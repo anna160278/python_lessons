@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Циклы — Python</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji-icon">🔁</span> Циклы</h1>
+            <p>while, for, range и управление циклами</p>
+        </div>
+
+        <nav class="page-nav">
+            <a href="index.html" class="page-link">🏠 Главная</a>
+        </nav>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="score">0</span>
+                <span class="stat-label">Очки</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="progress">1/6</span>
+                <span class="stat-label">Прогресс</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="correct">0</span>
+                <span class="stat-label">Правильных</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="content">
+            <!-- Раздел 1: while -->
+            <div class="lesson-section active" id="section1">
+                <h2><span class="emoji-icon">🔄</span> Цикл while</h2>
+                <p>Цикл <code>while</code> выполняет код <span style="color: #ff7b72; font-weight: bold;">ПОКА</span> условие истинно. Как только условие становится ложным — цикл завершается.</p>
+
+                <div class="code-block"><span class="com"># Простой счётчик</span>
+<span class="var">i</span> <span class="op">=</span> <span class="num">1</span>
+<span class="kw">while</span> <span class="var">i</span> <span class="op">&lt;=</span> <span class="num">5</span>:
+    <span class="func">print</span>(<span class="var">i</span>, <span class="var">end</span><span class="op">=</span><span class="str">" "</span>)
+    <span class="var">i</span> <span class="op">+=</span> <span class="num">1</span>
+<span class="com"># Вывод: 1 2 3 4 5</span></div>
+
+                <h3>Выход из цикла с помощью break</h3>
+                <div class="code-block"><span class="var">i</span> <span class="op">=</span> <span class="num">1</span>
+<span class="kw">while</span> <span class="var">i</span> <span class="op">&lt;=</span> <span class="num">10</span>:
+    <span class="kw">if</span> <span class="var">i</span> <span class="op">==</span> <span class="num">5</span>:
+        <span class="kw">break</span>
+    <span class="func">print</span>(<span class="var">i</span>, <span class="var">end</span><span class="op">=</span><span class="str">" "</span>)
+    <span class="var">i</span> <span class="op">+=</span> <span class="num">1</span>
+<span class="com"># Вывод: 1 2 3 4</span></div>
+
+                <div class="example-box">
+                    <strong>⚠️ Бесконечные циклы:</strong>
+                    <p><code>while True:</code> — бесконечный цикл. Используйте <code>break</code> для выхода.</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Сколько раз выполнится тело цикла:</div>
+                    <pre class="quiz-code">i = 0
+while i &lt; 3:
+    i += 1</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">2</div>
+                        <div class="quiz-option" data-correct="true">3</div>
+                        <div class="quiz-option" data-correct="false">4</div>
+                        <div class="quiz-option" data-correct="false">Бесконечно</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет:</div>
+                    <pre class="quiz-code">i = 3
+while i &gt; 0:
+    print(i, end=" ")
+    i -= 1</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">3 2 1</div>
+                        <div class="quiz-option" data-correct="false">2 1 0</div>
+                        <div class="quiz-option" data-correct="false">3 2 1 0</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет:</div>
+                    <pre class="quiz-code">i = 10
+while i &gt; 0:
+    i -= 3
+print(i)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">1</div>
+                        <div class="quiz-option" data-correct="true">-2</div>
+                        <div class="quiz-option" data-correct="false">0</div>
+                        <div class="quiz-option" data-correct="false">3</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 2: for + range -->
+            <div class="lesson-section" id="section2">
+                <h2><span class="emoji-icon">🔁</span> Цикл for и функция range()</h2>
+                <p>Цикл <code>for</code> перебирает элементы последовательности. Чаще всего используется с функцией <code>range()</code>.</p>
+
+                <h3>Цикл с range()</h3>
+                <div class="code-block"><span class="com"># range(5) генерирует числа 0, 1, 2, 3, 4</span>
+<span class="com"># Цикл выполнится 5 раз</span>
+<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">5</span>):
+    <span class="func">print</span>(<span class="var">i</span>, <span class="var">end</span><span class="op">=</span><span class="str">" "</span>)
+<span class="com"># Вывод: 0 1 2 3 4</span></div>
+
+                <h3>Разные варианты range()</h3>
+                <div class="code-block"><span class="func">range</span>(<span class="num">5</span>)         <span class="com"># 0, 1, 2, 3, 4 (5 чисел)</span>
+<span class="func">range</span>(<span class="num">2</span>, <span class="num">6</span>)      <span class="com"># 2, 3, 4, 5 (конец не включён)</span>
+<span class="func">range</span>(<span class="num">0</span>, <span class="num">10</span>, <span class="num">2</span>)  <span class="com"># 0, 2, 4, 6, 8 (шаг 2)</span>
+<span class="func">range</span>(<span class="num">5</span>, <span class="num">0</span>, <span class="op">-</span><span class="num">1</span>)  <span class="com"># 5, 4, 3, 2, 1 (обратный порядок)</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Запомните:</strong>
+                    <p><code>range(n)</code> — цикл выполнится <strong style="color:#a78bfa;">n раз</strong>, значения от 0 до n-1</p>
+                    <p><code>range(a, b)</code> — значения от a до b-1 (b не включается)</p>
+                    <p><code>range(a, b, step)</code> — значения от a до b-1 с шагом step</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Сколько раз выполнится цикл:</div>
+                    <pre class="quiz-code">for i in range(4):
+    print(i)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">3 раза</div>
+                        <div class="quiz-option" data-correct="true">4 раза</div>
+                        <div class="quiz-option" data-correct="false">5 раз</div>
+                        <div class="quiz-option" data-correct="false">Бесконечно</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Какие числа генерирует <code>range(2, 5)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">2, 3, 4</div>
+                        <div class="quiz-option" data-correct="false">2, 3, 4, 5</div>
+                        <div class="quiz-option" data-correct="false">1, 2, 3, 4</div>
+                        <div class="quiz-option" data-correct="false">1, 2, 3, 4, 5</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет:</div>
+                    <pre class="quiz-code">for i in range(0, 10, 3):
+    print(i, end=" ")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">0 3 6 9</div>
+                        <div class="quiz-option" data-correct="false">0 3 6</div>
+                        <div class="quiz-option" data-correct="false">3 6 9</div>
+                        <div class="quiz-option" data-correct="false">0 3 6 9 12</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 3: Перебор строки -->
+            <div class="lesson-section" id="section3">
+                <h2><span class="emoji-icon">🔤</span> Перебор строки циклом for</h2>
+                <p>Цикл <code>for</code> может перебирать символы строки по одному.</p>
+
+                <div class="code-block"><span class="kw">for</span> <span class="var">letter</span> <span class="kw">in</span> <span class="str">"Python"</span>:
+    <span class="func">print</span>(<span class="var">letter</span>, <span class="var">end</span><span class="op">=</span><span class="str">" "</span>)
+<span class="com"># Вывод: P y t h o n</span></div>
+
+                <h3>Подсчёт символов</h3>
+                <div class="code-block"><span class="var">word</span> <span class="op">=</span> <span class="str">"hello"</span>
+<span class="var">count</span> <span class="op">=</span> <span class="num">0</span>
+<span class="kw">for</span> <span class="var">ch</span> <span class="kw">in</span> <span class="var">word</span>:
+    <span class="kw">if</span> <span class="var">ch</span> <span class="kw">in</span> <span class="str">"aeiou"</span>:
+        <span class="var">count</span> <span class="op">+=</span> <span class="num">1</span>
+<span class="func">print</span>(<span class="var">count</span>)  <span class="com"># 2 (буквы e и o)</span></div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет:</div>
+                    <pre class="quiz-code">for ch in "abc":
+    print(ch, end="")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">abc</div>
+                        <div class="quiz-option" data-correct="false">a b c</div>
+                        <div class="quiz-option" data-correct="false">"abc"</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет:</div>
+                    <pre class="quiz-code">count = 0
+for ch in "banana":
+    if ch == "a":
+        count += 1
+print(count)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">2</div>
+                        <div class="quiz-option" data-correct="true">3</div>
+                        <div class="quiz-option" data-correct="false">4</div>
+                        <div class="quiz-option" data-correct="false">6</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет:</div>
+                    <pre class="quiz-code">for ch in "hello":
+    if ch == "l":
+        print("!", end="")
+    else:
+        print(ch, end="")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">he!lo</div>
+                        <div class="quiz-option" data-correct="true">he!!o</div>
+                        <div class="quiz-option" data-correct="false">hello</div>
+                        <div class="quiz-option" data-correct="false">he!o</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 4: break и continue -->
+            <div class="lesson-section" id="section4">
+                <h2><span class="emoji-icon">⏹️</span> break и continue</h2>
+                <p>Эти операторы позволяют управлять выполнением циклов.</p>
+
+                <div class="code-block"><span class="com"># break — прерывает цикл полностью</span>
+<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">10</span>):
+    <span class="kw">if</span> <span class="var">i</span> <span class="op">==</span> <span class="num">5</span>:
+        <span class="kw">break</span>
+    <span class="func">print</span>(<span class="var">i</span>, <span class="var">end</span><span class="op">=</span><span class="str">" "</span>)
+<span class="com"># Вывод: 0 1 2 3 4</span></div>
+
+                <div class="code-block"><span class="com"># continue — пропускает текущую итерацию</span>
+<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">5</span>):
+    <span class="kw">if</span> <span class="var">i</span> <span class="op">==</span> <span class="num">2</span>:
+        <span class="kw">continue</span>
+    <span class="func">print</span>(<span class="var">i</span>, <span class="var">end</span><span class="op">=</span><span class="str">" "</span>)
+<span class="com"># Вывод: 0 1 3 4 (пропущено 2)</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Разница:</strong>
+                    <p><code>break</code> — полностью выходит из цикла</p>
+                    <p><code>continue</code> — пропускает только текущую итерацию и идёт дальше</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что делает <code>break</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Пропускает итерацию</div>
+                        <div class="quiz-option" data-correct="true">Полностью выходит из цикла</div>
+                        <div class="quiz-option" data-correct="false">Завершает программу</div>
+                        <div class="quiz-option" data-correct="false">Повторяет итерацию</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет:</div>
+                    <pre class="quiz-code">for i in range(5):
+    if i % 2 == 0:
+        continue
+    print(i, end=" ")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">0 2 4</div>
+                        <div class="quiz-option" data-correct="true">1 3</div>
+                        <div class="quiz-option" data-correct="false">0 1 2 3 4</div>
+                        <div class="quiz-option" data-correct="false">1 2 3 4 5</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет:</div>
+                    <pre class="quiz-code">for i in range(6):
+    if i == 3:
+        break
+    print(i, end=" ")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">0 1 2</div>
+                        <div class="quiz-option" data-correct="false">0 1 2 3</div>
+                        <div class="quiz-option" data-correct="false">0 1 2 4 5</div>
+                        <div class="quiz-option" data-correct="false">0 1 2 3 4 5</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 5: Практика -->
+            <div class="lesson-section" id="section5">
+                <h2><span class="emoji-icon">💻</span> Практические паттерны</h2>
+                <p>Полезные приёмы работы с циклами.</p>
+
+                <h3>Вложенные циклы</h3>
+                <div class="code-block"><span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">1</span>, <span class="num">4</span>):
+    <span class="kw">for</span> <span class="var">j</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">1</span>, <span class="num">4</span>):
+        <span class="func">print</span>(<span class="var">i</span> <span class="op">*</span> <span class="var">j</span>, <span class="var">end</span><span class="op">=</span><span class="str">"\t"</span>)
+    <span class="func">print</span>()</div>
+
+                <h3>Накопление суммы</h3>
+                <div class="code-block"><span class="var">total</span> <span class="op">=</span> <span class="num">0</span>
+<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">1</span>, <span class="num">6</span>):
+    <span class="var">total</span> <span class="op">+=</span> <span class="var">i</span> <span class="op">**</span> <span class="num">2</span>
+<span class="func">print</span>(<span class="var">total</span>)  <span class="com"># 1 + 4 + 9 + 16 + 25 = 55</span></div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет:</div>
+                    <pre class="quiz-code">for i in range(2):
+    for j in range(2):
+        print(i + j, end=" ")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">0 1 1 2</div>
+                        <div class="quiz-option" data-correct="false">0 1 2 3</div>
+                        <div class="quiz-option" data-correct="false">1 2 2 3</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет:</div>
+                    <pre class="quiz-code">total = 0
+for i in range(1, 4):
+    total += i
+print(total)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">6</div>
+                        <div class="quiz-option" data-correct="false">10</div>
+                        <div class="quiz-option" data-correct="false">3</div>
+                        <div class="quiz-option" data-correct="false">4</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет:</div>
+                    <pre class="quiz-code">count = 0
+for i in range(10):
+    if i % 3 == 0:
+        continue
+    count += 1
+print(count)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">3</div>
+                        <div class="quiz-option" data-correct="true">7</div>
+                        <div class="quiz-option" data-correct="false">10</div>
+                        <div class="quiz-option" data-correct="false">4</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 6: Итоговый тест -->
+            <div class="lesson-section" id="section6">
+                <h2><span class="emoji-icon">🏆</span> Итоговый тест</h2>
+                <div class="final-test-header">
+                    <h3 style="margin:0; color:#856404;">10 вопросов, 7 минут. Удачи!</h3>
+                </div>
+
+                <div class="global-timer" id="globalTimer">️ 7:00</div>
+                <div class="final-test-stats" id="finalTestStats" style="display: none;"></div>
+
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">1. Что выведет:</div>
+                    <pre class="quiz-code">for i in range(1, 4):
+    print(i * 2, end=" ")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">2 4 6</div>
+                        <div class="quiz-option" data-correct="false">1 2 3</div>
+                        <div class="quiz-option" data-correct="false">2 4 6 8</div>
+                        <div class="quiz-option" data-correct="false">1 4 9</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">2. Что выведет:</div>
+                    <pre class="quiz-code">i = 10
+while i &gt; 0:
+    i -= 3
+print(i)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">1</div>
+                        <div class="quiz-option" data-correct="true">-2</div>
+                        <div class="quiz-option" data-correct="false">0</div>
+                        <div class="quiz-option" data-correct="false">3</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">3. Что выведет:</div>
+                    <pre class="quiz-code">for i in range(5):
+    if i % 2 == 0:
+        continue
+    print(i, end=" ")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">0 2 4</div>
+                        <div class="quiz-option" data-correct="true">1 3</div>
+                        <div class="quiz-option" data-correct="false">0 1 2 3 4</div>
+                        <div class="quiz-option" data-correct="false">1 2 3 4 5</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">4. Что выведет:</div>
+                    <pre class="quiz-code">s = 0
+for i in range(1, 5):
+    s += i
+print(s)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">10</div>
+                        <div class="quiz-option" data-correct="false">15</div>
+                        <div class="quiz-option" data-correct="false">6</div>
+                        <div class="quiz-option" data-correct="false">4</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">5. Что выведет:</div>
+                    <pre class="quiz-code">for i in range(3):
+    for j in range(2):
+        print("*", end="")
+    print()</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">**<br>**<br>**</div>
+                        <div class="quiz-option" data-correct="false">******</div>
+                        <div class="quiz-option" data-correct="false">*<br>*<br>*</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">6. Что выведет:</div>
+                    <pre class="quiz-code">i = 0
+while i &lt; 10:
+    if i == 3:
+        break
+    i += 1
+print(i)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">3</div>
+                        <div class="quiz-option" data-correct="false">4</div>
+                        <div class="quiz-option" data-correct="false">10</div>
+                        <div class="quiz-option" data-correct="false">2</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">7. Что выведет:</div>
+                    <pre class="quiz-code">count = 0
+for ch in "programming":
+    if ch == "r":
+        count += 1
+print(count)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">2</div>
+                        <div class="quiz-option" data-correct="false">1</div>
+                        <div class="quiz-option" data-correct="false">3</div>
+                        <div class="quiz-option" data-correct="false">0</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">8. Что выведет:</div>
+                    <pre class="quiz-code">i = 1
+while i &lt; 10:
+    i *= 2
+print(i)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">8</div>
+                        <div class="quiz-option" data-correct="true">16</div>
+                        <div class="quiz-option" data-correct="false">10</div>
+                        <div class="quiz-option" data-correct="false">32</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">9. Что выведет:</div>
+                    <pre class="quiz-code">for i in range(5, 0, -1):
+    print(i, end=" ")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">5 4 3 2 1</div>
+                        <div class="quiz-option" data-correct="false">5 4 3 2 1 0</div>
+                        <div class="quiz-option" data-correct="false">0 1 2 3 4 5</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">10. Что выведет:</div>
+                    <pre class="quiz-code">total = 0
+for i in range(1, 6):
+    if i % 2 == 0:
+        total += i
+print(total)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">15</div>
+                        <div class="quiz-option" data-correct="true">6</div>
+                        <div class="quiz-option" data-correct="false">9</div>
+                        <div class="quiz-option" data-correct="false">4</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="btn" id="prevBtn" onclick="previousSection()" disabled>← Назад</button>
+            <button class="btn" id="nextBtn" onclick="nextSection()">Далее →</button>
+        </div>
+    </div>
+
+    <script src="script_cycles.js"></script>
+</body>
+</html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Арифметика и Условия — Python</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji-icon">🔢</span> Арифметика и Условия</h1>
+            <p>Операции с числами и условные конструкции</p>
+        </div>
+
+        <nav class="page-nav">
+            <a href="index.html" class="page-link">🏠 Главная</a>
+        </nav>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="score">0</span>
+                <span class="stat-label">Очки</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="progress">1/7</span>
+                <span class="stat-label">Прогресс</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="correct">0</span>
+                <span class="stat-label">Правильных</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="content">
+            <!-- Раздел 1: Базовая арифметика -->
+            <div class="lesson-section active" id="section1">
+                <h2><span class="emoji-icon"></span> Базовая арифметика</h2>
+                <p>Python поддерживает все стандартные математические операции. Результат зависит от типов операндов.</p>
+
+                <div class="code-block"><span class="com"># Сложение и вычитание</span>
+<span class="func">print</span>(<span class="num">10</span> <span class="op">+</span> <span class="num">3</span>)   <span class="com"># 13</span>
+<span class="func">print</span>(<span class="num">10</span> <span class="op">-</span> <span class="num">3</span>)   <span class="com"># 7</span>
+
+<span class="com"># Умножение и деление</span>
+<span class="func">print</span>(<span class="num">10</span> <span class="op">*</span> <span class="num">3</span>)   <span class="com"># 30</span>
+<span class="func">print</span>(<span class="num">10</span> <span class="op">/</span> <span class="num">3</span>)   <span class="com"># 3.3333... (всегда float!)</span>
+<span class="func">print</span>(<span class="num">10</span> <span class="op">/</span> <span class="num">2</span>)   <span class="com"># 5.0 (тоже float!)</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Важно:</strong>
+                    <p>Оператор <code>/</code> <strong style="color:#a78bfa;">всегда</strong> возвращает число с точкой (float), даже если делится без остатка.</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что вернёт <code>10 / 2</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">5</div>
+                        <div class="quiz-option" data-correct="true">5.0</div>
+                        <div class="quiz-option" data-correct="false">2</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что вернёт <code>7 + 3 * 2</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">20</div>
+                        <div class="quiz-option" data-correct="true">13</div>
+                        <div class="quiz-option" data-correct="false">14</div>
+                        <div class="quiz-option" data-correct="false">17</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что вернёт <code>(7 + 3) * 2</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">20</div>
+                        <div class="quiz-option" data-correct="false">13</div>
+                        <div class="quiz-option" data-correct="false">14</div>
+                        <div class="quiz-option" data-correct="false">17</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 2: Целочисленное деление и остаток -->
+            <div class="lesson-section" id="section2">
+                <h2><span class="emoji-icon">➗</span> Целочисленное деление и остаток</h2>
+                <p>Помимо обычного деления, в Python есть целочисленное деление <code>//</code> и оператор остатка <code>%</code>.</p>
+
+                <div class="code-block"><span class="com"># Целочисленное деление — отбрасывает дробную часть</span>
+<span class="func">print</span>(<span class="num">10</span> <span class="op">//</span> <span class="num">3</span>)   <span class="com"># 3 (не 3.333...)</span>
+<span class="func">print</span>(<span class="num">7</span> <span class="op">//</span> <span class="num">2</span>)    <span class="com"># 3</span>
+<span class="func">print</span>(<span class="num">10</span> <span class="op">//</span> <span class="num">5</span>)   <span class="com"># 2</span>
+
+<span class="com"># Остаток от деления</span>
+<span class="func">print</span>(<span class="num">10</span> <span class="op">%</span> <span class="num">3</span>)    <span class="com"># 1 (10 = 3*3 + 1)</span>
+<span class="func">print</span>(<span class="num">7</span> <span class="op">%</span> <span class="num">2</span>)     <span class="com"># 1 (7 = 2*3 + 1)</span>
+<span class="func">print</span>(<span class="num">10</span> <span class="op">%</span> <span class="num">5</span>)    <span class="com"># 0 (делится без остатка)</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Где это полезно:</strong>
+                    <p><code>n % 2 == 0</code> — проверка на чётность</p>
+                    <p><code>n % 10</code> — последняя цифра числа</p>
+                    <p><code>n // 10</code> — число без последней цифры</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что вернёт <code>17 // 5</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">3</div>
+                        <div class="quiz-option" data-correct="false">3.4</div>
+                        <div class="quiz-option" data-correct="false">4</div>
+                        <div class="quiz-option" data-correct="false">2</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что вернёт <code>17 % 5</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">3</div>
+                        <div class="quiz-option" data-correct="true">2</div>
+                        <div class="quiz-option" data-correct="false">0</div>
+                        <div class="quiz-option" data-correct="false">5</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Как проверить, что число <code>n</code> чётное?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">n // 2 == 0</div>
+                        <div class="quiz-option" data-correct="true">n % 2 == 0</div>
+                        <div class="quiz-option" data-correct="false">n / 2 == 0</div>
+                        <div class="quiz-option" data-correct="false">n ** 2 == 0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 3: Возведение в степень -->
+            <div class="lesson-section" id="section3">
+                <h2><span class="emoji-icon"></span> Возведение в степень</h2>
+                <p>В Python для возведения в степень используется оператор <code>**</code>.</p>
+
+                <div class="code-block"><span class="func">print</span>(<span class="num">2</span> <span class="op">**</span> <span class="num">3</span>)    <span class="com"># 8  (2 * 2 * 2)</span>
+<span class="func">print</span>(<span class="num">5</span> <span class="op">**</span> <span class="num">2</span>)    <span class="com"># 25 (5 * 5)</span>
+<span class="func">print</span>(<span class="num">10</span> <span class="op">**</span> <span class="num">0</span>)   <span class="com"># 1  (любое число в степени 0 = 1)</span>
+<span class="func">print</span>(<span class="num">2</span> <span class="op">**</span> <span class="num">10</span>)   <span class="com"># 1024</span>
+
+<span class="com"># Дробная степень — извлечение корня</span>
+<span class="func">print</span>(<span class="num">9</span> <span class="op">**</span> <span class="num">0.5</span>)  <span class="com"># 3.0 (квадратный корень)</span>
+<span class="func">print</span>(<span class="num">27</span> <span class="op">**</span> (<span class="num">1</span><span class="op">/</span><span class="num">3</span>)) <span class="com"># 3.0 (кубический корень)</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Приоритет операций:</strong>
+                    <p>Приоритет выполнения арифметических действий такой же, как в математике: первым выполняется возведение в степень (<code>**</code>), потом умножение (<code>*</code>) и деление (<code>/</code>), и только потом сложение (<code>+</code>) и вычитание (<code>-</code>). Поменять порядок действий можно с помощью скобок.</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что вернёт <code>3 ** 3</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">9</div>
+                        <div class="quiz-option" data-correct="true">27</div>
+                        <div class="quiz-option" data-correct="false">6</div>
+                        <div class="quiz-option" data-correct="false">33</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что вернёт <code>2 + 3 ** 2</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">25</div>
+                        <div class="quiz-option" data-correct="true">11</div>
+                        <div class="quiz-option" data-correct="false">7</div>
+                        <div class="quiz-option" data-correct="false">13</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что вернёт <code>16 ** 0.5</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">8</div>
+                        <div class="quiz-option" data-correct="false">8.0</div>
+                        <div class="quiz-option" data-correct="true">4.0</div>
+                        <div class="quiz-option" data-correct="false">2.0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 4: if -->
+            <div class="lesson-section" id="section4">
+                <h2><span class="emoji-icon">🔀</span> Условие if</h2>
+                <p>Условные конструкции позволяют выполнять разный код в зависимости от условий.</p>
+
+                <div class="code-block"><span class="var">age</span> <span class="op">=</span> <span class="num">18</span>
+
+<span class="kw">if</span> <span class="var">age</span> <span class="op">&gt;=</span> <span class="num">18</span>:
+    <span class="func">print</span>(<span class="str">"Совершеннолетний"</span>)
+
+<span class="com"># Сравнение чисел</span>
+<span class="var">x</span> <span class="op">=</span> <span class="num">10</span>
+<span class="kw">if</span> <span class="var">x</span> <span class="op">&gt;</span> <span class="num">0</span>:
+    <span class="func">print</span>(<span class="str">"Положительное"</span>)
+<span class="kw">if</span> <span class="var">x</span> <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>:
+    <span class="func">print</span>(<span class="str">"Чётное"</span>)</div>
+
+                <h3>Операторы сравнения:</h3>
+                <div class="code-block"><span class="num">5</span> <span class="op">==</span> <span class="num">5</span>   <span class="com"># True  (равно)</span>
+<span class="num">5</span> <span class="op">!=</span> <span class="num">3</span>   <span class="com"># True  (не равно)</span>
+<span class="num">5</span> <span class="op">&gt;</span> <span class="num">3</span>    <span class="com"># True  (больше)</span>
+<span class="num">5</span> <span class="op">&lt;</span> <span class="num">3</span>    <span class="com"># False (меньше)</span>
+<span class="num">5</span> <span class="op">&gt;=</span> <span class="num">5</span>   <span class="com"># True  (больше или равно)</span>
+<span class="num">5</span> <span class="op">&lt;=</span> <span class="num">3</span>   <span class="com"># False (меньше или равно)</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Правила:</strong>
+                    <p>После <code>if</code> ставится <strong>двоеточие</strong> <code>:</code>, тело выделяется <strong>отступом</strong> (4 пробела).</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что вернёт <code>10 == 10.0</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">True</div>
+                        <div class="quiz-option" data-correct="false">False</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                        <div class="quiz-option" data-correct="false">None</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет:</div>
+                    <pre class="quiz-code">x = 15
+if x % 3 == 0:
+    print("Делится на 3")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">Делится на 3</div>
+                        <div class="quiz-option" data-correct="false">Ничего</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                        <div class="quiz-option" data-correct="false">False</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Какой символ ставится в конце строки с <code>if</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">;</div>
+                        <div class="quiz-option" data-correct="true">:</div>
+                        <div class="quiz-option" data-correct="false">,</div>
+                        <div class="quiz-option" data-correct="false">)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 5: else и elif -->
+            <div class="lesson-section" id="section5">
+                <h2><span class="emoji-icon">🔀</span> else и elif</h2>
+                <p><code>else</code> выполняется, если условие <code>if</code> ложно. <code>elif</code> позволяет проверять несколько условий.</p>
+
+                <div class="code-block"><span class="var">score</span> <span class="op">=</span> <span class="num">75</span>
+
+<span class="kw">if</span> <span class="var">score</span> <span class="op">&gt;=</span> <span class="num">90</span>:
+    <span class="func">print</span>(<span class="str">"Отлично"</span>)
+<span class="kw">elif</span> <span class="var">score</span> <span class="op">&gt;=</span> <span class="num">70</span>:
+    <span class="func">print</span>(<span class="str">"Хорошо"</span>)
+<span class="kw">elif</span> <span class="var">score</span> <span class="op">&gt;=</span> <span class="num">50</span>:
+    <span class="func">print</span>(<span class="str">"Удовлетворительно"</span>)
+<span class="kw">else</span>:
+    <span class="func">print</span>(<span class="str">"Не сдал"</span>)</div>
+
+                <div class="example-box">
+                    <strong>💡 Как это работает:</strong>
+                    <p>Python проверяет условия сверху вниз. Как только найдёт <strong style="color:#a78bfa;">истинное</strong> — выполнит его блок и пропустит все остальные.</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет:</div>
+                    <pre class="quiz-code">x = 15
+if x > 20:
+    print("A")
+elif x > 10:
+    print("B")
+elif x > 5:
+    print("C")
+else:
+    print("D")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">A</div>
+                        <div class="quiz-option" data-correct="true">B</div>
+                        <div class="quiz-option" data-correct="false">C</div>
+                        <div class="quiz-option" data-correct="false">B и C</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Когда выполняется блок <code>else</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Всегда</div>
+                        <div class="quiz-option" data-correct="true">Если все условия выше ложны</div>
+                        <div class="quiz-option" data-correct="false">Если if истинно</div>
+                        <div class="quiz-option" data-correct="false">Никогда</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет:</div>
+                    <pre class="quiz-code">n = 10
+if n % 2 == 0:
+    print("Чёт")
+else:
+    print("Нечёт")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">Чёт</div>
+                        <div class="quiz-option" data-correct="false">Нечёт</div>
+                        <div class="quiz-option" data-correct="false">Чёт и Нечёт</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 6: Логические операторы -->
+            <div class="lesson-section" id="section6">
+                <h2><span class="emoji-icon"></span> Логические операторы</h2>
+                <p>Операторы <code>and</code>, <code>or</code> и <code>not</code> позволяют комбинировать условия.</p>
+
+                <div class="code-block"><span class="var">age</span> <span class="op">=</span> <span class="num">25</span>
+<span class="var">money</span> <span class="op">=</span> <span class="num">500</span>
+
+<span class="com"># and — оба условия истинны</span>
+<span class="kw">if</span> <span class="var">age</span> <span class="op">&gt;=</span> <span class="num">18</span> <span class="kw">and</span> <span class="var">money</span> <span class="op">&gt;=</span> <span class="num">100</span>:
+    <span class="func">print</span>(<span class="str">"Можно купить"</span>)
+
+<span class="com"># or — хотя бы одно истинно</span>
+<span class="kw">if</span> <span class="var">age</span> <span class="op">&lt;</span> <span class="num">12</span> <span class="kw">or</span> <span class="var">age</span> <span class="op">&gt;</span> <span class="num">65</span>:
+    <span class="func">print</span>(<span class="str">"Скидка"</span>)
+
+<span class="com"># not — инверсия</span>
+<span class="var">is_banned</span> <span class="op">=</span> <span class="kw">False</span>
+<span class="kw">if</span> <span class="kw">not</span> <span class="var">is_banned</span>:
+    <span class="func">print</span>(<span class="str">"Доступ разрешён"</span>)</div>
+
+                <div class="example-box">
+                    <strong>💡 Таблица истинности:</strong>
+                    <p><code>True and True</code> → <code>True</code> &emsp;|&emsp; <code>True and False</code> → <code>False</code></p>
+                    <p><code>True or False</code> → <code>True</code> &emsp;|&emsp; <code>False or False</code> → <code>False</code></p>
+                    <p><code>not True</code> → <code>False</code> &emsp;&emsp;&emsp;|&emsp; <code>not False</code> → <code>True</code></p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что вернёт <code>True and False</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">True</div>
+                        <div class="quiz-option" data-correct="true">False</div>
+                        <div class="quiz-option" data-correct="false">None</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что вернёт <code>not (5 &gt; 3)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">True</div>
+                        <div class="quiz-option" data-correct="true">False</div>
+                        <div class="quiz-option" data-correct="false">5</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет:</div>
+                    <pre class="quiz-code">x = 7
+if x > 0 and x % 2 != 0:
+    print("A")
+else:
+    print("B")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">A</div>
+                        <div class="quiz-option" data-correct="false">B</div>
+                        <div class="quiz-option" data-correct="false">A и B</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 7: Итоговый тест -->
+            <div class="lesson-section" id="section7">
+                <h2><span class="emoji-icon">🏆</span> Итоговый тест</h2>
+                <div class="final-test-header">
+                    <h3 style="margin:0; color:#856404;">10 вопросов, 7 минут. Удачи!</h3>
+                </div>
+
+                <div class="global-timer" id="globalTimer">⏱️ 7:00</div>
+                <div class="final-test-stats" id="finalTestStats" style="display: none;"></div>
+
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">1. Что вернёт <code>15 / 4</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">3</div>
+                        <div class="quiz-option" data-correct="true">3.75</div>
+                        <div class="quiz-option" data-correct="false">4</div>
+                        <div class="quiz-option" data-correct="false">3.0</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">2. Что вернёт <code>15 // 4</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">3</div>
+                        <div class="quiz-option" data-correct="false">3.75</div>
+                        <div class="quiz-option" data-correct="false">4</div>
+                        <div class="quiz-option" data-correct="false">3.0</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">3. Что вернёт <code>15 % 4</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">4</div>
+                        <div class="quiz-option" data-correct="true">3</div>
+                        <div class="quiz-option" data-correct="false">1</div>
+                        <div class="quiz-option" data-correct="false">0</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">4. Что вернёт <code>2 ** 4</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">8</div>
+                        <div class="quiz-option" data-correct="true">16</div>
+                        <div class="quiz-option" data-correct="false">6</div>
+                        <div class="quiz-option" data-correct="false">24</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">5. Что вернёт <code>3 + 2 * 4 ** 2</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">80</div>
+                        <div class="quiz-option" data-correct="true">35</div>
+                        <div class="quiz-option" data-correct="false">19</div>
+                        <div class="quiz-option" data-correct="false">100</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">6. Что выведет:</div>
+                    <pre class="quiz-code">x = 10
+if x > 5:
+    print("A")
+if x > 8:
+    print("B")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">A</div>
+                        <div class="quiz-option" data-correct="false">B</div>
+                        <div class="quiz-option" data-correct="true">A и B</div>
+                        <div class="quiz-option" data-correct="false">Ничего</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">7. Что выведет:</div>
+                    <pre class="quiz-code">x = 7
+if x > 10:
+    print("A")
+elif x > 5:
+    print("B")
+else:
+    print("C")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">A</div>
+                        <div class="quiz-option" data-correct="true">B</div>
+                        <div class="quiz-option" data-correct="false">C</div>
+                        <div class="quiz-option" data-correct="false">B и C</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">8. Что вернёт <code>not (True and False)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">True</div>
+                        <div class="quiz-option" data-correct="false">False</div>
+                        <div class="quiz-option" data-correct="false">None</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">9. Что выведет:</div>
+                    <pre class="quiz-code">n = 25
+if n % 5 == 0 and n % 2 != 0:
+    print("A")
+else:
+    print("B")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">A</div>
+                        <div class="quiz-option" data-correct="false">B</div>
+                        <div class="quiz-option" data-correct="false">A и B</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">10. Что выведет:</div>
+                    <pre class="quiz-code">x = 3
+y = 4
+if x > y:
+    print("A")
+elif x == y:
+    print("B")
+elif x < y:
+    print("C")
+else:
+    print("D")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">A</div>
+                        <div class="quiz-option" data-correct="false">B</div>
+                        <div class="quiz-option" data-correct="true">C</div>
+                        <div class="quiz-option" data-correct="false">D</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="btn" id="prevBtn" onclick="previousSection()" disabled>← Назад</button>
+            <button class="btn" id="nextBtn" onclick="nextSection()">Далее →</button>
+        </div>
+    </div>
+
+    <script src="script_arithmetic.js"></script>
+</body>
+</html>

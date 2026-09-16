@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Строки - Интерактивный урок</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji-icon">🐍</span> Python Строки</h1>
+            <p>Интерактивный урок по работе со строками</p>
+        </div>
+
+        <nav class="page-nav">
+            <a href="index.html" class="page-link">🏠 Главная</a>
+        </nav>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="score">0</span>
+                <span class="stat-label">Очки</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="progress">1/8</span>
+                <span class="stat-label">Прогресс</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="correct">0</span>
+                <span class="stat-label">Правильных</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="content">
+            <!-- Раздел 1: Введение -->
+            <div class="lesson-section active" id="section1">
+                <h2><span class="emoji-icon">📚</span> Что такое строки?</h2>
+                <p>Строки в Python — это последовательности символов, заключённые в кавычки. Они используются для хранения и обработки текста.</p>
+                
+                <div class="code-block"><span class="com"># Создание строк</span>
+<span class="var">name</span> <span class="op">=</span> <span class="str">"Алиса"</span>
+<span class="var">greeting</span> <span class="op">=</span> <span class="str">'Привет!'</span>
+<span class="var">text</span> <span class="op">=</span> <span class="str">"Это строка на Python"</span></div>
+
+                <h3>Особенности строк:</h3>
+                <p>✅ Строки неизменяемы — после создания нельзя изменить отдельный символ</p>
+                <p>✅ Строки могут содержать любые символы: буквы, цифры, спецсимволы</p>
+                <p>✅ Пустая строка тоже является строкой: <code>""</code></p>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Какой из вариантов НЕ является строкой?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">"Привет"</div>
+                        <div class="quiz-option" data-correct="false">'Python'</div>
+                        <div class="quiz-option" data-correct="true">42</div>
+                        <div class="quiz-option" data-correct="false">""</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Как правильно создать строку в Python?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">string = Hello</div>
+                        <div class="quiz-option" data-correct="true">text = "Hello"</div>
+                        <div class="quiz-option" data-correct="false">str = [Hello]</div>
+                        <div class="quiz-option" data-correct="false">var = (Hello)</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Можно ли изменить один символ в уже созданной строке?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Да, с помощью индекса</div>
+                        <div class="quiz-option" data-correct="true">Нет, строки неизменяемы</div>
+                        <div class="quiz-option" data-correct="false">Да, методом change()</div>
+                        <div class="quiz-option" data-correct="false">Только если это цифра</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 2: Операции -->
+            <div class="lesson-section" id="section2">
+                <h2><span class="emoji-icon"></span> Операции со строками</h2>
+                
+                <h3>Конкатенация и повторение</h3>
+                <div class="code-block"><span class="var">first</span> <span class="op">=</span> <span class="str">"Привет"</span>
+<span class="var">second</span> <span class="op">=</span> <span class="str">"Мир"</span>
+<span class="var">result</span> <span class="op">=</span> <span class="var">first</span> <span class="op">+</span> <span class="str">" "</span> <span class="op">+</span> <span class="var">second</span>
+<span class="func">print</span>(<span class="var">result</span>)  <span class="com"># Привет Мир</span>
+
+<span class="var">laugh</span> <span class="op">=</span> <span class="str">"Ха"</span> <span class="op">*</span> <span class="num">3</span>
+<span class="func">print</span>(<span class="var">laugh</span>)  <span class="com"># ХаХаХа</span></div>
+
+                <h3>Длина строки</h3>
+                <div class="code-block"><span class="var">text</span> <span class="op">=</span> <span class="str">"Python"</span>
+<span class="func">print</span>(<span class="func">len</span>(<span class="var">text</span>))  <span class="com"># 6</span></div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет <code>"A" + "B"</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">A B</div>
+                        <div class="quiz-option" data-correct="true">AB</div>
+                        <div class="quiz-option" data-correct="false">A+B</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет <code>"Ha" * 3</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Ha3</div>
+                        <div class="quiz-option" data-correct="true">HaHaHa</div>
+                        <div class="quiz-option" data-correct="false">Ha Ha Ha</div>
+                        <div class="quiz-option" data-correct="false">333</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Чему равно <code>len("Кот")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">2</div>
+                        <div class="quiz-option" data-correct="true">3</div>
+                        <div class="quiz-option" data-correct="false">4</div>
+                        <div class="quiz-option" data-correct="false">6</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 3: Индексация -->
+            <div class="lesson-section" id="section3">
+                <h2><span class="emoji-icon">📍</span> Индексация строк</h2>
+                <p>Каждый символ имеет свой индекс. Индексация начинается с 0!</p>
+                
+                <div class="code-block"><span class="var">text</span> <span class="op">=</span> <span class="str">"Python"</span>
+<span class="com"># P y t h o n</span>
+<span class="com"># 0 1 2 3 4 5</span>
+
+<span class="func">print</span>(<span class="var">text</span>[<span class="num">0</span>])   <span class="com"># P (первый)</span>
+<span class="func">print</span>(<span class="var">text</span>[<span class="num">2</span>])   <span class="com"># t (третий)</span>
+<span class="func">print</span>(<span class="var">text</span>[<span class="num">-1</span>])  <span class="com"># n (последний)</span>
+<span class="func">print</span>(<span class="var">text</span>[<span class="num">-2</span>])  <span class="com"># o (предпоследний)</span></div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет <code>"Python"[0]</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">P</div>
+                        <div class="quiz-option" data-correct="false">y</div>
+                        <div class="quiz-option" data-correct="false">n</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет <code>"Python"[-1]</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">P</div>
+                        <div class="quiz-option" data-correct="false">y</div>
+                        <div class="quiz-option" data-correct="true">n</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет <code>"Python"[1]</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">P</div>
+                        <div class="quiz-option" data-correct="true">y</div>
+                        <div class="quiz-option" data-correct="false">t</div>
+                        <div class="quiz-option" data-correct="false">h</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 4: Срезы -->
+            <div class="lesson-section" id="section4">
+                <h2><span class="emoji-icon">✂️</span> Срезы строк</h2>
+                <p>Срезы позволяют получить подстроку. Синтаксис: <code>строка[начало:конец:шаг]</code></p>
+                
+                <div class="code-block"><span class="var">text</span> <span class="op">=</span> <span class="str">"Python"</span>
+
+<span class="func">print</span>(<span class="var">text</span>[<span class="num">0</span>:<span class="num">3</span>])   <span class="com"># Pyt (с 0 по 2)</span>
+<span class="func">print</span>(<span class="var">text</span>[:<span class="num">3</span>])    <span class="com"># Pyt (с начала до 3)</span>
+<span class="func">print</span>(<span class="var">text</span>[<span class="num">3</span>:])    <span class="com"># hon (с 3 до конца)</span>
+<span class="func">print</span>(<span class="var">text</span>[::<span class="num">2</span>])   <span class="com"># Pto (каждый второй)</span>
+<span class="func">print</span>(<span class="var">text</span>[::<span class="num">-1</span>])  <span class="com"># nohtyP (перевернуть)</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Важно:</strong>
+                    <p>Конец среза НЕ включается! Шаг по умолчанию равен 1. Отрицательный шаг идёт с конца.</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет <code>"Hello"[1:4]</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Hell</div>
+                        <div class="quiz-option" data-correct="true">ell</div>
+                        <div class="quiz-option" data-correct="false">ello</div>
+                        <div class="quiz-option" data-correct="false">Hel</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет <code>"Python"[:3]</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">Pyt</div>
+                        <div class="quiz-option" data-correct="false">hon</div>
+                        <div class="quiz-option" data-correct="false">Pyth</div>
+                        <div class="quiz-option" data-correct="false">yth</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет <code>"Python"[::2]</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Python</div>
+                        <div class="quiz-option" data-correct="true">Pto</div>
+                        <div class="quiz-option" data-correct="false">nohtyP</div>
+                        <div class="quiz-option" data-correct="false">yh</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 5: Методы строк (Часть 1) -->
+            <div class="lesson-section" id="section5">
+                <h2><span class="emoji-icon">🛠️</span> Методы строк (Часть 1)</h2>
+                
+                <div class="code-block"><span class="var">text</span> <span class="op">=</span> <span class="str">"  hello world  "</span>
+
+<span class="com"># Регистр</span>
+<span class="func">print</span>(<span class="var">text</span>.<span class="func">upper</span>())        <span class="com">#   HELLO WORLD  </span>
+<span class="func">print</span>(<span class="var">text</span>.<span class="func">lower</span>())        <span class="com">#   hello world  </span>
+<span class="func">print</span>(<span class="var">text</span>.<span class="func">capitalize</span>())   <span class="com">#   Hello world  </span>
+
+<span class="com"># Очистка, поиск и подсчёт</span>
+<span class="func">print</span>(<span class="var">text</span>.<span class="func">strip</span>())        <span class="com"># hello world (без пробелов)</span>
+<span class="func">print</span>(<span class="var">text</span>.<span class="func">find</span>(<span class="str">"world"</span>))  <span class="com"># 9 (индекс начала)</span>
+<span class="func">print</span>(<span class="var">text</span>.<span class="func">count</span>(<span class="str">"l"</span>))     <span class="com"># 3 (количество 'l')</span>
+<span class="func">print</span>(<span class="var">text</span>.<span class="func">replace</span>(<span class="str">"world"</span>, <span class="str">"Python"</span>)) <span class="com">#   hello Python  </span></div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что вернёт <code>"hello".upper()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">hello</div>
+                        <div class="quiz-option" data-correct="true">HELLO</div>
+                        <div class="quiz-option" data-correct="false">Hello</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что вернёт <code>"  hi  ".strip()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">"  hi  "</div>
+                        <div class="quiz-option" data-correct="true">"hi"</div>
+                        <div class="quiz-option" data-correct="false">"hi  "</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что вернёт <code>"hello world".capitalize()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Hello World</div>
+                        <div class="quiz-option" data-correct="true">Hello world</div>
+                        <div class="quiz-option" data-correct="false">HELLO WORLD</div>
+                        <div class="quiz-option" data-correct="false">hello World</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 6: Методы строк (Часть 2) -->
+            <div class="lesson-section" id="section6">
+                <h2><span class="emoji-icon">🔀</span> Методы строк (Часть 2: split и join)</h2>
+                
+                <div class="code-block"><span class="com"># Разделение строки на список</span>
+<span class="var">data</span> <span class="op">=</span> <span class="str">"apple,banana,cherry"</span>
+<span class="var">fruits</span> <span class="op">=</span> <span class="var">data</span>.<span class="func">split</span>(<span class="str">","</span>)
+<span class="func">print</span>(<span class="var">fruits</span>)  <span class="com"># ['apple', 'banana', 'cherry']</span>
+
+<span class="com"># Сборка списка в строку</span>
+<span class="var">parts</span> <span class="op">=</span> [<span class="str">"I"</span>, <span class="str">"love"</span>, <span class="str">"Python"</span>]
+<span class="var">sentence</span> <span class="op">=</span> <span class="str">" "</span>.<span class="func">join</span>(<span class="var">parts</span>)
+<span class="func">print</span>(<span class="var">sentence</span>)  <span class="com"># I love Python</span></div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что вернёт <code>"a,b,c".split(",")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">"abc"</div>
+                        <div class="quiz-option" data-correct="true">['a', 'b', 'c']</div>
+                        <div class="quiz-option" data-correct="false">('a', 'b', 'c')</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что вернёт <code>"-".join(['x', 'y'])</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">x y</div>
+                        <div class="quiz-option" data-correct="false">xy-</div>
+                        <div class="quiz-option" data-correct="true">x-y</div>
+                        <div class="quiz-option" data-correct="false">-x-y</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что вернёт <code>"mississippi".count("s")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">2</div>
+                        <div class="quiz-option" data-correct="true">4</div>
+                        <div class="quiz-option" data-correct="false">3</div>
+                        <div class="quiz-option" data-correct="false">5</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 7: f-строки -->
+            <div class="lesson-section" id="section7">
+                <h2><span class="emoji-icon">✨</span> f-строки</h2>
+                <p>f-строки — современный способ вставки переменных и выражений в строки.</p>
+                
+                <div class="code-block"><span class="var">name</span> <span class="op">=</span> <span class="str">"Алиса"</span>
+<span class="var">age</span> <span class="op">=</span> <span class="num">25</span>
+
+<span class="com"># Вставка переменных</span>
+<span class="func">print</span>(<span class="str">f"Меня зовут </span><span class="op">{</span><span class="var">name</span><span class="op">}</span><span class="str">, мне </span><span class="op">{</span><span class="var">age</span><span class="op">}</span><span class="str"> лет"</span>)
+
+<span class="com"># Вычисления внутри скобок</span>
+<span class="var">x</span> <span class="op">=</span> <span class="num">10</span>
+<span class="func">print</span>(<span class="str">f"Сумма: </span><span class="op">{</span><span class="var">x</span> <span class="op">+</span> <span class="num">5</span><span class="op">}</span><span class="str">"</span>)      <span class="com"># Сумма: 15</span>
+<span class="func">print</span>(<span class="str">f"Квадрат: </span><span class="op">{</span><span class="var">x</span><span class="op">**</span><span class="num">2</span><span class="op">}</span><span class="str">"</span>)   <span class="com"># Квадрат: 100</span></div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет <code>f"2+2={2+2}"</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">2+2={2+2}</div>
+                        <div class="quiz-option" data-correct="true">2+2=4</div>
+                        <div class="quiz-option" data-correct="false">2+2=22</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Если <code>x = 5</code>, что выведет <code>f"{x*2}"</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">x*2</div>
+                        <div class="quiz-option" data-correct="false">52</div>
+                        <div class="quiz-option" data-correct="true">10</div>
+                        <div class="quiz-option" data-correct="false">25</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Какой символ ставится перед кавычками в f-строке?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">s</div>
+                        <div class="quiz-option" data-correct="true">f</div>
+                        <div class="quiz-option" data-correct="false">v</div>
+                        <div class="quiz-option" data-correct="false">r</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 8: Итоговый тест -->
+            <div class="lesson-section" id="section8">
+                <h2><span class="emoji-icon"></span> Итоговый тест</h2>
+                <div class="final-test-header">
+                    <h3 style="margin:0; color:#856404;">15 вопросов, 10 минут на весь тест. Удачи!</h3>
+                </div>
+
+                <div class="global-timer" id="globalTimer">⏱️ 10:00</div>
+                <div class="final-test-stats" id="finalTestStats" style="display: none;"></div>
+
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">1. Какой тип данных у <code>"42"</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">int</div>
+                        <div class="quiz-option" data-correct="true">str</div>
+                        <div class="quiz-option" data-correct="false">float</div>
+                        <div class="quiz-option" data-correct="false">bool</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">2. Что выведет <code>"a" * 3</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">a3</div>
+                        <div class="quiz-option" data-correct="true">aaa</div>
+                        <div class="quiz-option" data-correct="false">a a a</div>
+                        <div class="quiz-option" data-correct="false">333</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">3. Чему равно <code>len("test")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">3</div>
+                        <div class="quiz-option" data-correct="true">4</div>
+                        <div class="quiz-option" data-correct="false">5</div>
+                        <div class="quiz-option" data-correct="false">0</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">4. Что выведет <code>"Python"[-2]</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">n</div>
+                        <div class="quiz-option" data-correct="true">o</div>
+                        <div class="quiz-option" data-correct="false">h</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">5. Что выведет <code>"Hello"[1:3]</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Hel</div>
+                        <div class="quiz-option" data-correct="true">el</div>
+                        <div class="quiz-option" data-correct="false">ell</div>
+                        <div class="quiz-option" data-correct="false">H</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">6. Что выведет <code>"Python"[::-1]</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Python</div>
+                        <div class="quiz-option" data-correct="true">nohtyP</div>
+                        <div class="quiz-option" data-correct="false">nohty</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">7. Что вернёт <code>"hello".upper()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Hello</div>
+                        <div class="quiz-option" data-correct="true">HELLO</div>
+                        <div class="quiz-option" data-correct="false">hello</div>
+                        <div class="quiz-option" data-correct="false">hELLO</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">8. Что вернёт <code>"  hi  ".strip()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">"  hi"</div>
+                        <div class="quiz-option" data-correct="false">"hi  "</div>
+                        <div class="quiz-option" data-correct="true">"hi"</div>
+                        <div class="quiz-option" data-correct="false">" hi "</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">9. Что вернёт <code>"python".capitalize()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">Python</div>
+                        <div class="quiz-option" data-correct="false">PYTHON</div>
+                        <div class="quiz-option" data-correct="false">python</div>
+                        <div class="quiz-option" data-correct="false">Python</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">10. Что вернёт <code>"hello world".find("world")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">5</div>
+                        <div class="quiz-option" data-correct="true">6</div>
+                        <div class="quiz-option" data-correct="false">7</div>
+                        <div class="quiz-option" data-correct="false">-1</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">11. Что вернёт <code>"a,b".split(",")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">"ab"</div>
+                        <div class="quiz-option" data-correct="true">['a', 'b']</div>
+                        <div class="quiz-option" data-correct="false">('a', 'b')</div>
+                        <div class="quiz-option" data-correct="false">a,b</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">12. Что вернёт <code>"-".join(['a', 'b'])</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">a b</div>
+                        <div class="quiz-option" data-correct="false">ab-</div>
+                        <div class="quiz-option" data-correct="true">a-b</div>
+                        <div class="quiz-option" data-correct="false">-a-b</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">13. Что выведет <code>f"{2+2}"</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">{2+2}</div>
+                        <div class="quiz-option" data-correct="true">4</div>
+                        <div class="quiz-option" data-correct="false">22</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">14. Что вернёт <code>"hello".replace("l", "r")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">herlo</div>
+                        <div class="quiz-option" data-correct="true">herro</div>
+                        <div class="quiz-option" data-correct="false">herll</div>
+                        <div class="quiz-option" data-correct="false">hello</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">15. Что вернёт <code>"Python".replace("P", "J")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">PythonP</div>
+                        <div class="quiz-option" data-correct="true">Jython</div>
+                        <div class="quiz-option" data-correct="false">JythonJ</div>
+                        <div class="quiz-option" data-correct="false">PythoJ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="btn" id="prevBtn" onclick="previousSection()" disabled>← Назад</button>
+            <button class="btn" id="nextBtn" onclick="nextSection()">Далее →</button>
+        </div>
+    </div>
+
+    <script src="script_strings.js"></script>
+</body>
+</html>
