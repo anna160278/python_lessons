@@ -5,92 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Справочник Python</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        .reference-section {
-            margin-bottom: 40px;
-        }
-        
-        .reference-section h2 {
-            color: #a78bfa;
-            font-size: 2em;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .reference-table {
-            width: 100%;
-            background: #1e1e2f;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid #2a2a4a;
-        }
-        
-        .reference-table table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        
-        .reference-table th {
-            background: #252542;
-            color: #a78bfa;
-            padding: 15px;
-            text-align: left;
-            font-weight: 600;
-        }
-        
-        .reference-table td {
-            padding: 12px 15px;
-            border-top: 1px solid #2a2a4a;
-            color: #d1d5db;
-        }
-        
-        .reference-table tr:hover {
-            background: #252542;
-        }
-        
-        .reference-table code {
-            background: #2d2d50;
-            color: #f0abfc;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9em;
-        }
-        
-        .quick-nav {
-            background: #1e1e2f;
-            border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 30px;
-            border: 1px solid #2a2a4a;
-        }
-        
-        .quick-nav h3 {
-            color: #a78bfa;
-            margin-bottom: 15px;
-        }
-        
-        .quick-nav ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .quick-nav li {
-            margin: 8px 0;
-        }
-        
-        .quick-nav a {
-            color: #818cf8;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-        
-        .quick-nav a:hover {
-            color: #a78bfa;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
@@ -106,19 +20,16 @@
         <div class="content">
             <div class="lesson-section active">
                 <div class="quick-nav">
-                    <h3>🔍 Быстрая навигация</h3>
-                    <ul>
-                        <li><a href="#arithmetic">Арифметические операции</a></li>
-                        <li><a href="#strings">Методы строк</a></li>
-                        <li><a href="#lists">Методы списков</a></li>
-                        <li><a href="#dicts">Методы словарей</a></li>
-                        <li><a href="#sets">Методы множеств</a></li>
-                        <li><a href="#turtle">Команды turtle</a></li>
-                    </ul>
+                    <a href="#arithmetic">🔢 Арифметика</a>
+                    <a href="#strings">📝 Строки</a>
+                    <a href="#lists">📋 Списки</a>
+                    <a href="#dicts">📚 Словари</a>
+                    <a href="#sets">🎯 Множества</a>
+                    <a href="#turtle">🐢 Turtle</a>
                 </div>
 
                 <div class="reference-section" id="arithmetic">
-                    <h2><span class="emoji-icon">🔢</span> Арифметические операции</h2>
+                    <h2><span class="emoji-icon"></span> Арифметические операции</h2>
                     <div class="reference-table">
                         <table>
                             <thead>
@@ -175,6 +86,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <a href="#" class="back-to-top">↑ Наверх</a>
                 </div>
 
                 <div class="reference-section" id="strings">
@@ -247,6 +159,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <a href="#" class="back-to-top">↑ Наверх</a>
                 </div>
 
                 <div class="reference-section" id="lists">
@@ -325,6 +238,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <a href="#" class="back-to-top">↑ Наверх</a>
                 </div>
 
                 <div class="reference-section" id="dicts">
@@ -385,10 +299,11 @@
                             </tbody>
                         </table>
                     </div>
+                    <a href="#" class="back-to-top">↑ Наверх</a>
                 </div>
 
                 <div class="reference-section" id="sets">
-                    <h2><span class="emoji-icon"></span> Методы множеств</h2>
+                    <h2><span class="emoji-icon">🎯</span> Методы множеств</h2>
                     <div class="reference-table">
                         <table>
                             <thead>
@@ -457,10 +372,63 @@
                             </tbody>
                         </table>
                     </div>
+                    <a href="#" class="back-to-top">↑ Наверх</a>
                 </div>
 
                 <div class="reference-section" id="turtle">
                     <h2><span class="emoji-icon">🐢</span> Команды turtle</h2>
+
+                    <h3>Подключение и настройка</h3>
+                    <div class="reference-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                    <th>Пример</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>import turtle as t</code></td>
+                                    <td>Импорт с коротким псевдонимом</td>
+                                    <td><code>import turtle as t</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>from turtle import *</code></td>
+                                    <td>Импорт всех функций напрямую</td>
+                                    <td><code>from turtle import *</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>setup(w, h)</code></td>
+                                    <td>Размер окна</td>
+                                    <td><code>setup(600, 400)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>Screen().colormode(255)</code></td>
+                                    <td>Режим RGB 0-255</td>
+                                    <td><code>Screen().colormode(255)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>bgcolor("name")</code></td>
+                                    <td>Цвет фона окна</td>
+                                    <td><code>bgcolor("lightblue")</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>title("text")</code></td>
+                                    <td>Заголовок окна</td>
+                                    <td><code>title("Рисунок")</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>mainloop()</code></td>
+                                    <td>Держит окно открытым (в конце программы)</td>
+                                    <td><code>mainloop()</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Движение и повороты</h3>
                     <div class="reference-table">
                         <table>
                             <thead>
@@ -492,6 +460,11 @@
                                     <td><code>right(45)</code></td>
                                 </tr>
                                 <tr>
+                                    <td><code>setheading(angle)</code></td>
+                                    <td>Абсолютное направление (в градусах)</td>
+                                    <td><code>setheading(90)</code></td>
+                                </tr>
+                                <tr>
                                     <td><code>penup()</code></td>
                                     <td>Поднять перо (не рисовать)</td>
                                     <td><code>penup()</code></td>
@@ -500,16 +473,6 @@
                                     <td><code>pendown()</code></td>
                                     <td>Опустить перо (рисовать)</td>
                                     <td><code>pendown()</code></td>
-                                </tr>
-                                <tr>
-                                    <td><code>color("name")</code></td>
-                                    <td>Установить цвет</td>
-                                    <td><code>color("red")</code></td>
-                                </tr>
-                                <tr>
-                                    <td><code>pensize(n)</code></td>
-                                    <td>Толщина линии</td>
-                                    <td><code>pensize(5)</code></td>
                                 </tr>
                                 <tr>
                                     <td><code>goto(x, y)</code></td>
@@ -521,14 +484,34 @@
                                     <td>Вернуться в центр</td>
                                     <td><code>home()</code></td>
                                 </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Рисование фигур</h3>
+                    <div class="reference-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                    <th>Пример</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 <tr>
                                     <td><code>circle(r)</code></td>
-                                    <td>Нарисовать круг радиуса r</td>
+                                    <td>Нарисовать окружность радиуса r</td>
                                     <td><code>circle(50)</code></td>
                                 </tr>
                                 <tr>
+                                    <td><code>dot(size)</code></td>
+                                    <td>Нарисовать заполненную точку</td>
+                                    <td><code>dot(20)</code></td>
+                                </tr>
+                                <tr>
                                     <td><code>begin_fill()</code></td>
-                                    <td>Начать заполнение</td>
+                                    <td>Начать заполнение фигуры</td>
                                     <td><code>begin_fill()</code></td>
                                 </tr>
                                 <tr>
@@ -539,6 +522,92 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <h3>Цвета и стиль</h3>
+                    <div class="reference-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                    <th>Пример</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>color("name")</code></td>
+                                    <td>Цвет пера и заполнения по имени</td>
+                                    <td><code>color("red")</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>color(r, g, b)</code></td>
+                                    <td>Цвет пера и заполнения в RGB (нужен colormode(255))</td>
+                                    <td><code>color(255, 0, 0)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>pencolor("name")</code></td>
+                                    <td>Только цвет пера (линии)</td>
+                                    <td><code>pencolor("blue")</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>fillcolor("name")</code></td>
+                                    <td>Только цвет заполнения фигуры</td>
+                                    <td><code>fillcolor("yellow")</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>pensize(n)</code></td>
+                                    <td>Толщина линии</td>
+                                    <td><code>pensize(5)</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Управление черепашкой</h3>
+                    <div class="reference-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                    <th>Пример</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>shape("name")</code></td>
+                                    <td>Форма черепашки</td>
+                                    <td><code>shape("turtle")</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>stamp()</code></td>
+                                    <td>Оставить отпечаток</td>
+                                    <td><code>stamp()</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>speed(n)</code></td>
+                                    <td>Скорость (1-10, 0 — мгновенно)</td>
+                                    <td><code>speed(0)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>hideturtle()</code></td>
+                                    <td>Скрыть черепашку</td>
+                                    <td><code>hideturtle()</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>showturtle()</code></td>
+                                    <td>Показать черепашку</td>
+                                    <td><code>showturtle()</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>write("text")</code></td>
+                                    <td>Написать текст</td>
+                                    <td><code>write("Привет!")</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <a href="#" class="back-to-top">↑ Наверх</a>
                 </div>
             </div>
         </div>
