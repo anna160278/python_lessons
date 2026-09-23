@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turtle — Python</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="turtle.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji-icon">🐢</span> Turtle</h1>
+            <p>Рисуем с помощью черепашки</p>
+        </div>
+
+        <nav class="page-nav">
+            <a href="index.html" class="page-link">🏠 Главная</a>
+        </nav>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="score">0</span>
+                <span class="stat-label">Очки</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="progress">1/8</span>
+                <span class="stat-label">Прогресс</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="correct">0</span>
+                <span class="stat-label">Правильных</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="content">
+            <!-- Раздел 1: Подключение turtle -->
+            <div class="lesson-section active" id="section1">
+                <h2><span class="emoji-icon">✅</span> Подключение библиотеки</h2>
+                <p>Модуль <code>turtle</code> входит в стандартную библиотеку Python — его не нужно устанавливать отдельно. Просто импортируйте его в начале программы.</p>
+
+                <h3>Три способа импорта</h3>
+                <div class="code-block"><span class="com"># Способ 1: импорт всего модуля</span>
+<span class="kw">import</span> <span class="var">turtle</span>
+<span class="var">turtle</span>.<span class="func">forward</span>(<span class="num">100</span>)
+<span class="var">turtle</span>.<span class="func">right</span>(<span class="num">90</span>)
+
+<span class="com"># Способ 2: импорт с коротким псевдонимом</span>
+<span class="kw">import</span> <span class="var">turtle</span> <span class="kw">as</span> <span class="var">t</span>
+<span class="var">t</span>.<span class="func">forward</span>(<span class="num">100</span>)
+<span class="var">t</span>.<span class="func">right</span>(<span class="num">90</span>)
+
+<span class="com"># Способ 3: импорт всех функций напрямую</span>
+<span class="kw">from</span> <span class="var">turtle</span> <span class="kw">import</span> <span class="op">*</span>
+<span class="func">forward</span>(<span class="num">100</span>)
+<span class="func">right</span>(<span class="num">90</span>)</div>
+
+<div class="example-box">
+    <strong>💡 Какой способ выбрать:</strong>
+    <p>✅ <code>from turtle import *</code> — самый удобный для обучения, короткие команды без префикса</p>
+    <p>✅ <code>import turtle as t</code> — золотая середина: короткий префикс <code>t.</code> и доступ ко всем функциям</p>
+    <p>✅ <code>import turtle</code> — хорош для больших проектов, сразу видно откуда функция</p>
+    <p>⚠️ Избегайте <code>from turtle import *</code> в серьёзных проектах — может конфликтовать с другими библиотеками</p>
+    <p>️ Не используйте <code>from turtle import forward, right</code> — вы получите только эти две функции, остальные будут недоступны</p>
+</div>
+
+                <h3>Настройка окна и запуск</h3>
+                <div class="code-block"><span class="kw">from</span> <span class="var">turtle</span> <span class="kw">import</span> <span class="op">*</span>
+
+<span class="com"># Настройка окна</span>
+<span class="func">setup</span>(<span class="num">600</span>, <span class="num">400</span>)       <span class="com"># ширина 600, высота 400</span>
+<span class="func">bgcolor</span>(<span class="str">"lightblue"</span>)  <span class="com"># цвет фона</span>
+<span class="func">title</span>(<span class="str">"Мой рисунок"</span>)  <span class="com"># заголовок окна</span>
+
+<span class="com"># Рисуем квадрат</span>
+<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">4</span>):
+    <span class="func">forward</span>(<span class="num">100</span>)
+    <span class="func">right</span>(<span class="num">90</span>)
+
+<span class="com"># Оставляем окно открытым</span>
+<span class="func">mainloop</span>()</div>
+
+                <div class="example-box">
+                    <strong>🚀 Попробуйте сами!</strong>
+                    <p>Откройте свой редактор кода (PyCharm, VS Code, IDLE) и запустите этот код. Вы увидите окно с нарисованным квадратом!</p>
+                    <p><code>mainloop()</code> — обязательная команда в конце, она держит окно открытым</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Какой импорт даёт самые короткие команды?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>import turtle</code></div>
+                        <div class="quiz-option" data-correct="true"><code>from turtle import *</code></div>
+                        <div class="quiz-option" data-correct="false"><code>from turtle import forward</code></div>
+                        <div class="quiz-option" data-correct="false"><code>import turtle as t</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что делает <code>setup(600, 400)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Устанавливает скорость черепашки</div>
+                        <div class="quiz-option" data-correct="true">Задаёт размер окна 600×400 пикселей</div>
+                        <div class="quiz-option" data-correct="false">Устанавливает цвет фона</div>
+                        <div class="quiz-option" data-correct="false">Создаёт 600 черепашек</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Зачем нужна <code>mainloop()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Запускает анимацию</div>
+                        <div class="quiz-option" data-correct="true">Держит окно открытым после рисования</div>
+                        <div class="quiz-option" data-correct="false">Очищает экран</div>
+                        <div class="quiz-option" data-correct="false">Возвращает черепашку домой</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 2: Движение и повороты -->
+            <div class="lesson-section" id="section2">
+                <h2><span class="emoji-icon"></span> Движение и повороты</h2>
+                <p>Черепашка начинает в центре экрана и смотрит вправо (на восток). Она может двигаться вперёд/назад и поворачиваться.</p>
+
+                <div class="code-block"><span class="func">forward</span>(<span class="num">100</span>)   <span class="com"># пройти вперёд 100 пикселей</span>
+<span class="func">backward</span>(<span class="num">50</span>)  <span class="com"># пройти назад 50 пикселей</span>
+<span class="func">right</span>(<span class="num">90</span>)    <span class="com"># повернуть направо на 90°</span>
+<span class="func">left</span>(<span class="num">45</span>)     <span class="com"># повернуть налево на 45°</span></div>
+
+                <h3>Абсолютный поворот: setheading()</h3>
+<p>В отличие от <code>left()</code> и <code>right()</code>, которые поворачивают <em>относительно текущего направления</em>, команда <code>setheading()</code> задаёт <strong>абсолютное направление</strong>. Угол указывается <strong>в градусах</strong>:</p>
+
+<div class="code-block"><span class="func">setheading</span>(<span class="num">0</span>)    <span class="com"># смотреть на восток (вправо) →</span>
+<span class="func">setheading</span>(<span class="num">90</span>)   <span class="com"># смотреть на север (вверх) ↑</span>
+<span class="func">setheading</span>(<span class="num">180</span>)  <span class="com"># смотреть на запад (влево) ←</span>
+<span class="func">setheading</span>(<span class="num">270</span>)  <span class="com"># смотреть на юг (вниз) ↓</span>
+<span class="func">setheading</span>(<span class="num">-90</span>)  <span class="com"># тоже самое, что 270 (вниз) ↓</span>
+
+<span class="com"># Разница:</span>
+<span class="func">right</span>(<span class="num">90</span>)        <span class="com"># повернуть на 90° от текущего направления</span>
+<span class="func">setheading</span>(<span class="num">90</span>)   <span class="com"># всегда смотреть вверх,</span>
+                 <span class="com"># независимо от текущего направления</span></div>
+<div class="svg-example">
+    <svg viewBox="0 0 300 260" class="turtle-svg" style="max-width: 320px;">
+        <!-- Фоновый круг -->
+        <circle cx="140" cy="130" r="100" fill="none" stroke="#2a2a4a" stroke-width="2"/>
+        
+        <!-- Вспомогательные линии -->
+        <line x1="140" y1="30" x2="140" y2="230" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="4"/>
+        <line x1="40" y1="130" x2="240" y2="130" stroke="#2a2a4a" stroke-width="1" stroke-dasharray="4"/>
+        
+        <!-- Стрелка 0° (восток) -->
+        <line x1="140" y1="130" x2="230" y2="130" stroke="#667eea" stroke-width="3"/>
+        <polygon points="230,125 240,130 230,135" fill="#667eea"/>
+        <text x="242" y="125" font-size="14" fill="#a78bfa" font-weight="bold">0°</text>
+        <text x="242" y="145" font-size="11" fill="#999">восток →</text>
+        
+        <!-- Стрелка 90° (север) -->
+        <line x1="140" y1="130" x2="140" y2="40" stroke="#667eea" stroke-width="3"/>
+        <polygon points="135,40 140,30 145,40" fill="#667eea"/>
+        <text x="145" y="35" font-size="14" fill="#a78bfa" font-weight="bold">90°</text>
+        <text x="145" y="52" font-size="11" fill="#999">север ↑</text>
+        
+        <!-- Стрелка 180° (запад) -->
+        <line x1="140" y1="130" x2="50" y2="130" stroke="#667eea" stroke-width="3"/>
+        <polygon points="50,125 40,130 50,135" fill="#667eea"/>
+        <text x="5" y="125" font-size="14" fill="#a78bfa" font-weight="bold">180°</text>
+        <text x="5" y="145" font-size="11" fill="#999">← запад</text>
+        
+        <!-- Стрелка 270° / -90° (юг) -->
+        <line x1="140" y1="130" x2="140" y2="220" stroke="#667eea" stroke-width="3"/>
+        <polygon points="135,220 140,230 145,220" fill="#667eea"/>
+        <text x="145" y="225" font-size="14" fill="#a78bfa" font-weight="bold">270°</text>
+        <text x="145" y="242" font-size="11" fill="#999">↓ юг</text>
+        
+        <!-- Дуга показывающая направление отсчёта -->
+        <path d="M 160 130 A 20 20 0 0 0 140 110" fill="none" stroke="#22c55e" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <defs>
+            <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+                <polygon points="0 0, 6 3, 0 6" fill="#22c55e"/>
+            </marker>
+        </defs>
+        <text x="165" y="115" font-size="11" fill="#22c55e">+90°</text>
+        
+        <!-- Центр -->
+        <circle cx="140" cy="130" r="5" fill="#22c55e"/>
+        
+        <!-- Подпись про отрицательные углы -->
+        <text x="10" y="255" font-size="11" fill="#f0abfc" font-style="italic">-90° = 270° (вниз)</text>
+    </svg>
+</div>
+<div class="example-box">
+    <strong>💡 Как работает отсчёт углов:</strong>
+    <p>✅ Углы отсчитываются <strong>против часовой стрелки</strong> от направления "вправо" (0°)</p>
+    <p>✅ <code>setheading(90)</code> — поворот на 90° против часовой = вверх</p>
+    <p>✅ <code>setheading(-90)</code> — поворот на 90° по часовой = вниз (то же, что 270°)</p>
+    <p>✅ Отрицательные углы — это поворот <strong>по часовой стрелке</strong></p>
+    <p>✅ <code>setheading(360)</code> = <code>setheading(0)</code> — полный оборот</p>
+</div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что делает <code>forward(50)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Поворачивает на 50°</div>
+                        <div class="quiz-option" data-correct="true">Двигается вперёд на 50 пикселей</div>
+                        <div class="quiz-option" data-correct="false">Рисует круг радиусом 50</div>
+                        <div class="quiz-option" data-correct="false">Меняет цвет на 50</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. В чём разница между <code>right(90)</code> и <code>setheading(90)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Никакой разницы</div>
+                        <div class="quiz-option" data-correct="true"><code>right</code> поворачивает относительно текущего направления, <code>setheading</code> задаёт абсолютное направление</div>
+                        <div class="quiz-option" data-correct="false"><code>right</code> быстрее работает</div>
+                        <div class="quiz-option" data-correct="false"><code>setheading</code> рисует линию</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Какое направление задаёт <code>setheading(0)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Вверх (север)</div>
+                        <div class="quiz-option" data-correct="true">Вправо (восток)</div>
+                        <div class="quiz-option" data-correct="false">Влево (запад)</div>
+                        <div class="quiz-option" data-correct="false">Вниз (юг)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 3: Рисование фигур -->
+            <div class="lesson-section" id="section3">
+                <h2><span class="emoji-icon">🔷</span> Рисование фигур</h2>
+                <p>С помощью циклов можно рисовать правильные многоугольники. Также есть специальные команды для кругов и точек.</p>
+
+                <h3>Квадрат и треугольник</h3>
+                <div class="code-block"><span class="com"># Квадрат</span>
+<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">4</span>):
+    <span class="func">forward</span>(<span class="num">100</span>)
+    <span class="func">right</span>(<span class="num">90</span>)
+
+<span class="com"># Треугольник</span>
+<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">3</span>):
+    <span class="func">forward</span>(<span class="num">100</span>)
+    <span class="func">right</span>(<span class="num">120</span>)</div>
+
+                <div class="example-box">
+                    <strong>💡 Формула угла поворота:</strong>
+                    <p>Для правильного n-угольника угол поворота = <code>360 / n</code></p>
+                    <p>Квадрат (4 стороны): 360 / 4 = <strong>90°</strong></p>
+                    <p>Треугольник (3 стороны): 360 / 3 = <strong>120°</strong></p>
+                    <p>Шестиугольник (6 сторон): 360 / 6 = <strong>60°</strong></p>
+                </div>
+
+                <h3>Круг и точка</h3>
+                <div class="code-block"><span class="com"># Круг — рисует окружность заданного радиуса</span>
+<span class="func">circle</span>(<span class="num">50</span>)    <span class="com"># круг радиусом 50 пикселей</span>
+<span class="func">circle</span>(<span class="num">30</span>)    <span class="com"># круг радиусом 30 пикселей</span>
+
+<span class="com"># Точка — рисует заполненный кружок заданного размера</span>
+<span class="func">dot</span>(<span class="num">20</span>)       <span class="com"># точка диаметром 20 пикселей</span>
+<span class="func">dot</span>(<span class="num">10</span>, <span class="str">"red"</span>) <span class="com"># красная точка диаметром 10</span></div>
+
+                <div class="example-box">
+                    <strong> Разница между circle() и dot():</strong>
+                    <p><code>circle(r)</code> — рисует <strong>окружность</strong> (контур), черепашка движется по кругу</p>
+                    <p><code>dot(size)</code> — рисует <strong>заполненную точку</strong>, черепашка остаётся на месте</p>
+                    <p><code>dot()</code> удобен для точек на графике или создания узоров</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Какой угол поворота нужен для шестиугольника?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">90°</div>
+                        <div class="quiz-option" data-correct="false">120°</div>
+                        <div class="quiz-option" data-correct="true">60°</div>
+                        <div class="quiz-option" data-correct="false">45°</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. В чём разница между <code>circle(50)</code> и <code>dot(50)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Никакой разницы</div>
+                        <div class="quiz-option" data-correct="true"><code>circle</code> рисует контур окружности, <code>dot</code> рисует заполненную точку</div>
+                        <div class="quiz-option" data-correct="false"><code>circle</code> быстрее</div>
+                        <div class="quiz-option" data-correct="false"><code>dot</code> рисует квадрат</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что нарисует этот код:</div>
+                    <pre class="quiz-code">for i in range(3):
+    forward(100)
+    right(120)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Квадрат
+                        </div>
+                        <div class="quiz-option" data-correct="true">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,10 50,45 10,45" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Треугольник
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><circle cx="30" cy="30" r="20" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Круг
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,8 36,24 54,24 40,34 45,50 30,41 15,50 20,34 6,24 24,24" fill="none" stroke="#667eea" stroke-width="1.5"/></svg>
+                            Звезда
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 4: Цвета и заполнение -->
+            <div class="lesson-section" id="section4">
+                <h2><span class="emoji-icon">🎨</span> Цвета и заполнение</h2>
+                <p>Можно менять цвет пера, цвет фона и заполнять фигуры цветом.</p>
+
+                <h3>Именованные цвета</h3>
+                <div class="code-block"><span class="func">color</span>(<span class="str">"red"</span>)        <span class="com"># красный</span>
+<span class="func">color</span>(<span class="str">"blue"</span>)       <span class="com"># синий</span>
+<span class="func">color</span>(<span class="str">"green"</span>)      <span class="com"># зелёный</span>
+<span class="func">color</span>(<span class="str">"yellow"</span>)     <span class="com"># жёлтый</span>
+<span class="func">color</span>(<span class="str">"purple"</span>)     <span class="com"># фиолетовый</span>
+<span class="func">color</span>(<span class="str">"orange"</span>)     <span class="com"># оранжевый</span>
+
+<span class="func">bgcolor</span>(<span class="str">"lightblue"</span>) <span class="com"># цвет фона окна</span></div>
+
+                <h3>Цвета в формате RGB</h3>
+<div class="code-block"><span class="com"># ⚠️ Важно! Без этой строки RGB цвета не работают!</span>
+<span class="com"># По умолчанию turtle использует режим 0.0–1.0</span>
+<span class="var">t</span>.<span class="func">Screen</span>().<span class="func">colormode</span>(<span class="num">255</span>)
+
+<span class="com"># RGB — красный, зелёный, синий (от 0 до 255)</span>
+<span class="func">color</span>(<span class="num">255</span>, <span class="num">0</span>, <span class="num">0</span>)       <span class="com"># красный</span>
+<span class="func">color</span>(<span class="num">0</span>, <span class="num">255</span>, <span class="num">0</span>)       <span class="com"># зелёный</span>
+<span class="func">color</span>(<span class="num">0</span>, <span class="num">0</span>, <span class="num">255</span>)       <span class="com"># синий</span>
+<span class="func">color</span>(<span class="num">255</span>, <span class="num">255</span>, <span class="num">0</span>)     <span class="com"># жёлтый</span>
+<span class="func">color</span>(<span class="num">128</span>, <span class="num">0</span>, <span class="num">128</span>)     <span class="com"># фиолетовый</span>
+
+<span class="com"># Можно использовать кортеж</span>
+<span class="func">color</span>((<span class="num">255</span>, <span class="num">128</span>, <span class="num">0</span>))   <span class="com"># оранжевый</span></div>
+
+<div class="example-box">
+    <strong>⚠️ Почему нужна colormode(255):</strong>
+    <p>По умолчанию turtle работает в режиме <code>colormode(1.0)</code>, где цвета задаются дробными числами от 0.0 до 1.0</p>
+    <p><code>Screen().colormode(255)</code> переключает режим на целые числа от 0 до 255 — как в веб-дизайне</p>
+    <p>Если используете <code>from turtle import *</code>, пишите просто <code>Screen().colormode(255)</code></p>
+    <p>Без этой строки <code>color(255, 0, 0)</code> вызовет ошибку <code>TurtleGraphicsError</code>!</p>
+</div>
+                <h3>Заполнение фигур</h3>
+                <div class="code-block"><span class="func">color</span>(<span class="str">"red"</span>)
+<span class="func">begin_fill</span>()        <span class="com"># начать запоминать контур</span>
+<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">4</span>):
+    <span class="func">forward</span>(<span class="num">100</span>)
+    <span class="func">right</span>(<span class="num">90</span>)
+<span class="func">end_fill</span>()          <span class="com"># заполнить фигуру текущим цветом</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Популярные цвета:</strong>
+                    <p>Именованные: <code>"red"</code>, <code>"blue"</code>, <code>"green"</code>, <code>"yellow"</code>, <code>"purple"</code>, <code>"orange"</code>, <code>"pink"</code>, <code>"brown"</code></p>
+                    <p>RGB: любой цвет можно задать тремя числами от 0 до 255</p>
+                    <p>HEX: <code>color("#FF5733")</code> — тоже работает</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Как задать красный цвет через RGB?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>color(0, 255, 0)</code></div>
+                        <div class="quiz-option" data-correct="true"><code>color(255, 0, 0)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>color(0, 0, 255)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>color(255, 255, 255)</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что делает <code>bgcolor("lightblue")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Меняет цвет пера</div>
+                        <div class="quiz-option" data-correct="true">Меняет цвет фона окна</div>
+                        <div class="quiz-option" data-correct="false">Заполняет фигуру голубым</div>
+                        <div class="quiz-option" data-correct="false">Создаёт голубую черепашку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что нарисует этот код:</div>
+                    <pre class="quiz-code">color("blue")
+pensize(3)
+for i in range(4):
+    forward(80)
+    right(90)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,10 50,45 10,45" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Синий треугольник
+                        </div>
+                        <div class="quiz-option" data-correct="true">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#667eea" stroke-width="3"/></svg>
+                            Синий квадрат с толстой линией
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#667eea" stroke-width="1"/></svg>
+                            Синий квадрат с тонкой линией
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><circle cx="30" cy="30" r="20" fill="none" stroke="#667eea" stroke-width="3"/></svg>
+                            Синий круг
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 5: Управление черепашкой -->
+            <div class="lesson-section" id="section5">
+                <h2><span class="emoji-icon"></span> Управление черепашкой</h2>
+                <p>Можно менять внешний вид черепашки, скорость, оставлять отпечатки и писать текст.</p>
+
+                <h3>Форма черепашки</h3>
+                <div class="code-block"><span class="func">shape</span>(<span class="str">"turtle"</span>)   <span class="com"># черепашка (по умолчанию)</span>
+<span class="func">shape</span>(<span class="str">"arrow"</span>)    <span class="com"># стрелка</span>
+<span class="func">shape</span>(<span class="str">"circle"</span>)   <span class="com"># круг</span>
+<span class="func">shape</span>(<span class="str">"square"</span>)   <span class="com"># квадрат</span>
+<span class="func">shape</span>(<span class="str">"triangle"</span>) <span class="com"># треугольник</span>
+<span class="func">shape</span>(<span class="str">"classic"</span>)  <span class="com"># классическая стрелка</span></div>
+
+                <h3>Скорость</h3>
+                <div class="code-block"><span class="func">speed</span>(<span class="num">1</span>)   <span class="com"># медленно</span>
+<span class="func">speed</span>(<span class="num">5</span>)   <span class="com"># нормально</span>
+<span class="func">speed</span>(<span class="num">10</span>)  <span class="com"># быстро</span>
+<span class="func">speed</span>(<span class="num">0</span>)   <span class="com"># мгновенно (без анимации)</span></div>
+
+                <h3>Отпечатки и видимость</h3>
+                <div class="code-block"><span class="func">stamp</span>()          <span class="com"># оставить отпечаток черепашки</span>
+<span class="func">hideturtle</span>()    <span class="com"># скрыть черепашку</span>
+<span class="func">showturtle</span>()    <span class="com"># показать черепашку</span>
+
+<span class="com"># Написать текст</span>
+<span class="func">write</span>(<span class="str">"Привет!"</span>, <span class="var">font</span>=(<span class="str">"Arial"</span>, <span class="num">16</span>, <span class="str">"bold"</span>))</div>
+
+                <div class="example-box">
+                    <strong>💡 Пример использования stamp():</strong>
+                    <p><code>stamp()</code> оставляет "след" черепашки в текущей позиции — удобно для создания узоров из одинаковых фигур</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что делает <code>shape("arrow")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Рисует стрелку</div>
+                        <div class="quiz-option" data-correct="true">Меняет форму черепашки на стрелку</div>
+                        <div class="quiz-option" data-correct="false">Направляет черепашку вперёд</div>
+                        <div class="quiz-option" data-correct="false">Удаляет черепашку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Какое значение <code>speed()</code> даёт мгновенное рисование?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>speed(1)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>speed(10)</code></div>
+                        <div class="quiz-option" data-correct="true"><code>speed(0)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>speed(100)</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что делает <code>stamp()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Стирает рисунок</div>
+                        <div class="quiz-option" data-correct="true">Оставляет отпечаток черепашки в текущей позиции</div>
+                        <div class="quiz-option" data-correct="false">Печатает текст на экране</div>
+                        <div class="quiz-option" data-correct="false">Сохраняет рисунок в файл</div>
+                    </div>
+                </div>
+            </div>
+
+           <!-- Раздел 6: Циклы и паттерны -->
+<div class="lesson-section" id="section6">
+    <h2><span class="emoji-icon">✨</span> Циклы и паттерны</h2>
+    <p>С помощью циклов можно создавать красивые узоры.</p>
+
+    <h3>Звезда</h3>
+    <div class="code-block"><span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">5</span>):
+    <span class="func">forward</span>(<span class="num">100</span>)
+    <span class="func">right</span>(<span class="num">144</span>)</div>
+
+    <h3>Спираль</h3>
+    <div class="code-block"><span class="com"># Спираль</span>
+<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">50</span>):
+    <span class="func">forward</span>(<span class="var">i</span> <span class="op">*</span> <span class="num">3</span>)
+    <span class="func">right</span>(<span class="num">61</span>)</div>
+
+    <h3>Цветок</h3>
+    <div class="code-block"><span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">6</span>):
+    <span class="func">circle</span>(<span class="num">50</span>)
+    <span class="func">right</span>(<span class="num">60</span>)</div>
+
+    <div class="example-box">
+        <strong>🧪 Экспериментируйте!</strong>
+        <p><strong>Попробуйте в песочнице</strong> (найдёте на следующей странице) или в своём редакторе кода — запустите эти примеры и поэкспериментируйте:</p>
+        <p>🔸 <strong>Меняйте углы</strong>: вместо <code>right(61)</code> попробуйте <code>right(60)</code>, <code>right(89)</code>, <code>right(120)</code> — каждый угол создаёт уникальный узор!</p>
+        <p>🔸 <strong>Меняйте количество итераций</strong>: вместо <code>range(50)</code> или <code>range(6)</code> поставьте другое число — узор изменится!</p>
+        <p> <strong>Комбинируйте</strong>: меняйте и угол, и количество кругов одновременно — создавайте свои собственные узоры!</p>
+    </div>
+
+    <div class="quiz-container">
+        <div class="quiz-question">1. Какой угол поворота для звезды с 5 лучами?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">72°</div>
+            <div class="quiz-option" data-correct="true">144°</div>
+            <div class="quiz-option" data-correct="false">120°</div>
+            <div class="quiz-option" data-correct="false">90°</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">2. Что происходит в спирали на каждой итерации?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Длина линии уменьшается</div>
+            <div class="quiz-option" data-correct="true">Длина линии увеличивается</div>
+            <div class="quiz-option" data-correct="false">Угол поворота меняется</div>
+            <div class="quiz-option" data-correct="false">Цвет меняется</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">3. Что нарисует этот код:</div>
+        <pre class="quiz-code">for i in range(6):
+    forward(50)
+    right(60)</pre>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">
+                <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,10 50,45 10,45" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                Треугольник
+            </div>
+            <div class="quiz-option" data-correct="false">
+                <svg viewBox="0 0 60 60" width="60" height="60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                Квадрат
+            </div>
+            <div class="quiz-option" data-correct="true">
+                <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,10 50,20 50,40 30,50 10,40 10,20" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                Шестиугольник
+            </div>
+            <div class="quiz-option" data-correct="false">
+                <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,8 36,24 54,24 40,34 45,50 30,41 15,50 20,34 6,24 24,24" fill="none" stroke="#667eea" stroke-width="1.5"/></svg>
+                Звезда
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- Раздел 7: Песочница -->
+            <div class="lesson-section" id="section7">
+                <h2><span class="emoji-icon">🎨</span> Песочница</h2>
+                <p>Попробуй рисовать прямо здесь! Пиши код слева — смотри результат справа.</p>
+
+                <div class="turtle-sandbox">
+                    <div class="sandbox-editor">
+                        <h3>Код Python</h3>
+                        <textarea id="turtleCode" spellcheck="false"># Нарисуем квадрат
+for i in range(4):
+    forward(80)
+    right(90)</textarea>
+                        <div class="sandbox-buttons">
+                            <button class="btn" onclick="runTurtle()">▶ Запустить</button>
+                            <button class="btn btn-secondary" onclick="clearCanvas()">🗑 Очистить</button>
+                            <button class="btn btn-secondary" onclick="toggleExamples()">📋 Примеры</button>
+                        </div>
+                        <div id="examplesPanel" class="examples-panel" style="display: none;">
+                            <button class="example-btn" onclick="loadExample('square')">Квадрат</button>
+                            <button class="example-btn" onclick="loadExample('triangle')">Треугольник</button>
+                            <button class="example-btn" onclick="loadExample('star')">Звезда</button>
+                            <button class="example-btn" onclick="loadExample('spiral')">Спираль</button>
+                            <button class="example-btn" onclick="loadExample('flower')">Цветок</button>
+                        </div>
+                    </div>
+                    <div class="sandbox-canvas">
+                        <h3>Результат</h3>
+                        <canvas id="turtleCanvas" width="400" height="400"></canvas>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <strong>💡 Поддерживаемые команды:</strong>
+                    <p><code>forward(n)</code>, <code>backward(n)</code>, <code>left(angle)</code>, <code>right(angle)</code></p>
+                    <p><code>setheading(angle)</code>, <code>penup()</code>, <code>pendown()</code></p>
+                    <p><code>color("name")</code>, <code>pensize(n)</code>, <code>circle(r)</code>, <code>dot(size)</code></p>
+                    <p><code>goto(x, y)</code>, <code>home()</code>, <code>begin_fill()</code>, <code>end_fill()</code></p>
+                    <p>Циклы: <code>for i in range(n):</code></p>
+                </div>
+            </div>
+
+            <!-- Раздел 8: Итоговый тест -->
+            <div class="lesson-section" id="section8">
+                <h2><span class="emoji-icon"></span> Итоговый тест</h2>
+                <div class="final-test-header">
+                    <h3 style="margin:0; color:#856404;">10 вопросов, 7 минут. Удачи!</h3>
+                </div>
+
+                <div class="global-timer" id="globalTimer">⏱️ 7:00</div>
+                <div class="final-test-stats" id="finalTestStats" style="display: none;"></div>
+
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">1. Что нарисует черепашка?</div>
+                    <pre class="quiz-code">for i in range(4):
+    forward(100)
+    right(90)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,10 50,45 10,45" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Треугольник
+                        </div>
+                        <div class="quiz-option" data-correct="true">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Квадрат
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><circle cx="30" cy="30" r="20" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Круг
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,8 36,24 54,24 40,34 45,50 30,41 15,50 20,34 6,24 24,24" fill="none" stroke="#667eea" stroke-width="1.5"/></svg>
+                            Звезда
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">2. Что делает <code>penup()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Прячет черепашку</div>
+                        <div class="quiz-option" data-correct="true">"Поднимает перо", черепашка перестаёт оставлять след</div>
+                        <div class="quiz-option" data-correct="false">Очищает экран</div>
+                        <div class="quiz-option" data-correct="false">Меняет цвет пера</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">3. Что нарисует этот код?</div>
+                    <pre class="quiz-code">for i in range(3):
+    forward(80)
+    right(120)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,10 50,45 10,45" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Треугольник
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Квадрат
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,10 35,25 50,25 38,35 42,50 30,40 18,50 22,35 10,25 25,25" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Звезда
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><line x1="10" y1="30" x2="50" y2="30" stroke="#667eea" stroke-width="2"/></svg>
+                            Линия
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">4. Что делает <code>circle(50)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Рисует квадрат 50×50</div>
+                        <div class="quiz-option" data-correct="true">Рисует круг радиусом 50</div>
+                        <div class="quiz-option" data-correct="false">Двигается по кругу 50 раз</div>
+                        <div class="quiz-option" data-correct="false">Меняет размер черепашки на 50</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">5. Что нарисует этот код?</div>
+                    <pre class="quiz-code">color("red")
+for i in range(4):
+    forward(60)
+    right(90)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Синий квадрат
+                        </div>
+                        <div class="quiz-option" data-correct="true">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#ef4444" stroke-width="2"/></svg>
+                            Красный квадрат
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><circle cx="30" cy="30" r="20" fill="none" stroke="#ef4444" stroke-width="2"/></svg>
+                            Красный круг
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,10 50,45 10,45" fill="none" stroke="#ef4444" stroke-width="2"/></svg>
+                            Красный треугольник
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">6. Что делает <code>setheading(90)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Поворачивает на 90° вправо</div>
+                        <div class="quiz-option" data-correct="true">Направляет черепашку вверх (на север)</div>
+                        <div class="quiz-option" data-correct="false">Двигается на 90 пикселей вперёд</div>
+                        <div class="quiz-option" data-correct="false">Устанавливает скорость 90</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">7. Что нарисует этот код?</div>
+                    <pre class="quiz-code">for i in range(5):
+    forward(100)
+    right(144)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,10 50,45 10,45" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Треугольник
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><rect x="10" y="10" width="40" height="40" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Квадрат
+                        </div>
+                        <div class="quiz-option" data-correct="true">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><polygon points="30,8 36,24 54,24 40,34 45,50 30,41 15,50 20,34 6,24 24,24" fill="none" stroke="#667eea" stroke-width="1.5"/></svg>
+                            Звезда
+                        </div>
+                        <div class="quiz-option" data-correct="false">
+                            <svg viewBox="0 0 60 60" width="60" height="60"><circle cx="30" cy="30" r="20" fill="none" stroke="#667eea" stroke-width="2"/></svg>
+                            Круг
+                        </div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">8. Что делает <code>dot(20)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Рисует круг радиусом 20</div>
+                        <div class="quiz-option" data-correct="true">Рисует заполненную точку диаметром 20</div>
+                        <div class="quiz-option" data-correct="false">Ставит 20 точек</div>
+                        <div class="quiz-option" data-correct="false">Двигается на 20 пикселей</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">9. Что нарисует этот код?</div>
+                    <pre class="quiz-code">forward(50)
+penup()
+forward(50)
+pendown()
+forward(50)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">
+            <svg viewBox="0 0 120 30" width="120" height="30">
+                <line x1="10" y1="15" x2="110" y2="15" stroke="#667eea" stroke-width="3"/>
+            </svg>
+            Одну длинную линию
+        </div>
+        <div class="quiz-option" data-correct="true">
+            <svg viewBox="0 0 120 30" width="120" height="30">
+                <line x1="10" y1="15" x2="45" y2="15" stroke="#667eea" stroke-width="3"/>
+                <line x1="75" y1="15" x2="110" y2="15" stroke="#667eea" stroke-width="3"/>
+            </svg>
+            Две линии с разрывом посередине
+        </div>
+        <div class="quiz-option" data-correct="false">
+            <svg viewBox="0 0 120 30" width="120" height="30">
+                <line x1="10" y1="15" x2="45" y2="15" stroke="#667eea" stroke-width="3"/>
+                <line x1="50" y1="15" x2="85" y2="15" stroke="#667eea" stroke-width="3"/>
+                <line x1="90" y1="15" x2="110" y2="15" stroke="#667eea" stroke-width="3"/>
+            </svg>
+            Три короткие линии
+        </div>
+        <div class="quiz-option" data-correct="false">
+            <svg viewBox="0 0 120 30" width="120" height="30">
+                <line x1="10" y1="15" x2="110" y2="15" stroke="#667eea" stroke-width="3" stroke-dasharray="5,5"/>
+            </svg>
+            Пунктирную линию
+        </div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">10. Что делает пара <code>begin_fill()</code> и <code>end_fill()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Начинает и заканчивает рисунок</div>
+                        <div class="quiz-option" data-correct="true">Заполняет нарисованную фигуру цветом</div>
+                        <div class="quiz-option" data-correct="false">Сохраняет и загружает рисунок</div>
+                        <div class="quiz-option" data-correct="false">Увеличивает и уменьшает черепашку</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="btn" id="prevBtn" onclick="previousSection()" disabled>← Назад</button>
+            <button class="btn" id="nextBtn" onclick="nextSection()">Далее →</button>
+        </div>
+    </div>
+
+    <script src="turtle.js"></script>
+</body>
+</html>

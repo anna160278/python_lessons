@@ -1,5 +1,5 @@
 let currentSection = 1;
-const totalSections = 5;
+const totalSections = 6;
 let score = 0;
 let correctAnswers = 0;
 let answeredQuestions = new Set();
@@ -192,10 +192,10 @@ function showFinalResults() {
         r = document.createElement('div');
         r.id = 'finalResults';
         r.innerHTML = `<div class="final-score"><h2>Урок завершён!</h2><div class="score-value" id="finalScore">0</div><p>очков набрано</p><div id="achievements"></div></div>
-            <div class="success-message"><strong> Что вы изучили:</strong><ul style="margin-left:20px;margin-top:10px;line-height:2;">
-            <li>Словари (dict) — пары ключ:значение</li><li>Создание, получение, добавление и изменение данных</li>
-            <li>Методы словарей: get, keys, values, items, update, pop, del</li><li>Перебор словарей циклом for</li>
-            <li>Практические паттерны: счётчик элементов, кортежи как ключи</li></ul></div>
+            <div class="success-message"><strong>📝 Что вы изучили:</strong><ul style="margin-left:20px;margin-top:10px;line-height:2;">
+            <li>Множества (set) — уникальные неупорядоченные коллекции</li><li>Создание множеств и удаление дубликатов</li>
+            <li>Методы добавления и удаления: add, remove, discard, pop</li><li>Операции над множествами: union, intersection, difference</li>
+            <li>Проверка вхождения и подмножеств</li><li>Практическое применение множеств</li></ul></div>
             <div style="text-align:center;margin-top:30px;"><a href="index.html" class="btn" style="text-decoration:none;display:inline-block;">🏠 На главную</a>
             <button class="btn" onclick="restartLesson()">🔄 Пройти заново</button></div>`;
         document.getElementById(`section${totalSections}`).appendChild(r);
@@ -203,7 +203,7 @@ function showFinalResults() {
     document.getElementById('finalScore').textContent = score;
     const a = document.getElementById('achievements');
     a.innerHTML = '';
-    if (correctAnswers >= 15) a.innerHTML += '<span class="achievement">🏆 Мастер словарей</span>';
+    if (correctAnswers >= 15) a.innerHTML += '<span class="achievement">🏆 Мастер множеств</span>';
     if (correctAnswers >= 10) a.innerHTML += '<span class="achievement">⭐ Отличник</span>';
     if (score >= 100) a.innerHTML += '<span class="achievement"> Эксперт</span>';
 }

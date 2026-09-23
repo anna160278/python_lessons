@@ -1,5 +1,5 @@
 let currentSection = 1;
-const totalSections = 5;
+const totalSections = 4;
 let score = 0;
 let correctAnswers = 0;
 let answeredQuestions = new Set();
@@ -91,7 +91,7 @@ function showFinalTestStats(timeIsUp) {
     let percent = Math.round((finalCorrectCount / FINAL_TOTAL) * 100);
     let emoji = '🎯', message = '';
     if (percent === 100) { emoji = '🏆'; message = 'Идеальный результат!'; }
-    else if (percent >= 80) { emoji = '🌟'; message = 'Отличный результат!'; }
+    else if (percent >= 80) { emoji = ''; message = 'Отличный результат!'; }
     else if (percent >= 60) { emoji = '👍'; message = 'Хороший результат!'; }
     else if (percent >= 40) { emoji = '📚'; message = 'Неплохо, но можно лучше!'; }
     else { emoji = '💪'; message = 'Стоит повторить материал!'; }
@@ -192,20 +192,20 @@ function showFinalResults() {
         r = document.createElement('div');
         r.id = 'finalResults';
         r.innerHTML = `<div class="final-score"><h2>Урок завершён!</h2><div class="score-value" id="finalScore">0</div><p>очков набрано</p><div id="achievements"></div></div>
-            <div class="success-message"><strong> Что вы изучили:</strong><ul style="margin-left:20px;margin-top:10px;line-height:2;">
-            <li>Словари (dict) — пары ключ:значение</li><li>Создание, получение, добавление и изменение данных</li>
-            <li>Методы словарей: get, keys, values, items, update, pop, del</li><li>Перебор словарей циклом for</li>
-            <li>Практические паттерны: счётчик элементов, кортежи как ключи</li></ul></div>
-            <div style="text-align:center;margin-top:30px;"><a href="index.html" class="btn" style="text-decoration:none;display:inline-block;">🏠 На главную</a>
+            <div class="success-message"><strong>📝 Что вы изучили:</strong><ul style="margin-left:20px;margin-top:10px;line-height:2;">
+            <li>Кортежи (tuple) — неизменяемые последовательности</li><li>Создание кортежей через скобки и tuple()</li>
+            <li>Индексация, срезы и перебор циклом for</li><li>Распаковка кортежей в переменные</li>
+            <li>Обмен значений через кортежи</li></ul></div>
+            <div style="text-align:center;margin-top:30px;"><a href="index.html" class="btn" style="text-decoration:none;display:inline-block;"> На главную</a>
             <button class="btn" onclick="restartLesson()">🔄 Пройти заново</button></div>`;
         document.getElementById(`section${totalSections}`).appendChild(r);
     }
     document.getElementById('finalScore').textContent = score;
     const a = document.getElementById('achievements');
     a.innerHTML = '';
-    if (correctAnswers >= 15) a.innerHTML += '<span class="achievement">🏆 Мастер словарей</span>';
+    if (correctAnswers >= 15) a.innerHTML += '<span class="achievement">🏆 Мастер кортежей</span>';
     if (correctAnswers >= 10) a.innerHTML += '<span class="achievement">⭐ Отличник</span>';
-    if (score >= 100) a.innerHTML += '<span class="achievement"> Эксперт</span>';
+    if (score >= 100) a.innerHTML += '<span class="achievement">💎 Эксперт</span>';
 }
 
 function restartLesson() {

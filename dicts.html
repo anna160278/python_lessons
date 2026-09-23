@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Словари и Кортежи — Python</title>
+    <title>Словари — Python</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1><span class="emoji-icon">📚</span>Кортежи и словари</h1>
-            <p>Работа со словарями и кортежами в Python</p>
+            <h1><span class="emoji-icon">📚</span> Словари</h1>
+            <p>Пары ключ-значение и работа с ними</p>
         </div>
 
         <nav class="page-nav">
@@ -23,7 +23,7 @@
                 <span class="stat-label">Очки</span>
             </div>
             <div class="stat-item">
-                <span class="stat-value" id="progress">1/8</span>
+                <span class="stat-value" id="progress">1/5</span>
                 <span class="stat-label">Прогресс</span>
             </div>
             <div class="stat-item">
@@ -37,223 +37,9 @@
         </div>
 
         <div class="content">
-            <!-- Раздел 1: Кортежи -->
+            <!-- Раздел 1: Что такое словари -->
             <div class="lesson-section active" id="section1">
-                <h2><span class="emoji-icon">📦</span> Что такое кортежи?</h2>
-                <p>Кортеж (<code>tuple</code>) — это <strong style="color:#a78bfa;">неизменяемый</strong> упорядоченный набор элементов. Похож на список, но после создания его нельзя изменить.</p>
-
-                <div class="code-block"><span class="com"># Создание кортежей</span>
-<span class="var">point</span> <span class="op">=</span> (<span class="num">3</span>, <span class="num">4</span>)
-<span class="var">colors</span> <span class="op">=</span> (<span class="str">"красный"</span>, <span class="str">"зелёный"</span>, <span class="str">"синий"</span>)
-<span class="var">single</span> <span class="op">=</span> (<span class="num">42</span>,)  <span class="com"># кортеж из 1 элемента (запятая обязательна!)</span>
-<span class="var">empty</span> <span class="op">=</span> ()       <span class="com"># пустой кортеж</span>
-
-<span class="com"># Создание через функцию tuple()</span>
-<span class="var">from_list</span> <span class="op">=</span> <span class="func">tuple</span>([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>])
-<span class="var">from_str</span> <span class="op">=</span> <span class="func">tuple</span>(<span class="str">"abc"</span>)
-
-<span class="func">print</span>(<span class="var">from_list</span>)  <span class="com"># (1, 2, 3)</span>
-<span class="func">print</span>(<span class="var">from_str</span>)   <span class="com"># ('a', 'b', 'c')</span></div>
-
-                <div class="example-box">
-                    <strong>💡 Зачем нужны кортежи:</strong>
-                    <p>✅ Быстрее списков — Python оптимизирует их</p>
-                    <p>✅ Защищают данные от случайного изменения</p>
-                    <p>✅ Удобны для возврата нескольких значений из функции</p>
-                </div>
-
-                <div class="quiz-container">
-                    <div class="quiz-question">1. Какой тип данных у <code>(1, 2, 3)</code>?</div>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="false">list</div>
-                        <div class="quiz-option" data-correct="true">tuple</div>
-                        <div class="quiz-option" data-correct="false">set</div>
-                        <div class="quiz-option" data-correct="false">dict</div>
-                    </div>
-                </div>
-                <div class="quiz-container">
-                    <div class="quiz-question">2. Что выведет:</div>
-                    <pre class="quiz-code">a = (10, 20, 30)
-print(len(a))</pre>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="false">2</div>
-                        <div class="quiz-option" data-correct="true">3</div>
-                        <div class="quiz-option" data-correct="false">30</div>
-                        <div class="quiz-option" data-correct="false">Ошибку</div>
-                    </div>
-                </div>
-                <div class="quiz-container">
-                    <div class="quiz-question">3. Можно ли изменить элемент кортежа после создания?</div>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="false">Да</div>
-                        <div class="quiz-option" data-correct="true">Нет</div>
-                        <div class="quiz-option" data-correct="false">Только строки</div>
-                        <div class="quiz-option" data-correct="false">Только числа</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Раздел 2: Работа с кортежами -->
-            <div class="lesson-section" id="section2">
-                <h2><span class="emoji-icon"></span> Работа с кортежами</h2>
-                <p>Кортежи поддерживают те же операции, что и списки: индексацию, срезы и перебор циклом.</p>
-
-                <h3>Доступ к элементам</h3>
-                <div class="code-block"><span class="var">t</span> <span class="op">=</span> (<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>, <span class="num">40</span>, <span class="num">50</span>)
-
-<span class="com"># Индексация</span>
-<span class="func">print</span>(<span class="var">t</span>[<span class="num">0</span>])    <span class="com"># 10 (первый элемент)</span>
-<span class="func">print</span>(<span class="var">t</span>[<span class="num">-1</span>])   <span class="com"># 50 (последний элемент)</span>
-
-<span class="com"># Срезы</span>
-<span class="func">print</span>(<span class="var">t</span>[<span class="num">1</span>:<span class="num">4</span>])  <span class="com"># (20, 30, 40)</span>
-<span class="func">print</span>(<span class="var">t</span>[::<span class="num">2</span>])  <span class="com"># (10, 30, 50) — каждый второй</span>
-<span class="func">print</span>(<span class="var">t</span>[::<span class="num">-1</span>]) <span class="com"># (50, 40, 30, 20, 10) — в обратном порядке</span></div>
-
-                <h3>Перебор циклом for</h3>
-                <div class="code-block"><span class="var">colors</span> <span class="op">=</span> (<span class="str">"красный"</span>, <span class="str">"зелёный"</span>, <span class="str">"синий"</span>)
-
-<span class="kw">for</span> <span class="var">color</span> <span class="kw">in</span> <span class="var">colors</span>:
-    <span class="func">print</span>(<span class="var">color</span>)
-<span class="com"># красный</span>
-<span class="com"># зелёный</span>
-<span class="com"># синий</span>
-
-<span class="com"># С индексами</span>
-<span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="func">len</span>(<span class="var">colors</span>)):
-    <span class="func">print</span>(<span class="var">i</span>, <span class="var">colors</span>[<span class="var">i</span>])
-<span class="com"># 0 красный</span>
-<span class="com"># 1 зелёный</span>
-<span class="com"># 2 синий</span></div>
-
-                <h3>Распаковка кортежей</h3>
-                <div class="code-block"><span class="com"># Распаковка в переменные</span>
-<span class="var">point</span> <span class="op">=</span> (<span class="num">3</span>, <span class="num">4</span>)
-<span class="var">x</span>, <span class="var">y</span> <span class="op">=</span> <span class="var">point</span>
-<span class="func">print</span>(<span class="var">x</span>, <span class="var">y</span>)  <span class="com"># 3 4</span>
-
-<span class="com"># Обмен значений</span>
-<span class="var">a</span>, <span class="var">b</span> <span class="op">=</span> <span class="num">1</span>, <span class="num">2</span>
-<span class="var">a</span>, <span class="var">b</span> <span class="op">=</span> <span class="var">b</span>, <span class="var">a</span>
-<span class="func">print</span>(<span class="var">a</span>, <span class="var">b</span>)  <span class="com"># 2 1</span>
-
-<span class="com"># Упаковка — создание кортежа без скобок</span>
-<span class="var">coords</span> <span class="op">=</span> <span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>
-<span class="func">print</span>(<span class="var">coords</span>)  <span class="com"># (10, 20, 30)</span></div>
-
-                <div class="example-box">
-                    <strong>💡 Полезные приёмы:</strong>
-                    <p><code>t[i]</code> — доступ по индексу</p>
-                    <p><code>t[a:b]</code> — срез кортежа</p>
-                    <p><code>x, y = point</code> — распаковка в переменные</p>
-                    <p><code>a, b = b, a</code> — обмен значений без временной переменной</p>
-                </div>
-
-                <div class="quiz-container">
-                    <div class="quiz-question">1. Что выведет:</div>
-                    <pre class="quiz-code">t = (10, 20, 30, 40)
-print(t[1:3])</pre>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="false">(10, 20)</div>
-                        <div class="quiz-option" data-correct="true">(20, 30)</div>
-                        <div class="quiz-option" data-correct="false">(20, 30, 40)</div>
-                        <div class="quiz-option" data-correct="false">Ошибку</div>
-                    </div>
-                </div>
-                <div class="quiz-container">
-                    <div class="quiz-question">2. Что выведет:</div>
-                    <pre class="quiz-code">t = (1, 2, 3)
-x, y, z = t
-print(y)</pre>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="false">1</div>
-                        <div class="quiz-option" data-correct="true">2</div>
-                        <div class="quiz-option" data-correct="false">3</div>
-                        <div class="quiz-option" data-correct="false">Ошибку</div>
-                    </div>
-                </div>
-                <div class="quiz-container">
-                    <div class="quiz-question">3. Что выведет:</div>
-                    <pre class="quiz-code">a, b = 5, 10
-a, b = b, a
-print(a, b)</pre>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="false">5 10</div>
-                        <div class="quiz-option" data-correct="true">10 5</div>
-                        <div class="quiz-option" data-correct="false">5 5</div>
-                        <div class="quiz-option" data-correct="false">Ошибку</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Раздел 3: Операции с кортежами -->
-            <div class="lesson-section" id="section3">
-                <h2><span class="emoji-icon">🔗</span> Операции с кортежами</h2>
-                <p>С кортежами можно выполнять конкатенацию, повторение и использовать методы <code>count()</code> и <code>index()</code>.</p>
-
-                <div class="code-block"><span class="var">a</span> <span class="op">=</span> (<span class="num">1</span>, <span class="num">2</span>)
-<span class="var">b</span> <span class="op">=</span> (<span class="num">3</span>, <span class="num">4</span>)
-
-<span class="com"># Конкатенация</span>
-<span class="func">print</span>(<span class="var">a</span> <span class="op">+</span> <span class="var">b</span>)  <span class="com"># (1, 2, 3, 4)</span>
-
-<span class="com"># Повторение</span>
-<span class="func">print</span>(<span class="var">a</span> <span class="op">*</span> <span class="num">3</span>)  <span class="com"># (1, 2, 1, 2, 1, 2)</span>
-
-<span class="com"># count и index</span>
-<span class="var">t</span> <span class="op">=</span> (<span class="num">1</span>, <span class="num">2</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">2</span>)
-<span class="func">print</span>(<span class="var">t</span>.<span class="func">count</span>(<span class="num">2</span>))  <span class="com"># 3</span>
-<span class="func">print</span>(<span class="var">t</span>.<span class="func">index</span>(<span class="num">3</span>))  <span class="com"># 3</span>
-
-<span class="com"># Проверка вхождения</span>
-<span class="func">print</span>(<span class="num">2</span> <span class="kw">in</span> <span class="var">t</span>)      <span class="com"># True</span></div>
-
-                <div class="example-box">
-                    <strong>💡 Кортежи vs Списки:</strong>
-                    <p><code>(1, 2, 3)</code> — кортеж, нельзя изменять</p>
-                    <p><code>[1, 2, 3]</code> — список, можно изменять</p>
-                    <p>Синтаксис похож, но круглые скобки вместо квадратных</p>
-                </div>
-
-                <div class="quiz-container">
-                    <div class="quiz-question">1. Что выведет:</div>
-                    <pre class="quiz-code">a = (1, 2)
-b = (3, 4)
-print(a + b)</pre>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="true">(1, 2, 3, 4)</div>
-                        <div class="quiz-option" data-correct="false">((1, 2), (3, 4))</div>
-                        <div class="quiz-option" data-correct="false">(4, 6)</div>
-                        <div class="quiz-option" data-correct="false">Ошибку</div>
-                    </div>
-                </div>
-                <div class="quiz-container">
-                    <div class="quiz-question">2. Что выведет:</div>
-                    <pre class="quiz-code">t = (1, 2, 2, 3)
-print(t.count(2))</pre>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="false">1</div>
-                        <div class="quiz-option" data-correct="true">2</div>
-                        <div class="quiz-option" data-correct="false">3</div>
-                        <div class="quiz-option" data-correct="false">4</div>
-                    </div>
-                </div>
-                <div class="quiz-container">
-                    <div class="quiz-question">3. Что выведет:</div>
-                    <pre class="quiz-code">t = (10, 20, 30)
-print(t[1])</pre>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="false">10</div>
-                        <div class="quiz-option" data-correct="true">20</div>
-                        <div class="quiz-option" data-correct="false">30</div>
-                        <div class="quiz-option" data-correct="false">Ошибку</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Раздел 4: Словари -->
-            <div class="lesson-section" id="section4">
-                <h2><span class="emoji-icon"></span> Что такое словари?</h2>
+                <h2><span class="emoji-icon">✅</span> Что такое словари?</h2>
                 <p>Словарь (<code>dict</code>) — это неупорядоченная коллекция пар <strong style="color:#a78bfa;">ключ:значение</strong>. Ключи уникальны, значения могут повторяться.</p>
 
                 <div class="code-block"><span class="com"># Создание словарей</span>
@@ -275,7 +61,7 @@ print(t[1])</pre>
 <span class="func">print</span>(<span class="var">student</span>[<span class="str">"age"</span>])  <span class="com"># 15</span></div>
 
                 <div class="example-box">
-                    <strong>⚠️ Правила ключей:</strong>
+                    <strong>❗ Правила ключей:</strong>
                     <p>✅ Ключи должны быть <strong style="color:#a78bfa;">неизменяемыми</strong> (строки, числа, кортежи)</p>
                     <p>✅ Ключи уникальны — при дублировании перезаписывается значение</p>
                     <p>✅ Кортежи можно использовать как ключи: <code>{(0, 0): "начало"}</code></p>
@@ -315,9 +101,9 @@ print(d)</pre>
                 </div>
             </div>
 
-            <!-- Раздел 5: Методы словарей -->
-            <div class="lesson-section" id="section5">
-                <h2><span class="emoji-icon">️</span> Методы словарей</h2>
+            <!-- Раздел 2: Методы словарей -->
+            <div class="lesson-section" id="section2">
+                <h2><span class="emoji-icon">🔧</span> Методы словарей</h2>
                 <p>Словари имеют удобные методы для безопасной работы с данными.</p>
 
                 <div class="code-block"><span class="var">student</span> <span class="op">=</span> {<span class="str">"name"</span>: <span class="str">"Алиса"</span>, <span class="str">"age"</span>: <span class="num">20</span>}
@@ -390,8 +176,8 @@ print(len(d))</pre>
                 </div>
             </div>
 
-            <!-- Раздел 6: Перебор словарей -->
-            <div class="lesson-section" id="section6">
+            <!-- Раздел 3: Перебор словарей -->
+            <div class="lesson-section" id="section3">
                 <h2><span class="emoji-icon">🔁</span> Перебор словарей циклом for</h2>
                 <p>Словари можно перебирать разными способами — по ключам, значениям или парам.</p>
 
@@ -460,10 +246,10 @@ for k, v in d.items():
                 </div>
             </div>
 
-            <!-- Раздел 7: Практические паттерны -->
-            <div class="lesson-section" id="section7">
+            <!-- Раздел 4: Практические паттерны -->
+            <div class="lesson-section" id="section4">
                 <h2><span class="emoji-icon">💻</span> Практические паттерны</h2>
-                <p>Рассмотрим полезные приёмы работы со словарями и кортежами.</p>
+                <p>Рассмотрим полезные приёмы работы со словарями.</p>
 
                 <h3>Счётчик элементов — вариант 1 (через if)</h3>
                 <div class="code-block"><span class="var">words</span> <span class="op">=</span> [<span class="str">"кот"</span>, <span class="str">"пёс"</span>, <span class="str">"кот"</span>, <span class="str">"кот"</span>, <span class="str">"пёс"</span>]
@@ -541,8 +327,8 @@ print(grid[(0, 0)])</pre>
                 </div>
             </div>
 
-            <!-- Раздел 8: Итоговый тест -->
-            <div class="lesson-section" id="section8">
+            <!-- Раздел 5: Итоговый тест -->
+            <div class="lesson-section" id="section5">
                 <h2><span class="emoji-icon">🏆</span> Итоговый тест</h2>
                 <div class="final-test-header">
                     <h3 style="margin:0; color:#856404;">10 вопросов, 7 минут. Удачи!</h3>
@@ -552,21 +338,10 @@ print(grid[(0, 0)])</pre>
                 <div class="final-test-stats" id="finalTestStats" style="display: none;"></div>
 
                 <div class="quiz-container final-q">
-                    <div class="quiz-question">1. Что выведет:</div>
-                    <pre class="quiz-code">t = (1, 2, 3)
-print(t[1])</pre>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="false">1</div>
-                        <div class="quiz-option" data-correct="true">2</div>
-                        <div class="quiz-option" data-correct="false">3</div>
-                        <div class="quiz-option" data-correct="false">Ошибку</div>
-                    </div>
-                </div>
-                <div class="quiz-container final-q">
-                    <div class="quiz-question">2. Что выведет:</div>
-                    <pre class="quiz-code">student = {"name": "Алиса", "age": 20}
-student["grade"] = "A"
-print(len(student))</pre>
+                    <div class="quiz-question">1. Меню ресторана. Что выведет:</div>
+                    <pre class="quiz-code">menu = {"пицца": 500, "паста": 350}
+menu["салат"] = 250
+print(len(menu))</pre>
                     <div class="quiz-options">
                         <div class="quiz-option" data-correct="false">2</div>
                         <div class="quiz-option" data-correct="true">3</div>
@@ -575,95 +350,110 @@ print(len(student))</pre>
                     </div>
                 </div>
                 <div class="quiz-container final-q">
-                    <div class="quiz-question">3. Что выведет:</div>
-                    <pre class="quiz-code">d = {"x": 10}
-print(d.get("y", 0))</pre>
+                    <div class="quiz-question">2. Мини-переводчик. Что выведет:</div>
+                    <pre class="quiz-code">translate = {"hello": "привет"}
+print(translate.get("bye", "неизвестно"))</pre>
                     <div class="quiz-options">
                         <div class="quiz-option" data-correct="false">None</div>
-                        <div class="quiz-option" data-correct="true">0</div>
+                        <div class="quiz-option" data-correct="true">неизвестно</div>
                         <div class="quiz-option" data-correct="false">Ошибку</div>
-                        <div class="quiz-option" data-correct="false">"y"</div>
+                        <div class="quiz-option" data-correct="false">"bye"</div>
                     </div>
                 </div>
                 <div class="quiz-container final-q">
-                    <div class="quiz-question">4. Что выведет:</div>
-                    <pre class="quiz-code">t = (1, 2, 2, 3)
-print(t.count(2))</pre>
+                    <div class="quiz-question">3. Команда разработчиков. Что выведет:</div>
+                    <pre class="quiz-code">team = {"lead": "Алиса", "dev": "Боб"}
+for role in team:
+    print(role, end=" ")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">lead dev</div>
+                        <div class="quiz-option" data-correct="false">Алиса Боб</div>
+                        <div class="quiz-option" data-correct="false">lead Алиса dev Боб</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">4. Фруктовый магазин. Что выведет:</div>
+                    <pre class="quiz-code">shop = {"яблоки": 10, "груши": 20, "сливы": 30}
+print(list(shop.values()))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">['яблоки', 'груши', 'сливы']</div>
+                        <div class="quiz-option" data-correct="true">[10, 20, 30]</div>
+                        <div class="quiz-option" data-correct="false">[('яблоки', 10), ('груши', 20), ('сливы', 30)]</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">5. Прогноз погоды. Что выведет:</div>
+                    <pre class="quiz-code">weather = {"monday": "sunny"}
+weather.pop("monday")
+print(weather)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">{}</div>
+                        <div class="quiz-option" data-correct="false">{"monday": "sunny"}</div>
+                        <div class="quiz-option" data-correct="false">"sunny"</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">6. Звуки животных. Что выведет:</div>
+                    <pre class="quiz-code">sounds = {"cat": "мяу", "dog": "гав", "cow": "му"}
+del sounds["dog"]
+print(sounds)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">{'cat': 'мяу', 'dog': 'гав', 'cow': 'му'}</div>
+                        <div class="quiz-option" data-correct="true">{'cat': 'мяу', 'cow': 'му'}</div>
+                        <div class="quiz-option" data-correct="false">{'dog': 'гав'}</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">7. Рейтинги фильмов. Что выведет:</div>
+                    <pre class="quiz-code">ratings = {"matrix": 8.7, "inception": 8.8}
+ratings.update({"interstellar": 8.6})
+print(len(ratings))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">2</div>
+                        <div class="quiz-option" data-correct="true">3</div>
+                        <div class="quiz-option" data-correct="false">4</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">8. Страны и столицы. Что выведет:</div>
+                    <pre class="quiz-code">capitals = {"france": "paris", "germany": "berlin"}
+for country, city in capitals.items():
+    print(country, city)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">france paris<br>germany berlin</div>
+                        <div class="quiz-option" data-correct="false">('france', 'paris')<br>('germany', 'berlin')</div>
+                        <div class="quiz-option" data-correct="false">france germany</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">9. Подсчёт цветов. Что выведет:</div>
+                    <pre class="quiz-code">d = {}
+for color in ["red", "red", "blue"]:
+    d[color] = d.get(color, 0) + 1
+print(d["red"])</pre>
                     <div class="quiz-options">
                         <div class="quiz-option" data-correct="false">1</div>
                         <div class="quiz-option" data-correct="true">2</div>
                         <div class="quiz-option" data-correct="false">3</div>
-                        <div class="quiz-option" data-correct="false">4</div>
-                    </div>
-                </div>
-                <div class="quiz-container final-q">
-                    <div class="quiz-question">5. Что выведет:</div>
-                    <pre class="quiz-code">x, y = "hello", "world"
-x, y = y, x
-print(x)</pre>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="false">hello</div>
-                        <div class="quiz-option" data-correct="true">world</div>
-                        <div class="quiz-option" data-correct="false">hello world</div>
                         <div class="quiz-option" data-correct="false">Ошибку</div>
                     </div>
                 </div>
                 <div class="quiz-container final-q">
-                    <div class="quiz-question">6. Что выведет:</div>
-                    <pre class="quiz-code">d = {"name": "Bob", "age": 25}
-for key in d:
-    print(key, end=" ")</pre>
+                    <div class="quiz-question">10. Книга. Что выведет:</div>
+                    <pre class="quiz-code">book = {"title": "Python", "pages": 300}
+book["pages"] = 350
+print(book["pages"])</pre>
                     <div class="quiz-options">
-                        <div class="quiz-option" data-correct="true">name age</div>
-                        <div class="quiz-option" data-correct="false">Bob 25</div>
-                        <div class="quiz-option" data-correct="false">name Bob age 25</div>
+                        <div class="quiz-option" data-correct="false">300</div>
+                        <div class="quiz-option" data-correct="true">350</div>
                         <div class="quiz-option" data-correct="false">Ошибку</div>
-                    </div>
-                </div>
-                <div class="quiz-container final-q">
-                    <div class="quiz-question">7. Что выведет:</div>
-                    <pre class="quiz-code">d = {"a": 10, "b": 20, "c": 30}
-print(list(d.values()))</pre>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="false">['a', 'b', 'c']</div>
-                        <div class="quiz-option" data-correct="true">[10, 20, 30]</div>
-                        <div class="quiz-option" data-correct="false">[('a', 10), ('b', 20), ('c', 30)]</div>
-                        <div class="quiz-option" data-correct="false">Ошибку</div>
-                    </div>
-                </div>
-                <div class="quiz-container final-q">
-                    <div class="quiz-question">8. Что выведет:</div>
-                    <pre class="quiz-code">t = (1, 2) * 2
-print(t)</pre>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="false">(2, 4)</div>
-                        <div class="quiz-option" data-correct="true">(1, 2, 1, 2)</div>
-                        <div class="quiz-option" data-correct="false">(1, 1, 2, 2)</div>
-                        <div class="quiz-option" data-correct="false">Ошибку</div>
-                    </div>
-                </div>
-                <div class="quiz-container final-q">
-                    <div class="quiz-question">9. Что выведет:</div>
-                    <pre class="quiz-code">d = {"a": 1}
-d.pop("a")
-print(d)</pre>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="true">{}</div>
-                        <div class="quiz-option" data-correct="false">{"a": 1}</div>
-                        <div class="quiz-option" data-correct="false">1</div>
-                        <div class="quiz-option" data-correct="false">Ошибку</div>
-                    </div>
-                </div>
-                <div class="quiz-container final-q">
-                    <div class="quiz-question">10. Что выведет:</div>
-                    <pre class="quiz-code">d = {"a": 1, "b": 2, "c": 3}
-del d["b"]
-print(d)</pre>
-                    <div class="quiz-options">
-                        <div class="quiz-option" data-correct="false">{'a': 1, 'b': 2, 'c': 3}</div>
-                        <div class="quiz-option" data-correct="true">{'a': 1, 'c': 3}</div>
-                        <div class="quiz-option" data-correct="false">{'b': 2}</div>
-                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                        <div class="quiz-option" data-correct="false">None</div>
                     </div>
                 </div>
             </div>

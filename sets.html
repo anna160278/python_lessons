@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Множества — Python</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji-icon">🎯</span> Множества</h1>
+            <p>Работа с множествами в Python</p>
+        </div>
+
+        <nav class="page-nav">
+            <a href="index.html" class="page-link">🏠 Главная</a>
+        </nav>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="score">0</span>
+                <span class="stat-label">Очки</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="progress">1/6</span>
+                <span class="stat-label">Прогресс</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="correct">0</span>
+                <span class="stat-label">Правильных</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="content">
+            <!-- Раздел 1: Что такое множества -->
+            <div class="lesson-section active" id="section1">
+                <h2><span class="emoji-icon">✅</span> Что такое множества?</h2>
+                <p>Множество (<code>set</code>) — это <strong style="color:#a78bfa;">неупорядоченная</strong> коллекция <strong style="color:#a78bfa;">уникальных</strong> элементов. Дубликаты автоматически удаляются.</p>
+
+                <div class="code-block"><span class="com"># Создание множеств</span>
+<span class="var">numbers</span> <span class="op">=</span> {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>}
+<span class="var">fruits</span> <span class="op">=</span> {<span class="str">"яблоко"</span>, <span class="str">"банан"</span>, <span class="str">"вишня"</span>}
+<span class="var">empty</span> <span class="op">=</span> <span class="func">set</span>()  <span class="com"># пустое множество (не {}!)</span>
+
+<span class="com"># Из списка — удаляются дубликаты</span>
+<span class="var">unique</span> <span class="op">=</span> <span class="func">set</span>([<span class="num">1</span>, <span class="num">2</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">3</span>, <span class="num">3</span>])
+<span class="func">print</span>(<span class="var">unique</span>)  <span class="com"># {1, 2, 3}</span>
+
+<span class="func">print</span>(<span class="func">len</span>(<span class="var">numbers</span>))  <span class="com"># 5</span></div>
+
+                <div class="example-box">
+                    <strong>️ Особенности множеств:</strong>
+                    <p>✅ Элементы уникальны — дубликаты удаляются автоматически</p>
+                    <p>✅ Неупорядочены — элементы не имеют индексов</p>
+                    <p>✅ Элементы должны быть неизменяемыми (числа, строки, кортежи)</p>
+                    <p>✅ Быстрая проверка вхождения (<code>in</code>)</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Какой тип данных у <code>{1, 2, 3}</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">dict</div>
+                        <div class="quiz-option" data-correct="false">list</div>
+                        <div class="quiz-option" data-correct="true">set</div>
+                        <div class="quiz-option" data-correct="false">tuple</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет:</div>
+                    <pre class="quiz-code">s = {1, 2, 2, 3, 3, 3}
+print(len(s))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">6</div>
+                        <div class="quiz-option" data-correct="true">3</div>
+                        <div class="quiz-option" data-correct="false">1</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Как создать пустое множество?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">{}</div>
+                        <div class="quiz-option" data-correct="true">set()</div>
+                        <div class="quiz-option" data-correct="false">[]</div>
+                        <div class="quiz-option" data-correct="false">()</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 2: Добавление и удаление -->
+            <div class="lesson-section" id="section2">
+                <h2><span class="emoji-icon">➕</span> Добавление и удаление элементов</h2>
+                <p>Множества изменяемы — можно добавлять и удалять элементы.</p>
+
+                <div class="code-block"><span class="var">s</span> <span class="op">=</span> {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>}
+
+<span class="com"># add — добавить один элемент</span>
+<span class="var">s</span>.<span class="func">add</span>(<span class="num">4</span>)
+<span class="func">print</span>(<span class="var">s</span>)  <span class="com"># {1, 2, 3, 4}</span>
+
+<span class="com"># update — добавить несколько элементов</span>
+<span class="var">s</span>.<span class="func">update</span>([<span class="num">5</span>, <span class="num">6</span>, <span class="num">7</span>])
+<span class="func">print</span>(<span class="var">s</span>)  <span class="com"># {1, 2, 3, 4, 5, 6, 7}</span>
+
+<span class="com"># remove — удалить элемент (ошибка, если нет)</span>
+<span class="var">s</span>.<span class="func">remove</span>(<span class="num">3</span>)
+<span class="func">print</span>(<span class="var">s</span>)  <span class="com"># {1, 2, 4, 5, 6, 7}</span>
+
+<span class="com"># discard — удалить элемент (без ошибки)</span>
+<span class="var">s</span>.<span class="func">discard</span>(<span class="num">10</span>)  <span class="com"># ничего не произойдёт</span>
+
+<span class="com"># pop — удалить случайный элемент</span>
+<span class="var">x</span> <span class="op">=</span> <span class="var">s</span>.<span class="func">pop</span>()
+<span class="func">print</span>(<span class="var">x</span>)  <span class="com"># какой-то элемент из множества</span>
+
+<span class="com"># clear — очистить множество полностью</span>
+<span class="var">s</span>.<span class="func">clear</span>()
+<span class="func">print</span>(<span class="var">s</span>)  <span class="com"># set()</span></div>
+
+                <div class="example-box">
+                    <strong>💡 remove vs discard:</strong>
+                    <p><code>remove(x)</code> — удаляет <code>x</code>, вызывает ошибку если <code>x</code> нет в множестве</p>
+                    <p><code>discard(x)</code> — удаляет <code>x</code>, ничего не делает если <code>x</code> нет</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет:</div>
+                    <pre class="quiz-code">s = {10, 20, 30}
+s.discard(20)
+print(len(s))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">3</div>
+                        <div class="quiz-option" data-correct="true">2</div>
+                        <div class="quiz-option" data-correct="false">0</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что произойдёт при <code>s.remove(10)</code>, если 10 нет в множестве?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Ничего</div>
+                        <div class="quiz-option" data-correct="true">Вызовет ошибку KeyError</div>
+                        <div class="quiz-option" data-correct="false">Вернёт None</div>
+                        <div class="quiz-option" data-correct="false">Добавит 10</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что делает метод <code>discard()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Добавляет элемент</div>
+                        <div class="quiz-option" data-correct="true">Удаляет элемент без ошибки</div>
+                        <div class="quiz-option" data-correct="false">Проверяет наличие</div>
+                        <div class="quiz-option" data-correct="false">Очищает множество</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 3: Операции над множествами -->
+            <div class="lesson-section" id="section3">
+                <h2><span class="emoji-icon">🔗</span> Операции над множествами</h2>
+                <p>Множества поддерживают математические операции: объединение, пересечение, разность.</p>
+
+                <div class="code-block"><span class="var">a</span> <span class="op">=</span> {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>}
+<span class="var">b</span> <span class="op">=</span> {<span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>}
+
+<span class="com"># Объединение — все элементы из обоих множеств</span>
+<span class="func">print</span>(<span class="var">a</span> <span class="op">|</span> <span class="var">b</span>)           <span class="com"># {1, 2, 3, 4, 5, 6}</span>
+<span class="func">print</span>(<span class="var">a</span>.<span class="func">union</span>(<span class="var">b</span>))     <span class="com"># {1, 2, 3, 4, 5, 6}</span>
+
+<span class="com"># Пересечение — только общие</span>
+<span class="com"># (пересекающиеся) элементы</span>
+<span class="func">print</span>(<span class="var">a</span> <span class="op">&</span> <span class="var">b</span>)           <span class="com"># {3, 4}</span>
+<span class="func">print</span>(<span class="var">a</span>.<span class="func">intersection</span>(<span class="var">b</span>))  <span class="com"># {3, 4}</span>
+
+<span class="com"># Разность — элементы из a, которых нет в b</span>
+<span class="func">print</span>(<span class="var">a</span> <span class="op">-</span> <span class="var">b</span>)           <span class="com"># {1, 2}</span>
+<span class="func">print</span>(<span class="var">a</span>.<span class="func">difference</span>(<span class="var">b</span>))    <span class="com"># {1, 2}</span>
+
+<span class="com"># Симметрическая разность -</span>
+<span class="com"># это все элементы обоих множеств, кроме пересекающихся</span>
+<span class="func">print</span>(<span class="var">a</span> <span class="op">^</span> <span class="var">b</span>)           <span class="com"># {1, 2, 5, 6}</span>
+<span class="func">print</span>(<span class="var">a</span>.<span class="func">symmetric_difference</span>(<span class="var">b</span>))  <span class="com"># {1, 2, 5, 6}</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Круги Эйлера (диаграммы Венна):</strong>
+                    <div class="venn-container">
+                        <div class="venn-item">
+                            <svg viewBox="0 0 100 60" width="100" height="60">
+                                <circle cx="35" cy="30" r="20" fill="#667eea" opacity="0.8"/>
+                                <circle cx="65" cy="30" r="20" fill="#667eea" opacity="0.8"/>
+                            </svg>
+                            <span>A | B (Объединение)</span>
+                        </div>
+                        <div class="venn-item">
+                            <svg viewBox="0 0 100 60" width="100" height="60">
+                                <circle cx="35" cy="30" r="20" fill="none" stroke="#667eea" stroke-width="2"/>
+                                <circle cx="65" cy="30" r="20" fill="none" stroke="#667eea" stroke-width="2"/>
+                                <path d="M 50 16.78 A 20 20 0 0 0 50 43.22 A 20 20 0 0 0 50 16.78" fill="#667eea" opacity="0.8"/>
+                            </svg>
+                            <span>A & B (Пересечение)</span>
+                        </div>
+                        <div class="venn-item">
+                            <svg viewBox="0 0 100 60" width="100" height="60">
+                                <circle cx="35" cy="30" r="20" fill="#667eea" opacity="0.8"/>
+                                <circle cx="65" cy="30" r="20" fill="#1e1e2f" opacity="1"/>
+                                <circle cx="65" cy="30" r="20" fill="none" stroke="#667eea" stroke-width="2"/>
+                            </svg>
+                            <span>A - B (Разность)</span>
+                        </div>
+                        <div class="venn-item">
+                            <svg viewBox="0 0 100 60" width="100" height="60">
+                                <circle cx="35" cy="30" r="20" fill="#667eea" opacity="0.8"/>
+                                <circle cx="65" cy="30" r="20" fill="#667eea" opacity="0.8"/>
+                                <path d="M 50 16.78 A 20 20 0 0 0 50 43.22 A 20 20 0 0 0 50 16.78" fill="#1e1e2f" opacity="1"/>
+                            </svg>
+                            <span>A ^ B (Симм. разность)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет:</div>
+                    <pre class="quiz-code">a = {1, 2, 3}
+b = {2, 3, 4}
+print(a | b)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">{2, 3}</div>
+                        <div class="quiz-option" data-correct="true">{1, 2, 3, 4}</div>
+                        <div class="quiz-option" data-correct="false">{1, 4}</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет:</div>
+                    <pre class="quiz-code">a = {1, 2, 3}
+b = {2, 3, 4}
+print(a & b)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">{2, 3}</div>
+                        <div class="quiz-option" data-correct="false">{1, 2, 3, 4}</div>
+                        <div class="quiz-option" data-correct="false">{1, 4}</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет:</div>
+                    <pre class="quiz-code">a = {1, 2, 3}
+b = {2, 3, 4}
+print(a - b)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">{2, 3}</div>
+                        <div class="quiz-option" data-correct="false">{1, 2, 3, 4}</div>
+                        <div class="quiz-option" data-correct="true">{1}</div>
+                        <div class="quiz-option" data-correct="false">{4}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 4: Проверка вхождения и подмножеств -->
+            <div class="lesson-section" id="section4">
+                <h2><span class="emoji-icon">🔍</span> Проверка вхождения и подмножеств</h2>
+                <p>Множества удобны для быстрой проверки наличия элемента и отношений между множествами.</p>
+
+                <div class="code-block"><span class="var">a</span> <span class="op">=</span> {<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>}
+<span class="var">b</span> <span class="op">=</span> {<span class="num">2</span>, <span class="num">3</span>}
+<span class="var">c</span> <span class="op">=</span> {<span class="num">6</span>, <span class="num">7</span>}
+
+<span class="com"># Проверка вхождения</span>
+<span class="func">print</span>(<span class="num">3</span> <span class="kw">in</span> <span class="var">a</span>)      <span class="com"># True</span>
+<span class="func">print</span>(<span class="num">6</span> <span class="kw">in</span> <span class="var">a</span>)      <span class="com"># False</span>
+
+<span class="com"># Подмножество (все элементы b есть в a)</span>
+<span class="func">print</span>(<span class="var">b</span>.<span class="func">issubset</span>(<span class="var">a</span>))     <span class="com"># True</span>
+<span class="func">print</span>(<span class="var">c</span>.<span class="func">issubset</span>(<span class="var">a</span>))     <span class="com"># False</span>
+
+<span class="com"># Надмножество (a содержит все элементы b)</span>
+<span class="func">print</span>(<span class="var">a</span>.<span class="func">issuperset</span>(<span class="var">b</span>))   <span class="com"># True</span>
+
+<span class="com"># Непересекающиеся множества</span>
+<span class="func">print</span>(<span class="var">a</span>.<span class="func">isdisjoint</span>(<span class="var">c</span>))  <span class="com"># True (нет общих элементов)</span>
+<span class="func">print</span>(<span class="var">a</span>.<span class="func">isdisjoint</span>(<span class="var">b</span>))  <span class="com"># False (есть общие)</span></div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет:</div>
+                    <pre class="quiz-code">s = {1, 2, 3, 4, 5}
+print(3 in s)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">True</div>
+                        <div class="quiz-option" data-correct="false">False</div>
+                        <div class="quiz-option" data-correct="false">3</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет:</div>
+                    <pre class="quiz-code">a = {1, 2, 3}
+b = {2, 3}
+print(b.issubset(a))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">True</div>
+                        <div class="quiz-option" data-correct="false">False</div>
+                        <div class="quiz-option" data-correct="false">{2, 3}</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что означает <code>a.isdisjoint(b)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">a является подмножеством b</div>
+                        <div class="quiz-option" data-correct="true">a и b не имеют общих элементов</div>
+                        <div class="quiz-option" data-correct="false">a и b равны</div>
+                        <div class="quiz-option" data-correct="false">a является надмножеством b</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 5: Практические примеры -->
+            <div class="lesson-section" id="section5">
+                <h2><span class="emoji-icon">💡</span> Практические примеры</h2>
+                <p>Множества часто используются для удаления дубликатов и проверки уникальности.</p>
+
+                <h3>Удаление дубликатов из списка</h3>
+                <div class="code-block"><span class="var">numbers</span> <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">3</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">4</span>, <span class="num">5</span>]
+<span class="var">unique</span> <span class="op">=</span> <span class="func">list</span>(<span class="func">set</span>(<span class="var">numbers</span>))
+<span class="func">print</span>(<span class="var">unique</span>)  <span class="com"># [1, 2, 3, 4, 5] (порядок может отличаться)</span></div>
+
+                <h3>Проверка уникальности</h3>
+                <div class="code-block"><span class="var">lst1</span> <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>]
+<span class="func">print</span>(<span class="func">len</span>(<span class="var">lst1</span>) <span class="op">==</span> <span class="func">len</span>(<span class="func">set</span>(<span class="var">lst1</span>)))  <span class="com"># True (длина совпадает)</span>
+
+<span class="var">lst2</span> <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>, <span class="num">2</span>, <span class="num">3</span>]
+<span class="func">print</span>(<span class="func">len</span>(<span class="var">lst2</span>) <span class="op">==</span> <span class="func">len</span>(<span class="func">set</span>(<span class="var">lst2</span>)))  <span class="com"># False (есть дубликаты)</span></div>
+
+                <h3>Поиск общих элементов</h3>
+                <div class="code-block"><span class="var">group1</span> <span class="op">=</span> {<span class="str">"Алиса"</span>, <span class="str">"Боб"</span>, <span class="str">"Чарли"</span>}
+<span class="var">group2</span> <span class="op">=</span> {<span class="str">"Боб"</span>, <span class="str">"Дейв"</span>, <span class="str">"Ева"</span>}
+
+<span class="var">common</span> <span class="op">=</span> <span class="var">group1</span> <span class="op">&</span> <span class="var">group2</span>
+<span class="func">print</span>(<span class="var">common</span>)  <span class="com"># {'Боб'}</span></div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет:</div>
+                    <pre class="quiz-code">lst = [1, 2, 2, 3, 3, 3]
+print(len(set(lst)))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">6</div>
+                        <div class="quiz-option" data-correct="true">3</div>
+                        <div class="quiz-option" data-correct="false">1</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет:</div>
+                    <pre class="quiz-code">a = {1, 2, 3}
+b = {3, 4, 5}
+print(a ^ b)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">{3}</div>
+                        <div class="quiz-option" data-correct="false">{1, 2, 3, 4, 5}</div>
+                        <div class="quiz-option" data-correct="true">{1, 2, 4, 5}</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Как быстро проверить, что все элементы списка уникальны?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Использовать цикл for</div>
+                        <div class="quiz-option" data-correct="true">Сравнить len(lst) и len(set(lst))</div>
+                        <div class="quiz-option" data-correct="false">Использовать метод unique()</div>
+                        <div class="quiz-option" data-correct="false">Это невозможно</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 6: Итоговый тест -->
+            <div class="lesson-section" id="section6">
+                <h2><span class="emoji-icon">🏆</span> Итоговый тест</h2>
+                <div class="final-test-header">
+                    <h3 style="margin:0; color:#856404;">10 вопросов, 7 минут. Удачи!</h3>
+                </div>
+
+                <div class="global-timer" id="globalTimer">⏱️ 7:00</div>
+                <div class="final-test-stats" id="finalTestStats" style="display: none;"></div>
+
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">1. Что выведет:</div>
+                    <pre class="quiz-code">s = {"a", "b", "b", "c", "c", "c"}
+print(len(s))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">6</div>
+                        <div class="quiz-option" data-correct="true">3</div>
+                        <div class="quiz-option" data-correct="false">1</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">2. Что выведет:</div>
+                    <pre class="quiz-code">a = {"x", "y", "z"}
+b = {"y", "z", "w"}
+print(a | b)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">{"y", "z"}</div>
+                        <div class="quiz-option" data-correct="true">{"x", "y", "z", "w"}</div>
+                        <div class="quiz-option" data-correct="false">{"x", "w"}</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">3. Что выведет:</div>
+                    <pre class="quiz-code">a = {"cat", "dog", "bird"}
+b = {"dog", "bird", "fish"}
+print(a & b)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">{"dog", "bird"}</div>
+                        <div class="quiz-option" data-correct="false">{"cat", "dog", "bird", "fish"}</div>
+                        <div class="quiz-option" data-correct="false">{"cat", "fish"}</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">4. Что выведет:</div>
+                    <pre class="quiz-code">a = {"apple", "banana", "cherry"}
+b = {"banana", "cherry", "date"}
+print(a - b)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">{"banana", "cherry"}</div>
+                        <div class="quiz-option" data-correct="false">{"apple", "banana", "cherry", "date"}</div>
+                        <div class="quiz-option" data-correct="true">{"apple"}</div>
+                        <div class="quiz-option" data-correct="false">{"date"}</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">5. Что выведет:</div>
+                    <pre class="quiz-code">s = {"red", "green", "blue"}
+s.add("yellow")
+s.add("green")
+print(len(s))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">5</div>
+                        <div class="quiz-option" data-correct="true">4</div>
+                        <div class="quiz-option" data-correct="false">3</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">6. Что выведет:</div>
+                    <pre class="quiz-code">a = {"mon", "tue", "wed"}
+b = {"wed", "thu", "fri"}
+print(a ^ b)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">{"wed"}</div>
+                        <div class="quiz-option" data-correct="false">{"mon", "tue", "wed", "thu", "fri"}</div>
+                        <div class="quiz-option" data-correct="true">{"mon", "tue", "thu", "fri"}</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">7. Что выведет:</div>
+                    <pre class="quiz-code">s = {"a", "b", "c"}
+s.discard("x")
+print(s)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">{"a", "b", "c"}</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                        <div class="quiz-option" data-correct="false">{"a", "b", "c", "x"}</div>
+                        <div class="quiz-option" data-correct="false">set()</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">8. Что выведет:</div>
+                    <pre class="quiz-code">a = {"python", "java", "cpp"}
+b = {"java", "cpp"}
+print(b.issubset(a))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">True</div>
+                        <div class="quiz-option" data-correct="false">False</div>
+                        <div class="quiz-option" data-correct="false">{"java", "cpp"}</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">9. Что выведет:</div>
+                    <pre class="quiz-code">lst = ["red", "blue", "red", "green", "blue"]
+unique = set(lst)
+print(len(unique))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">5</div>
+                        <div class="quiz-option" data-correct="true">3</div>
+                        <div class="quiz-option" data-correct="false">1</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">10. Что выведет:</div>
+                    <pre class="quiz-code">s = {"one", "two", "three"}
+s.clear()
+print(s)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">set()</div>
+                        <div class="quiz-option" data-correct="false">{}</div>
+                        <div class="quiz-option" data-correct="false">None</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="btn" id="prevBtn" onclick="previousSection()" disabled>← Назад</button>
+            <button class="btn" id="nextBtn" onclick="nextSection()">Далее →</button>
+        </div>
+    </div>
+
+    <script src="script_sets.js"></script>
+</body>
+</html>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Справочник Python</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .reference-section {
+            margin-bottom: 40px;
+        }
+        
+        .reference-section h2 {
+            color: #a78bfa;
+            font-size: 2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .reference-table {
+            width: 100%;
+            background: #1e1e2f;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #2a2a4a;
+        }
+        
+        .reference-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .reference-table th {
+            background: #252542;
+            color: #a78bfa;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .reference-table td {
+            padding: 12px 15px;
+            border-top: 1px solid #2a2a4a;
+            color: #d1d5db;
+        }
+        
+        .reference-table tr:hover {
+            background: #252542;
+        }
+        
+        .reference-table code {
+            background: #2d2d50;
+            color: #f0abfc;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9em;
+        }
+        
+        .quick-nav {
+            background: #1e1e2f;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            border: 1px solid #2a2a4a;
+        }
+        
+        .quick-nav h3 {
+            color: #a78bfa;
+            margin-bottom: 15px;
+        }
+        
+        .quick-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .quick-nav li {
+            margin: 8px 0;
+        }
+        
+        .quick-nav a {
+            color: #818cf8;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .quick-nav a:hover {
+            color: #a78bfa;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji-icon">📖</span> Справочник Python</h1>
+            <p>Краткое руководство по основным функциям и методам</p>
+        </div>
+
+        <nav class="page-nav">
+            <a href="index.html" class="page-link">🏠 Главная</a>
+        </nav>
+
+        <div class="content">
+            <div class="lesson-section active">
+                <div class="quick-nav">
+                    <h3>🔍 Быстрая навигация</h3>
+                    <ul>
+                        <li><a href="#arithmetic">Арифметические операции</a></li>
+                        <li><a href="#strings">Методы строк</a></li>
+                        <li><a href="#lists">Методы списков</a></li>
+                        <li><a href="#dicts">Методы словарей</a></li>
+                        <li><a href="#sets">Методы множеств</a></li>
+                        <li><a href="#turtle">Команды turtle</a></li>
+                    </ul>
+                </div>
+
+                <div class="reference-section" id="arithmetic">
+                    <h2><span class="emoji-icon">🔢</span> Арифметические операции</h2>
+                    <div class="reference-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Операция</th>
+                                    <th>Синтаксис</th>
+                                    <th>Пример</th>
+                                    <th>Результат</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Сложение</td>
+                                    <td><code>a + b</code></td>
+                                    <td><code>10 + 3</code></td>
+                                    <td><code>13</code></td>
+                                </tr>
+                                <tr>
+                                    <td>Вычитание</td>
+                                    <td><code>a - b</code></td>
+                                    <td><code>10 - 3</code></td>
+                                    <td><code>7</code></td>
+                                </tr>
+                                <tr>
+                                    <td>Умножение</td>
+                                    <td><code>a * b</code></td>
+                                    <td><code>10 * 3</code></td>
+                                    <td><code>30</code></td>
+                                </tr>
+                                <tr>
+                                    <td>Деление</td>
+                                    <td><code>a / b</code></td>
+                                    <td><code>10 / 3</code></td>
+                                    <td><code>3.333...</code></td>
+                                </tr>
+                                <tr>
+                                    <td>Целочисленное деление</td>
+                                    <td><code>a // b</code></td>
+                                    <td><code>10 // 3</code></td>
+                                    <td><code>3</code></td>
+                                </tr>
+                                <tr>
+                                    <td>Остаток от деления</td>
+                                    <td><code>a % b</code></td>
+                                    <td><code>10 % 3</code></td>
+                                    <td><code>1</code></td>
+                                </tr>
+                                <tr>
+                                    <td>Возведение в степень</td>
+                                    <td><code>a ** b</code></td>
+                                    <td><code>2 ** 3</code></td>
+                                    <td><code>8</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="reference-section" id="strings">
+                    <h2><span class="emoji-icon">📝</span> Методы строк</h2>
+                    <div class="reference-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Метод</th>
+                                    <th>Описание</th>
+                                    <th>Пример</th>
+                                    <th>Результат</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>upper()</code></td>
+                                    <td>Верхний регистр</td>
+                                    <td><code>"hello".upper()</code></td>
+                                    <td><code>"HELLO"</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>lower()</code></td>
+                                    <td>Нижний регистр</td>
+                                    <td><code>"HELLO".lower()</code></td>
+                                    <td><code>"hello"</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>capitalize()</code></td>
+                                    <td>Первая буква заглавная</td>
+                                    <td><code>"hello".capitalize()</code></td>
+                                    <td><code>"Hello"</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>strip()</code></td>
+                                    <td>Убрать пробелы по краям</td>
+                                    <td><code>"  hi  ".strip()</code></td>
+                                    <td><code>"hi"</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>find(x)</code></td>
+                                    <td>Найти индекс подстроки</td>
+                                    <td><code>"hello".find("ll")</code></td>
+                                    <td><code>2</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>count(x)</code></td>
+                                    <td>Подсчитать вхождения</td>
+                                    <td><code>"hello".count("l")</code></td>
+                                    <td><code>2</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>replace(a, b)</code></td>
+                                    <td>Заменить a на b</td>
+                                    <td><code>"hello".replace("l", "r")</code></td>
+                                    <td><code>"herro"</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>split(sep)</code></td>
+                                    <td>Разбить по разделителю</td>
+                                    <td><code>"a,b".split(",")</code></td>
+                                    <td><code>['a', 'b']</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>join(list)</code></td>
+                                    <td>Собрать список в строку</td>
+                                    <td><code>"-".join(['a', 'b'])</code></td>
+                                    <td><code>"a-b"</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="reference-section" id="lists">
+                    <h2><span class="emoji-icon">📋</span> Методы списков</h2>
+                    <div class="reference-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Метод</th>
+                                    <th>Описание</th>
+                                    <th>Пример</th>
+                                    <th>Результат</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>append(x)</code></td>
+                                    <td>Добавить элемент в конец</td>
+                                    <td><code>[1,2].append(3)</code></td>
+                                    <td><code>[1, 2, 3]</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>extend(list)</code></td>
+                                    <td>Добавить несколько элементов</td>
+                                    <td><code>[1].extend([2,3])</code></td>
+                                    <td><code>[1, 2, 3]</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>insert(i, x)</code></td>
+                                    <td>Вставить по индексу</td>
+                                    <td><code>[1,3].insert(1, 2)</code></td>
+                                    <td><code>[1, 2, 3]</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>remove(x)</code></td>
+                                    <td>Удалить по значению</td>
+                                    <td><code>[1,2,3].remove(2)</code></td>
+                                    <td><code>[1, 3]</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>pop(i)</code></td>
+                                    <td>Удалить по индексу</td>
+                                    <td><code>[1,2,3].pop(1)</code></td>
+                                    <td><code>[1, 3]</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>sort()</code></td>
+                                    <td>Сортировка</td>
+                                    <td><code>[3,1,2].sort()</code></td>
+                                    <td><code>[1, 2, 3]</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>reverse()</code></td>
+                                    <td>Перевернуть список</td>
+                                    <td><code>[1,2,3].reverse()</code></td>
+                                    <td><code>[3, 2, 1]</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>index(x)</code></td>
+                                    <td>Найти индекс элемента</td>
+                                    <td><code>[10,20,30].index(20)</code></td>
+                                    <td><code>1</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>count(x)</code></td>
+                                    <td>Подсчитать вхождения</td>
+                                    <td><code>[1,2,2,3].count(2)</code></td>
+                                    <td><code>2</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>clear()</code></td>
+                                    <td>Очистить список</td>
+                                    <td><code>[1,2,3].clear()</code></td>
+                                    <td><code>[]</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="reference-section" id="dicts">
+                    <h2><span class="emoji-icon">📚</span> Методы словарей</h2>
+                    <div class="reference-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Метод</th>
+                                    <th>Описание</th>
+                                    <th>Пример</th>
+                                    <th>Результат</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>get(key, default)</code></td>
+                                    <td>Безопасное получение</td>
+                                    <td><code>d.get("x", 0)</code></td>
+                                    <td>Значение или default</td>
+                                </tr>
+                                <tr>
+                                    <td><code>keys()</code></td>
+                                    <td>Все ключи</td>
+                                    <td><code>{"a":1}.keys()</code></td>
+                                    <td><code>dict_keys(['a'])</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>values()</code></td>
+                                    <td>Все значения</td>
+                                    <td><code>{"a":1}.values()</code></td>
+                                    <td><code>dict_values([1])</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>items()</code></td>
+                                    <td>Все пары ключ-значение</td>
+                                    <td><code>{"a":1}.items()</code></td>
+                                    <td><code>dict_items([('a', 1)])</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>update(dict)</code></td>
+                                    <td>Добавить/обновить пары</td>
+                                    <td><code>d.update({"b":2})</code></td>
+                                    <td>Добавляет ключи</td>
+                                </tr>
+                                <tr>
+                                    <td><code>pop(key)</code></td>
+                                    <td>Удалить и вернуть значение</td>
+                                    <td><code>{"a":1}.pop("a")</code></td>
+                                    <td><code>1</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>del d[key]</code></td>
+                                    <td>Удалить по ключу</td>
+                                    <td><code>del d["a"]</code></td>
+                                    <td>Удаляет ключ</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="reference-section" id="sets">
+                    <h2><span class="emoji-icon"></span> Методы множеств</h2>
+                    <div class="reference-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Метод/Операция</th>
+                                    <th>Описание</th>
+                                    <th>Пример</th>
+                                    <th>Результат</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>add(x)</code></td>
+                                    <td>Добавить элемент</td>
+                                    <td><code>{1,2}.add(3)</code></td>
+                                    <td><code>{1, 2, 3}</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>remove(x)</code></td>
+                                    <td>Удалить (ошибка если нет)</td>
+                                    <td><code>{1,2}.remove(2)</code></td>
+                                    <td><code>{1}</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>discard(x)</code></td>
+                                    <td>Удалить (без ошибки)</td>
+                                    <td><code>{1,2}.discard(5)</code></td>
+                                    <td><code>{1, 2}</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>union()</code> или <code>|</code></td>
+                                    <td>Объединение</td>
+                                    <td><code>{1,2} | {2,3}</code></td>
+                                    <td><code>{1, 2, 3}</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>intersection()</code> или <code>&</code></td>
+                                    <td>Пересечение</td>
+                                    <td><code>{1,2} & {2,3}</code></td>
+                                    <td><code>{2}</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>difference()</code> или <code>-</code></td>
+                                    <td>Разность</td>
+                                    <td><code>{1,2} - {2,3}</code></td>
+                                    <td><code>{1}</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>symmetric_difference()</code> или <code>^</code></td>
+                                    <td>Симметрическая разность</td>
+                                    <td><code>{1,2} ^ {2,3}</code></td>
+                                    <td><code>{1, 3}</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>issubset()</code></td>
+                                    <td>Проверка подмножества</td>
+                                    <td><code>{1}.issubset({1,2})</code></td>
+                                    <td><code>True</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>clear()</code></td>
+                                    <td>Очистить множество</td>
+                                    <td><code>{1,2}.clear()</code></td>
+                                    <td><code>set()</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="reference-section" id="turtle">
+                    <h2><span class="emoji-icon">🐢</span> Команды turtle</h2>
+                    <div class="reference-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Команда</th>
+                                    <th>Описание</th>
+                                    <th>Пример</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>forward(n)</code></td>
+                                    <td>Вперёд на n пикселей</td>
+                                    <td><code>forward(100)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>backward(n)</code></td>
+                                    <td>Назад на n пикселей</td>
+                                    <td><code>backward(50)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>left(angle)</code></td>
+                                    <td>Поворот налево на угол</td>
+                                    <td><code>left(90)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>right(angle)</code></td>
+                                    <td>Поворот направо на угол</td>
+                                    <td><code>right(45)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>penup()</code></td>
+                                    <td>Поднять перо (не рисовать)</td>
+                                    <td><code>penup()</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>pendown()</code></td>
+                                    <td>Опустить перо (рисовать)</td>
+                                    <td><code>pendown()</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>color("name")</code></td>
+                                    <td>Установить цвет</td>
+                                    <td><code>color("red")</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>pensize(n)</code></td>
+                                    <td>Толщина линии</td>
+                                    <td><code>pensize(5)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>goto(x, y)</code></td>
+                                    <td>Перейти к координатам</td>
+                                    <td><code>goto(100, 100)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>home()</code></td>
+                                    <td>Вернуться в центр</td>
+                                    <td><code>home()</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>circle(r)</code></td>
+                                    <td>Нарисовать круг радиуса r</td>
+                                    <td><code>circle(50)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>begin_fill()</code></td>
+                                    <td>Начать заполнение</td>
+                                    <td><code>begin_fill()</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>end_fill()</code></td>
+                                    <td>Закончить заполнение</td>
+                                    <td><code>end_fill()</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

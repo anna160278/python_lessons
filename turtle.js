@@ -1,5 +1,7 @@
+// === ЧАСТЬ 1: ЛОГИКА УРОКА (навигация, тесты, таймер) ===
+
 let currentSection = 1;
-const totalSections = 5;
+const totalSections = 8;
 let score = 0;
 let correctAnswers = 0;
 let answeredQuestions = new Set();
@@ -91,7 +93,7 @@ function showFinalTestStats(timeIsUp) {
     let percent = Math.round((finalCorrectCount / FINAL_TOTAL) * 100);
     let emoji = '🎯', message = '';
     if (percent === 100) { emoji = '🏆'; message = 'Идеальный результат!'; }
-    else if (percent >= 80) { emoji = '🌟'; message = 'Отличный результат!'; }
+    else if (percent >= 80) { emoji = ''; message = 'Отличный результат!'; }
     else if (percent >= 60) { emoji = '👍'; message = 'Хороший результат!'; }
     else if (percent >= 40) { emoji = '📚'; message = 'Неплохо, но можно лучше!'; }
     else { emoji = '💪'; message = 'Стоит повторить материал!'; }
@@ -192,18 +194,18 @@ function showFinalResults() {
         r = document.createElement('div');
         r.id = 'finalResults';
         r.innerHTML = `<div class="final-score"><h2>Урок завершён!</h2><div class="score-value" id="finalScore">0</div><p>очков набрано</p><div id="achievements"></div></div>
-            <div class="success-message"><strong> Что вы изучили:</strong><ul style="margin-left:20px;margin-top:10px;line-height:2;">
-            <li>Словари (dict) — пары ключ:значение</li><li>Создание, получение, добавление и изменение данных</li>
-            <li>Методы словарей: get, keys, values, items, update, pop, del</li><li>Перебор словарей циклом for</li>
-            <li>Практические паттерны: счётчик элементов, кортежи как ключи</li></ul></div>
-            <div style="text-align:center;margin-top:30px;"><a href="index.html" class="btn" style="text-decoration:none;display:inline-block;">🏠 На главную</a>
+            <div class="success-message"><strong>📝 Что вы изучили:</strong><ul style="margin-left:20px;margin-top:10px;line-height:2;">
+            <li>Подключение библиотеки turtle и настройка окна</li><li>Основные команды движения: forward, backward, left, right, setheading</li>
+            <li>Рисование фигур: квадрат, треугольник, круг, точка</li><li>Цвета: именованные, RGB, заполнение фигур</li>
+            <li>Управление черепашкой: shape, stamp, speed, hideturtle, write</li><li>Создание узоров: звёзды, спирали, цветы</li></ul></div>
+            <div style="text-align:center;margin-top:30px;"><a href="index.html" class="btn" style="text-decoration:none;display:inline-block;"> На главную</a>
             <button class="btn" onclick="restartLesson()">🔄 Пройти заново</button></div>`;
         document.getElementById(`section${totalSections}`).appendChild(r);
     }
     document.getElementById('finalScore').textContent = score;
     const a = document.getElementById('achievements');
     a.innerHTML = '';
-    if (correctAnswers >= 15) a.innerHTML += '<span class="achievement">🏆 Мастер словарей</span>';
+    if (correctAnswers >= 15) a.innerHTML += '<span class="achievement">🏆 Мастер turtle</span>';
     if (correctAnswers >= 10) a.innerHTML += '<span class="achievement">⭐ Отличник</span>';
     if (score >= 100) a.innerHTML += '<span class="achievement"> Эксперт</span>';
 }
@@ -224,3 +226,323 @@ function restartLesson() {
 }
 
 updateStats(); updateNavigation();
+
+// === ЧАСТЬ 2: ПЕСОЧНИЦА TURTLE ===
+
+const canvas = document.getElementById('turtleCanvas');
+const ctx = canvas.getContext('2d');
+let turtle = {
+    x: 200,
+    y: 200,
+    angle: 0,
+    penDown: true,
+    color: '#667eea',
+    penSize: 3,
+    filling: false,
+    fillPath: []
+};
+
+function resetTurtle() {
+    turtle = {
+        x: 200,
+        y: 200,
+        angle: 0,
+        penDown: true,
+        color: '#667eea',
+        penSize: 3,
+        filling: false,
+        fillPath: []
+    };
+}
+
+function clearCanvas() {
+    ctx.fillStyle = '#1a1a2e';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    resetTurtle();
+}
+
+function drawTurtleIcon() {
+    ctx.save();
+    ctx.translate(turtle.x, turtle.y);
+    ctx.rotate(turtle.angle * Math.PI / 180);
+    
+    ctx.fillStyle = '#22c55e';
+    ctx.beginPath();
+    ctx.moveTo(12, 0);
+    ctx.lineTo(-8, -7);
+    ctx.lineTo(-8, 7);
+    ctx.closePath();
+    ctx.fill();
+    
+    ctx.restore();
+}
+
+function forward(distance, i) {
+    let dist = distance;
+    if (typeof distance === 'string') {
+        dist = eval(distance.replace(/i/g, i !== undefined ? i : 0));
+    }
+    
+    const rad = turtle.angle * Math.PI / 180;
+    const newX = turtle.x + dist * Math.cos(rad);
+    const newY = turtle.y + dist * Math.sin(rad);
+    
+    if (turtle.penDown) {
+        ctx.strokeStyle = turtle.color;
+        ctx.lineWidth = turtle.penSize;
+        ctx.lineCap = 'round';
+        ctx.beginPath();
+        ctx.moveTo(turtle.x, turtle.y);
+        ctx.lineTo(newX, newY);
+        ctx.stroke();
+    }
+    
+    if (turtle.filling) {
+        turtle.fillPath.push({x: newX, y: newY});
+    }
+    
+    turtle.x = newX;
+    turtle.y = newY;
+}
+
+function backward(distance) {
+    forward(-distance);
+}
+
+function left(angle) {
+    turtle.angle -= angle;
+}
+
+function right(angle) {
+    turtle.angle += angle;
+}
+
+function setheading(angle) {
+    turtle.angle = angle;
+}
+
+function penup() {
+    turtle.penDown = false;
+}
+
+function pendown() {
+    turtle.penDown = true;
+}
+
+function setColor(col) {
+    turtle.color = col;
+}
+
+function pensize(size) {
+    turtle.penSize = size;
+}
+
+function goto(x, y) {
+    if (turtle.penDown) {
+        ctx.strokeStyle = turtle.color;
+        ctx.lineWidth = turtle.penSize;
+        ctx.beginPath();
+        ctx.moveTo(turtle.x, turtle.y);
+        ctx.lineTo(x, y);
+        ctx.stroke();
+    }
+    turtle.x = x;
+    turtle.y = y;
+}
+
+function home() {
+    goto(200, 200);
+    turtle.angle = 0;
+}
+
+function circle(radius) {
+    const steps = 36;
+    const stepAngle = 360 / steps;
+    const stepLength = 2 * Math.PI * radius / steps;
+    
+    for (let i = 0; i < steps; i++) {
+        forward(stepLength);
+        left(stepAngle);
+    }
+}
+
+function dot(size) {
+    ctx.fillStyle = turtle.color;
+    ctx.beginPath();
+    ctx.arc(turtle.x, turtle.y, size / 2, 0, Math.PI * 2);
+    ctx.fill();
+}
+
+function begin_fill() {
+    turtle.filling = true;
+    turtle.fillPath = [{x: turtle.x, y: turtle.y}];
+}
+
+function end_fill() {
+    if (turtle.filling && turtle.fillPath.length > 0) {
+        ctx.fillStyle = turtle.color;
+        ctx.globalAlpha = 0.5;
+        ctx.beginPath();
+        ctx.moveTo(turtle.fillPath[0].x, turtle.fillPath[0].y);
+        for (let i = 1; i < turtle.fillPath.length; i++) {
+            ctx.lineTo(turtle.fillPath[i].x, turtle.fillPath[i].y);
+        }
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 1.0;
+    }
+    turtle.filling = false;
+    turtle.fillPath = [];
+}
+
+function executeCommand(cmd, i) {
+    cmd = cmd.trim();
+    
+    if (cmd.startsWith('forward(')) {
+        const arg = cmd.match(/forward\(([^)]+)\)/)[1];
+        if (arg.includes('i')) {
+            forward(arg, i);
+        } else {
+            forward(parseFloat(arg));
+        }
+    } else if (cmd.startsWith('backward(')) {
+        backward(parseFloat(cmd.match(/backward\(([^)]+)\)/)[1]));
+    } else if (cmd.startsWith('left(')) {
+        left(parseFloat(cmd.match(/left\(([^)]+)\)/)[1]));
+    } else if (cmd.startsWith('right(')) {
+        right(parseFloat(cmd.match(/right\(([^)]+)\)/)[1]));
+    } else if (cmd.startsWith('setheading(')) {
+        setheading(parseFloat(cmd.match(/setheading\(([^)]+)\)/)[1]));
+    } else if (cmd === 'penup()') {
+        penup();
+    } else if (cmd === 'pendown()') {
+        pendown();
+    } else if (cmd.startsWith('color(')) {
+        const col = cmd.match(/color\(['"]([^'"]+)['"]\)/)[1];
+        setColor(col);
+    } else if (cmd.startsWith('pensize(')) {
+        pensize(parseFloat(cmd.match(/pensize\(([^)]+)\)/)[1]));
+    } else if (cmd.startsWith('goto(')) {
+        const coords = cmd.match(/goto\(([^,]+),\s*([^)]+)\)/);
+        goto(parseFloat(coords[1]), parseFloat(coords[2]));
+    } else if (cmd === 'home()') {
+        home();
+    } else if (cmd.startsWith('circle(')) {
+        circle(parseFloat(cmd.match(/circle\(([^)]+)\)/)[1]));
+    } else if (cmd.startsWith('dot(')) {
+        dot(parseFloat(cmd.match(/dot\(([^)]+)\)/)[1]));
+    } else if (cmd === 'begin_fill()') {
+        begin_fill();
+    } else if (cmd === 'end_fill()') {
+        end_fill();
+    }
+}
+
+function runTurtle() {
+    clearCanvas();
+    const code = document.getElementById('turtleCode').value;
+    const lines = code.split('\n');
+    let i = 0;
+    
+    function executeLine() {
+        if (i >= lines.length) {
+            drawTurtleIcon();
+            return;
+        }
+        
+        const line = lines[i];
+        const trimmed = line.trim();
+        i++;
+        
+        if (trimmed === '' || trimmed.startsWith('#')) {
+            executeLine();
+            return;
+        }
+        
+        try {
+            if (trimmed.startsWith('for i in range(')) {
+                const count = parseInt(trimmed.match(/range\(([^)]+)\)/)[1]);
+                const indent = line.match(/^(\s+)/);
+                const indentLevel = indent ? indent[1].length : 0;
+                const block = [];
+                
+                while (i < lines.length) {
+                    const nextLine = lines[i];
+                    const nextTrimmed = nextLine.trim();
+                    
+                    if (nextTrimmed === '') {
+                        i++;
+                        continue;
+                    }
+                    
+                    const nextIndent = nextLine.match(/^(\s+)/);
+                    const nextIndentLevel = nextIndent ? nextIndent[1].length : 0;
+                    
+                    if (nextIndentLevel > indentLevel) {
+                        block.push(nextTrimmed);
+                        i++;
+                    } else {
+                        break;
+                    }
+                }
+                
+                for (let j = 0; j < count; j++) {
+                    for (const cmd of block) {
+                        executeCommand(cmd, j);
+                    }
+                }
+                
+                executeLine();
+                return;
+            } else {
+                executeCommand(trimmed);
+            }
+        } catch (e) {
+            console.error('Error:', e);
+        }
+        
+        setTimeout(executeLine, 5);
+    }
+    
+    executeLine();
+}
+
+const examples = {
+    square: `# Квадрат
+for i in range(4):
+    forward(80)
+    right(90)`,
+    
+    triangle: `# Треугольник
+for i in range(3):
+    forward(100)
+    right(120)`,
+    
+    star: `# Звезда
+for i in range(5):
+    forward(100)
+    right(144)`,
+    
+    spiral: `# Спираль
+for i in range(50):
+    forward(i * 3)
+    right(61)`,
+    
+    flower: `# Цветок
+for i in range(6):
+    circle(40)
+    right(60)`
+};
+
+function loadExample(name) {
+    document.getElementById('turtleCode').value = examples[name];
+    runTurtle();
+}
+
+function toggleExamples() {
+    const panel = document.getElementById('examplesPanel');
+    panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+}
+
+// Инициализация
+clearCanvas();

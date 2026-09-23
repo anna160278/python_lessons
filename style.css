@@ -712,4 +712,45 @@ pre.quiz-code {
     .lessons-grid { 
         grid-template-columns: 1fr; 
     }
+
+    /* Стили для кругов Эйлера (диаграмм Венна) */
+.venn-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.venn-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 120px;
+}
+
+.venn-item span {
+    font-size: 0.9em;
+    color: #c4c9d4;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+}
+
+@media (max-width: 768px) {
+    .venn-container {
+        gap: 10px;
+    }
+    .venn-item {
+        min-width: 100px;
+        padding: 8px;
+    }
+    .venn-item svg {
+        width: 80px;
+        height: 48px;
+    }
+}
 }
