@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Функции — Python</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji-icon">🧩</span> Функции</h1>
+            <p>Создаём собственные команды в Python</p>
+        </div>
+
+        <nav class="page-nav">
+            <a href="index.html" class="page-link">🏠 Главная</a>
+        </nav>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="score">0</span>
+                <span class="stat-label">Очки</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="progress">1/9</span>
+                <span class="stat-label">Прогресс</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="correct">0</span>
+                <span class="stat-label">Правильных</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="content">
+            <!-- Раздел 1: Что такое функции -->
+            <div class="lesson-section active" id="section1">
+                <h2><span class="emoji-icon">💡</span> Что такое функции?</h2>
+                <p>Функция — это <strong style="color:#a78bfa;">именованный блок кода</strong>, который можно вызывать многократно. Представьте функцию как рецепт: вы описываете действия один раз, а потом используете их сколько угодно.</p>
+
+                <div class="code-block"><span class="com"># Вы уже использовали встроенные функции!</span>
+<span class="func">print</span>(<span class="str">"Привет!"</span>)     <span class="com"># функция вывода</span>
+<span class="func">len</span>(<span class="str">"Python"</span>)       <span class="com"># функция длины</span>
+<span class="func">max</span>(<span class="num">10</span>, <span class="num">20</span>, <span class="num">30</span>)    <span class="com"># функция максимума</span>
+<span class="func">type</span>(<span class="num">42</span>)            <span class="com"># функция типа</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Зачем нужны функции:</strong>
+                    <p>✅ <strong>Повторное использование</strong> — написали один раз, вызываем много раз</p>
+                    <p>✅ <strong>Читаемость</strong> — код становится понятнее</p>
+                    <p>✅ <strong>Организация</strong> — код разбит на логические части</p>
+                    <p>✅ <strong>Избегание ошибок</strong> — меньше копирования = меньше опечаток</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что такое функция в Python?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Переменная с числом</div>
+                        <div class="quiz-option" data-correct="true">Именованный блок кода, который можно вызывать многократно</div>
+                        <div class="quiz-option" data-correct="false">Комментарий в коде</div>
+                        <div class="quiz-option" data-correct="false">Тип данных</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет <code>len("Hello")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">4</div>
+                        <div class="quiz-option" data-correct="true">5</div>
+                        <div class="quiz-option" data-correct="false">6</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Какая из этих функций встроенная?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">draw_square()</div>
+                        <div class="quiz-option" data-correct="true">print()</div>
+                        <div class="quiz-option" data-correct="false">my_function()</div>
+                        <div class="quiz-option" data-correct="false">calculate()</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 2: Создание функций -->
+            <div class="lesson-section" id="section2">
+                <h2><span class="emoji-icon">🛠️</span> Создание функций</h2>
+                <p>Функция создаётся с помощью ключевого слова <code>def</code> (от англ. <em>define</em> — определить).</p>
+
+                <div class="code-block"><span class="com"># Создание функции</span>
+<span class="kw">def</span> <span class="func">greet</span>():
+    <span class="func">print</span>(<span class="str">"Привет, мир!"</span>)
+
+<span class="com"># Вызов функции</span>
+<span class="func">greet</span>()  <span class="com"># Привет, мир!</span>
+<span class="func">greet</span>()  <span class="com"># Привет, мир!</span>
+<span class="func">greet</span>()  <span class="com"># Привет, мир!</span></div>
+
+                <div class="example-box">
+                    <strong>️ Важно: функция не работает без вызова!</strong>
+                    <p>Просто написать <code>def</code> — недостаточно. Python запомнит функцию, но <strong>не выполнит её</strong>, пока вы её не вызовете.</p>
+                    <p>Без вызова <code>greet()</code> код выше ничего не выведет на экран!</p>
+                    <p>🔑 <strong>def</strong> = "создать рецепт" → <strong>вызов</strong> = "приготовить по рецепту"</p>
+                </div>
+
+                <div class="example-box">
+                    <strong>💡 Структура функции:</strong>
+                    <p><code>def</code> — ключевое слово для создания функции</p>
+                    <p><code>greet</code> — имя функции (как переменная, но с действиями)</p>
+                    <p><code>()</code> — скобки для параметров (пока пустые)</p>
+                    <p><code>:</code> — двоеточие обязательно!</p>
+                    <p><strong>Отступ</strong> — тело функции (4 пробела или Tab)</p>
+                </div>
+
+                <h3>Функции с параметрами</h3>
+                <div class="code-block"><span class="kw">def</span> <span class="func">greet</span>(<span class="var">name</span>):
+    <span class="func">print</span>(<span class="str">f"Привет, </span><span class="var">{name}</span><span class="str">!"</span>)
+
+<span class="func">greet</span>(<span class="str">"Алиса"</span>)   <span class="com"># Привет, Алиса!</span>
+<span class="func">greet</span>(<span class="str">"Боб"</span>)     <span class="com"># Привет, Боб!</span></div>
+
+                <h3>Пример с turtle: рисуем квадрат</h3>
+                <div class="code-block"><span class="kw">def</span> <span class="func">draw_square</span>(<span class="var">size</span>):
+    <span class="kw">for</span> <span class="var">i</span> <span class="kw">in</span> <span class="func">range</span>(<span class="num">4</span>):
+        <span class="func">forward</span>(<span class="var">size</span>)
+        <span class="func">right</span>(<span class="num">90</span>)
+
+<span class="com"># Рисуем квадраты разного размера</span>
+<span class="func">draw_square</span>(<span class="num">50</span>)
+<span class="func">draw_square</span>(<span class="num">100</span>)
+<span class="func">draw_square</span>(<span class="num">150</span>)</div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Какое ключевое слово используется для создания функции?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>function</code></div>
+                        <div class="quiz-option" data-correct="true"><code>def</code></div>
+                        <div class="quiz-option" data-correct="false"><code>func</code></div>
+                        <div class="quiz-option" data-correct="false"><code>define</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что произойдёт, если создать функцию, но не вызвать её?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Функция выполнится один раз</div>
+                        <div class="quiz-option" data-correct="false">Будет ошибка</div>
+                        <div class="quiz-option" data-correct="true">Ничего не произойдёт — функция просто запомнится</div>
+                        <div class="quiz-option" data-correct="false">Функция выполнится автоматически</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что такое параметр функции?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Имя функции</div>
+                        <div class="quiz-option" data-correct="true">Переменная, которую функция принимает при вызове</div>
+                        <div class="quiz-option" data-correct="false">Возвращаемое значение</div>
+                        <div class="quiz-option" data-correct="false">Комментарий</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 3: Параметры и аргументы -->
+            <div class="lesson-section" id="section3">
+                <h2><span class="emoji-icon">📥</span> Параметры и аргументы</h2>
+
+                <h3>В чём разница?</h3>
+                <div class="code-block"><span class="kw">def</span> <span class="func">greet</span>(<span class="var">name</span>):      <span class="com"># name — это ПАРАМЕТР</span>
+    <span class="func">print</span>(<span class="str">f"Привет, </span><span class="var">{name}</span><span class="str">!"</span>)
+
+<span class="func">greet</span>(<span class="str">"Алиса"</span>)          <span class="com"># "Алиса" — это АРГУМЕНТ</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Запомните разницу:</strong>
+                    <p><strong>Параметр</strong> — это "переменная-заглушка" в определении функции (<code>def</code>)</p>
+                    <p><strong>Аргумент</strong> — это конкретное значение, которое мы передаём при вызове</p>
+                    <p>Аналогия: параметр — это пустая форма, аргумент — то, что мы в неё вписываем</p>
+                </div>
+
+                <h3>Аргументы подставляются по порядку</h3>
+                <div class="code-block"><span class="kw">def</span> <span class="func">introduce</span>(<span class="var">name</span>, <span class="var">age</span>):
+    <span class="func">print</span>(<span class="str">f"Меня зовут </span><span class="var">{name}</span><span class="str">, мне </span><span class="var">{age}</span><span class="str"> лет"</span>)
+
+<span class="com"># Первый аргумент → первый параметр (name)</span>
+<span class="com"># Второй аргумент → второй параметр (age)</span>
+<span class="func">introduce</span>(<span class="str">"Алиса"</span>, <span class="num">20</span>)   <span class="com"># Меня зовут Алиса, мне 20 лет</span>
+<span class="func">introduce</span>(<span class="str">"Боб"</span>, <span class="num">25</span>)     <span class="com"># Меня зовут Боб, мне 25 лет</span></div>
+
+                <div class="example-box">
+                    <strong>️ Порядок важен!</strong>
+                    <p>Если перепутать порядок, получится бессмыслица:</p>
+                    <p><code>introduce(20, "Алиса")</code> → "Меня зовут 20, мне Алиса лет" 😅</p>
+                </div>
+
+                <h3>Именованные аргументы — порядок не важен</h3>
+                <p>Если указать имя параметра при вызове, можно передавать аргументы в любом порядке:</p>
+
+                <div class="code-block"><span class="com"># Обычный вызов (по порядку)</span>
+<span class="func">introduce</span>(<span class="str">"Алиса"</span>, <span class="num">20</span>)
+
+<span class="com"># Именованные аргументы (порядок не важен!)</span>
+<span class="func">introduce</span>(<span class="var">age</span><span class="op">=</span><span class="num">20</span>, <span class="var">name</span><span class="op">=</span><span class="str">"Алиса"</span>)
+
+<span class="com"># Оба вызова дают одинаковый результат</span></div>
+
+                <h3>Значения по умолчанию</h3>
+                <p>Можно задать значение параметра "по умолчанию" — тогда его можно не передавать при вызове:</p>
+
+                <div class="code-block"><span class="kw">def</span> <span class="func">greet</span>(<span class="var">name</span>, <span class="var">greeting</span><span class="op">=</span><span class="str">"Привет"</span>):
+    <span class="func">print</span>(<span class="str">f"</span><span class="var">{greeting}</span><span class="str">, </span><span class="var">{name}</span><span class="str">!"</span>)
+
+<span class="func">greet</span>(<span class="str">"Алиса"</span>)              
+<span class="com"># Привет, Алиса! (используется значение по умолчанию)</span>
+<span class="func">greet</span>(<span class="str">"Боб"</span>, <span class="str">"Здравствуй"</span>)  
+<span class="com"># Здравствуй, Боб! (значение заменено)</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Правило:</strong>
+                    <p>Параметры со значениями по умолчанию должны идти <strong>после</strong> обязательных параметров</p>
+                    <p>✅ <code>def f(name, greeting="Привет")</code> — правильно</p>
+                    <p>❌ <code>def f(greeting="Привет", name)</code> — ошибка!</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что такое параметр функции?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Значение, которое передаётся при вызове</div>
+                        <div class="quiz-option" data-correct="true">Переменная в определении функции (def)</div>
+                        <div class="quiz-option" data-correct="false">Возвращаемое значение</div>
+                        <div class="quiz-option" data-correct="false">Имя функции</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет этот код:</div>
+                    <pre class="quiz-code">def greet(name, greeting="Привет"):
+    print(f"{greeting}, {name}!")
+
+greet("Боб")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Привет, name!</div>
+                        <div class="quiz-option" data-correct="true">Привет, Боб!</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                        <div class="quiz-option" data-correct="false">greeting, Боб!</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет этот код:</div>
+                    <pre class="quiz-code">def introduce(name, age):
+    print(f"{name} - {age}")
+
+introduce(age=25, name="Боб")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">25 - Боб</div>
+                        <div class="quiz-option" data-correct="true">Боб - 25</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                        <div class="quiz-option" data-correct="false">name - age</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 4: Возврат значений -->
+            <div class="lesson-section" id="section4">
+                <h2><span class="emoji-icon">📤</span> Возврат значений</h2>
+                <p>Функция может <strong>выводить</strong> результат на экран через <code>print</code>, а может <strong>возвращать</strong> его через <code>return</code>. Это большая разница!</p>
+
+                <h3>Вариант 1: функция с print (только выводит)</h3>
+                <div class="code-block"><span class="kw">def</span> <span class="func">add_print</span>(<span class="var">a</span>, <span class="var">b</span>):
+    <span class="func">print</span>(<span class="var">a</span> <span class="op">+</span> <span class="var">b</span>)
+
+<span class="var">result</span> <span class="op">=</span> <span class="func">add_print</span>(<span class="num">3</span>, <span class="num">5</span>)  <span class="com"># На экран: 8</span>
+<span class="func">print</span>(<span class="var">result</span>)             <span class="com"># На экран: None</span>
+<span class="com"># result нельзя использовать в вычислениях!</span></div>
+
+                <h3>Вариант 2: функция с return (возвращает значение)</h3>
+                <div class="code-block"><span class="kw">def</span> <span class="func">add_return</span>(<span class="var">a</span>, <span class="var">b</span>):
+    <span class="kw">return</span> <span class="var">a</span> <span class="op">+</span> <span class="var">b</span>
+
+<span class="var">result</span> <span class="op">=</span> <span class="func">add_return</span>(<span class="num">3</span>, <span class="num">5</span>)  <span class="com"># Ничего не выводится</span>
+<span class="func">print</span>(<span class="var">result</span>)              <span class="com"># На экран: 8</span>
+<span class="com"># result можно использовать дальше!</span>
+<span class="func">print</span>(<span class="var">result</span> <span class="op">*</span> <span class="num">2</span>)          <span class="com"># На экран: 16</span></div>
+
+                <div class="example-box">
+                    <strong>⚠️ print vs return:</strong>
+                    <p><code>print()</code> — <strong>показывает</strong> значение на экране, но функция ничего не возвращает (вернёт <code>None</code>)</p>
+                    <p><code>return</code> — <strong>отдаёт</strong> значение обратно в код, который вызвал функцию</p>
+                    <p>Функция без <code>return</code> всегда возвращает <code>None</code></p>
+                </div>
+
+                <h3>Возврат нескольких значений</h3>
+                <p>Функция может возвращать несколько значений через запятую — на самом деле это кортеж:</p>
+
+                <div class="code-block"><span class="kw">def</span> <span class="func">get_min_max</span>(<span class="var">numbers</span>):
+    <span class="kw">return</span> <span class="func">min</span>(<span class="var">numbers</span>), <span class="func">max</span>(<span class="var">numbers</span>)
+
+<span class="var">minimum</span>, <span class="var">maximum</span> <span class="op">=</span> <span class="func">get_min_max</span>([<span class="num">3</span>, <span class="num">1</span>, <span class="num">4</span>, <span class="num">1</span>, <span class="num">5</span>])
+<span class="func">print</span>(<span class="var">minimum</span>)  <span class="com"># 1</span>
+<span class="func">print</span>(<span class="var">maximum</span>)  <span class="com"># 5</span></div>
+
+                <h3>Пример: вычисление площади круга</h3>
+                <div class="code-block"><span class="kw">def</span> <span class="func">circle_area</span>(<span class="var">radius</span>):
+    <span class="kw">return</span> <span class="num">3.14</span> <span class="op">*</span> <span class="var">radius</span> <span class="op">**</span> <span class="num">2</span>
+
+<span class="var">area1</span> <span class="op">=</span> <span class="func">circle_area</span>(<span class="num">5</span>)
+<span class="var">area2</span> <span class="op">=</span> <span class="func">circle_area</span>(<span class="num">10</span>)
+
+<span class="func">print</span>(<span class="var">area1</span>)  <span class="com"># 78.5</span>
+<span class="func">print</span>(<span class="var">area2</span>)  <span class="com"># 314.0</span>
+<span class="func">print</span>(<span class="var">area2</span> <span class="op">-</span> <span class="var">area1</span>)  <span class="com"># 235.5</span></div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет этот код:</div>
+                    <pre class="quiz-code">def multiply(x, y):
+    return x * y
+
+result = multiply(4, 7)
+print(result + 1)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">28</div>
+                        <div class="quiz-option" data-correct="true">29</div>
+                        <div class="quiz-option" data-correct="false">471</div>
+                        <div class="quiz-option" data-correct="false">None</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что возвращает функция без return?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">0</div>
+                        <div class="quiz-option" data-correct="false">Пустую строку</div>
+                        <div class="quiz-option" data-correct="true">None</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет этот код:</div>
+                    <pre class="quiz-code">def get_pair():
+    return 1, 2
+
+x, y = get_pair()
+print(x + y)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">(1, 2)</div>
+                        <div class="quiz-option" data-correct="true">3</div>
+                        <div class="quiz-option" data-correct="false">12</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 5: *args и **kwargs -->
+            <div class="lesson-section" id="section5">
+                <h2><span class="emoji-icon"></span> *args и **kwargs</h2>
+                <p>Иногда мы не знаем заранее, сколько аргументов передаст пользователь. Для этого есть <code>*args</code> и <code>**kwargs</code>.</p>
+
+                <h3>*args — произвольное количество аргументов</h3>
+                <p><code>*args</code> собирает все переданные аргументы в <strong>кортеж</strong>. Можно передать любое количество:</p>
+
+                <div class="code-block"><span class="kw">def</span> <span class="func">sum_all</span>(<span class="op">*</span><span class="var">args</span>):
+    <span class="var">total</span> <span class="op">=</span> <span class="num">0</span>
+    <span class="kw">for</span> <span class="var">num</span> <span class="kw">in</span> <span class="var">args</span>:      <span class="com"># args — это кортеж</span>
+        <span class="var">total</span> <span class="op">+=</span> <span class="var">num</span>     <span class="com"># прибавляем каждое число</span>
+    <span class="kw">return</span> <span class="var">total</span>
+
+<span class="func">print</span>(<span class="func">sum_all</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>))        <span class="com"># 6  (1+2+3)</span>
+<span class="func">print</span>(<span class="func">sum_all</span>(<span class="num">10</span>, <span class="num">20</span>))         <span class="com"># 30 (10+20)</span>
+<span class="func">print</span>(<span class="func">sum_all</span>(<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>))  <span class="com"># 15 (1+2+3+4+5)</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Как это работает пошагово:</strong>
+                    <p>При вызове <code>sum_all(1, 2, 3)</code> переменная <code>args</code> становится кортежем <code>(1, 2, 3)</code></p>
+                    <p>Цикл <code>for num in args</code> проходит по каждому числу: 1, потом 2, потом 3</p>
+                    <p>Каждое число прибавляется к <code>total</code>: 0→1→3→6</p>
+                </div>
+
+                <h3>**kwargs — произвольное количество именованных аргументов</h3>
+                <p><code>**kwargs</code> собирает именованные аргументы в <strong>словарь</strong>:</p>
+
+                <div class="code-block"><span class="kw">def</span> <span class="func">print_info</span>(<span class="op">**</span><span class="var">kwargs</span>):
+    <span class="kw">for</span> <span class="var">key</span>, <span class="var">value</span> <span class="kw">in</span> <span class="var">kwargs</span>.<span class="func">items</span>():
+        <span class="func">print</span>(<span class="str">f"</span><span class="var">{key}</span><span class="str">: </span><span class="var">{value}</span><span class="str">"</span>)
+
+<span class="func">print_info</span>(<span class="var">name</span><span class="op">=</span><span class="str">"Алиса"</span>, <span class="var">age</span><span class="op">=</span><span class="num">20</span>)
+<span class="com"># name: Алиса</span>
+<span class="com"># age: 20</span>
+
+<span class="func">print_info</span>(<span class="var">city</span><span class="op">=</span><span class="str">"Москва"</span>, <span class="var">country</span><span class="op">=</span><span class="str">"Россия"</span>, <span class="var">pop</span><span class="op">=</span><span class="num">12000000</span>)
+<span class="com"># city: Москва</span>
+<span class="com"># country: Россия</span>
+<span class="com"># pop: 12000000</span></div>
+
+                <div class="example-box">
+                    <strong> Как работает **kwargs:</strong>
+                    <p>При вызове <code>print_info(name="Алиса", age=20)</code> переменная <code>kwargs</code> становится словарём <code>{"name": "Алиса", "age": 20}</code></p>
+                    <p>Можно передать <strong>любое количество</strong> именованных параметров</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет этот код:</div>
+                    <pre class="quiz-code">def sum_all(*args):
+    total = 0
+    for num in args:
+        total += num
+    return total
+
+print(sum_all(1, 2, 3, 4))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">4</div>
+                        <div class="quiz-option" data-correct="false">(1, 2, 3, 4)</div>
+                        <div class="quiz-option" data-correct="true">10</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Во что превращаются аргументы внутри функции с *args?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">В список</div>
+                        <div class="quiz-option" data-correct="true">В кортеж</div>
+                        <div class="quiz-option" data-correct="false">В словарь</div>
+                        <div class="quiz-option" data-correct="false">В строку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет этот код:</div>
+                    <pre class="quiz-code">def print_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+print_info(city="Москва", country="Россия")</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">city: Москва<br>country: Россия</div>
+                        <div class="quiz-option" data-correct="false">Москва Россия</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                        <div class="quiz-option" data-correct="false">city country</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 6: Lambda и подсказки типов -->
+            <div class="lesson-section" id="section6">
+                <h2><span class="emoji-icon"></span> Lambda и подсказки типов</h2>
+
+                <h3>Lambda-функции</h3>
+                <p>Lambda — это <strong>анонимная</strong> (безымянная) функция в одну строку. Используется для простых операций.</p>
+
+                <div class="code-block"><span class="com"># Обычная функция</span>
+<span class="kw">def</span> <span class="func">square</span>(<span class="var">x</span>):
+    <span class="kw">return</span> <span class="var">x</span> <span class="op">**</span> <span class="num">2</span>
+
+<span class="com"># То же самое через lambda</span>
+<span class="var">square</span> <span class="op">=</span> <span class="kw">lambda</span> <span class="var">x</span>: <span class="var">x</span> <span class="op">**</span> <span class="num">2</span>
+
+<span class="func">print</span>(<span class="var">square</span>(<span class="num">5</span>))  <span class="com"># 25</span>
+
+<span class="com"># Lambda с несколькими параметрами</span>
+<span class="var">add</span> <span class="op">=</span> <span class="kw">lambda</span> <span class="var">a</span>, <span class="var">b</span>: <span class="var">a</span> <span class="op">+</span> <span class="var">b</span>
+<span class="func">print</span>(<span class="var">add</span>(<span class="num">3</span>, <span class="num">7</span>))  <span class="com"># 10</span></div>
+
+                <div class="example-box">
+                    <strong> Когда использовать lambda:</strong>
+                    <p>✅ Для простых однострочных функций</p>
+                    <p>✅ Как аргумент для других функций (sort, map, filter)</p>
+                    <p>⚠️ Не использовать для сложной логики — лучше обычная функция</p>
+                </div>
+
+                <h3>Подсказки типов (Type Hints)</h3>
+                <p>Подсказки типов <strong>не влияют</strong> на работу кода, но помогают понять, какие данные ожидаются.</p>
+
+                <div class="code-block"><span class="kw">def</span> <span class="func">greet</span>(<span class="var">name</span>: <span class="func">str</span>, <span class="var">age</span>: <span class="func">int</span>) <span class="op">-></span> <span class="func">str</span>:
+    <span class="kw">return</span> <span class="str">f"Привет, </span><span class="var">{name}</span><span class="str">! Тебе </span><span class="var">{age}</span><span class="str"> лет."</span>
+
+<span class="func">print</span>(<span class="func">greet</span>(<span class="str">"Алиса"</span>, <span class="num">20</span>))
+<span class="com"># Привет, Алиса! Тебе 20 лет.</span></div>
+
+                <div class="example-box">
+                    <strong> Синтаксис подсказок:</strong>
+                    <p><code>name: str</code> — параметр <code>name</code> должен быть строкой</p>
+                    <p><code>age: int</code> — параметр <code>age</code> должен быть целым числом</p>
+                    <p><code>-> str</code> — функция возвращает строку</p>
+                    <p>⚠️ Python <strong>не проверяет</strong> типы автоматически — это только подсказки для программиста</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет этот код:</div>
+                    <pre class="quiz-code">double = lambda x: x * 2
+print(double(7))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">7</div>
+                        <div class="quiz-option" data-correct="true">14</div>
+                        <div class="quiz-option" data-correct="false">lambda</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что означает <code>-> str</code> в определении функции?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Функция принимает строку</div>
+                        <div class="quiz-option" data-correct="true">Функция возвращает строку</div>
+                        <div class="quiz-option" data-correct="false">Функция удаляет строку</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что выведет этот код:</div>
+                    <pre class="quiz-code">multiply = lambda a, b: a * b
+print(multiply(4, 5))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">9</div>
+                        <div class="quiz-option" data-correct="false">45</div>
+                        <div class="quiz-option" data-correct="true">20</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 7: Область видимости -->
+            <div class="lesson-section" id="section7">
+                <h2><span class="emoji-icon"></span> Область видимости переменных</h2>
+                <p>Каждая переменная существует только в определённой <strong>области видимости</strong> — там, где она была создана.</p>
+
+                <h3>Локальные и глобальные переменные</h3>
+                <div class="example-box">
+                    <strong>📌 Определения:</strong>
+                    <p><strong>Локальная переменная</strong> — создана <em>внутри</em> функции. Видна <strong>только внутри</strong> этой функции.</p>
+                    <p><strong>Глобальная переменная</strong> — создана <em>вне</em> функций. Видна <strong>везде</strong> в программе.</p>
+                </div>
+
+                <div class="code-block"><span class="var">x</span> <span class="op">=</span> <span class="num">10</span>  <span class="com"># глобальная переменная</span>
+
+<span class="kw">def</span> <span class="func">my_func</span>():
+    <span class="func">print</span>(<span class="var">x</span>)  <span class="com"># 10 — функция видит глобальную переменную</span>
+
+<span class="func">my_func</span>()
+<span class="func">print</span>(<span class="var">x</span>)  <span class="com"># 10 — доступна и снаружи</span></div>
+
+                <div class="code-block"><span class="kw">def</span> <span class="func">my_func</span>():
+    <span class="var">y</span> <span class="op">=</span> <span class="num">20</span>  <span class="com"># локальная переменная</span>
+    <span class="func">print</span>(<span class="var">y</span>)  <span class="com"># 20 — внутри функции всё работает</span>
+
+<span class="func">my_func</span>()
+<span class="com"># print(y)  # Ошибка! y не существует вне функции</span></div>
+
+                <div class="example-box">
+                    <strong>⚠️ Важное правило:</strong>
+                    <p style="color: #fbbf24; font-weight: bold;">Функция может <strong>читать</strong> глобальные переменные, но не может их <strong>изменять</strong> без ключевого слова <code>global</code>.</p>
+                </div>
+
+                <h3>Почему нельзя изменять глобальные переменные?</h3>
+                <div class="code-block"><span class="var">count</span> <span class="op">=</span> <span class="num">0</span>
+
+<span class="kw">def</span> <span class="func">increment</span>():
+    <span class="var">count</span> <span class="op">=</span> <span class="var">count</span> <span class="op">+</span> <span class="num">1</span>  <span class="com">#  Ошибка UnboundLocalError!</span>
+
+<span class="func">increment</span>()</div>
+
+                <p>Python видит присваивание <code>count = ...</code> внутри функции и решает, что <code>count</code> — локальная переменная. Но справа от <code>=</code> он пытается прочитать её же — а она ещё не создана!</p>
+
+                <h3>Решение: ключевое слово global</h3>
+                <div class="code-block"><span class="var">count</span> <span class="op">=</span> <span class="num">0</span>
+
+<span class="kw">def</span> <span class="func">increment</span>():
+    <span class="kw">global</span> <span class="var">count</span>      <span class="com"># ✅ говорим: используй глобальную count</span>
+    <span class="var">count</span> <span class="op">=</span> <span class="var">count</span> <span class="op">+</span> <span class="num">1</span>
+
+<span class="func">increment</span>()
+<span class="func">increment</span>()
+<span class="func">print</span>(<span class="var">count</span>)  <span class="com"># 2</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Когда использовать global:</strong>
+                    <p>✅ Когда функция должна <strong>изменить</strong> глобальную переменную</p>
+                    <p>⚠️ Злоупотреблять <code>global</code> не стоит — лучше передавать значения через параметры и <code>return</code></p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что выведет этот код:</div>
+                    <pre class="quiz-code">x = 10
+
+def func():
+    print(x)
+
+func()</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                        <div class="quiz-option" data-correct="true">10</div>
+                        <div class="quiz-option" data-correct="false">None</div>
+                        <div class="quiz-option" data-correct="false">Ничего</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет этот код:</div>
+                    <pre class="quiz-code">x = 100
+
+def func():
+    x = 50
+    print(x)
+
+func()
+print(x)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">50<br>50</div>
+                        <div class="quiz-option" data-correct="true">50<br>100</div>
+                        <div class="quiz-option" data-correct="false">100<br>100</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Зачем нужно ключевое слово <code>global</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Чтобы создать новую переменную</div>
+                        <div class="quiz-option" data-correct="true">Чтобы изменить глобальную переменную внутри функции</div>
+                        <div class="quiz-option" data-correct="false">Чтобы удалить переменную</div>
+                        <div class="quiz-option" data-correct="false">Чтобы импортировать модуль</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 8: Рекурсия -->
+            <div class="lesson-section" id="section8">
+                <h2><span class="emoji-icon">🔄</span> Рекурсия</h2>
+                <p>Рекурсия — это когда функция <strong>вызывает сама себя</strong>.</p>
+
+                <div class="example-box">
+                    <strong>Аналогия с матрёшкой:</strong>
+                    <p>Каждая матрёшка содержит внутри себя такую же, но поменьше. Представьте, что вам нужно узнать, сколько матрёшек внутри большой:</p>
+                    <p>1️⃣ Открываете большую — внутри ещё одна</p>
+                    <p>2️⃣ Открываете её — внутри ещё одна</p>
+                    <p>3️⃣ Открываете — внутри <strong>самая маленькая</strong> (она не открывается)</p>
+                    <p>4️⃣ Начинаете "собирать" ответ обратно: 1, 2, 3 матрёшки</p>
+                    <p>🔑 <strong>Самая маленькая матрёшка</strong> — это <strong>базовый случай</strong> (условие остановки - выхода из рекурсии)</p>
+                </div>
+
+                <h3>Пример: факториал числа</h3>
+                <p>Факториал числа <code>n</code> — это произведение всех чисел от 1 до n </p>
+                <p>(обозначается <code>n!</code>) <code>5! = 5 × 4 × 3 × 2 × 1 = 120</code></p>
+
+                <div class="code-block"><span class="kw">def</span> <span class="func">factorial</span>(<span class="var">n</span>):
+    <span class="com"># Базовый случай — самая маленькая "матрёшка"</span>
+    <span class="kw">if</span> <span class="var">n</span> <span class="op">==</span> <span class="num">0</span> <span class="kw">or</span> <span class="var">n</span> <span class="op">==</span> <span class="num">1</span>:
+        <span class="kw">return</span> <span class="num">1</span>
+    <span class="com"># Рекурсивный вызов — открываем следующую "матрёшку"</span>
+    <span class="kw">return</span> <span class="var">n</span> <span class="op">*</span> <span class="func">factorial</span>(<span class="var">n</span> <span class="op">-</span> <span class="num">1</span>)
+
+<span class="func">print</span>(<span class="func">factorial</span>(<span class="num">5</span>))  <span class="com"># 120</span></div>
+
+                <h3>Как происходит вызов (пошагово)</h3>
+                <div class="code-block"><span class="com"># factorial(5)</span>
+<span class="com"># = 5 * factorial(4)</span>
+<span class="com"># = 5 * 4 * factorial(3)</span>
+<span class="com"># = 5 * 4 * 3 * factorial(2)</span>
+<span class="com"># = 5 * 4 * 3 * 2 * factorial(1)</span>
+<span class="com"># = 5 * 4 * 3 * 2 * 1    ← базовый случай!</span>
+<span class="com"># = 120</span></div>
+
+                <div class="example-box">
+                    <strong>️ Правила рекурсии:</strong>
+                    <p>✅ Обязательно нужен <strong>базовый случай</strong> (условие остановки) — иначе получится бесконечная рекурсия!</p>
+                    <p>✅ Каждый вызов должен <strong>приближаться</strong> к базовому случаю (у нас <code>n</code> уменьшается)</p>
+                    <p>❌ Без базового случая получите <code>RecursionError</code> — как матрёшка без дна!</p>
+                </div>
+
+                <h3>Пример с turtle: рекурсивная спираль</h3>
+                <div class="code-block"><span class="kw">def</span> <span class="func">draw_spiral</span>(<span class="var">length</span>):
+    <span class="kw">if</span> <span class="var">length</span> <span class="op"><</span> <span class="num">5</span>:
+        <span class="kw">return</span>  <span class="com"># базовый случай — останавливаемся</span>
+    <span class="func">forward</span>(<span class="var">length</span>)
+    <span class="func">right</span>(<span class="num">90</span>)
+    <span class="func">draw_spiral</span>(<span class="var">length</span> <span class="op">-</span> <span class="num">10</span>)  
+    <span class="com"># рекурсивный вызов с меньшим размером</span>
+
+<span class="func">draw_spiral</span>(<span class="num">100</span>)</div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что такое рекурсия?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Цикл for</div>
+                        <div class="quiz-option" data-correct="true">Когда функция вызывает сама себя</div>
+                        <div class="quiz-option" data-correct="false">Импорт модуля</div>
+                        <div class="quiz-option" data-correct="false">Создание списка</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что выведет <code>factorial(4)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">4</div>
+                        <div class="quiz-option" data-correct="false">12</div>
+                        <div class="quiz-option" data-correct="true">24</div>
+                        <div class="quiz-option" data-correct="false">120</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что произойдёт, если в рекурсивной функции нет базового случая?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Функция вернёт 0</div>
+                        <div class="quiz-option" data-correct="false">Функция выполнится один раз</div>
+                        <div class="quiz-option" data-correct="true">Произойдёт ошибка RecursionError</div>
+                        <div class="quiz-option" data-correct="false">Ничего не произойдёт</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 9: Итоговый тест -->
+            <div class="lesson-section" id="section9">
+                <h2><span class="emoji-icon">🏆</span> Итоговый тест</h2>
+                <div class="final-test-header">
+                    <h3 style="margin:0; color:#856404;">10 вопросов, 7 минут. Удачи!</h3>
+                </div>
+
+                <div class="global-timer" id="globalTimer">⏱️ 7:00</div>
+                <div class="final-test-stats" id="finalTestStats" style="display: none;"></div>
+
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">1. Что выведет этот код:</div>
+                    <pre class="quiz-code">def multiply(a, b):
+    return a * b
+
+print(multiply(7, 8))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">78</div>
+                        <div class="quiz-option" data-correct="false">45</div>
+                        <div class="quiz-option" data-correct="true">56</div>
+                        <div class="quiz-option" data-correct="false">None</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">2. Что выведет функция без return?</div>
+                    <pre class="quiz-code">def hello():
+    print("Hello world")
+
+result = hello()
+print(result)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Hello world</div>
+                        <div class="quiz-option" data-correct="true">Hello world<br>None</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                        <div class="quiz-option" data-correct="false">None</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">3. Что выведет lambda-функция:</div>
+                    <pre class="quiz-code">square = lambda x: x ** 2
+print(square(6))</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">12</div>
+                        <div class="quiz-option" data-correct="true">36</div>
+                        <div class="quiz-option" data-correct="false">6</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">4. Что означает <code>-> int</code> в определении функции?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Функция принимает целое число</div>
+                        <div class="quiz-option" data-correct="true">Функция возвращает целое число</div>
+                        <div class="quiz-option" data-correct="false">Функция удаляет целое число</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+    <div class="quiz-question">5. Что выведет этот код:</div>
+    <pre class="quiz-code">def sum_to_n(n):
+    if n == 0:
+        return 0
+    return n + sum_to_n(n - 1)
+
+print(sum_to_n(5))</pre>
+    <div class="quiz-options">
+        <div class="quiz-option" data-correct="false">5</div>
+        <div class="quiz-option" data-correct="false">10</div>
+        <div class="quiz-option" data-correct="true">15</div>
+        <div class="quiz-option" data-correct="false">20</div>
+    </div>
+</div>
+                <div class="quiz-container final-q">
+    <div class="quiz-question">6. Что выведет этот код:</div>
+    <pre class="quiz-code">score = 10
+
+def update_score():
+    score = 20
+    print(score)
+
+update_score()
+print(score)</pre>
+    <div class="quiz-options">
+        <div class="quiz-option" data-correct="false">20<br>20</div>
+        <div class="quiz-option" data-correct="true">20<br>10</div>
+        <div class="quiz-option" data-correct="false">10<br>10</div>
+        <div class="quiz-option" data-correct="false">Ошибку</div>
+    </div>
+</div>
+                <div class="quiz-container final-q">
+    <div class="quiz-question">7. Что выведет этот код:</div>
+    <pre class="quiz-code">def create_profile(**kwargs):
+    for key, val in kwargs.items():
+        print(f"{key}: {val}")
+
+create_profile(role="Admin", level=5)</pre>
+    <div class="quiz-options">
+        <div class="quiz-option" data-correct="true">role: Admin<br>level: 5</div>
+        <div class="quiz-option" data-correct="false">Admin 5</div>
+        <div class="quiz-option" data-correct="false">Ошибку</div>
+        <div class="quiz-option" data-correct="false">role level</div>
+    </div>
+</div>
+                <div class="quiz-container final-q">
+    <div class="quiz-question">8. Что выведет этот код:</div>
+    <pre class="quiz-code">def make_coffee(size="medium", type="latte"):
+    return f"{size} {type}"
+
+print(make_coffee(type="cappuccino"))</pre>
+    <div class="quiz-options">
+        <div class="quiz-option" data-correct="false">cappuccino medium</div>
+        <div class="quiz-option" data-correct="true">medium cappuccino</div>
+        <div class="quiz-option" data-correct="false">Ошибку</div>
+        <div class="quiz-option" data-correct="false">None</div>
+    </div>
+</div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">9. Что выведет этот код:</div>
+                    <pre class="quiz-code">def get_min_max(numbers):
+    return min(numbers), max(numbers)
+
+minimum, maximum = get_min_max([3, 1, 4, 1, 5])
+print(minimum, maximum)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">(1, 5)</div>
+                        <div class="quiz-option" data-correct="true">1 5</div>
+                        <div class="quiz-option" data-correct="false">15</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+    <div class="quiz-question">10. Что выведет этот код:</div>
+    <pre class="quiz-code">def multiply_all(*args):
+    result = 1
+    for num in args:
+        result *= num
+    return result
+
+print(multiply_all(2, 3, 4))</pre>
+    <div class="quiz-options">
+        <div class="quiz-option" data-correct="false">9</div>
+        <div class="quiz-option" data-correct="false">(2, 3, 4)</div>
+        <div class="quiz-option" data-correct="true">24</div>
+        <div class="quiz-option" data-correct="false">Ошибку</div>
+    </div>
+</div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="btn" id="prevBtn" onclick="previousSection()" disabled>← Назад</button>
+            <button class="btn" id="nextBtn" onclick="nextSection()">Далее →</button>
+        </div>
+    </div>
+
+    <script src="script-functions.js"></script>
+</body>
+</html>
