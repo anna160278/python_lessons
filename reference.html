@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Справочник Python</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -26,6 +28,7 @@
                     <a href="#dicts">📚 Словари</a>
                     <a href="#sets">🎯 Множества</a>
                     <a href="#turtle">🐢 Turtle</a>
+                    <a href="#oop">🏛️ ООП</a>
                 </div>
 
                 <div class="reference-section" id="arithmetic">
@@ -609,8 +612,150 @@
                     </div>
                     <a href="#" class="back-to-top">↑ Наверх</a>
                 </div>
+
+                <section class="reference-section" id="oop">
+                    <h2>🏛️ ООП: синтаксис и магические методы</h2>
+
+                    <h3>Основы ООП</h3>
+                    <div class="reference-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Конструкция</th>
+                                    <th>Описание</th>
+                                    <th>Пример</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>class Name:</code></td>
+                                    <td>Создание класса</td>
+                                    <td><code>class Car:</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>def __init__(self):</code></td>
+                                    <td>Конструктор (вызывается при создании объекта)</td>
+                                    <td><code>def __init__(self, name):</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>self.attr = value</code></td>
+                                    <td>Атрибут объекта</td>
+                                    <td><code>self.name = name</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>self.__attr</code></td>
+                                    <td>Приватный атрибут (нельзя менять извне)</td>
+                                    <td><code>self.__balance = 0</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>super().__init__()</code></td>
+                                    <td>Вызов конструктора родителя</td>
+                                    <td><code>super().__init__(name)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>class Child(Parent):</code></td>
+                                    <td>Наследование</td>
+                                    <td><code>class Dog(Animal):</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Магические методы</h3>
+                    <div class="reference-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Метод</th>
+                                    <th>Когда вызывается</th>
+                                    <th>Пример</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>__str__</code></td>
+                                    <td><code>print(obj)</code> — как объект выглядит при выводе</td>
+                                    <td><code>return f"{self.name}"</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>__repr__</code></td>
+                                    <td>Представление в консоли/отладке</td>
+                                    <td><code>return f"Car('{self.name}')"</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>__len__</code></td>
+                                    <td><code>len(obj)</code> — длина объекта</td>
+                                    <td><code>return len(self.items)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>__add__</code></td>
+                                    <td>оператор <code>+</code></td>
+                                    <td><code>return Money(a + b)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>__eq__</code></td>
+                                    <td>оператор <code>==</code></td>
+                                    <td><code>return self.x == other.x</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>__lt__</code></td>
+                                    <td>оператор <code><</code></td>
+                                    <td><code>return self.age < other.age</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h3>Встроенные функции для ООП</h3>
+                    <div class="reference-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Функция</th>
+                                    <th>Описание</th>
+                                    <th>Пример</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>type(obj)</code></td>
+                                    <td>Тип объекта</td>
+                                    <td><code>type(car1)</code> → <code>&lt;class 'Car'&gt;</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>isinstance(obj, Class)</code></td>
+                                    <td>Проверка принадлежности к классу</td>
+                                    <td><code>isinstance(car1, Car)</code> → <code>True</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>issubclass(A, B)</code></td>
+                                    <td>Проверка наследования</td>
+                                    <td><code>issubclass(Dog, Animal)</code> → <code>True</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>dir(obj)</code></td>
+                                    <td>Все атрибуты и методы объекта</td>
+                                    <td><code>dir(car1)</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>getattr(obj, name)</code></td>
+                                    <td>Получить атрибут по имени</td>
+                                    <td><code>getattr(car1, 'color')</code></td>
+                                </tr>
+                                <tr>
+                                    <td><code>setattr(obj, name, val)</code></td>
+                                    <td>Задать атрибут по имени</td>
+                                    <td><code>setattr(car1, 'color', 'red')</code></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <a href="#" class="back-to-top">[↑ Наверх](#)</a>
+                </section>
             </div>
         </div>
     </div>
 </body>
+
 </html>
