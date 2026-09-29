@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ООП — Python</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji-icon">🏛️</span> Объектно-ориентированное программирование</h1>
+            <p>Создаём собственные типы данных в Python</p>
+        </div>
+
+        <nav class="page-nav">
+            <a href="index.html" class="page-link">🏠 Главная</a>
+        </nav>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="score">0</span>
+                <span class="stat-label">Очки</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="progress">1/7</span>
+                <span class="stat-label">Прогресс</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="correct">0</span>
+                <span class="stat-label">Правильных</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="content">
+
+            <!-- Раздел 1: Что такое классы -->
+            <div class="lesson-section active" id="section1">
+                <h2><span class="emoji-icon">📦</span> Что такое классы и объекты?</h2>
+                
+                <p>Представь, что ты делаешь игру с машинами . У каждой машины есть <strong>цвет</strong>, <strong>марка</strong> и <strong>скорость</strong>. Если у тебя 100 машин, писать код для каждой отдельно — долго и скучно!</p>
+                
+                <p>Вместо этого мы создаём <strong>класс</strong> — это как <strong>чертёж машины</strong>. Один раз нарисовали чертёж — и можем построить по нему сколько угодно машин!</p>
+
+                <div class="example-box">
+                    <strong> Аналогия с машинами:</strong>
+                    <p><strong>Класс <code>Car</code></strong> — это чертёж машины (общий план: у каждой будет цвет, марка, скорость)</p>
+                    <p><strong>Объект <code>my_car</code></strong> — это конкретная машина, построенная по чертежу (красная Toyota, едет 120 км/ч)</p>
+                    <p>По одному чертежу можно построить много разных машин: красную, синюю, зелёную!</p>
+                </div>
+
+    <div class="code-block"><span class="com"># Создаём класс (чертёж машины)</span>
+<span class="kw">class</span> <span class="func">Car</span>:
+    <span class="kw">pass</span>  <span class="com"># пока пустой чертёж</span>
+
+<span class="com"># Строим конкретные машины по чертежу</span>
+<span class="var">car1</span> <span class="op">=</span> <span class="func">Car</span>()  <span class="com"># первая машина</span>
+<span class="var">car2</span> <span class="op">=</span> <span class="func">Car</span>()  <span class="com"># вторая машина</span>
+
+<span class="func">print</span>(<span class="func">type</span>(<span class="var">car1</span>))  <span class="com"># &lt;class '__main__.Car'&gt;</span></div>
+
+                <h3>Атрибуты класса — общие свойства всех машин</h3>
+                <p>У всех машин есть <strong>общие свойства</strong>: у каждой 4 колеса и 1 двигатель. Такие свойства можно задать прямо в классе — они будут <strong>одинаковыми для всех объектов</strong>.</p>
+
+            <div class="code-block"><span class="kw">class</span> <span class="func">Car</span>:
+    <span class="var">wheels</span> <span class="op">=</span> <span class="num">4</span>      <span class="com"># у всех машин 4 колеса</span>
+    <span class="var">engine</span> <span class="op">=</span> <span class="num">1</span>      <span class="com"># у всех машин 1 двигатель</span>
+
+<span class="com"># Создаём разные машины</span>
+<span class="var">car1</span> <span class="op">=</span> <span class="func">Car</span>()
+<span class="var">car2</span> <span class="op">=</span> <span class="func">Car</span>()
+
+<span class="com"># Обращаемся к атрибутам через точку</span>
+<span class="func">print</span>(<span class="var">car1</span>.<span class="var">wheels</span>)   <span class="com"># 4</span>
+<span class="func">print</span>(<span class="var">car2</span>.<span class="var">wheels</span>)   <span class="com"># 4 (тоже 4!)</span>
+<span class="func">print</span>(<span class="var">car1</span>.<span class="var">engine</span>)   <span class="com"># 1</span>
+
+<span class="com"># Можно обратиться и через имя класса</span>
+<span class="func">print</span>(<span class="func">Car</span>.<span class="var">wheels</span>)    <span class="com"># 4</span></div>
+
+                <div class="example-box">
+                    <strong>🔑 Запомни:</strong>
+                    <p><code>class</code> — создаёт новый класс.</p>
+                    <p>Имя класса пишется с <strong>большой буквы</strong>: <code>Car</code>, <code>Robot</code>, <code>Player</code></p>
+                    <p><code>()</code> после имени класса — <strong>строит объект</strong> (как "запустить конвейер")</p>
+                    <p><code>объект.атрибут</code> — обращаемся к свойству через <strong>точку</strong></p>
+                    <p>Атрибуты класса <strong>одинаковы для всех объектов</strong>, пока мы их не изменим</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что такое класс в программировании?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Конкретный объект программы</div>
+                        <div class="quiz-option" data-correct="true">Чертёж или шаблон для создания объектов</div>
+                        <div class="quiz-option" data-correct="false">Функция с параметрами</div>
+                        <div class="quiz-option" data-correct="false">Тип переменной</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Как создать объект класса <code>Car</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>Car = new()</code></div>
+                        <div class="quiz-option" data-correct="true"><code>my_car = Car()</code></div>
+                        <div class="quiz-option" data-correct="false"><code>create Car</code></div>
+                        <div class="quiz-option" data-correct="false"><code>Car.create()</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Как правильно назвать класс?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>my_class</code></div>
+                        <div class="quiz-option" data-correct="false"><code>myClass</code></div>
+                        <div class="quiz-option" data-correct="true"><code>MyClass</code></div>
+                        <div class="quiz-option" data-correct="false"><code>MYCLASS</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">4. Что выведет этот код:</div>
+<pre class="quiz-code">class Car:
+    wheels = 4
+
+car1 = Car()
+car2 = Car()
+print(car1.wheels, car2.wheels)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">4 0</div>
+                        <div class="quiz-option" data-correct="true">4 4</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                        <div class="quiz-option" data-correct="false">None None</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 2: Атрибуты и конструктор -->
+<div class="lesson-section" id="section2">
+    <h2><span class="emoji-icon">⚙️</span> Атрибуты и конструктор <code>__init__</code></h2>
+    
+    <p>У каждого объекта есть <strong>свойства</strong> (атрибуты) и <strong>действия</strong> (методы). Если ты уже знаешь, что такое переменные и функции — считай, что половину ООП ты уже понял!</p>
+
+    <div class="example-box">
+        <strong>💡 Простая аналогия:</strong>
+        <p><strong>Атрибут</strong> — это как <strong>переменная</strong>, только "принадлежащая" объекту</p>
+        <p><strong>Метод</strong> — это как <strong>функция</strong>, только "живущая" внутри класса</p>
+        <p>Атрибуты хранят данные (цвет, скорость), методы — выполняют действия (ехать, сигналить)</p>
+    </div>
+
+    <h3>Задаём атрибуты напрямую</h3>
+    <p>Самый простой способ — создать объект и сразу задать ему свойства через точку:</p>
+
+    <div class="code-block"><span class="kw">class</span> <span class="func">Car</span>:
+    <span class="kw">pass</span>  <span class="com"># пустой класс</span>
+
+<span class="com"># Создаём машину</span>
+<span class="var">car1</span> <span class="op">=</span> <span class="func">Car</span>()
+<span class="var">car1</span>.<span class="var">color</span> <span class="op">=</span> <span class="str">"красный"</span>      <span class="com"># атрибут (как переменная)</span>
+<span class="var">car1</span>.<span class="var">brand</span> <span class="op">=</span> <span class="str">"Toyota"</span>     
+<span class="var">car1</span>.<span class="var">speed</span> <span class="op">=</span> <span class="num">120</span>          
+
+<span class="func">print</span>(<span class="var">car1</span>.<span class="var">color</span>)   <span class="com"># красный</span>
+<span class="func">print</span>(<span class="var">car1</span>.<span class="var">brand</span>)   <span class="com"># Toyota</span></div>
+
+    <div class="example-box">
+        <strong>⚠️ Проблема:</strong>
+        <p>Если нужно создать 10 машин, придётся для каждой писать 3 строки:</p>
+        <p><code>car1.color = "красный"</code>, <code>car1.brand = "Toyota"</code>, <code>car1.speed = 120</code></p>
+        <p><code>car2.color = "синий"</code>, <code>car2.brand = "BMW"</code>, <code>car2.speed = 150</code></p>
+        <p>...и так 10 раз! Это <strong>много повторяющегося кода</strong>.</p>
+    </div>
+
+    <h3>Решение: конструктор <code>__init__</code></h3>
+    <p>Чтобы не писать одно и то же много раз, используем <strong>конструктор</strong> — специальный метод <code>__init__</code>, который <strong>автоматически запускается</strong> при создании объекта.</p>
+
+    <div class="code-block"><span class="kw">class</span> <span class="func">Car</span>:
+    <span class="kw">def</span> <span class="func">__init__</span>(<span class="var">self</span>, <span class="var">color</span>, <span class="var">brand</span>, <span class="var">speed</span>):
+        <span class="var">self</span>.<span class="var">color</span> <span class="op">=</span> <span class="var">color</span>    <span class="com"># сохраняем цвет</span>
+        <span class="var">self</span>.<span class="var">brand</span> <span class="op">=</span> <span class="var">brand</span>    <span class="com"># сохраняем марку</span>
+        <span class="var">self</span>.<span class="var">speed</span> <span class="op">=</span> <span class="var">speed</span>    <span class="com"># сохраняем скорость</span>
+
+<span class="com"># Теперь создаём машины в одну строку!</span>
+<span class="var">car1</span> <span class="op">=</span> <span class="func">Car</span>(<span class="str">"красный"</span>, <span class="str">"Toyota"</span>, <span class="num">120</span>)
+<span class="var">car2</span> <span class="op">=</span> <span class="func">Car</span>(<span class="str">"синий"</span>, <span class="str">"BMW"</span>, <span class="num">150</span>)
+
+<span class="func">print</span>(<span class="var">car1</span>.<span class="var">color</span>)   <span class="com"># красный</span>
+<span class="func">print</span>(<span class="var">car2</span>.<span class="var">brand</span>)   <span class="com"># BMW</span></div>
+
+    <div class="example-box">
+        <strong>🔑 Как работает <code>__init__</code>:</strong>
+        <p>1️⃣ Когда пишем <code>car1 = Car("красный", "Toyota", 120)</code>, Python <strong>автоматически</strong> вызывает <code>__init__</code></p>
+        <p>2️ Аргументы <code>"красный"</code>, <code>"Toyota"</code>, <code>120</code> попадают в параметры <code>color</code>, <code>brand</code>, <code>speed</code></p>
+        <p>3️⃣ <code>self.color = color</code> означает: "сохрани значение <code>color</code> в атрибут <code>color</code> <strong>этого</strong> объекта"</p>
+        <p>4️⃣ <code>self</code> — это ссылка на <strong>конкретный объект</strong> (на <code>car1</code> или <code>car2</code>)</p>
+    </div>
+
+    <div class="example-box">
+        <strong>💡 Запомни:</strong>
+        <p><strong>Атрибут</strong> = переменная внутри объекта (<code>self.color</code>)</p>
+        <p><code>__init__</code> — конструктор, запускается <strong>автоматически</strong> при создании объекта</p>
+        <p><code>self</code> — ссылка на <strong>текущий объект</strong>, всегда первый параметр</p>
+    </div>
+
+    <div class="quiz-container">
+        <div class="quiz-question">1. Что такое атрибут в ООП?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Функция внутри класса</div>
+            <div class="quiz-option" data-correct="true">Переменная, принадлежащая объекту</div>
+            <div class="quiz-option" data-correct="false">Имя класса</div>
+            <div class="quiz-option" data-correct="false">Тип данных</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">2. Как называется метод, который вызывается при создании объекта?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><code>__start__</code></div>
+            <div class="quiz-option" data-correct="true"><code>__init__</code></div>
+            <div class="quiz-option" data-correct="false"><code>__new__</code></div>
+            <div class="quiz-option" data-correct="false"><code>__create__</code></div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">3. Что такое <code>self</code> в методе класса?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Имя класса</div>
+            <div class="quiz-option" data-correct="true">Ссылка на текущий объект</div>
+            <div class="quiz-option" data-correct="false">Глобальная переменная</div>
+            <div class="quiz-option" data-correct="false">Ключевое слово Python</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">4. Что выведет этот код:</div>
+        <pre class="quiz-code">class Dog:
+    def __init__(self, name):
+        self.name = name
+
+dog = Dog("Шарик")
+print(dog.name)</pre>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Dog</div>
+            <div class="quiz-option" data-correct="true">Шарик</div>
+            <div class="quiz-option" data-correct="false">name</div>
+            <div class="quiz-option" data-correct="false">Ошибку</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">5. Зачем нужен <code>__init__</code>?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Чтобы удалить объект</div>
+            <div class="quiz-option" data-correct="true">Чтобы автоматически задать атрибуты при создании объекта</div>
+            <div class="quiz-option" data-correct="false">Чтобы напечатать объект</div>
+            <div class="quiz-option" data-correct="false">Чтобы импортировать класс</div>
+        </div>
+    </div>
+</div>
+
+            <!-- Раздел 3: Методы и много объектов -->
+<div class="lesson-section" id="section3">
+    <h2><span class="emoji-icon">🎭</span> Методы и много объектов</h2>
+    
+    <p>Кроме свойств, у объектов есть <strong>действия</strong> (методы). Это функции внутри класса, которые могут использовать атрибуты через <code>self</code>.</p>
+
+    <h3>Методы — действия объекта</h3>
+
+    <div class="code-block"><span class="kw">class</span> <span class="func">Car</span>:
+    <span class="kw">def</span> <span class="func">__init__</span>(<span class="var">self</span>, <span class="var">color</span>, <span class="var">brand</span>):
+        <span class="var">self</span>.<span class="var">color</span> <span class="op">=</span> <span class="var">color</span>
+        <span class="var">self</span>.<span class="var">brand</span> <span class="op">=</span> <span class="var">brand</span>
+    
+    <span class="kw">def</span> <span class="func">honk</span>(<span class="var">self</span>):           <span class="com"># метод (функция внутри класса)</span>
+        <span class="func">print</span>(<span class="str">f"</span><span class="var">{self.brand}</span><span class="str"> говорит: Би-бип!"</span>)
+    
+    <span class="kw">def</span> <span class="func">info</span>(<span class="var">self</span>):            <span class="com"># метод (функция внутри класса)</span>
+        <span class="func">print</span>(<span class="str">f"</span><span class="var">{self.color}</span><span class="str"> </span><span class="var">{self.brand}</span><span class="str">"</span>)
+
+<span class="var">car1</span> <span class="op">=</span> <span class="func">Car</span>(<span class="str">"красный"</span>, <span class="str">"Toyota"</span>)
+<span class="var">car1</span>.<span class="func">honk</span>()    <span class="com"># Toyota говорит: Би-бип!</span>
+<span class="var">car1</span>.<span class="func">info</span>()    <span class="com"># красный Toyota</span></div>
+
+    <div class="example-box">
+        <strong> Запомни про методы:</strong>
+        <p><strong>Метод</strong> = функция внутри класса (<code>def honk(self)</code>)</p>
+        <p><code>объект.метод()</code> — вызываем действие через точку</p>
+        <p>Методы могут использовать атрибуты через <code>self.атрибут</code></p>
+    </div>
+
+    <h3>Создаём много объектов</h3>
+    <p>Одна формочка — много печенек! Один класс — много объектов, каждый со своими данными.</p>
+
+    <div class="code-block"><span class="kw">class</span> <span class="func">Robot</span>:
+    <span class="kw">def</span> <span class="func">__init__</span>(<span class="var">self</span>, <span class="var">name</span>, <span class="var">color</span>):
+        <span class="var">self</span>.<span class="var">name</span> <span class="op">=</span> <span class="var">name</span>
+        <span class="var">self</span>.<span class="var">color</span> <span class="op">=</span> <span class="var">color</span>
+    
+    <span class="kw">def</span> <span class="func">greet</span>(<span class="var">self</span>):
+        <span class="func">print</span>(<span class="str">f"Привет! Я </span><span class="var">{self.name}</span><span class="str">, </span><span class="var">{self.color}</span><span class="str"> робот"</span>)
+
+<span class="com"># Создаём разных роботов</span>
+<span class="var">robot1</span> <span class="op">=</span> <span class="func">Robot</span>(<span class="str">"R2D2"</span>, <span class="str">"синий"</span>)
+<span class="var">robot2</span> <span class="op">=</span> <span class="func">Robot</span>(<span class="str">"C3PO"</span>, <span class="str">"золотой"</span>)
+<span class="var">robot3</span> <span class="op">=</span> <span class="func">Robot</span>(<span class="str">"Wall-E"</span>, <span class="str">"жёлтый"</span>)
+
+<span class="var">robot1</span>.<span class="func">greet</span>()  <span class="com"># Привет! Я R2D2, синий робот</span>
+<span class="var">robot2</span>.<span class="func">greet</span>()  <span class="com"># Привет! Я C3PO, золотой робот</span>
+<span class="var">robot3</span>.<span class="func">greet</span>()  <span class="com"># Привет! Я Wall-E, жёлтый робот</span></div>
+
+    <div class="example-box">
+        <strong>💡 Каждый объект независим:</strong>
+        <p>✅ <code>robot1.name</code> = "R2D2", а <code>robot2.name</code> = "C3PO"</p>
+        <p>✅ Изменение одного объекта не влияет на другие</p>
+        <p>✅ Все объекты созданы по одному классу, но живут своей жизнью</p>
+    </div>
+
+    <div class="quiz-container">
+        <div class="quiz-question">1. Что такое метод в ООП?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Переменная внутри объекта</div>
+            <div class="quiz-option" data-correct="true">Функция, определённая внутри класса</div>
+            <div class="quiz-option" data-correct="false">Атрибут класса</div>
+            <div class="quiz-option" data-correct="false">Ключевое слово Python</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">2. Сколько объектов создано в коде выше с роботами?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">1</div>
+            <div class="quiz-option" data-correct="true">3</div>
+            <div class="quiz-option" data-correct="false">6</div>
+            <div class="quiz-option" data-correct="false">0</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">3. Что выведет <code>robot2.color</code>?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">синий</div>
+            <div class="quiz-option" data-correct="true">золотой</div>
+            <div class="quiz-option" data-correct="false">жёлтый</div>
+            <div class="quiz-option" data-correct="false">Ошибку</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">4. Можно ли изменить атрибут объекта после создания?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Нет, только при создании</div>
+            <div class="quiz-option" data-correct="true">Да, например: <code>robot1.name = "Новое имя"</code></div>
+            <div class="quiz-option" data-correct="false">Только числовые атрибуты</div>
+            <div class="quiz-option" data-correct="false">Только строковые атрибуты</div>
+        </div>
+    </div>
+</div>
+
+            <!-- Раздел 4: Drag & Drop задание -->
+<div class="lesson-section" id="section4">
+    <h2><span class="emoji-icon">🧩</span> Задание: Собери класс из строк</h2>
+    <p>Перетащи строки кода из верхнего блока в нижний в правильном порядке. <strong>Обрати внимание на отступы!</strong></p>
+
+    <div class="interactive-task">
+        <div class="task-description">
+            <strong>📋 Задание:</strong> Собери класс <code>Dog</code> с конструктором и методом <code>bark()</code>
+        </div>
+
+        <div class="dnd-workspace">
+            <!-- Верхний блок: Банк строк -->
+            <div class="dnd-panel dnd-bank-panel">
+                <h4>📦 Банк строк <span class="hint">(тяни отсюда)</span></h4>
+                <div id="dnd-bank" class="dnd-list source-list">
+                    <!-- Строки появятся здесь через JS -->
+                </div>
+            </div>
+
+            <!-- Стрелка между блоками -->
+            <div class="dnd-arrow">⬇️</div>
+
+            <!-- Нижний блок: Твой код -->
+            <div class="dnd-panel dnd-editor-panel">
+                <h4>📝 Твой код <span class="hint">(бросай сюда)</span></h4>
+                <div id="dnd-editor" class="dnd-list dropzone">
+                    <div class="empty-state">Перетащи сюда первую строку кода...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="task-controls">
+            <button class="btn" onclick="checkDnd()">✅ Проверить код</button>
+            <button class="btn btn-secondary" onclick="resetDnd()">🔄 Сбросить</button>
+            <button class="btn btn-secondary" onclick="showDndHint()">💡 Подсказка (-5 очков)</button>
+        </div>
+
+        <div id="dndResult"></div>
+    </div>
+</div>
+
+            <!-- Раздел 5: Заполнение пропусков -->
+            <div class="lesson-section" id="section5">
+                <h2><span class="emoji-icon">✏️</span> Задание: Заполни пропуски</h2>
+                <p>В коде пропущены ключевые слова. Нажми на слово в банке слева, потом на пропуск в коде справа — слово встанет на место.</p>
+
+                <div class="interactive-task">
+                    <div class="task-description">
+                        <strong>📋 Задание:</strong> Заполни пропуски в классе <code>Book</code>
+                    </div>
+
+                    <div class="fill-container">
+                        <div class="fill-bank">
+                            <h4> Банк слов</h4>
+                            <div class="fill-words" id="fillWords">
+                                <!-- Заполняется JS -->
+                            </div>
+                        </div>
+
+                        <div class="fill-code">
+                            <h4>📝 Код с пропусками</h4>
+                            <div id="fillCode">
+                                <!-- Заполняется JS -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="task-controls">
+                        <button class="btn" onclick="checkFill()">✅ Проверить</button>
+                        <button class="btn btn-secondary" onclick="resetFill()">🔄 Сбросить</button>
+                        <button class="btn btn-secondary" onclick="showFillHint()">💡 Подсказка (-5 очков)</button>
+                    </div>
+
+                    <div id="fillResult"></div>
+                </div>
+            </div>
+
+            <!-- Раздел 6: Инкапсуляция -->
+            <div class="lesson-section" id="section6">
+                <h2><span class="emoji-icon">🔒</span> Инкапсуляция (защита данных)</h2>
+                
+                <p>Иногда нужно защитить данные объекта от случайного изменения. Например, баланс в банке нельзя менять напрямую — только через специальные методы.</p>
+
+                <div class="code-block"><span class="kw">class</span> <span class="func">BankAccount</span>:
+    <span class="kw">def</span> <span class="func">__init__</span>(<span class="var">self</span>, <span class="var">balance</span>):
+        <span class="var">self</span>.<span class="var">__balance</span> <span class="op">=</span> <span class="var">balance</span>
+            <span class="com"># приватный атрибут (2 подчёркивания)</span>
+    
+    <span class="kw">def</span> <span class="func">deposit</span>(<span class="var">self</span>, <span class="var">amount</span>):
+        <span class="kw">if</span> <span class="var">amount</span> <span class="op">></span> <span class="num">0</span>:
+            <span class="var">self</span>.<span class="var">__balance</span> <span class="op">+=</span> <span class="var">amount</span>
+            <span class="func">print</span>(<span class="str">f"Внесено </span><span class="var">{amount}</span><span class="str">"</span>)
+    
+    <span class="kw">def</span> <span class="func">get_balance</span>(<span class="var">self</span>):
+        <span class="kw">return</span> <span class="var">self</span>.<span class="var">__balance</span>
+
+<span class="var">acc</span> <span class="op">=</span> <span class="func">BankAccount</span>(<span class="num">1000</span>)
+<span class="var">acc</span>.<span class="func">deposit</span>(<span class="num">500</span>)        <span class="com"># Внесено 500</span>
+<span class="func">print</span>(<span class="var">acc</span>.<span class="func">get_balance</span>())  <span class="com"># 1500</span>
+<span class="com"># print(acc.__balance)  # ❌ Ошибка! Нельзя напрямую</span></div>
+
+                <div class="example-box">
+                    <strong>🔑 Правила инкапсуляции:</strong>
+                    <p>🔒 <strong>Приватный атрибут</strong> — имя начинается с двух подчёркиваний: <code>__balance</code></p>
+                    <p>✅ <strong>Геттер</strong> — метод для чтения (<code>get_balance()</code>)</p>
+                    <p>✅ <strong>Сеттер</strong> — метод для изменения с проверкой (<code>deposit()</code>)</p>
+                    <p>⚠️ Прямой доступ <code>acc.__balance</code> вызовет ошибку — это защита!</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Как сделать атрибут приватным?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Добавить <code>private</code></div>
+                        <div class="quiz-option" data-correct="true">Начать имя с двух подчёркиваний: <code>__name</code></div>
+                        <div class="quiz-option" data-correct="false">Использовать <code>secret</code></div>
+                        <div class="quiz-option" data-correct="false">Начать с одного подчёркивания</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что такое геттер?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Метод для изменения атрибута</div>
+                        <div class="quiz-option" data-correct="true">Метод для чтения атрибута</div>
+                        <div class="quiz-option" data-correct="false">Конструктор класса</div>
+                        <div class="quiz-option" data-correct="false">Приватный метод</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Зачем нужна инкапсуляция?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Чтобы код работал быстрее</div>
+                        <div class="quiz-option" data-correct="true">Чтобы защитить данные от неправильного изменения</div>
+                        <div class="quiz-option" data-correct="false">Чтобы уменьшить размер кода</div>
+                        <div class="quiz-option" data-correct="false">Чтобы скрыть код от других программистов</div>
+                    </div>
+                </div>
+            </div>
+ 
+<!-- Раздел 7: Наследование -->
+<div class="lesson-section" id="section7">
+    <h2><span class="emoji-icon">🧬</span> Наследование</h2>
+    
+    <p><strong>Наследование</strong> — это когда один класс получает все свойства и методы другого класса. Как в жизни: ребёнок наследует черты родителей.</p>
+
+    <div class="example-box">
+        <strong>💡 Аналогия:</strong>
+        <p>👤 <strong>Родитель</strong>: класс <code>Person</code> (у всех людей есть имя и возраст)</p>
+        <p>🎓 <strong>Ребёнок</strong>: класс <code>Student</code> (наследует всё от <code>Person</code>, но добавляет класс/школу)</p>
+        <p>👨‍ <strong>Ребёнок</strong>: класс <code>Teacher</code> (наследует всё от <code>Person</code>, но добавляет предмет)</p>
+    </div>
+
+    <h3>Родительский класс <code>Person</code></h3>
+    <p>Сначала создадим общий класс для всех людей:</p>
+
+    <div class="code-block"><span class="kw">class</span> <span class="func">Person</span>:
+    <span class="kw">def</span> <span class="func">__init__</span>(<span class="var">self</span>, <span class="var">name</span>, <span class="var">age</span>):
+        <span class="var">self</span>.<span class="var">name</span> <span class="op">=</span> <span class="var">name</span>
+        <span class="var">self</span>.<span class="var">age</span> <span class="op">=</span> <span class="var">age</span>
+    
+    <span class="kw">def</span> <span class="func">info</span>(<span class="var">self</span>):
+        <span class="func">print</span>(<span class="str">f"</span><span class="var">{self.name}</span><span class="str">, </span><span class="var">{self.age}</span><span class="str"> лет"</span>)
+
+<span class="var">person</span> <span class="op">=</span> <span class="func">Person</span>(<span class="str">"Иван"</span>, <span class="num">35</span>)
+<span class="var">person</span>.<span class="func">info</span>()  <span class="com"># Иван, 35 лет</span></div>
+
+    <h3>Дочерний класс <code>Student</code></h3>
+    <p>Теперь создадим класс ученика. Он наследует всё от <code>Person</code>, но добавляет своё поле <code>grade</code> (класс):</p>
+
+    <div class="code-block"><span class="kw">class</span> <span class="func">Student</span>(<span class="func">Person</span>):
+    <span class="kw">def</span> <span class="func">__init__</span>(<span class="var">self</span>, <span class="var">name</span>, <span class="var">age</span>, <span class="var">grade</span>):
+        <span class="func">super</span>().<span class="func">__init__</span>(<span class="var">name</span>, <span class="var">age</span>)  <span class="com"># вызываем конструктор</span>
+                                <span class="com"># родительского класса Person</span>
+        <span class="var">self</span>.<span class="var">grade</span> <span class="op">=</span> <span class="var">grade</span>            <span class="com"># добавляем своё поле</span>
+    
+    <span class="kw">def</span> <span class="func">study</span>(<span class="var">self</span>):
+        <span class="func">print</span>(<span class="str">f"</span><span class="var">{self.name}</span><span class="str"> учится в </span><span class="var">{self.grade}</span><span class="str"> классе"</span>)
+
+<span class="var">student</span> <span class="op">=</span> <span class="func">Student</span>(<span class="str">"Алиса"</span>, <span class="num">12</span>, <span class="str">"6А"</span>)
+<span class="var">student</span>.<span class="func">info</span>()    <span class="com"># Алиса, 12 лет (метод от родителя!)</span>
+<span class="var">student</span>.<span class="func">study</span>()   <span class="com"># Алиса учится в 6А классе (свой метод)</span></div>
+
+    <div class="example-box">
+        <strong>🔑 Как это работает:</strong>
+        <p>1️ <code>class Student(Person)</code> — Student наследует всё от Person</p>
+        <p>2️⃣ <code>super().__init__(name, age)</code> — вызываем конструктор родителя, чтобы создать поля <code>name</code> и <code>age</code></p>
+        <p>3️⃣ <code>self.grade = grade</code> — добавляем новое поле, которого нет у родителя</p>
+        <p>4️ <code>student.info()</code> — работает, хотя мы его не писали в Student! Он унаследован от Person</p>
+    </div>
+
+    <h3>Переопределение метода</h3>
+    <p>Дочерний класс может <strong>переопределить</strong> метод родителя — написать свою версию с тем же именем:</p>
+
+    <div class="code-block"><span class="kw">class</span> <span class="func">Teacher</span>(<span class="func">Person</span>):
+    <span class="kw">def</span> <span class="func">__init__</span>(<span class="var">self</span>, <span class="var">name</span>, <span class="var">age</span>, <span class="var">subject</span>):
+        <span class="func">super</span>().<span class="func">__init__</span>(<span class="var">name</span>, <span class="var">age</span>)
+        <span class="var">self</span>.<span class="var">subject</span> <span class="op">=</span> <span class="var">subject</span>
+    
+    <span class="kw">def</span> <span class="func">info</span>(<span class="var">self</span>):  <span class="com"># переопределяем метод родителя!</span>
+        <span class="func">print</span>(<span class="str">f"</span><span class="var">{self.name}</span><span class="str">, учитель </span><span class="var">{self.subject}</span><span class="str">"</span>)
+
+<span class="var">teacher</span> <span class="op">=</span> <span class="func">Teacher</span>(<span class="str">"Мария Ивановна"</span>, <span class="num">45</span>, <span class="str">"математики"</span>)
+<span class="var">teacher</span>.<span class="func">info</span>()  <span class="com"># Мария Ивановна, учитель математики</span>
+<span class="com"># (а не "Мария Ивановна, 45 лет" как у Person!)</span></div>
+
+    <div class="example-box">
+        <strong> Запомни:</strong>
+        <p><code>class Child(Parent)</code> — Child наследует всё от Parent</p>
+        <p><code>super().__init__(...)</code> — вызов конструктора родителя</p>
+        <p>Дочерний класс может <strong>переопределить</strong> метод родителя (как <code>info()</code> у Teacher)</p>
+        <p>Если метод не переопределён — используется родительский (как <code>info()</code> у Student)</p>
+    </div>
+
+    <div class="quiz-container">
+        <div class="quiz-question">1. Как указать, что класс наследуется от другого?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><code>class Dog extends Animal</code></div>
+            <div class="quiz-option" data-correct="true"><code>class Dog(Animal)</code></div>
+            <div class="quiz-option" data-correct="false"><code>class Dog inherits Animal</code></div>
+            <div class="quiz-option" data-correct="false"><code>class Dog from Animal</code></div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">2. Что делает <code>super().__init__()</code>?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Создаёт новый объект</div>
+            <div class="quiz-option" data-correct="true">Вызывает конструктор родительского класса</div>
+            <div class="quiz-option" data-correct="false">Удаляет объект</div>
+            <div class="quiz-option" data-correct="false">Копирует все методы</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">3. Что такое переопределение метода?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Удаление метода у родителя</div>
+            <div class="quiz-option" data-correct="true">Написание метода с тем же именем в дочернем классе</div>
+            <div class="quiz-option" data-correct="false">Копирование метода в другой класс</div>
+            <div class="quiz-option" data-correct="false">Изменение имени метода</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">4. Что выведет этот код:</div>
+        <pre class="quiz-code">class A:
+    def hello(self):
+        return "A"
+
+class B(A):
+    pass
+
+b = B()
+print(b.hello())</pre>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Ошибку</div>
+            <div class="quiz-option" data-correct="true">A</div>
+            <div class="quiz-option" data-correct="false">B</div>
+            <div class="quiz-option" data-correct="false">None</div>
+        </div>
+    </div>
+</div>   
+
+<!-- Раздел 8: Полиморфизм -->
+<div class="lesson-section" id="section8">
+    <h2><span class="emoji-icon"></span> Полиморфизм</h2>
+    
+    <p><strong>Полиморфизм</strong> — "много форм". Один и тот же метод работает по-разному для разных объектов. Как в жизни: команда "Голос!" — собака лает, кошка мяукает, корова мычит.</p>
+
+    <h3>Базовый класс <code>Animal</code> и его наследники</h3>
+    <p>Создадим общий класс для всех животных, а потом сделаем разных наследников:</p>
+
+    <div class="code-block"><span class="kw">class</span> <span class="func">Animal</span>:
+    <span class="kw">def</span> <span class="func">__init__</span>(<span class="var">self</span>, <span class="var">name</span>):
+        <span class="var">self</span>.<span class="var">name</span> <span class="op">=</span> <span class="var">name</span>
+    
+    <span class="kw">def</span> <span class="func">voice</span>(<span class="var">self</span>):
+        <span class="kw">return</span> <span class="str">"..."</span>  <span class="com"># по умолчанию — тишина</span>
+
+<span class="kw">class</span> <span class="func">Cat</span>(<span class="func">Animal</span>):
+    <span class="kw">def</span> <span class="func">voice</span>(<span class="var">self</span>):
+        <span class="kw">return</span> <span class="str">"Мяу"</span>
+
+<span class="kw">class</span> <span class="func">Dog</span>(<span class="func">Animal</span>):
+    <span class="kw">def</span> <span class="func">voice</span>(<span class="var">self</span>):
+        <span class="kw">return</span> <span class="str">"Гав"</span>
+
+<span class="kw">class</span> <span class="func">Cow</span>(<span class="func">Animal</span>):
+    <span class="kw">def</span> <span class="func">voice</span>(<span class="var">self</span>):
+        <span class="kw">return</span> <span class="str">"Му"</span></div>
+
+    <h3>Один интерфейс — разное поведение</h3>
+    <p>Теперь самое интересное: мы можем работать со всеми животными одинаково, не зная, кто именно перед нами:</p>
+
+    <div class="code-block"><span class="com"># Создаём разных животных</span>
+<span class="var">animals</span> <span class="op">=</span> [<span class="func">Cat</span>(<span class="str">"Барсик"</span>), <span class="func">Dog</span>(<span class="str">"Шарик"</span>), <span class="func">Cow</span>(<span class="str">"Бурёнка"</span>)]
+
+<span class="com"># Вызываем один и тот же метод — но каждый отвечает по-своему!</span>
+<span class="kw">for</span> <span class="var">animal</span> <span class="kw">in</span> <span class="var">animals</span>:
+    <span class="func">print</span>(<span class="str">f"</span><span class="var">{animal.name}</span><span class="str"> говорит: </span><span class="var">{animal.voice()}</span><span class="str">"</span>)
+
+<span class="com"># Барсик говорит: Мяу</span>
+<span class="com"># Шарик говорит: Гав</span>
+<span class="com"># Бурёнка говорит: Му</span></div>
+
+    <div class="example-box">
+        <strong>💡 В чём магия?</strong>
+        <p>Цикл <code>for animal in animals</code> <strong>не знает</strong>, кто перед ним — кот, собака или корова</p>
+        <p>Он просто вызывает <code>animal.voice()</code> — и каждый объект отвечает <strong>по-своему</strong></p>
+        <p>Это и есть полиморфизм: <strong>один вызов — много форм</strong></p>
+    </div>
+
+    <h3>Магические методы: <code>__str__</code>, <code>__add__</code> и <code>__eq__</code></h3>
+<p>Python позволяет переопределять даже операторы! Давай сделаем класс <code>Money</code> — кошелёк с деньгами:</p>
+
+<div class="code-block"><span class="kw">class</span> <span class="func">Money</span>:
+    <span class="kw">def</span> <span class="func">__init__</span>(<span class="var">self</span>, <span class="var">amount</span>):
+        <span class="var">self</span>.<span class="var">amount</span> <span class="op">=</span> <span class="var">amount</span>
+    
+    <span class="kw">def</span> <span class="func">__str__</span>(<span class="var">self</span>):
+        <span class="kw">return</span> <span class="str">f"</span><span class="var">{self.amount}</span><span class="str"> руб."</span>
+    
+    <span class="kw">def</span> <span class="func">__add__</span>(<span class="var">self</span>, <span class="var">other</span>):
+        <span class="kw">return</span> <span class="func">Money</span>(<span class="var">self</span>.<span class="var">amount</span> <span class="op">+</span> <span class="var">other</span>.<span class="var">amount</span>)
+    
+    <span class="kw">def</span> <span class="func">__eq__</span>(<span class="var">self</span>, <span class="var">other</span>):
+        <span class="kw">return</span> <span class="var">self</span>.<span class="var">amount</span> <span class="op">==</span> <span class="var">other</span>.<span class="var">amount</span>
+
+<span class="var">wallet1</span> <span class="op">=</span> <span class="func">Money</span>(<span class="num">500</span>)
+<span class="var">wallet2</span> <span class="op">=</span> <span class="func">Money</span>(<span class="num">300</span>)
+
+<span class="func">print</span>(<span class="var">wallet1</span>)              <span class="com"># 500 руб. — работает __str__</span>
+<span class="func">print</span>(<span class="var">wallet1</span> <span class="op">+</span> <span class="var">wallet2</span>)    <span class="com"># 800 руб. — работает __add__</span>
+<span class="func">print</span>(<span class="var">wallet1</span> <span class="op">==</span> <span class="var">wallet2</span>)   <span class="com"># False — работает __eq__</span></div>
+
+<div class="example-box">
+    <strong>💡 Популярные магические методы:</strong>
+    <p><code>__str__</code> — как объект выглядит при <code>print()</code></p>
+    <p><code>__add__</code> — как работает оператор <code>+</code> (сложение двух кошельков)</p>
+    <p><code>__eq__</code> — как работает оператор <code>==</code> (сравнение кошельков)</p>
+    <p><code>__len__</code> — как работает <code>len(obj)</code></p>
+</div>
+
+    <div class="quiz-container">
+        <div class="quiz-question">1. Что такое полиморфизм?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Создание нескольких классов</div>
+            <div class="quiz-option" data-correct="true">Один интерфейс — разное поведение у разных объектов</div>
+            <div class="quiz-option" data-correct="false">Наследование от нескольких классов</div>
+            <div class="quiz-option" data-correct="false">Защита данных</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">2. Какой магический метод отвечает за <code>print(obj)</code>?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><code>__print__</code></div>
+            <div class="quiz-option" data-correct="true"><code>__str__</code></div>
+            <div class="quiz-option" data-correct="false"><code>__show__</code></div>
+            <div class="quiz-option" data-correct="false"><code>__display__</code></div>
+        </div>
+    </div>
+    <div class="quiz-container">
+    <div class="quiz-question">3. Что выведет <code>wallet1 + wallet2</code> для <code>Money(500)</code> и <code>Money(300)</code>?</div>
+    <div class="quiz-options">
+        <div class="quiz-option" data-correct="false">500300 руб.</div>
+        <div class="quiz-option" data-correct="false">Ошибку</div>
+        <div class="quiz-option" data-correct="true">800 руб.</div>
+        <div class="quiz-option" data-correct="false">Money(800)</div>
+    </div>
+</div>
+</div>
+            <!-- Раздел 9: Итоговый тест -->
+            <div class="lesson-section" id="section9">
+                <h2><span class="emoji-icon"></span> Итоговый тест</h2>
+                <div class="final-test-header">
+                    <h3 style="margin:0; color:#856404;">10 вопросов, 7 минут. Удачи!</h3>
+                </div>
+
+                <div class="global-timer" id="globalTimer">⏱️ 7:00</div>
+                <div class="final-test-stats" id="finalTestStats" style="display: none;"></div>
+
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">1. Что выведет этот код:</div>
+                    <pre class="quiz-code">class A:
+    def __init__(self, x):
+        self.x = x
+
+obj = A(42)
+print(obj.x)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">A</div>
+                        <div class="quiz-option" data-correct="true">42</div>
+                        <div class="quiz-option" data-correct="false">x</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">2. Что такое <code>self</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Имя класса</div>
+                        <div class="quiz-option" data-correct="true">Ссылка на текущий объект</div>
+                        <div class="quiz-option" data-correct="false">Глобальная переменная</div>
+                        <div class="quiz-option" data-correct="false">Ключевое слово Python</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">3. Как сделать атрибут приватным?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>_name</code></div>
+                        <div class="quiz-option" data-correct="true"><code>__name</code></div>
+                        <div class="quiz-option" data-correct="false"><code>private name</code></div>
+                        <div class="quiz-option" data-correct="false"><code>#name</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">4. Что выведет этот код:</div>
+                    <pre class="quiz-code">class Box:
+    def __init__(self, size):
+        self.__size = size
+    def get_size(self):
+        return self.__size
+
+b = Box(10)
+print(b.get_size())</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                        <div class="quiz-option" data-correct="true">10</div>
+                        <div class="quiz-option" data-correct="false">__size</div>
+                        <div class="quiz-option" data-correct="false">None</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">5. Как правильно создать объект класса <code>Car</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>Car = new()</code></div>
+                        <div class="quiz-option" data-correct="true"><code>my_car = Car()</code></div>
+                        <div class="quiz-option" data-correct="false"><code>create Car</code></div>
+                        <div class="quiz-option" data-correct="false"><code>Car.create()</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">6. Что выведет этот код:</div>
+                    <pre class="quiz-code">class Counter:
+    def __init__(self):
+        self.count = 0
+    def increment(self):
+        self.count += 1
+
+c = Counter()
+c.increment()
+c.increment()
+print(c.count)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">0</div>
+                        <div class="quiz-option" data-correct="false">1</div>
+                        <div class="quiz-option" data-correct="true">2</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">7. Что такое метод класса?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Переменная внутри класса</div>
+                        <div class="quiz-option" data-correct="true">Функция, которая работает с объектом класса</div>
+                        <div class="quiz-option" data-correct="false">Имя класса</div>
+                        <div class="quiz-option" data-correct="false">Тип данных</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">8. Что выведет этот код:</div>
+                    <pre class="quiz-code">class Animal:
+    def __init__(self, name):
+        self.name = name
+
+a = Animal("Кот")
+print(a.name)</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Animal</div>
+                        <div class="quiz-option" data-correct="true">Кот</div>
+                        <div class="quiz-option" data-correct="false">name</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">9. Зачем нужен конструктор <code>__init__</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Чтобы удалить объект</div>
+                        <div class="quiz-option" data-correct="true">Чтобы задать начальные значения атрибутам</div>
+                        <div class="quiz-option" data-correct="false">Чтобы напечатать объект</div>
+                        <div class="quiz-option" data-correct="false">Чтобы импортировать класс</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">10. Что выведет этот код:</div>
+                    <pre class="quiz-code">class Robot:
+    def __init__(self, name):
+        self.name = name
+    def say_hello(self):
+        return f"Привет, я {self.name}"
+
+r = Robot("R2D2")
+print(r.say_hello())</pre>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Robot</div>
+                        <div class="quiz-option" data-correct="false">R2D2</div>
+                        <div class="quiz-option" data-correct="true">Привет, я R2D2</div>
+                        <div class="quiz-option" data-correct="false">Ошибку</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="btn" id="prevBtn" onclick="previousSection()" disabled>← Назад</button>
+            <button class="btn" id="nextBtn" onclick="nextSection()">Далее →</button>
+        </div>
+    </div>
+
+    <script src="script_oop.js"></script>
+</body>
+</html>
