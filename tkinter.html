@@ -1,0 +1,981 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tkinter — Python</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji-icon">📟</span> Tkinter: создаём графические интерфейсы</h1>
+            <p>Превращаем скучный текст в красивые окна с кнопками</p>
+        </div>
+
+        <nav class="page-nav">
+            <a href="index.html" class="page-link">🏠 Главная</a>
+        </nav>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="score">0</span>
+                <span class="stat-label">Очки</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="progress">1/9</span>
+                <span class="stat-label">Прогресс</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="correct">0</span>
+                <span class="stat-label">Правильных</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="content">
+            <!-- Раздел 1: Что такое GUI + первое окно + Label + pack() -->
+            <div class="lesson-section active" id="section1">
+                <h2><span class="emoji-icon">✅</span> Что такое GUI и первое окно</h2>
+                
+                <p>До сих пор наши программы общались с пользователем через <strong>текст в консоли</strong>: <code>input()</code> спрашивает, <code>print()</code> отвечает. Это работает, но выглядит скучно.</p>
+                
+                <p><strong>GUI</strong> (Graphical User Interface) — это графический интерфейс: окна, кнопки, поля ввода. Всё, к чему ты привык в играх и приложениях.</p>
+
+                <div class="example-box">
+                    <strong>💡 Консоль vs GUI:</strong>
+                    <p>🖥️<strong>Консоль</strong>: чёрное окно, только текст</p>
+                    <p>️📟<strong>GUI</strong>: цветные окна, кнопки, картинки, мышка</p>
+                </div>
+
+                <h3>Библиотека tkinter</h3>
+                <p>В Python есть встроенная библиотека <code>tkinter</code> для создания GUI. Она уже установлена — ничего дополнительно скачивать не нужно!</p>
+
+                <div class="code-block"><span class="kw">import</span> <span class="var">tkinter</span> <span class="kw">as</span> <span class="var">tk</span>
+
+<span class="com"># Создаём главное окно</span>
+<span class="var">window</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Tk</span>()
+<span class="var">window</span>.<span class="func">title</span>(<span class="str">"Моё первое окно"</span>)
+<span class="var">window</span>.<span class="func">geometry</span>(<span class="str">"400x300"</span>)  <span class="com"># ширина x высота</span>
+
+<span class="var">window</span>.<span class="func">mainloop</span>()  <span class="com"># запускаем окно</span></div>
+
+                <div class="example-box">
+                    <strong>🔑 Что здесь происходит:</strong>
+                    <p><code>tk.Tk()</code> — создаёт окно (как <code>Car()</code> создаёт объект машины)</p>
+                    <p><code>title()</code> — задаёт заголовок окна</p>
+                    <p><code>geometry()</code> — задаёт размер в формате <code>"ширинаxвысота"</code></p>
+                    <p><code>mainloop()</code> — запускает окно и держит его открытым (как бесконечный цикл)</p>
+                </div>
+
+                <h3>Первый виджет: Label (текст)</h3>
+                <p><strong>Виджет</strong> — это элемент интерфейса: текст, кнопка, поле ввода. Самый простой виджет — <code>Label</code> (метка/текст).</p>
+
+                <div class="code-block"><span class="kw">import</span> <span class="var">tkinter</span> <span class="kw">as</span> <span class="var">tk</span>
+
+<span class="var">window</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Tk</span>()
+<span class="var">window</span>.<span class="func">title</span>(<span class="str">"Привет!"</span>)
+
+<span class="com"># Создаём текст</span>
+<span class="var">label</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Label</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"Привет, мир!"</span>)
+<span class="var">label</span>.<span class="func">pack</span>()  <span class="com"># размещаем в окне</span>
+
+<span class="var">window</span>.<span class="func">mainloop</span>()</div>
+
+                <div class="example-box">
+                    <strong>💡 Как работает Label:</strong>
+                    <p><code>tk.Label(window, text="...")</code> — создаём текст</p>
+                    <p>Первый аргумент — <strong>родитель</strong> (окно, в котором будет текст)</p>
+                    <p><code>text=</code> — что написать</p>
+                    <p><code>pack()</code> — размещает виджет в окне (по умолчанию — сверху)</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Что такое GUI?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Текстовый редактор</div>
+                        <div class="quiz-option" data-correct="true">Графический интерфейс пользователя</div>
+                        <div class="quiz-option" data-correct="false">Язык программирования</div>
+                        <div class="quiz-option" data-correct="false">Тип данных</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что делает <code>mainloop()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Закрывает окно</div>
+                        <div class="quiz-option" data-correct="true">Держит окно открытым и реагирует на действия</div>
+                        <div class="quiz-option" data-correct="false">Создаёт кнопку</div>
+                        <div class="quiz-option" data-correct="false">Меняет цвет фона</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что такое виджет?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Переменная</div>
+                        <div class="quiz-option" data-correct="true">Элемент интерфейса (кнопка, текст, поле)</div>
+                        <div class="quiz-option" data-correct="false">Функция</div>
+                        <div class="quiz-option" data-correct="false">Цикл</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 2: Entry + кнопка + свойства виджетов -->
+<div class="lesson-section" id="section2">
+    <h2><span class="emoji-icon">🔘</span> Entry, Button и свойства виджетов</h2>
+    
+    <p>Теперь добавим <strong>поле ввода</strong> (Entry) и <strong>кнопку</strong> (Button). Также разберём, как менять внешний вид виджетов.</p>
+
+    <h3>Виджет Entry (поле ввода)</h3>
+    <p>Entry — это однострочное поле, куда пользователь может вводить текст. У него есть три важных метода:</p>
+
+    <div class="code-block"><span class="kw">import</span> <span class="var">tkinter</span> <span class="kw">as</span> <span class="var">tk</span>
+
+<span class="var">window</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Tk</span>()
+
+<span class="var">entry</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Entry</span>(<span class="var">window</span>, <span class="var">width</span><span class="op">=</span><span class="num">30</span>)
+<span class="var">entry</span>.<span class="func">pack</span>()
+
+<span class="com"># get() — получить текст из поля</span>
+<span class="var">text</span> <span class="op">=</span> <span class="var">entry</span>.<span class="func">get</span>()
+<span class="func">print</span>(<span class="var">text</span>)  <span class="com"># то, что ввёл пользователь</span>
+
+<span class="com"># insert() — вставить текст в поле</span>
+<span class="var">entry</span>.<span class="func">insert</span>(<span class="num">0</span>, <span class="str">"Привет!"</span>)  <span class="com"># вставить в начало</span>
+
+<span class="com"># delete() — удалить текст</span>
+<span class="var">entry</span>.<span class="func">delete</span>(<span class="num">0</span>, <span class="str">"end"</span>)  <span class="com"># удалить всё (от 0 до конца)</span>
+
+<span class="var">window</span>.<span class="func">mainloop</span>()</div>
+
+    <div class="example-box">
+        <strong>🔑 Методы Entry:</strong>
+        <p><code>entry.get()</code> — <strong>получить</strong> текст, который ввёл пользователь (возвращает строку)</p>
+        <p><code>entry.insert(0, "текст")</code> — <strong>вставить</strong> текст. <code>0</code> — позиция вставки (0 = начало)</p>
+        <p><code>entry.delete(0, "end")</code> — <strong>удалить</strong> текст. <code>0</code> — откуда, <code>"end"</code> — до конца</p>
+        <p><code>entry.delete(0)</code> — удалить один символ в позиции 0</p>
+    </div>
+
+    <h3>Наглядный пример: Приветствие</h3>
+    <p>Давай сделаем программу, где пользователь вводит имя, нажимает кнопку — и видит приветствие:</p>
+
+    <div class="code-block"><span class="kw">import</span> <span class="var">tkinter</span> <span class="kw">as</span> <span class="var">tk</span>
+
+<span class="var">window</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Tk</span>()
+<span class="var">window</span>.<span class="func">title</span>(<span class="str">"Приветствие"</span>)
+
+<span class="com"># Функция, которая сработает при клике</span>
+<span class="kw">def</span> <span class="func">say_hello</span>():
+    <span class="var">name</span> <span class="op">=</span> <span class="var">entry</span>.<span class="func">get</span>()      <span class="com"># 1. Получаем текст из Entry</span>
+    <span class="kw">if</span> <span class="var">name</span>:                <span class="com"># 2. Проверяем, не пустое ли поле</span>
+        <span class="var">label</span>.<span class="func">config</span>(<span class="var">text</span><span class="op">=</span><span class="str">f"Привет, </span><span class="var">{name}</span><span class="str">! 👋"</span>)  
+        <span class="com"># 3. Меняем текст Label</span>
+        <span class="var">entry</span>.<span class="func">delete</span>(<span class="num">0</span>, <span class="str">"end"</span>)   <span class="com"># 4. Очищаем поле ввода</span>
+    <span class="kw">else</span>:
+        <span class="var">label</span>.<span class="func">config</span>(<span class="var">text</span><span class="op">=</span><span class="str">"Введи имя!"</span>)
+
+<span class="com"># Создаём виджеты</span>
+<span class="var">entry</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Entry</span>(<span class="var">window</span>, <span class="var">width</span><span class="op">=</span><span class="num">30</span>)
+<span class="var">entry</span>.<span class="func">pack</span>(<span class="var">pady</span><span class="op">=</span><span class="num">10</span>)
+
+<span class="var">button</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Button</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"ОК"</span>, <span class="var">command</span><span class="op">=</span><span class="var">say_hello</span>)
+<span class="var">button</span>.<span class="func">pack</span>(<span class="var">pady</span><span class="op">=</span><span class="num">10</span>)
+
+<span class="var">label</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Label</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">""</span>, <span class="var">font</span><span class="op">=</span>(<span class="str">"Arial"</span>, <span class="num">14</span>))
+<span class="var">label</span>.<span class="func">pack</span>(<span class="var">pady</span><span class="op">=</span><span class="num">10</span>)
+
+<span class="var">window</span>.<span class="func">mainloop</span>()</div>
+
+    <div class="example-box">
+        <strong>💡 Как это работает (по шагам):</strong>
+        <p><strong>1️⃣ Пользователь вводит имя</strong> → текст сохраняется в Entry</p>
+        <p><strong>2️⃣ Нажимает кнопку</strong> → вызывается функция <code>say_hello()</code></p>
+        <p><strong>3️⃣ <code>entry.get()</code></strong> → получаем текст из поля (например, "Аня")</p>
+        <p><strong>4️⃣ <code>label.config(text=...)</code></strong> → меняем текст метки на "Привет, Аня! 👋"</p>
+        <p><strong>5️⃣ <code>entry.delete(0, "end")</code></strong> → очищаем поле для нового ввода</p>
+    </div>
+
+    <h3>Свойства виджетов</h3>
+    <p>У каждого виджета есть свойства, которые задаются при создании:</p>
+
+    <div class="code-block"><span class="com"># Label с разными свойствами</span>
+<span class="var">label</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Label</span>(
+    <span class="var">window</span>,
+    <span class="var">text</span><span class="op">=</span><span class="str">"Красивый текст"</span>,
+    <span class="var">font</span><span class="op">=</span>(<span class="str">"Arial"</span>, <span class="num">16</span>),      <span class="com"># шрифт и размер</span>
+    <span class="var">fg</span><span class="op">=</span><span class="str">"blue"</span>,              <span class="com"># цвет текста (foreground)</span>
+    <span class="var">bg</span><span class="op">=</span><span class="str">"yellow"</span>,            <span class="com"># цвет фона (background)</span>
+    <span class="var">width</span><span class="op">=</span><span class="num">20</span>,               <span class="com"># ширина</span>
+    <span class="var">height</span><span class="op">=</span><span class="num">2</span>                <span class="com"># высота</span>
+)
+<span class="var">label</span>.<span class="func">pack</span>()</div>
+
+    <div class="example-box">
+        <strong>🎨 Популярные свойства:</strong>
+        <p><code>text</code> — текст (для Label и Button)</p>
+        <p><code>font</code> — шрифт: <code>("Arial", 16)</code> или <code>("Times", 12, "bold")</code></p>
+        <p><code>fg</code> — цвет текста (foreground)</p>
+        <p><code>bg</code> — цвет фона (background)</p>
+        <p><code>width</code>, <code>height</code> — размеры</p>
+        <p><code>relief</code> — стиль рамки: <code>"flat"</code>, <code>"raised"</code>, <code>"sunken"</code></p>
+    </div>
+
+    <h3>Отступы: padx и pady</h3>
+    <p>Чтобы виджеты не прилипали друг к другу, используем отступы:</p>
+
+    <div class="code-block"><span class="var">label</span>.<span class="func">pack</span>(<span class="var">padx</span><span class="op">=</span><span class="num">20</span>, <span class="var">pady</span><span class="op">=</span><span class="num">10</span>)
+<span class="com"># padx — отступы слева и справа</span>
+<span class="com"># pady — отступы сверху и снизу</span></div>
+
+    <div class="quiz-container">
+        <div class="quiz-question">1. Какой виджет создаёт поле ввода?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><code>Label</code></div>
+            <div class="quiz-option" data-correct="true"><code>Entry</code></div>
+            <div class="quiz-option" data-correct="false"><code>Button</code></div>
+            <div class="quiz-option" data-correct="false"><code>Input</code></div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">2. Как получить текст из Entry?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><code>entry.text</code></div>
+            <div class="quiz-option" data-correct="false"><code>entry.value</code></div>
+            <div class="quiz-option" data-correct="true"><code>entry.get()</code></div>
+            <div class="quiz-option" data-correct="false"><code>entry.read()</code></div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">3. Что делает <code>entry.delete(0, "end")</code>?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Удаляет Entry из окна</div>
+            <div class="quiz-option" data-correct="true">Очищает весь текст в поле</div>
+            <div class="quiz-option" data-correct="false">Удаляет последний символ</div>
+            <div class="quiz-option" data-correct="false">Скрывает поле ввода</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">4. Какое свойство задаёт цвет текста?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><code>color</code></div>
+            <div class="quiz-option" data-correct="false"><code>text_color</code></div>
+            <div class="quiz-option" data-correct="true"><code>fg</code></div>
+            <div class="quiz-option" data-correct="false"><code>font</code></div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">5. Что делает <code>padx=20</code>?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Задаёт ширину виджета</div>
+            <div class="quiz-option" data-correct="true">Добавляет отступы слева и справа</div>
+            <div class="quiz-option" data-correct="false">Меняет цвет фона</div>
+            <div class="quiz-option" data-correct="false">Устанавливает шрифт</div>
+        </div>
+    </div>
+</div>
+
+            <!-- Раздел 3: Изменение свойств, command, config, получение данных -->
+            <div class="lesson-section" id="section3">
+                <h2><span class="emoji-icon">️</span> Изменение свойств и обработка событий</h2>
+                
+                <p>Виджеты можно менять <strong>после создания</strong> — через метод <code>config()</code>. А кнопки могут запускать функции через параметр <code>command</code>.</p>
+
+                <h3>Метод config() — меняем свойства</h3>
+                <div class="code-block"><span class="kw">import</span> <span class="var">tkinter</span> <span class="kw">as</span> <span class="var">tk</span>
+
+<span class="var">window</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Tk</span>()
+
+<span class="var">label</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Label</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"Старый текст"</span>)
+<span class="var">label</span>.<span class="func">pack</span>()
+
+<span class="com"># Меняем текст и цвет</span>
+<span class="var">label</span>.<span class="func">config</span>(<span class="var">text</span><span class="op">=</span><span class="str">"Новый текст!"</span>, <span class="var">fg</span><span class="op">=</span><span class="str">"red"</span>)
+
+<span class="var">window</span>.<span class="func">mainloop</span>()</div>
+
+                <h3>Параметр command — что делает кнопка</h3>
+                <p>Когда пользователь нажимает кнопку, должна выполниться какая-то функция. Её указываем в параметре <code>command</code>:</p>
+
+                <div class="code-block"><span class="kw">def</span> <span class="func">on_click</span>():
+    <span class="func">print</span>(<span class="str">"Кнопка нажата!"</span>)
+
+<span class="var">button</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Button</span>(
+    <span class="var">window</span>, 
+    <span class="var">text</span><span class="op">=</span><span class="str">"Нажми"</span>,
+    <span class="var">command</span><span class="op">=</span><span class="var">on_click</span>  <span class="com"># без скобок!</span>
+)
+<span class="var">button</span>.<span class="func">pack</span>()</div>
+
+                <div class="example-box">
+                    <strong>️ Важно:</strong>
+                    <p><code>command=on_click</code> — передаём <strong>имя функции</strong> (без скобок!)</p>
+                    <p><code>command=on_click()</code> —  ошибка! Это вызовет функцию сразу при создании кнопки</p>
+                </div>
+
+                <h3>Получение данных из Entry</h3>
+                <p>Чтобы узнать, что пользователь ввёл в поле, используем метод <code>get()</code>:</p>
+
+                <div class="code-block"><span class="kw">def</span> <span class="func">show_name</span>():
+    <span class="var">name</span> <span class="op">=</span> <span class="var">entry</span>.<span class="func">get</span>()  <span class="com"># получаем текст из поля</span>
+    <span class="var">label</span>.<span class="func">config</span>(<span class="var">text</span><span class="op">=</span><span class="str">f"Привет, </span><span class="var">{name}</span><span class="str">!"</span>)
+
+<span class="var">entry</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Entry</span>(<span class="var">window</span>)
+<span class="var">entry</span>.<span class="func">pack</span>()
+
+<span class="var">button</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Button</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"OK"</span>, <span class="var">command</span><span class="op">=</span><span class="var">show_name</span>)
+<span class="var">button</span>.<span class="func">pack</span>()
+
+<span class="var">label</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Label</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">""</span>)
+<span class="var">label</span>.<span class="func">pack</span>()</div>
+
+                <div class="example-box">
+                    <strong>🔑 Запомни:</strong>
+                    <p><code>entry.get()</code> — получить текст из поля ввода</p>
+                    <p><code>label.config(text="...")</code> — изменить текст метки</p>
+                    <p><code>command=функция</code> — что делать при клике (без скобок!)</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Как изменить текст Label после создания?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>label.text = "..."</code></div>
+                        <div class="quiz-option" data-correct="true"><code>label.config(text="...")</code></div>
+                        <div class="quiz-option" data-correct="false"><code>label.set("...")</code></div>
+                        <div class="quiz-option" data-correct="false"><code>label.change("...")</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Как получить текст из Entry?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>entry.text</code></div>
+                        <div class="quiz-option" data-correct="false"><code>entry.value</code></div>
+                        <div class="quiz-option" data-correct="true"><code>entry.get()</code></div>
+                        <div class="quiz-option" data-correct="false"><code>entry.read()</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Как правильно указать функцию для кнопки?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>command=on_click()</code></div>
+                        <div class="quiz-option" data-correct="true"><code>command=on_click</code></div>
+                        <div class="quiz-option" data-correct="false"><code>command="on_click"</code></div>
+                        <div class="quiz-option" data-correct="false"><code>click=on_click</code></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 4: Параметры pack -->
+            <div class="lesson-section" id="section4">
+                <h2><span class="emoji-icon">📐</span> Параметры pack()</h2>
+                
+                <p>Метод <code>pack()</code> размещает виджеты в окне. У него есть полезные параметры для управления расположением.</p>
+
+                <h3>side — с какой стороны</h3>
+                <div class="code-block"><span class="com"># По умолчанию — сверху (side="top")</span>
+<span class="var">label1</span>.<span class="func">pack</span>()
+
+<span class="com"># Можно указать сторону</span>
+<span class="var">label2</span>.<span class="func">pack</span>(<span class="var">side</span><span class="op">=</span><span class="str">"left"</span>)    <span class="com"># слева</span>
+<span class="var">label3</span>.<span class="func">pack</span>(<span class="var">side</span><span class="op">=</span><span class="str">"right"</span>)   <span class="com"># справа</span>
+<span class="var">label4</span>.<span class="func">pack</span>(<span class="var">side</span><span class="op">=</span><span class="str">"bottom"</span>)  <span class="com"># снизу</span></div>
+
+                <h3>fill — заполнение пространства</h3>
+                <div class="code-block"><span class="com"># Растянуть по горизонтали</span>
+<span class="var">label</span>.<span class="func">pack</span>(<span class="var">fill</span><span class="op">=</span><span class="str">"x"</span>)
+
+<span class="com"># Растянуть по вертикали</span>
+<span class="var">label</span>.<span class="func">pack</span>(<span class="var">fill</span><span class="op">=</span><span class="str">"y"</span>)
+
+<span class="com"># Растянуть в обе стороны</span>
+<span class="var">label</span>.<span class="func">pack</span>(<span class="var">fill</span><span class="op">=</span><span class="str">"both"</span>)</div>
+
+                <h3>expand — занимать всё свободное место</h3>
+                <div class="code-block"><span class="com"># Виджет займёт всё доступное пространство</span>
+<span class="var">label</span>.<span class="func">pack</span>(<span class="var">expand</span><span class="op">=</span><span class="kw">True</span>)</div>
+
+                <h3>anchor — выравнивание</h3>
+                <div class="code-block"><span class="com"># Выравнивание по сторонам света</span>
+<span class="var">label</span>.<span class="func">pack</span>(<span class="var">anchor</span><span class="op">=</span><span class="str">"n"</span>)   <span class="com"># север (сверху)</span>
+<span class="var">label</span>.<span class="func">pack</span>(<span class="var">anchor</span><span class="op">=</span><span class="str">"s"</span>)   <span class="com"># юг (снизу)</span>
+<span class="var">label</span>.<span class="func">pack</span>(<span class="var">anchor</span><span class="op">=</span><span class="str">"w"</span>)   <span class="com"># запад (слева)</span>
+<span class="var">label</span>.<span class="func">pack</span>(<span class="var">anchor</span><span class="op">=</span><span class="str">"e"</span>)   <span class="com"># восток (справа)</span>
+<span class="var">label</span>.<span class="func">pack</span>(<span class="var">anchor</span><span class="op">=</span><span class="str">"center"</span>)  <span class="com"># по центру</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Комбинируем параметры:</strong>
+                    <p><code>label.pack(side="left", padx=10, pady=5, fill="x", expand=True)</code></p>
+                    <p>Можно использовать несколько параметров одновременно!</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Как разместить виджет слева?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>pack(left=True)</code></div>
+                        <div class="quiz-option" data-correct="true"><code>pack(side="left")</code></div>
+                        <div class="quiz-option" data-correct="false"><code>pack(position="left")</code></div>
+                        <div class="quiz-option" data-correct="false"><code>pack(anchor="left")</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что делает <code>fill="x"</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Заполняет цветом</div>
+                        <div class="quiz-option" data-correct="true">Растягивает виджет по горизонтали</div>
+                        <div class="quiz-option" data-correct="false">Добавляет отступы</div>
+                        <div class="quiz-option" data-correct="false">Меняет шрифт</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что означает <code>anchor="center"</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Закрепить виджет</div>
+                        <div class="quiz-option" data-correct="true">Выровнять по центру</div>
+                        <div class="quiz-option" data-correct="false">Сделать виджет центральным</div>
+                        <div class="quiz-option" data-correct="false">Добавить якорь</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 5: place() и grid() -->
+            <div class="lesson-section" id="section5">
+                <h2><span class="emoji-icon">📍</span> place() и grid()</h2>
+                
+                <p>Кроме <code>pack()</code>, есть ещё два способа размещения виджетов: <code>place()</code> (точные координаты) и <code>grid()</code> (сетка).</p>
+
+                <h3>place() — точные координаты</h3>
+                <p>Размещает виджет по конкретным координатам x и y:</p>
+
+                <div class="code-block"><span class="com"># Абсолютные координаты (в пикселях)</span>
+<span class="var">label</span>.<span class="func">place</span>(<span class="var">x</span><span class="op">=</span><span class="num">50</span>, <span class="var">y</span><span class="op">=</span><span class="num">100</span>)
+
+<span class="com"># Относительные координаты (от 0.0 до 1.0)</span>
+<span class="var">label</span>.<span class="func">place</span>(<span class="var">relx</span><span class="op">=</span><span class="num">0.5</span>, <span class="var">rely</span><span class="op">=</span><span class="num">0.5</span>)  <span class="com"># центр окна</span>
+
+<span class="com"># С размерами</span>
+<span class="var">button</span>.<span class="func">place</span>(<span class="var">x</span><span class="op">=</span><span class="num">10</span>, <span class="var">y</span><span class="op">=</span><span class="num">10</span>, <span class="var">width</span><span class="op">=</span><span class="num">100</span>, <span class="var">height</span><span class="op">=</span><span class="num">30</span>)</div>
+
+                <div class="example-box">
+                    <strong>️ Когда использовать place():</strong>
+                    <p>✅ Когда нужно точное позиционирование</p>
+                    <p>️ Неудобно при изменении размера окна</p>
+                    <p>⚠️ Сложно поддерживать при добавлении новых виджетов</p>
+                </div>
+
+                <h3>grid() — размещение по сетке</h3>
+                <p><code>grid()</code> размещает виджеты в таблице (строки и столбцы). Это самый удобный способ для сложных интерфейсов!</p>
+
+                <div class="code-block"><span class="com"># Размещаем в строке 0, столбце 0</span>
+<span class="var">label1</span>.<span class="func">grid</span>(<span class="var">row</span><span class="op">=</span><span class="num">0</span>, <span class="var">column</span><span class="op">=</span><span class="num">0</span>)
+
+<span class="com"># Строка 0, столбец 1</span>
+<span class="var">label2</span>.<span class="func">grid</span>(<span class="var">row</span><span class="op">=</span><span class="num">0</span>, <span class="var">column</span><span class="op">=</span><span class="num">1</span>)
+
+<span class="com"># Строка 1, столбец 0</span>
+<span class="var">entry</span>.<span class="func">grid</span>(<span class="var">row</span><span class="op">=</span><span class="num">1</span>, <span class="var">column</span><span class="op">=</span><span class="num">0</span>)
+
+<span class="com"># Строка 1, столбец 1</span>
+<span class="var">button</span>.<span class="func">grid</span>(<span class="var">row</span><span class="op">=</span><span class="num">1</span>, <span class="var">column</span><span class="op">=</span><span class="num">1</span>)</div>
+
+                <div class="example-box">
+                    <strong>📊 Как работает grid:</strong>
+                    <p>Представь таблицу Excel:</p>
+                    <p><code>row</code> — номер строки (с 0)</p>
+                    <p><code>column</code> — номер столбца (с 0)</p>
+                    <p>Виджеты автоматически выравниваются!</p>
+                </div>
+
+                <h3>Параметры grid</h3>
+                <div class="code-block"><span class="com"># Отступы</span>
+<span class="var">label</span>.<span class="func">grid</span>(<span class="var">row</span><span class="op">=</span><span class="num">0</span>, <span class="var">column</span><span class="op">=</span><span class="num">0</span>, <span class="var">padx</span><span class="op">=</span><span class="num">10</span>, <span class="var">pady</span><span class="op">=</span><span class="num">5</span>)
+
+<span class="com"># Растянуть на несколько столбцов</span>
+<span class="var">button</span>.<span class="func">grid</span>(<span class="var">row</span><span class="op">=</span><span class="num">2</span>, <span class="var">column</span><span class="op">=</span><span class="num">0</span>, <span class="var">columnspan</span><span class="op">=</span><span class="num">2</span>)
+
+<span class="com"># Растянуть на несколько строк</span>
+<span class="var">text</span>.<span class="func">grid</span>(<span class="var">row</span><span class="op">=</span><span class="num">0</span>, <span class="var">rowspan</span><span class="op">=</span><span class="num">3</span>)
+
+<span class="com"># Выравнивание внутри ячейки</span>
+<span class="var">label</span>.<span class="func">grid</span>(<span class="var">row</span><span class="op">=</span><span class="num">0</span>, <span class="var">column</span><span class="op">=</span><span class="num">0</span>, <span class="var">sticky</span><span class="op">=</span><span class="str">"w"</span>)  
+<span class="com"># прижать к западу (левому краю)</span></div>
+
+                <div class="example-box">
+                    <strong>💡 sticky — как приклеить виджет:</strong>
+                    <p><code>"n"</code> — север (сверху), <code>"s"</code> — юг (снизу)</p>
+                    <p><code>"w"</code> — запад (слева), <code>"e"</code> — восток (справа)</p>
+                    <p><code>"nsew"</code> — растянуть во все стороны</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Как разместить виджет в строке 2, столбце 3?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>place(row=2, column=3)</code></div>
+                        <div class="quiz-option" data-correct="true"><code>grid(row=2, column=3)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>pack(row=2, column=3)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>set(2, 3)</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что делает <code>columnspan=2</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Добавляет 2 столбца</div>
+                        <div class="quiz-option" data-correct="true">Виджет занимает 2 столбца</div>
+                        <div class="quiz-option" data-correct="false">Удаляет столбец</div>
+                        <div class="quiz-option" data-correct="false">Меняет ширину столбца</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Когда лучше использовать place()?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Для сложных интерфейсов</div>
+                        <div class="quiz-option" data-correct="true">Для точного позиционирования</div>
+                        <div class="quiz-option" data-correct="false">Для таблиц</div>
+                        <div class="quiz-option" data-correct="false">Для кнопок</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 6: messagebox и Text -->
+<div class="lesson-section" id="section6">
+    <h2><span class="emoji-icon">💬</span> messagebox и Text</h2>
+    
+    <p>tkinter имеет много полезных виджетов. Начнём с всплывающих окон и многострочного текста.</p>
+
+    <h3>messagebox — всплывающие окна</h3>
+    <p>messagebox — это модуль для показа небольших диалоговых окон. Его нужно импортировать отдельно:</p>
+
+    <div class="code-block"><span class="kw">from</span> <span class="var">tkinter</span> <span class="kw">import</span> <span class="var">messagebox</span>
+
+<span class="com"># Информационное окно (только кнопка OK)</span>
+<span class="var">messagebox</span>.<span class="func">showinfo</span>(<span class="str">"Заголовок"</span>, <span class="str">"Текст сообщения"</span>)
+
+<span class="com"># Предупреждение (жёлтый значок)</span>
+<span class="var">messagebox</span>.<span class="func">showwarning</span>(<span class="str">"Внимание"</span>, <span class="str">"Что-то не так!"</span>)
+
+<span class="com"># Ошибка (красный значок)</span>
+<span class="var">messagebox</span>.<span class="func">showerror</span>(<span class="str">"Ошибка"</span>, <span class="str">"Произошла ошибка!"</span>)</div>
+
+    <h3>Окна с вопросом</h3>
+    <p>Некоторые messagebox <strong>возвращают значение</strong> — True или False, в зависимости от того, что нажал пользователь:</p>
+
+    <div class="code-block"><span class="com"># Да / Нет — возвращает True или False</span>
+<span class="var">result</span> <span class="op">=</span> <span class="var">messagebox</span>.<span class="func">askyesno</span>(<span class="str">"Вопрос"</span>, <span class="str">"Ты уверен?"</span>)
+<span class="kw">if</span> <span class="var">result</span>:
+    <span class="func">print</span>(<span class="str">"Пользователь нажал Да"</span>)
+<span class="kw">else</span>:
+    <span class="func">print</span>(<span class="str">"Пользователь нажал Нет"</span>)
+
+<span class="com"># OK / Отмена — возвращает True или False</span>
+<span class="var">ok</span> <span class="op">=</span> <span class="var">messagebox</span>.<span class="func">askokcancel</span>(<span class="str">"Подтверждение"</span>, <span class="str">"Продолжить?"</span>)
+
+<span class="com"># Повторить / Отмена — возвращает строку "retry" или "cancel"</span>
+<span class="var">choice</span> <span class="op">=</span> <span class="var">messagebox</span>.<span class="func">askretrycancel</span>(<span class="str">"Ошибка"</span>, <span class="str">"Заново?"</span>)</div>
+
+    <div class="example-box">
+        <strong>💡 Практический пример — подтверждение удаления:</strong>
+        <div class="code-block"><span class="kw">def</span> <span class="func">delete</span>():
+
+    <span class="var">answer</span> <span class="op">=</span> <span class="var">messagebox</span>.<span class="func">askyesno</span>(<span class="str">"Удаление"</span>, <span class="str">"Вы уверены?"</span>)
+    <span class="kw">if</span> <span class="var">answer</span>:
+        <span class="func">print</span>(<span class="str">"Удалено!"</span>)
+    <span class="kw">else</span>:
+        <span class="func">print</span>(<span class="str">"Отменено"</span>)
+
+<span class="var">btn</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Button</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"Удалить"</span>, <span class="var">command</span><span class="op">=</span><span class="var">delete</span>)
+<span class="var">btn</span>.<span class="func">pack</span>()</div>
+    </div>
+
+    <h3>Text — многострочное поле ввода</h3>
+    <p>В отличие от Entry (одна строка), Text позволяет вводить <strong>много строк текста</strong>, как в блокноте.</p>
+
+    <div class="code-block"><span class="com"># Большое поле для текста</span>
+<span class="var">text</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Text</span>(<span class="var">window</span>, <span class="var">width</span><span class="op">=</span><span class="num">40</span>, <span class="var">height</span><span class="op">=</span><span class="num">10</span>)
+<span class="var">text</span>.<span class="func">pack</span>()
+
+<span class="com"># Вставить текст</span>
+<span class="var">text</span>.<span class="func">insert</span>(<span class="str">"1.0"</span>, <span class="str">"Привет!"</span>)
+
+<span class="com"># Получить весь текст</span>
+<span class="var">content</span> <span class="op">=</span> <span class="var">text</span>.<span class="func">get</span>(<span class="str">"1.0"</span>, <span class="str">"end"</span>)</div>
+
+    <div class="example-box">
+        <strong>🔑 Индексы в Text — формат "строка.символ":</strong>
+        <p>В Text каждый символ имеет адрес в формате <code>"строка.символ"</code>:</p>
+        <p><code>"1.0"</code> — строка 1, символ 0 (самое начало текста)</p>
+        <p><code>"2.5"</code> — строка 2, символ 5 (шестой символ второй строки)</p>
+        <p><code>"3.0"</code> — начало третьей строки</p>
+        <p><code>"end"</code> — самый конец текста (после последнего символа)</p>
+        <p><code>"end-1c"</code> — конец минус 1 символ (убирает лишний перенос строки)</p>
+    </div>
+
+    <div class="example-box">
+        <strong>️ Важно:</strong>
+        <p>Нумерация <strong>строк начинается с 1</strong> (не с 0!) — это исторически сложилось в tkinter</p>
+        <p>Нумерация <strong>символов начинается с 0</strong> — как в списках Python</p>
+        <p>Индексы всегда пишутся в <strong>кавычках</strong>, потому что это строки: <code>"1.0"</code>, а не <code>1.0</code></p>
+    </div>
+
+    <div class="example-box">
+        <strong>💡 Примеры использования индексов:</strong>
+        <p><code>text.insert("1.0", "Привет")</code> — вставить "Привет" в самое начало</p>
+        <p><code>text.insert("end", "\nНовая строка")</code> — добавить текст в конец</p>
+        <p><code>text.delete("1.0", "end")</code> — очистить весь текст</p>
+        <p><code>text.get("1.0", "end-1c")</code> — получить весь текст без лишнего переноса</p>
+    </div>
+
+    <div class="quiz-container">
+        <div class="quiz-question">1. Как показать информационное окно?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><code>alert("Текст")</code></div>
+            <div class="quiz-option" data-correct="true"><code>messagebox.showinfo("Заголовок", "Текст")</code></div>
+            <div class="quiz-option" data-correct="false"><code>popup("Текст")</code></div>
+            <div class="quiz-option" data-correct="false"><code>window.show("Текст")</code></div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">2. Что возвращает <code>askyesno()</code>?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Строку "yes" или "no"</div>
+            <div class="quiz-option" data-correct="true">True или False</div>
+            <div class="quiz-option" data-correct="false">1 или 0</div>
+            <div class="quiz-option" data-correct="false">Ничего</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">3. Какой индекс означает самое начало текста в Text?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><code>"0.0"</code></div>
+            <div class="quiz-option" data-correct="true"><code>"1.0"</code></div>
+            <div class="quiz-option" data-correct="false"><code>"start"</code></div>
+            <div class="quiz-option" data-correct="false"><code>"begin"</code></div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">4. Что означает <code>"end-1c"</code>?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Конец минус 1 строка</div>
+            <div class="quiz-option" data-correct="true">Конец минус 1 символ</div>
+            <div class="quiz-option" data-correct="false">Предпоследняя строка</div>
+            <div class="quiz-option" data-correct="false">Ошибку</div>
+        </div>
+    </div>
+</div>
+
+            <!-- Раздел 7: Radiobutton, Checkbutton, Listbox и переменные -->
+<div class="lesson-section" id="section7">
+    <h2><span class="emoji-icon">☑️</span> Radiobutton, Checkbutton, Listbox</h2>
+    
+    <p>Эти виджеты работают <strong>не как обычные</strong> — им нужны специальные переменные tkinter, чтобы "запоминать" своё состояние.</p>
+
+    <h3>Специальные переменные tkinter</h3>
+    <p>Обычные переменные Python (<code>name = "Алиса"</code>) <strong>не подходят</strong> для виджетов. tkinter использует свои переменные, которые умеют <strong>уведомлять виджеты об изменениях</strong>:</p>
+
+    <div class="code-block"><span class="var">text_var</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">StringVar</span>()    <span class="com"># для текста</span>
+<span class="var">num_var</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">IntVar</span>()        <span class="com"># для целых чисел</span>
+<span class="var">float_var</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">DoubleVar</span>()  <span class="com"># для дробных чисел</span>
+<span class="var">bool_var</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">BooleanVar</span>()  <span class="com"># для True/False</span></div>
+
+    <div class="example-box">
+        <strong>🔑 Два главных метода:</strong>
+        <p><code>var.get()</code> — <strong>получить</strong> текущее значение переменной</p>
+        <p><code>var.set("новое")</code> — <strong>установить</strong> новое значение</p>
+        <p>Когда значение меняется через <code>set()</code>, все виджеты, связанные с этой переменной, <strong>автоматически обновляются</strong>!</p>
+    </div>
+
+    <h3>Radiobutton — выбор одного из нескольких</h3>
+    <p>Несколько Radiobutton объединяются <strong>одной переменной</strong>. Выбран может быть только один:</p>
+
+    <div class="code-block"><span class="var">color_var</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">StringVar</span>()  <span class="com"># одна переменная на все кнопки</span>
+<span class="var">color_var</span>.<span class="func">set</span>(<span class="str">"red"</span>)       <span class="com"># значение по умолчанию</span>
+
+<span class="com"># Все три кнопки связаны с color_var</span>
+<span class="var">tk</span>.<span class="func">Radiobutton</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"Красный"</span>, 
+              <span class="var">variable</span><span class="op">=</span><span class="var">color_var</span>, <span class="var">value</span><span class="op">=</span><span class="str">"red"</span>).<span class="func">pack</span>()
+<span class="var">tk</span>.<span class="func">Radiobutton</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"Синий"</span>,   
+              <span class="var">variable</span><span class="op">=</span><span class="var">color_var</span>, <span class="var">value</span><span class="op">=</span><span class="str">"blue"</span>).<span class="func">pack</span>()
+<span class="var">tk</span>.<span class="func">Radiobutton</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"Зелёный"</span>, 
+              <span class="var">variable</span><span class="op">=</span><span class="var">color_var</span>, <span class="var">value</span><span class="op">=</span><span class="str">"green"</span>).<span class="func">pack</span>()
+
+<span class="com"># Узнать, что выбрано:</span>
+<span class="func">print</span>(<span class="var">color_var</span>.<span class="func">get</span>())  <span class="com"># "red", "blue" или "green"</span></div>
+
+    <div class="example-box">
+        <strong>💡 Как это работает:</strong>
+        <p>Все Radiobutton имеют <strong>одинаковый</strong> параметр <code>variable=color_var</code></p>
+        <p>Но <strong>разный</strong> параметр <code>value</code> — это то, что запишется в переменную при выборе</p>
+        <p>Когда пользователь кликает на кнопку, в <code>color_var</code> автоматически записывается её <code>value</code></p>
+    </div>
+
+    <h3>Checkbutton — флажок (да/нет)</h3>
+    <p>Checkbutton может быть <strong>включён или выключен</strong>. Использует BooleanVar:</p>
+
+    <div class="code-block"><span class="var">agree_var</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">BooleanVar</span>()  <span class="com"># True или False</span>
+
+<span class="var">check</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Checkbutton</span>(
+    <span class="var">window</span>, 
+    <span class="var">text</span><span class="op">=</span><span class="str">"Я согласен с правилами"</span>,
+    <span class="var">variable</span><span class="op">=</span><span class="var">agree_var</span>
+)
+<span class="var">check</span>.<span class="func">pack</span>()
+
+<span class="com"># Проверить состояние:</span>
+<span class="kw">if</span> <span class="var">agree_var</span>.<span class="func">get</span>():
+    <span class="func">print</span>(<span class="str">"Галочка стоит!"</span>)
+<span class="kw">else</span>:
+    <span class="func">print</span>(<span class="str">"Галочка не стоит"</span>)</div>
+
+    <div class="example-box">
+        <strong>⚙️ onvalue и offvalue:</strong>
+        <p>По умолчанию Checkbutton записывает <code>True</code>/<code>False</code>. Но можно задать свои значения:</p>
+        <div class="code-block"><span class="var">mode_var</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">StringVar</span>()
+<span class="var">tk</span>.<span class="func">Checkbutton</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"Ночь"</span>, 
+               <span class="var">variable</span><span class="op">=</span><span class="var">mode_var</span>,
+               <span class="var">onvalue</span><span class="op">=</span><span class="str">"night"</span>,    <span class="com"># когда включён</span>
+               <span class="var">offvalue</span><span class="op">=</span><span class="str">"day"</span>).<span class="func">pack</span>()  <span class="com"># когда выключен</span></div>
+    </div>
+
+    <h3>Listbox — список элементов</h3>
+    <p>Listbox показывает список, из которого пользователь может выбрать один или несколько элементов:</p>
+
+    <div class="code-block"><span class="var">listbox</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Listbox</span>(<span class="var">window</span>)
+<span class="var">listbox</span>.<span class="func">pack</span>()
+
+<span class="com"># Добавить элементы</span>
+<span class="var">listbox</span>.<span class="func">insert</span>(<span class="str">"end"</span>, <span class="str">"Яблоко"</span>)
+<span class="var">listbox</span>.<span class="func">insert</span>(<span class="str">"end"</span>, <span class="str">"Банан"</span>)
+<span class="var">listbox</span>.<span class="func">insert</span>(<span class="str">"end"</span>, <span class="str">"Апельсин"</span>)
+
+<span class="com"># Получить выбранный элемент</span>
+<span class="var">selected</span> <span class="op">=</span> <span class="var">listbox</span>.<span class="func">get</span>(<span class="var">listbox</span>.<span class="func">curselection</span>())
+
+<span class="com"># Удалить выбранный</span>
+<span class="var">listbox</span>.<span class="func">delete</span>(<span class="var">listbox</span>.<span class="func">curselection</span>())</div>
+
+    <div class="example-box">
+        <strong>💡 Полезные методы Listbox:</strong>
+        <p><code>insert("end", "текст")</code> — добавить в конец списка</p>
+        <p><code>insert(0, "текст")</code> — добавить в начало</p>
+        <p><code>get(i)</code> — получить элемент по индексу</p>
+        <p><code>curselection()</code> — получить индекс выбранного элемента</p>
+        <p><code>delete(i)</code> — удалить элемент по индексу</p>
+        <p><code>size()</code> — количество элементов в списке</p>
+    </div>
+
+    <h3>Полный пример: анкета</h3>
+    <p>Соберём всё вместе — анкету с Radiobutton, Checkbutton и кнопкой:</p>
+
+    <div class="code-block"><span class="kw">import</span> <span class="var">tkinter</span> <span class="kw">as</span> <span class="var">tk</span>
+<span class="kw">from</span> <span class="var">tkinter</span> <span class="kw">import</span> <span class="var">messagebox</span>
+
+<span class="var">window</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Tk</span>()
+<span class="var">window</span>.<span class="func">title</span>(<span class="str">"Анкета"</span>)
+
+<span class="var">gender_var</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">StringVar</span>()
+<span class="var">agree_var</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">BooleanVar</span>()
+
+<span class="var">tk</span>.<span class="func">Label</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"Выбери пол:"</span>).<span class="func">pack</span>()
+<span class="var">tk</span>.<span class="func">Radiobutton</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"М"</span>, 
+              <span class="var">variable</span><span class="op">=</span><span class="var">gender_var</span>, <span class="var">value</span><span class="op">=</span><span class="str">"М"</span>).<span class="func">pack</span>()
+<span class="var">tk</span>.<span class="func">Radiobutton</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"Ж"</span>, 
+              <span class="var">variable</span><span class="op">=</span><span class="var">gender_var</span>, <span class="var">value</span><span class="op">=</span><span class="str">"Ж"</span>).<span class="func">pack</span>()
+
+<span class="var">tk</span>.<span class="func">Checkbutton</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"Согласен"</span>, 
+              <span class="var">variable</span><span class="op">=</span><span class="var">agree_var</span>).<span class="func">pack</span>()
+
+<span class="kw">def</span> <span class="func">submit</span>():
+    <span class="var">gender</span> <span class="op">=</span> <span class="var">gender_var</span>.<span class="func">get</span>()
+    <span class="var">agree</span> <span class="op">=</span> <span class="var">agree_var</span>.<span class="func">get</span>()
+    <span class="kw">if not</span> <span class="var">gender</span>:
+        <span class="var">messagebox</span>.<span class="func">showwarning</span>(<span class="str">"Ошибка"</span>, <span class="str">"Выбери пол!"</span>)
+    <span class="kw">elif not</span> <span class="var">agree</span>:
+        <span class="var">messagebox</span>.<span class="func">showwarning</span>(<span class="str">"Ошибка"</span>, <span class="str">"Нужно согласие!"</span>)
+    <span class="kw">else</span>:
+        <span class="var">messagebox</span>.<span class="func">showinfo</span>(<span class="str">"Готово"</span>, <span class="str">f"Пол: </span><span class="var">{gender}</span><span class="str">"</span>)
+
+<span class="var">tk</span>.<span class="func">Button</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"Отправить"</span>, <span class="var">command</span><span class="op">=</span><span class="var">submit</span>).<span class="func">pack</span>()
+
+<span class="var">window</span>.<span class="func">mainloop</span>()</div>
+
+    <div class="quiz-container">
+        <div class="quiz-question">1. Какая переменная tkinter хранит текст?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><code>TextVar()</code></div>
+            <div class="quiz-option" data-correct="true"><code>StringVar()</code></div>
+            <div class="quiz-option" data-correct="false"><code>StrVar()</code></div>
+            <div class="quiz-option" data-correct="false"><code>Var()</code></div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">2. Как получить значение переменной tkinter?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><code>var.value</code></div>
+            <div class="quiz-option" data-correct="false"><code>var.get_value()</code></div>
+            <div class="quiz-option" data-correct="true"><code>var.get()</code></div>
+            <div class="quiz-option" data-correct="false"><code>var.read()</code></div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">3. Чем Radiobutton отличается от Checkbutton?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false">Ничем</div>
+            <div class="quiz-option" data-correct="true">Radiobutton — выбор одного, Checkbutton — да/нет</div>
+            <div class="quiz-option" data-correct="false">Radiobutton больше по размеру</div>
+            <div class="quiz-option" data-correct="false">Checkbutton только для текста</div>
+        </div>
+    </div>
+    <div class="quiz-container">
+        <div class="quiz-question">4. Как добавить элемент в Listbox?</div>
+        <div class="quiz-options">
+            <div class="quiz-option" data-correct="false"><code>listbox.add("текст")</code></div>
+            <div class="quiz-option" data-correct="true"><code>listbox.insert("end", "текст")</code></div>
+            <div class="quiz-option" data-correct="false"><code>listbox.append("текст")</code></div>
+            <div class="quiz-option" data-correct="false"><code>listbox.push("текст")</code></div>
+        </div>
+    </div>
+</div>
+
+            <!-- Раздел 8: Заполнение пропусков -->
+            <div class="lesson-section" id="section8">
+                <h2><span class="emoji-icon">✏️</span> Задание: Заполни пропуски</h2>
+                <p>В коде пропущены ключевые слова tkinter. Нажми на слово в банке слева, потом на пропуск в коде справа.</p>
+
+                <div class="interactive-task">
+                    <div class="task-description">
+                        <strong>📋 Задание:</strong> Заполни пропуски в коде с Entry и Button
+                    </div>
+
+                    <div class="fill-container">
+                        <div class="fill-bank">
+                            <h4>📚 Банк слов</h4>
+                            <div class="fill-words" id="fillWords"></div>
+                        </div>
+
+                        <div class="fill-code">
+                            <h4>📝 Код с пропусками</h4>
+                            <div id="fillCode"></div>
+                        </div>
+                    </div>
+
+                    <div class="task-controls">
+                        <button class="btn" onclick="checkFill()">✅ Проверить</button>
+                        <button class="btn btn-secondary" onclick="resetFill()">🔄 Сбросить</button>
+                        <button class="btn btn-secondary" onclick="showFillHint()">💡 Подсказка (-5 очков)</button>
+                    </div>
+
+                    <div id="fillResult"></div>
+                </div>
+            </div>
+
+            <!-- Раздел 9: Итоговый тест -->
+            <div class="lesson-section" id="section9">
+                <h2><span class="emoji-icon">🏆</span> Итоговый тест</h2>
+                <div class="final-test-header">
+                    <h3 style="margin:0; color:#856404;">10 вопросов, 7 минут. Удачи!</h3>
+                </div>
+
+                <div class="global-timer" id="globalTimer">⏱️ 7:00</div>
+                <div class="final-test-stats" id="finalTestStats" style="display: none;"></div>
+
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">1. Что создаёт окно в tkinter?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>tk.Window()</code></div>
+                        <div class="quiz-option" data-correct="true"><code>tk.Tk()</code></div>
+                        <div class="quiz-option" data-correct="false"><code>tk.App()</code></div>
+                        <div class="quiz-option" data-correct="false"><code>tk.Screen()</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">2. Какой виджет создаёт текстовую надпись?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>Text</code></div>
+                        <div class="quiz-option" data-correct="true"><code>Label</code></div>
+                        <div class="quiz-option" data-correct="false"><code>String</code></div>
+                        <div class="quiz-option" data-correct="false"><code>Write</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">3. Как получить текст из Entry?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>entry.text</code></div>
+                        <div class="quiz-option" data-correct="false"><code>entry.value</code></div>
+                        <div class="quiz-option" data-correct="true"><code>entry.get()</code></div>
+                        <div class="quiz-option" data-correct="false"><code>entry.read()</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">4. Что делает <code>pack(side="left")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Размещает сверху</div>
+                        <div class="quiz-option" data-correct="true">Размещает слева</div>
+                        <div class="quiz-option" data-correct="false">Размещает справа</div>
+                        <div class="quiz-option" data-correct="false">Размещает снизу</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">5. Как разместить виджет в сетке grid?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>grid(x=0, y=0)</code></div>
+                        <div class="quiz-option" data-correct="true"><code>grid(row=0, column=0)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>grid(position=0)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>grid(cell=0)</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">6. Как изменить текст Label?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>label.text = "..."</code></div>
+                        <div class="quiz-option" data-correct="true"><code>label.config(text="...")</code></div>
+                        <div class="quiz-option" data-correct="false"><code>label.set("...")</code></div>
+                        <div class="quiz-option" data-correct="false"><code>label.update("...")</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">7. Что делает <code>mainloop()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Закрывает окно</div>
+                        <div class="quiz-option" data-correct="true">Держит окно открытым</div>
+                        <div class="quiz-option" data-correct="false">Создаёт кнопку</div>
+                        <div class="quiz-option" data-correct="false">Меняет цвет</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">8. Какой виджет для выбора одного варианта?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>Checkbutton</code></div>
+                        <div class="quiz-option" data-correct="true"><code>Radiobutton</code></div>
+                        <div class="quiz-option" data-correct="false"><code>Listbox</code></div>
+                        <div class="quiz-option" data-correct="false"><code>Option</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">9. Как правильно указать command для кнопки?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>command=func()</code></div>
+                        <div class="quiz-option" data-correct="true"><code>command=func</code></div>
+                        <div class="quiz-option" data-correct="false"><code>command="func"</code></div>
+                        <div class="quiz-option" data-correct="false"><code>click=func</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">10. Что делает <code>fill="x"</code> в pack()?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Заполняет цветом</div>
+                        <div class="quiz-option" data-correct="true">Растягивает по горизонтали</div>
+                        <div class="quiz-option" data-correct="false">Добавляет отступы</div>
+                        <div class="quiz-option" data-correct="false">Меняет шрифт</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="btn" id="prevBtn" onclick="previousSection()" disabled>← Назад</button>
+            <button class="btn" id="nextBtn" onclick="nextSection()">Далее →</button>
+        </div>
+    </div>
+
+    <script src="script-tkinter.js"></script>
+</body>
+</html>

@@ -29,6 +29,7 @@
                     <a href="#sets">🎯 Множества</a>
                     <a href="#turtle">🐢 Turtle</a>
                     <a href="#oop">🏛️ ООП</a>
+                    <a href="#tkinter">📟 Tkinter</a>
                 </div>
 
                 <div class="reference-section" id="arithmetic">
@@ -751,8 +752,371 @@
                         </table>
                     </div>
 
-                    <a href="#" class="back-to-top">[↑ Наверх](#)</a>
+                    <a href="#" class="back-to-top">↑ Наверх</a>
                 </section>
+
+                <!-- Раздел Tkinter -->
+<section class="reference-section" id="tkinter">
+    <h2><span class="emoji-icon">📟</span> Tkinter: графические интерфейсы</h2>
+
+    <h3>Основы</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>import tkinter as tk</code></td>
+                    <td>Импорт библиотеки</td>
+                    <td><code>import tkinter as tk</code></td>
+                </tr>
+                <tr>
+                    <td><code>tk.Tk()</code></td>
+                    <td>Создать главное окно</td>
+                    <td><code>window = tk.Tk()</code></td>
+                </tr>
+                <tr>
+                    <td><code>window.title("...")</code></td>
+                    <td>Заголовок окна</td>
+                    <td><code>window.title("Моё окно")</code></td>
+                </tr>
+                <tr>
+                    <td><code>window.geometry("WxH")</code></td>
+                    <td>Размер окна (ширина x высота)</td>
+                    <td><code>window.geometry("400x300")</code></td>
+                </tr>
+                <tr>
+                    <td><code>window.mainloop()</code></td>
+                    <td>Запустить окно (держать открытым)</td>
+                    <td><code>window.mainloop()</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Виджеты</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Виджет</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Label</code></td>
+                    <td>Текстовая метка</td>
+                    <td><code>tk.Label(window, text="Привет")</code></td>
+                </tr>
+                <tr>
+                    <td><code>Entry</code></td>
+                    <td>Поле ввода (одна строка)</td>
+                    <td><code>tk.Entry(window, width=30)</code></td>
+                </tr>
+                <tr>
+                    <td><code>Button</code></td>
+                    <td>Кнопка</td>
+                    <td><code>tk.Button(window, text="OK")</code></td>
+                </tr>
+                <tr>
+                    <td><code>Text</code></td>
+                    <td>Многострочное поле ввода</td>
+                    <td><code>tk.Text(window, width=40, height=10)</code></td>
+                </tr>
+                <tr>
+                    <td><code>Radiobutton</code></td>
+                    <td>Переключатель (выбор одного)</td>
+                    <td><code>tk.Radiobutton(window, text="Да", variable=var, value="yes")</code></td>
+                </tr>
+                <tr>
+                    <td><code>Checkbutton</code></td>
+                    <td>Флажок (да/нет)</td>
+                    <td><code>tk.Checkbutton(window, text="Согласен", variable=var)</code></td>
+                </tr>
+                <tr>
+                    <td><code>Listbox</code></td>
+                    <td>Список элементов</td>
+                    <td><code>tk.Listbox(window)</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Методы виджетов</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Метод</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>.pack()</code></td>
+                    <td>Разместить виджет (по умолчанию)</td>
+                    <td><code>label.pack()</code></td>
+                </tr>
+                <tr>
+                    <td><code>.grid(row, column)</code></td>
+                    <td>Разместить в сетке</td>
+                    <td><code>label.grid(row=0, column=1)</code></td>
+                </tr>
+                <tr>
+                    <td><code>.place(x, y)</code></td>
+                    <td>Разместить по координатам</td>
+                    <td><code>label.place(x=50, y=100)</code></td>
+                </tr>
+                <tr>
+                    <td><code>.config(...)</code></td>
+                    <td>Изменить свойства виджета</td>
+                    <td><code>label.config(text="Новый", fg="red")</code></td>
+                </tr>
+                <tr>
+                    <td><code>.get()</code></td>
+                    <td>Получить текст (Entry)</td>
+                    <td><code>text = entry.get()</code></td>
+                </tr>
+                <tr>
+                    <td><code>.insert(pos, text)</code></td>
+                    <td>Вставить текст (Entry/Text)</td>
+                    <td><code>entry.insert(0, "Привет")</code></td>
+                </tr>
+                <tr>
+                    <td><code>.delete(start, end)</code></td>
+                    <td>Удалить текст</td>
+                    <td><code>entry.delete(0, "end")</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Параметры pack()</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Параметр</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>side</code></td>
+                    <td>Сторона размещения</td>
+                    <td><code>side="left"</code>, <code>"right"</code>, <code>"top"</code>, <code>"bottom"</code></td>
+                </tr>
+                <tr>
+                    <td><code>fill</code></td>
+                    <td>Растянуть виджет</td>
+                    <td><code>fill="x"</code>, <code>"y"</code>, <code>"both"</code></td>
+                </tr>
+                <tr>
+                    <td><code>expand</code></td>
+                    <td>Занять свободное место</td>
+                    <td><code>expand=True</code></td>
+                </tr>
+                <tr>
+                    <td><code>anchor</code></td>
+                    <td>Выравнивание</td>
+                    <td><code>anchor="center"</code>, <code>"n"</code>, <code>"w"</code></td>
+                </tr>
+                <tr>
+                    <td><code>padx, pady</code></td>
+                    <td>Отступы (горизонтальные/вертикальные)</td>
+                    <td><code>padx=10, pady=5</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Параметры grid()</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Параметр</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>row, column</code></td>
+                    <td>Строка и столбец</td>
+                    <td><code>row=0, column=1</code></td>
+                </tr>
+                <tr>
+                    <td><code>columnspan</code></td>
+                    <td>Объединить столбцы</td>
+                    <td><code>columnspan=2</code></td>
+                </tr>
+                <tr>
+                    <td><code>rowspan</code></td>
+                    <td>Объединить строки</td>
+                    <td><code>rowspan=3</code></td>
+                </tr>
+                <tr>
+                    <td><code>sticky</code></td>
+                    <td>Приклеить к стороне</td>
+                    <td><code>sticky="w"</code>, <code>"nsew"</code></td>
+                </tr>
+                <tr>
+                    <td><code>padx, pady</code></td>
+                    <td>Отступы</td>
+                    <td><code>padx=10, pady=5</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>messagebox</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Функция</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>showinfo(title, msg)</code></td>
+                    <td>Информационное окно</td>
+                    <td><code>messagebox.showinfo("Ок", "Готово!")</code></td>
+                </tr>
+                <tr>
+                    <td><code>showwarning(title, msg)</code></td>
+                    <td>Предупреждение</td>
+                    <td><code>messagebox.showwarning("Внимание", "Ошибка!")</code></td>
+                </tr>
+                <tr>
+                    <td><code>showerror(title, msg)</code></td>
+                    <td>Ошибка</td>
+                    <td><code>messagebox.showerror("Ошибка", "Сбой!")</code></td>
+                </tr>
+                <tr>
+                    <td><code>askyesno(title, msg)</code></td>
+                    <td>Вопрос Да/Нет (возвращает True/False)</td>
+                    <td><code>if messagebox.askyesno("?", "Удалить?"):</code></td>
+                </tr>
+                <tr>
+                    <td><code>askokcancel(title, msg)</code></td>
+                    <td>ОК/Отмена (возвращает True/False)</td>
+                    <td><code>if messagebox.askokcancel("?", "Выйти?"):</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Переменные tkinter</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Тип</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>StringVar()</code></td>
+                    <td>Переменная для текста</td>
+                    <td><code>var = tk.StringVar()</code></td>
+                </tr>
+                <tr>
+                    <td><code>IntVar()</code></td>
+                    <td>Переменная для целого числа</td>
+                    <td><code>var = tk.IntVar()</code></td>
+                </tr>
+                <tr>
+                    <td><code>DoubleVar()</code></td>
+                    <td>Переменная для дробного числа</td>
+                    <td><code>var = tk.DoubleVar()</code></td>
+                </tr>
+                <tr>
+                    <td><code>BooleanVar()</code></td>
+                    <td>Переменная для True/False</td>
+                    <td><code>var = tk.BooleanVar()</code></td>
+                </tr>
+                <tr>
+                    <td><code>.get()</code></td>
+                    <td>Получить значение</td>
+                    <td><code>value = var.get()</code></td>
+                </tr>
+                <tr>
+                    <td><code>.set(value)</code></td>
+                    <td>Установить значение</td>
+                    <td><code>var.set("Новое")</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Свойства виджетов</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Свойство</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>text</code></td>
+                    <td>Текст (Label, Button)</td>
+                    <td><code>text="Привет"</code></td>
+                </tr>
+                <tr>
+                    <td><code>font</code></td>
+                    <td>Шрифт и размер</td>
+                    <td><code>font=("Arial", 16)</code></td>
+                </tr>
+                <tr>
+                    <td><code>fg</code></td>
+                    <td>Цвет текста (foreground)</td>
+                    <td><code>fg="blue"</code></td>
+                </tr>
+                <tr>
+                    <td><code>bg</code></td>
+                    <td>Цвет фона (background)</td>
+                    <td><code>bg="yellow"</code></td>
+                </tr>
+                <tr>
+                    <td><code>width, height</code></td>
+                    <td>Размеры</td>
+                    <td><code>width=20, height=2</code></td>
+                </tr>
+                <tr>
+                    <td><code>command</code></td>
+                    <td>Функция при клике (Button)</td>
+                    <td><code>command=on_click</code></td>
+                </tr>
+                <tr>
+                    <td><code>variable</code></td>
+                    <td>Связанная переменная (Radiobutton, Checkbutton)</td>
+                    <td><code>variable=var</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a href="#" class="back-to-top">↑ Наверх</a>
+</section>
+
             </div>
         </div>
     </div>
