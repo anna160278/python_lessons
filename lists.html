@@ -429,21 +429,21 @@ print(a)</pre>
                 <p>Со списками можно выполнять операции конкатенации, повторения и проверки вхождения.</p>
 
                 <div class="code-block"><span class="com"># Конкатенация (объединение)</span>
-<span class="var">a</span> <span class="op">=</span> [<span class="num">1</span>, <span class="num">2</span>]
-<span class="var">b</span> <span class="op">=</span> [<span class="num">3</span>, <span class="num">4</span>]
-<span class="func">print</span>(<span class="var">a</span> <span class="op">+</span> <span class="var">b</span>)  <span class="com"># [1, 2, 3, 4]</span>
+<span class="var">a</span> <span class="op">=</span> [<span class="num">"a"</span>, <span class="num">"b"</span>]
+<span class="var">b</span> <span class="op">=</span> [<span class="num">"x"</span>, <span class="num">"y"</span>]
+<span class="func">print</span>(<span class="var">a</span> <span class="op">+</span> <span class="var">b</span>)  <span class="com"># ["a", "b", "x", "y"]</span>
 
 <span class="com"># Повторение</span>
-<span class="func">print</span>(<span class="var">a</span> <span class="op">*</span> <span class="num">3</span>)  <span class="com"># [1, 2, 1, 2, 1, 2]</span>
+<span class="func">print</span>(<span class="var">a</span> <span class="op">*</span> <span class="num">3</span>)  <span class="com"># ["a", "b", "a", "b", "a", "b"]</span>
 
 <span class="com"># Проверка вхождения</span>
-<span class="func">print</span>(<span class="num">2</span> <span class="kw">in</span> <span class="var">a</span>)      <span class="com"># True</span>
-<span class="func">print</span>(<span class="num">5</span> <span class="kw">not in</span> <span class="var">a</span>)  <span class="com"># True</span>
+<span class="func">print</span>(<span class="num">"b"</span> <span class="kw">in</span> <span class="var">a</span>)      <span class="com"># True</span>
+<span class="func">print</span>(<span class="num">"c"</span> <span class="kw">not in</span> <span class="var">a</span>)  <span class="com"># True</span>
 
 <span class="com"># Перебор списка</span>
 <span class="kw">for</span> <span class="var">item</span> <span class="kw">in</span> <span class="var">a</span>:
     <span class="func">print</span>(<span class="var">item</span>, <span class="var">end</span><span class="op">=</span><span class="str">" "</span>)
-<span class="com"># Вывод: 1 2</span></div>
+<span class="com"># Вывод: a b</span></div>
 
                 <div class="quiz-container">
                     <div class="quiz-question">1. Что выведет:</div>
