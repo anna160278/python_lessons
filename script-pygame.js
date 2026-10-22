@@ -219,6 +219,7 @@ function showFinalResults() {
 
 function restartLesson() {
     currentSection = 1; score = 0; correctAnswers = 0; finalCorrectCount = 0; finalTestFinished = false;
+    closeSendModal(); // <-- ДОБАВИТЬ ЭТУ СТРОКУ
     answeredQuestions.clear(); stopGlobalTimer();
     document.querySelectorAll('.quiz-option').forEach(o => { o.classList.remove('correct','incorrect'); o.style.pointerEvents = 'auto'; });
     document.querySelectorAll('.success-message').forEach(m => m.remove());
@@ -292,6 +293,34 @@ function closeSendModal() {
     if (modal) modal.remove();
 }
 
+// ===== МОДАЛЬНОЕ ОКНО ОТПРАВКИ РЕЗУЛЬТАТА =====
+function openSendModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay active';
+    modal.id = 'sendModal';
+    modal.innerHTML = `
+        <div class="modal">
+            <h3>📧 Отправить результат преподавателю</h3>
+            <p style="color:#999;margin-bottom:15px;">Введи своё имя и email, чтобы мы знали, кто прошёл тест:</p>
+            <input type="text" id="studentName" placeholder="Твоё имя" autocomplete="off" style="margin-bottom:10px;">
+            <input type="email" id="studentEmail" placeholder="Твой email (необязательно)" autocomplete="email">
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" onclick="closeSendModal()">Отмена</button>
+                <button class="btn" onclick="sendResult()">📤 Отправить</button>
+            </div>
+            <div class="send-status" id="sendStatus"></div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    setTimeout(() => document.getElementById('studentName').focus(), 100);
+}
+
+function closeSendModal() {
+    const modal = document.getElementById('sendModal');
+    if (modal) modal.remove();
+}
+
 function sendResult() {
     const name = document.getElementById('studentName').value.trim();
     const email = document.getElementById('studentEmail').value.trim();
@@ -304,7 +333,6 @@ function sendResult() {
         return;
     }
     
-    // Простая проверка email (если введён)
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
         statusEl.className = 'send-status error';
         statusEl.textContent = '❌ Некорректный email. Проверь формат!';
@@ -318,79 +346,137 @@ function sendResult() {
     statusEl.style.display = 'block';
     statusEl.textContent = '⏳ Отправляем результат...';
     
-    // Собираем данные об ошибках и правильных ответах
     const wrongAnswers = [];
     const correctAnswers = [];
     
+    // АБСОЛЮТНО НАДЁЖНАЯ функция извлечения текста с сохранением ВСЕХ пробелов
+    function getFullQuestionText(container) {
+    let text = container.querySelector('.quiz-question').textContent.trim();
+    text = text.replace(/^\d+[\.\)]\s*/, '');
+    
+    const codeBlock = container.querySelector('.quiz-code');
+    if (codeBlock) {
+        let codeText = "";
+        
+        function walk(node) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                codeText += node.nodeValue;
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                if (node.tagName === 'BR') {
+                    codeText += '\n';
+                } else {
+                    for (let child of node.childNodes) {
+                        walk(child);
+                    }
+                }
+            }
+        }
+        walk(codeBlock);
+        
+        codeText = codeText.replace(/\u00A0/g, ' ');
+        
+        let lines = codeText.split('\n');
+        while (lines.length > 0 && lines[0].trim() === '') lines.shift();
+        while (lines.length > 0 && lines[lines.length - 1].trim() === '') lines.pop();
+        
+        //  ГЛАВНОЕ ИСПРАВЛЕНИЕ: заменяем пробелы в начале строк на видимые маркеры
+        let formattedLines = lines.map(line => {
+            // Считаем количество ведущих пробелов
+            let leadingSpaces = line.match(/^(\s*)/)[1].length;
+            // Заменяем каждый пробел на символ "·" (средняя точка) или "›"
+            let visibleIndent = '`'.repeat(leadingSpaces);
+            let content = line.trimStart();
+            return visibleIndent + content;
+        });
+        
+        let finalCode = formattedLines.join('\n');
+        
+        text += '\n\n┌─── КОД ───\n' + finalCode + '\n└───────────';
+    }
+    return text;
+}
+
+    // Анализируем каждый вопрос
     document.querySelectorAll('.final-q').forEach((container) => {
-        const question = container.querySelector('.quiz-question').textContent;
-        const selected = container.querySelector('.quiz-option.correct, .quiz-option.incorrect');
-        const isCorrect = selected && selected.classList.contains('correct');
+        const wrongOption = container.querySelector('.quiz-option.incorrect');
+        const correctOption = container.querySelector('.quiz-option[data-correct="true"]');
         
-        const cleanQuestion = question.replace(/^\d+\.\s*/, '');
-        
-        if (isCorrect) {
-            correctAnswers.push(`✅ ${cleanQuestion}`);
-        } else {
-            const selectedText = selected ? selected.textContent.trim() : 'Не отвечено';
-            const correctOption = container.querySelector('.quiz-option[data-correct="true"]');
+        if (wrongOption) {
+            const qText = getFullQuestionText(container);
+            const selectedText = wrongOption.textContent.trim();
             const correctText = correctOption ? correctOption.textContent.trim() : 'Неизвестно';
             
-            wrongAnswers.push(`❌ ${cleanQuestion}\n   Выбрано: ${selectedText}\n   Правильно: ${correctText}`);
+            wrongAnswers.push(
+                `❌ ВОПРОС:\n${qText}\n` +
+                `   👉 Ученик выбрал: ${selectedText}\n` +
+                `   ✅ Правильный ответ: ${correctText}`
+            );
+        } else {
+            const qText = getFullQuestionText(container);
+            correctAnswers.push(`✅ ${qText}`);
         }
     });
     
-    // Получаем время из таймера
+    // Подсчёт
+    const totalQuestions = typeof FINAL_TOTAL !== 'undefined' ? FINAL_TOTAL : (correctAnswers.length + wrongAnswers.length);
+    const actualCorrectCount = typeof finalCorrectCount !== 'undefined' ? finalCorrectCount : correctAnswers.length;
+    const accuracy = totalQuestions > 0 ? Math.round((actualCorrectCount / totalQuestions) * 100) : 0;
+    
+    // Время
     const timerEl = document.getElementById('globalTimer');
     let timeSpent = 'Неизвестно';
     if (timerEl) {
-        const timerText = timerEl.textContent;
-        const timeMatch = timerText.match(/(\d+:\d+)/);
-        if (timeMatch) {
-            timeSpent = timeMatch[1];
-        } else if (timerText.includes('Время вышло')) {
+        const timerText = timerEl.textContent.trim();
+        if (timerText.includes('Время вышло')) {
             timeSpent = '7:00 (время вышло)';
         } else if (timerText.includes('Тест завершён')) {
-            const timeLeft = globalTimeLeft || 0;
-            const spent = 420 - timeLeft;
-            const m = Math.floor(spent / 60);
-            const s = spent % 60;
-            timeSpent = `${m}:${s.toString().padStart(2, '0')}`;
+            if (typeof globalTimeLeft !== 'undefined') {
+                const spent = 420 - globalTimeLeft;
+                const m = Math.floor(spent / 60);
+                const s = spent % 60;
+                timeSpent = `${m}:${s.toString().padStart(2, '0')}`;
+            } else {
+                timeSpent = '7:00 (приблизительно)';
+            }
+        } else {
+            const timeMatch = timerText.match(/(\d+:\d+)/);
+            if (timeMatch) timeSpent = timeMatch[1];
         }
     }
     
-    // Формируем текст письма
+    const emailDisplay = email ? email : 'Не указан';
+    const lessonTopic = 'Pygame'; // <-- Не забудь поменять название урока здесь!
+    
     const message = `📊 РЕЗУЛЬТАТ ТЕСТА
 
 👤 Ученик: ${name}
-📧 Email: ${email || 'Не указан'}
-📚 Тема: Pygame - создаём 2D-игры
-🏆 Очки: ${score}
-✅ Правильных ответов: ${finalCorrectCount} из ${FINAL_TOTAL}
-📈 Точность: ${Math.round((finalCorrectCount / FINAL_TOTAL) * 100)}%
+📧 Email: ${emailDisplay}
+📚 Тема: ${lessonTopic}
+🏆 Очки: ${typeof score !== 'undefined' ? score : 'N/A'}
+✅ Правильных ответов: ${actualCorrectCount} из ${totalQuestions}
+📈 Точность: ${accuracy}%
 ⏱️ Время прохождения: ${timeSpent}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ✅ ПРАВИЛЬНЫЕ ОТВЕТЫ (${correctAnswers.length}):
-${correctAnswers.join('\n')}
+${correctAnswers.length > 0 ? correctAnswers.join('\n\n') : 'Нет'}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ❌ ОШИБКИ (${wrongAnswers.length}):
-${wrongAnswers.join('\n\n')}
+${wrongAnswers.length > 0 ? wrongAnswers.join('\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n') : 'Нет'}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Отправлено автоматически из урока Pygame`;
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Отправлено автоматически из системы обучения`;
     
-    // ТВОЙ КЛЮЧ WEB3FORMS
-    const accessKey = '97a78ea1-7447-43c9-bdfd-655d10e9e4c8';
+    const accessKey = '97a78ea1-7447-43c9-bdfd-655d10e9e4c8'; // Твой ключ
     
     const formData = {
         access_key: accessKey,
         name: name,
-        email: email || 'student@pygame-lesson.ru',  // используем email ученика или дефолтный
-        subject: `Результат теста: Pygame - ${name}`,
+        email: email || 'no-reply@lesson.ru',
+        subject: `Результат теста: ${lessonTopic} - ${name}`,
         message: message
     };
     
@@ -408,7 +494,6 @@ ${wrongAnswers.join('\n\n')}
             statusEl.className = 'send-status success';
             statusEl.textContent = '✅ Результат успешно отправлен!';
             sendBtn.innerHTML = '✅ Отправлено';
-            
             setTimeout(() => {
                 closeSendModal();
                 sendBtn.disabled = false;
@@ -426,6 +511,15 @@ ${wrongAnswers.join('\n\n')}
         sendBtn.innerHTML = '📤 Отправить';
     });
 }
+
+
+// Закрытие модального окна по клику на фон
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('modal-overlay')) {
+        closeSendModal();
+    }
+});
+
 
 // ===== ИНИЦИАЛИЗАЦИЯ =====
 updateStats();

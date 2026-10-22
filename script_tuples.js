@@ -196,7 +196,9 @@ function showFinalResults() {
             <li>Кортежи (tuple) — неизменяемые последовательности</li><li>Создание кортежей через скобки и tuple()</li>
             <li>Индексация, срезы и перебор циклом for</li><li>Распаковка кортежей в переменные</li>
             <li>Обмен значений через кортежи</li></ul></div>
-            <div style="text-align:center;margin-top:30px;"><a href="index.html" class="btn" style="text-decoration:none;display:inline-block;"> На главную</a>
+            <div style="text-align:center;margin-top:30px;">
+            <button class="btn" onclick="openSendModal()" style="margin-right:10px;">📧 Отправить результат</button>
+            <a href="index.html" class="btn" style="text-decoration:none;display:inline-block;"> На главную</a>
             <button class="btn" onclick="restartLesson()">🔄 Пройти заново</button></div>`;
         document.getElementById(`section${totalSections}`).appendChild(r);
     }
@@ -210,6 +212,7 @@ function showFinalResults() {
 
 function restartLesson() {
     currentSection = 1; score = 0; correctAnswers = 0; finalCorrectCount = 0; finalTestFinished = false;
+    closeSendModal(); // <-- ДОБАВИТЬ ЭТУ СТРОКУ
     answeredQuestions.clear(); stopGlobalTimer();
     document.querySelectorAll('.quiz-option').forEach(o => { o.classList.remove('correct','incorrect'); o.style.pointerEvents = 'auto'; });
     document.querySelectorAll('.success-message').forEach(m => m.remove());
@@ -223,4 +226,233 @@ function restartLesson() {
     updateStats(); updateNavigation(); setTimeout(scrollToSectionTop, 50);
 }
 
-updateStats(); updateNavigation();
+
+// ===== МОДАЛЬНОЕ ОКНО ОТПРАВКИ РЕЗУЛЬТАТА =====
+function openSendModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay active';
+    modal.id = 'sendModal';
+    modal.innerHTML = `
+        <div class="modal">
+            <h3>📧 Отправить результат преподавателю</h3>
+            <p style="color:#999;margin-bottom:15px;">Введи своё имя и email, чтобы мы знали, кто прошёл тест:</p>
+            <input type="text" id="studentName" placeholder="Твоё имя" autocomplete="off" style="margin-bottom:10px;">
+            <input type="email" id="studentEmail" placeholder="Твой email (необязательно)" autocomplete="email">
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" onclick="closeSendModal()">Отмена</button>
+                <button class="btn" onclick="sendResult()">📤 Отправить</button>
+            </div>
+            <div class="send-status" id="sendStatus"></div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    setTimeout(() => document.getElementById('studentName').focus(), 100);
+}
+
+function closeSendModal() {
+    const modal = document.getElementById('sendModal');
+    if (modal) modal.remove();
+}
+
+function sendResult() {
+    const name = document.getElementById('studentName').value.trim();
+    const email = document.getElementById('studentEmail').value.trim();
+    const statusEl = document.getElementById('sendStatus');
+    const sendBtn = document.querySelector('.modal-buttons .btn:not(.btn-secondary)');
+    
+    if (!name) {
+        statusEl.className = 'send-status error';
+        statusEl.textContent = '❌ Пожалуйста, введи своё имя!';
+        return;
+    }
+    
+    if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        statusEl.className = 'send-status error';
+        statusEl.textContent = '❌ Некорректный email. Проверь формат!';
+        return;
+    }
+    
+    // Блокируем кнопку
+    sendBtn.disabled = true;
+    sendBtn.innerHTML = '⏳ Отправка...';
+    statusEl.className = 'send-status';
+    statusEl.style.display = 'block';
+    statusEl.textContent = '⏳ Отправляем результат...';
+    
+    const wrongAnswers = [];
+    const correctAnswers = [];
+    
+    // АБСОЛЮТНО НАДЁЖНАЯ функция извлечения текста с сохранением ВСЕХ пробелов
+    function getFullQuestionText(container) {
+    let text = container.querySelector('.quiz-question').textContent.trim();
+    text = text.replace(/^\d+[\.\)]\s*/, '');
+    
+    const codeBlock = container.querySelector('.quiz-code');
+    if (codeBlock) {
+        let codeText = "";
+        
+        function walk(node) {
+            if (node.nodeType === Node.TEXT_NODE) {
+                codeText += node.nodeValue;
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+                if (node.tagName === 'BR') {
+                    codeText += '\n';
+                } else {
+                    for (let child of node.childNodes) {
+                        walk(child);
+                    }
+                }
+            }
+        }
+        walk(codeBlock);
+        
+        codeText = codeText.replace(/\u00A0/g, ' ');
+        
+        let lines = codeText.split('\n');
+        while (lines.length > 0 && lines[0].trim() === '') lines.shift();
+        while (lines.length > 0 && lines[lines.length - 1].trim() === '') lines.pop();
+        
+        //  ГЛАВНОЕ ИСПРАВЛЕНИЕ: заменяем пробелы в начале строк на видимые маркеры
+        let formattedLines = lines.map(line => {
+            // Считаем количество ведущих пробелов
+            let leadingSpaces = line.match(/^(\s*)/)[1].length;
+            // Заменяем каждый пробел на символ "·" (средняя точка) или "›"
+            let visibleIndent = '`'.repeat(leadingSpaces);
+            let content = line.trimStart();
+            return visibleIndent + content;
+        });
+        
+        let finalCode = formattedLines.join('\n');
+        
+        text += '\n\n┌─── КОД ───\n' + finalCode + '\n└───────────';
+    }
+    return text;
+}
+
+    // Анализируем каждый вопрос
+    document.querySelectorAll('.final-q').forEach((container) => {
+        const wrongOption = container.querySelector('.quiz-option.incorrect');
+        const correctOption = container.querySelector('.quiz-option[data-correct="true"]');
+        
+        if (wrongOption) {
+            const qText = getFullQuestionText(container);
+            const selectedText = wrongOption.textContent.trim();
+            const correctText = correctOption ? correctOption.textContent.trim() : 'Неизвестно';
+            
+            wrongAnswers.push(
+                `❌ ВОПРОС:\n${qText}\n` +
+                `   👉 Ученик выбрал: ${selectedText}\n` +
+                `   ✅ Правильный ответ: ${correctText}`
+            );
+        } else {
+            const qText = getFullQuestionText(container);
+            correctAnswers.push(`✅ ${qText}`);
+        }
+    });
+    
+    // Подсчёт
+    const totalQuestions = typeof FINAL_TOTAL !== 'undefined' ? FINAL_TOTAL : (correctAnswers.length + wrongAnswers.length);
+    const actualCorrectCount = typeof finalCorrectCount !== 'undefined' ? finalCorrectCount : correctAnswers.length;
+    const accuracy = totalQuestions > 0 ? Math.round((actualCorrectCount / totalQuestions) * 100) : 0;
+    
+    // Время
+    const timerEl = document.getElementById('globalTimer');
+    let timeSpent = 'Неизвестно';
+    if (timerEl) {
+        const timerText = timerEl.textContent.trim();
+        if (timerText.includes('Время вышло')) {
+            timeSpent = '7:00 (время вышло)';
+        } else if (timerText.includes('Тест завершён')) {
+            if (typeof globalTimeLeft !== 'undefined') {
+                const spent = 420 - globalTimeLeft;
+                const m = Math.floor(spent / 60);
+                const s = spent % 60;
+                timeSpent = `${m}:${s.toString().padStart(2, '0')}`;
+            } else {
+                timeSpent = '7:00 (приблизительно)';
+            }
+        } else {
+            const timeMatch = timerText.match(/(\d+:\d+)/);
+            if (timeMatch) timeSpent = timeMatch[1];
+        }
+    }
+    
+    const emailDisplay = email ? email : 'Не указан';
+    const lessonTopic = 'Кортежи'; // <-- Не забудь поменять название урока здесь!
+    
+    const message = `📊 РЕЗУЛЬТАТ ТЕСТА
+
+👤 Ученик: ${name}
+📧 Email: ${emailDisplay}
+📚 Тема: ${lessonTopic}
+🏆 Очки: ${typeof score !== 'undefined' ? score : 'N/A'}
+✅ Правильных ответов: ${actualCorrectCount} из ${totalQuestions}
+📈 Точность: ${accuracy}%
+⏱️ Время прохождения: ${timeSpent}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ ПРАВИЛЬНЫЕ ОТВЕТЫ (${correctAnswers.length}):
+${correctAnswers.length > 0 ? correctAnswers.join('\n\n') : 'Нет'}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+❌ ОШИБКИ (${wrongAnswers.length}):
+${wrongAnswers.length > 0 ? wrongAnswers.join('\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n') : 'Нет'}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Отправлено автоматически из системы обучения`;
+    
+    const accessKey = '97a78ea1-7447-43c9-bdfd-655d10e9e4c8'; // Твой ключ
+    
+    const formData = {
+        access_key: accessKey,
+        name: name,
+        email: email || 'no-reply@lesson.ru',
+        subject: `Результат теста: ${lessonTopic} - ${name}`,
+        message: message
+    };
+    
+    fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            statusEl.className = 'send-status success';
+            statusEl.textContent = '✅ Результат успешно отправлен!';
+            sendBtn.innerHTML = '✅ Отправлено';
+            setTimeout(() => {
+                closeSendModal();
+                sendBtn.disabled = false;
+                sendBtn.innerHTML = '📤 Отправить';
+            }, 2000);
+        } else {
+            throw new Error(data.message || 'Ошибка отправки');
+        }
+    })
+    .catch(error => {
+        console.error('Ошибка:', error);
+        statusEl.className = 'send-status error';
+        statusEl.textContent = '❌ Не удалось отправить. Попробуй ещё раз.';
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = '📤 Отправить';
+    });
+}
+
+
+// Закрытие модального окна по клику на фон
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('modal-overlay')) {
+        closeSendModal();
+    }
+});
+
+updateStats(); 
+updateNavigation();
