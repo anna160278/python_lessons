@@ -30,6 +30,7 @@
                     <a href="#turtle">🐢 Turtle</a>
                     <a href="#oop">🏛️ ООП</a>
                     <a href="#tkinter">📟 Tkinter</a>
+                    <a href="#pygame">🎮 Pygame</a>
                 </div>
 
                 <div class="reference-section" id="arithmetic">
@@ -1109,6 +1110,563 @@
                     <td><code>variable</code></td>
                     <td>Связанная переменная (Radiobutton, Checkbutton)</td>
                     <td><code>variable=var</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a href="#" class="back-to-top">↑ Наверх</a>
+</section>
+
+<!-- Раздел Pygame -->
+<section class="reference-section" id="pygame">
+    <h2><span class="emoji-icon">🎮</span> Pygame: создание 2D-игр</h2>
+
+    <h3>Основы</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>import pygame as pg</code></td>
+                    <td>Импорт библиотеки с псевдонимом</td>
+                    <td><code>import pygame as pg</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.init()</code></td>
+                    <td>Инициализация всех модулей pygame</td>
+                    <td><code>pg.init()</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.display.set_mode((w, h))</code></td>
+                    <td>Создать окно размером w×h пикселей</td>
+                    <td><code>screen = pg.display.set_mode((600, 400))</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.display.set_caption("...")</code></td>
+                    <td>Заголовок окна</td>
+                    <td><code>pg.display.set_caption("Моя игра")</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.display.flip()</code></td>
+                    <td>Обновить экран (показать всё нарисованное)</td>
+                    <td><code>pg.display.flip()</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.quit()</code></td>
+                    <td>Закрыть pygame (в конце программы)</td>
+                    <td><code>pg.quit()</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Игровой цикл и FPS</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>pg.time.Clock()</code></td>
+                    <td>Создать объект Clock для контроля FPS</td>
+                    <td><code>clock = pg.time.Clock()</code></td>
+                </tr>
+                <tr>
+                    <td><code>clock.tick(FPS)</code></td>
+                    <td>Ограничить цикл до FPS кадров в секунду</td>
+                    <td><code>clock.tick(60)</code></td>
+                </tr>
+                <tr>
+                    <td><code>screen.fill((R, G, B))</code></td>
+                    <td>Залить экран цветом RGB</td>
+                    <td><code>screen.fill((30, 30, 30))</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>События</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>pg.event.get()</code></td>
+                    <td>Получить все события</td>
+                    <td><code>for event in pg.event.get():</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.QUIT</code></td>
+                    <td>Событие закрытия окна</td>
+                    <td><code>if event.type == pg.QUIT:</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.KEYDOWN</code></td>
+                    <td>Нажатие клавиши</td>
+                    <td><code>if event.type == pg.KEYDOWN:</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.K_UP, K_DOWN, K_LEFT, K_RIGHT</code></td>
+                    <td>Стрелки клавиатуры</td>
+                    <td><code>if event.key == pg.K_UP:</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.K_SPACE</code></td>
+                    <td>Пробел</td>
+                    <td><code>if event.key == pg.K_SPACE:</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.K_ESCAPE</code></td>
+                    <td>Клавиша Esc</td>
+                    <td><code>if event.key == pg.K_ESCAPE:</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.MOUSEBUTTONDOWN</code></td>
+                    <td>Нажатие кнопки мыши</td>
+                    <td><code>if event.type == pg.MOUSEBUTTONDOWN:</code></td>
+                </tr>
+                <tr>
+                    <td><code>event.pos</code></td>
+                    <td>Координаты клика мыши (x, y)</td>
+                    <td><code>x, y = event.pos</code></td>
+                </tr>
+                <tr>
+                    <td><code>event.button</code></td>
+                    <td>Номер кнопки мыши (1=левая, 2=средняя, 3=правая)</td>
+                    <td><code>if event.button == 1:</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Клавиатура и мышь (непрерывное состояние)</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>pg.key.get_pressed()</code></td>
+                    <td>Состояние всех клавиш (True если зажата)</td>
+                    <td><code>keys = pg.key.get_pressed()</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.mouse.get_pos()</code></td>
+                    <td>Текущая позиция курсора мыши (x, y)</td>
+                    <td><code>x, y = pg.mouse.get_pos()</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.mouse.get_pressed()</code></td>
+                    <td>Состояние кнопок мыши (left, middle, right)</td>
+                    <td><code>left, mid, right = pg.mouse.get_pressed()</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Рисование фигур</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>pg.draw.rect(screen, color, (x, y, w, h))</code></td>
+                    <td>Прямоугольник</td>
+                    <td><code>pg.draw.rect(screen, (255,0,0), (50, 50, 100, 60))</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.draw.circle(screen, color, (x, y), r)</code></td>
+                    <td>Круг</td>
+                    <td><code>pg.draw.circle(screen, (0,255,0), (300, 200), 40)</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.draw.line(screen, color, (x1,y1), (x2,y2), width)</code></td>
+                    <td>Линия</td>
+                    <td><code>pg.draw.line(screen, (0,0,255), (0,0), (600,400), 3)</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.draw.ellipse(screen, color, (x, y, w, h))</code></td>
+                    <td>Эллипс (овал)</td>
+                    <td><code>pg.draw.ellipse(screen, (255,255,0), (100,100,200,100))</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.draw.polygon(screen, color, points)</code></td>
+                    <td>Многоугольник</td>
+                    <td><code>pg.draw.polygon(screen, (255,0,255), [(100,100), (200,50), (300,100)])</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Цвета</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Формат</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>(R, G, B)</code></td>
+                    <td>Кортеж RGB (0-255)</td>
+                    <td><code>(255, 0, 0)</code> — красный</td>
+                </tr>
+                <tr>
+                    <td><code>"red"</code></td>
+                    <td>Имя цвета (около 140 стандартных)</td>
+                    <td><code>"blue"</code>, <code>"green"</code>, <code>"yellow"</code></td>
+                </tr>
+                <tr>
+                    <td><code>"#FF0000"</code></td>
+                    <td>HEX-код цвета</td>
+                    <td><code>"#00FF00"</code> — зелёный</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Объект Rect (прямоугольник)</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Атрибут</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>pg.Rect(x, y, w, h)</code></td>
+                    <td>Создать прямоугольник</td>
+                    <td><code>rect = pg.Rect(0, 0, 50, 50)</code></td>
+                </tr>
+                <tr>
+                    <td><code>rect.x, rect.y</code></td>
+                    <td>Координаты верхнего левого угла</td>
+                    <td><code>rect.x = 100</code></td>
+                </tr>
+                <tr>
+                    <td><code>rect.center</code></td>
+                    <td>Центр прямоугольника (x, y)</td>
+                    <td><code>rect.center = (300, 200)</code></td>
+                </tr>
+                <tr>
+                    <td><code>rect.centerx, rect.centery</code></td>
+                    <td>Только X или Y центра</td>
+                    <td><code>rect.centerx = 300</code></td>
+                </tr>
+                <tr>
+                    <td><code>rect.top, rect.bottom, rect.left, rect.right</code></td>
+                    <td>Границы прямоугольника</td>
+                    <td><code>rect.right = 600</code> (прижать к правому краю)</td>
+                </tr>
+                <tr>
+                    <td><code>rect.topleft, rect.bottomright</code></td>
+                    <td>Угловые точки (кортежи)</td>
+                    <td><code>rect.topleft = (0, 0)</code></td>
+                </tr>
+                <tr>
+                    <td><code>rect.midtop, rect.midbottom</code></td>
+                    <td>Середины сторон</td>
+                    <td><code>rect.midbottom = (300, 400)</code></td>
+                </tr>
+                <tr>
+                    <td><code>rect.width (w), rect.height (h)</code></td>
+                    <td>Размеры</td>
+                    <td><code>print(rect.width)</code></td>
+                </tr>
+                <tr>
+                    <td><code>rect.size</code></td>
+                    <td>Кортеж (width, height)</td>
+                    <td><code>print(rect.size)</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Изображения и трансформации</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>pg.image.load("file.png")</code></td>
+                    <td>Загрузить изображение</td>
+                    <td><code>img = pg.image.load("player.png")</code></td>
+                </tr>
+                <tr>
+                    <td><code>img.convert()</code></td>
+                    <td>Конвертировать для ускорения (JPG, PNG без прозрачности)</td>
+                    <td><code>img = pg.image.load("bg.jpg")<br>.convert()</code></td>
+                </tr>
+                <tr>
+                    <td><code>img.convert_alpha()</code></td>
+                    <td>Конвертировать с прозрачностью (PNG)</td>
+                    <td><code>img = pg.image.load("player.png")<br>.convert_alpha()</code></td>
+                </tr>
+                <tr>
+                    <td><code>screen.blit(img, (x, y))</code></td>
+                    <td>Вывести изображение на экран</td>
+                    <td><code>screen.blit(player_img, <br>(100, 200))</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.transform.scale(img, (w, h))</code></td>
+                    <td>Масштабировать изображение</td>
+                    <td><code>small = pg.transform.scale(img, <br>(50, 50))</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.transform.rotate(img, angle)</code></td>
+                    <td>Повернуть на угол (в градусах)</td>
+                    <td><code>rotated = pg.transform.rotate(img, 45)</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.transform.flip(img, x, y)</code></td>
+                    <td>Отразить (x=True — горизонтально, y=True — вертикально)</td>
+                    <td><code>flipped = pg.transform.flip(img, True, False)</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Текст и шрифты</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>pg.font.Font(None, size)</code></td>
+                    <td>Создать шрифт (None = встроенный)</td>
+                    <td><code>font = pg.font.Font(None, 36)</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.font.Font("file.ttf", size)</code></td>
+                    <td>Использовать свой шрифт</td>
+                    <td><code>font = pg.font.Font("arial.ttf", 24)</code></td>
+                </tr>
+                <tr>
+                    <td><code>font.render(text, antialias, color)</code></td>
+                    <td>Создать изображение текста (antialias=True — сглаживание)</td>
+                    <td><code>text = font.render("Счёт: 0", True, (255,255,255))</code></td>
+                </tr>
+                <tr>
+                    <td><code>screen.blit(text, (x, y))</code></td>
+                    <td>Вывести текст на экран</td>
+                    <td><code>screen.blit(text, (10, 10))</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Звуки и музыка</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>pg.mixer.init()</code></td>
+                    <td>Инициализировать звуковой модуль</td>
+                    <td><code>pg.mixer.init()</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.mixer.Sound("file.wav")</code></td>
+                    <td>Загрузить короткий звук (WAV, OGG)</td>
+                    <td><code>shoot = pg.mixer.Sound("shoot.wav")</code></td>
+                </tr>
+                <tr>
+                    <td><code>sound.play()</code></td>
+                    <td>Воспроизвести звук (можно накладывать)</td>
+                    <td><code>shoot.play()</code></td>
+                </tr>
+                <tr>
+                    <td><code>sound.set_volume(vol)</code></td>
+                    <td>Громкость звука (0.0 до 1.0)</td>
+                    <td><code>shoot.set_volume(0.5)</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.mixer.music.load("file.mp3")</code></td>
+                    <td>Загрузить музыку (MP3, OGG)</td>
+                    <td><code>pg.mixer.music.load("bg.mp3")</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.mixer.music.play(-1)</code></td>
+                    <td>Играть музыку (-1 = бесконечно, 0 = один раз)</td>
+                    <td><code>pg.mixer.music.play(-1)</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.mixer.music.set_volume(vol)</code></td>
+                    <td>Громкость музыки (0.0 до 1.0)</td>
+                    <td><code>pg.mixer.music.set_volume(0.3)</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.mixer.music.pause()</code></td>
+                    <td>Пауза</td>
+                    <td><code>pg.mixer.music.pause()</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.mixer.music.unpause()</code></td>
+                    <td>Продолжить</td>
+                    <td><code>pg.mixer.music.unpause()</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.mixer.music.stop()</code></td>
+                    <td>Остановить</td>
+                    <td><code>pg.mixer.music.stop()</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Спрайты и группы</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>class Player(pg.sprite.Sprite)</code></td>
+                    <td>Создать класс-спрайт (наследовать от Sprite)</td>
+                    <td><code>class Player(pg.sprite.Sprite):</code></td>
+                </tr>
+                <tr>
+                    <td><code>self.image</code></td>
+                    <td>Обязательный атрибут: изображение спрайта</td>
+                    <td><code>self.image = <br>pg.Surface((30, 30))</code></td>
+                </tr>
+                <tr>
+                    <td><code>self.rect</code></td>
+                    <td>Обязательный атрибут: прямоугольник позиции</td>
+                    <td><code>self.rect = <br>self.image.get_rect()</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.sprite.Group()</code></td>
+                    <td>Создать группу спрайтов</td>
+                    <td><code>all_sprites = pg.sprite.Group()</code></td>
+                </tr>
+                <tr>
+                    <td><code>group.add(sprite)</code></td>
+                    <td>Добавить спрайт в группу</td>
+                    <td><code>all_sprites.add(player)</code></td>
+                </tr>
+                <tr>
+                    <td><code>group.remove(sprite)</code></td>
+                    <td>Убрать спрайт из группы</td>
+                    <td><code>all_sprites.remove(enemy)</code></td>
+                </tr>
+                <tr>
+                    <td><code>group.update()</code></td>
+                    <td>Вызвать update() у всех спрайтов группы</td>
+                    <td><code>all_sprites.update()</code></td>
+                </tr>
+                <tr>
+                    <td><code>group.draw(screen)</code></td>
+                    <td>Нарисовать все спрайты группы</td>
+                    <td><code>all_sprites.draw(screen)</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Столкновения</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>rect1.colliderect(rect2)</code></td>
+                    <td>Проверить пересечение двух прямоугольников</td>
+                    <td><code>if player.colliderect(enemy):</code></td>
+                </tr>
+                <tr>
+                    <td><code>rect.collidepoint(x, y)</code></td>
+                    <td>Проверить, находится ли точка внутри прямоугольника</td>
+                    <td><code>if rect.collidepoint(mouse_x, mouse_y):</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.sprite.spritecollide(sprite, group, dokill)</code></td>
+                    <td>Столкновение спрайта с группой (dokill=True — удалить при столкновении)</td>
+                    <td><code>hits = pg.sprite.spritecollide(player, enemies, True)</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.sprite.spritecollide(sprite, group, dokill, pg.sprite.collide_mask)</code></td>
+                    <td>То же, но с пиксельной точностью (по маскам)</td>
+                    <td><code>hits = pg.sprite.spritecollide(player, enemies, True, pg.sprite.collide_mask)</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.sprite.groupcollide(group1, group2, dokill1, dokill2)</code></td>
+                    <td>Столкновение группы с группой</td>
+                    <td><code>hits = pg.sprite.groupcollide(bullets, enemies, True, True)</code></td>
+                </tr>
+                <tr>
+                    <td><code>pg.mask.from_surface(img)</code></td>
+                    <td>Создать маску из изображения (для точных столкновений)</td>
+                    <td><code>mask = pg.mask.from_surface(player_img)</code></td>
+                </tr>
+                <tr>
+                    <td><code>mask1.overlap(mask2, offset)</code></td>
+                    <td>Проверить пересечение масок</td>
+                    <td><code>if mask1.overlap(mask2, offset):</code></td>
                 </tr>
             </tbody>
         </table>

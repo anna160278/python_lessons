@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pygame — Python</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji-icon">🎮</span> Pygame: создаём 2D-игры</h1>
+            <p>Превращаем Python в игровую платформу</p>
+        </div>
+
+        <nav class="page-nav">
+            <a href="index.html" class="page-link">🏠 Главная</a>
+        </nav>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="score">0</span>
+                <span class="stat-label">Очки</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="progress">1/11</span>
+                <span class="stat-label">Прогресс</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="correct">0</span>
+                <span class="stat-label">Правильных</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="content">
+            <!-- Раздел 1: Что такое pygame + установка + первое окно -->
+            <div class="lesson-section active" id="section1">
+                <h2><span class="emoji-icon">🎮</span> Что такое pygame и первое окно</h2>
+                
+                <p><strong>Pygame</strong> — это библиотека Python для создания 2D-игр. С её помощью можно рисовать графику, воспроизводить звуки и обрабатывать нажатия клавиш и мыши.</p>
+
+                <h3>Установка pygame</h3>
+                <p>Pygame не входит в стандартную библиотеку Python — его нужно установить отдельно. Открой терминал (командную строку) и напиши:</p>
+                <div class="code-block"><span class="com"># В терминале (не в редакторе Python!):</span>
+<span class="var">pip</span> <span class="func">install</span> <span class="var">pygame</span>
+
+<span class="com"># После установки проверяем в Python:</span>
+<span class="kw">import</span> <span class="var">pygame</span>
+<span class="func">print</span>(<span class="var">pygame</span>.<span class="var">ver</span>)  <span class="com"># Должна появиться версия, например 2.5.0</span></div>
+
+                <h3>Импорт: <code>import pygame as pg</code></h3>
+                <p>В большинстве игр pygame импортируют с псевдонимом <code>pg</code>. Это общепринятый стандарт, который делает код короче и чище.</p>
+                <div class="code-block"><span class="kw">import</span> <span class="var">pygame</span> <span class="kw">as</span> <span class="var">pg</span>
+
+<span class="com"># Теперь вместо pygame.init() мы пишем pg.init()</span>
+<span class="com"># Вместо pygame.draw.rect() мы пишем pg.draw.rect()</span></div>
+
+                <h3>Первое окно и игровой цикл</h3>
+                <div class="code-block"><span class="kw">import</span> <span class="var">pygame</span> <span class="kw">as</span> <span class="var">pg</span>
+
+<span class="com"># 1. Инициализируем все модули pygame (обязательно в начале!)</span>
+<span class="var">pg</span>.<span class="func">init</span>()
+
+<span class="com"># 2. Создаём игровое окно размером 600 на 400 пикселей</span>
+<span class="var">screen</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">display</span>.<span class="func">set_mode</span>((<span class="num">600</span>, <span class="num">400</span>))
+
+<span class="com"># 3. Задаём заголовок окна</span>
+<span class="var">pg</span>.<span class="var">display</span>.<span class="func">set_caption</span>(<span class="str">"Моя первая игра"</span>)
+
+<span class="com"># 4. Флаг для управления игровым циклом</span>
+<span class="var">running</span> <span class="op">=</span> <span class="kw">True</span>
+
+<span class="com"># 5. Игровой цикл: работает, пока running == True</span>
+<span class="kw">while</span> <span class="var">running</span>:
+    <span class="com"># Обрабатываем все события (клавиши, мышь, закрытие окна)</span>
+    <span class="kw">for</span> <span class="var">event</span> <span class="kw">in</span> <span class="var">pg</span>.<span class="var">event</span>.<span class="func">get</span>():
+        <span class="com"># Если пользователь нажал на крестик закрытия окна</span>
+        <span class="kw">if</span> <span class="var">event</span>.<span class="var">type</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">QUIT</span>:
+            <span class="var">running</span> <span class="op">=</span> <span class="kw">False</span>  <span class="com"># Останавливаем цикл</span>
+    
+    <span class="com"># 6. Заливаем экран тёмно-серым цветом</span>
+    <span class="var">screen</span>.<span class="func">fill</span>((<span class="num">30</span>, <span class="num">30</span>, <span class="num">30</span>))
+    
+    <span class="com"># 7. Обновляем содержимое всего экрана </span>
+    <span class="var">pg</span>.<span class="var">display</span>.<span class="func">flip</span>()  <span class="com"># показываем всё, что нарисовали</span>
+
+<span class="com"># 8. Корректно закрываем pygame после выхода из цикла</span>
+<span class="var">pg</span>.<span class="func">quit</span>()</div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Как правильно установить pygame?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>import pygame</code></div>
+                        <div class="quiz-option" data-correct="true"><code>pip install pygame</code></div>
+                        <div class="quiz-option" data-correct="false"><code>download pygame</code></div>
+                        <div class="quiz-option" data-correct="false">Он уже встроен в Python</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Что делает функция <code>pg.init()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Создаёт игровое окно</div>
+                        <div class="quiz-option" data-correct="true">Инициализирует все модули pygame</div>
+                        <div class="quiz-option" data-correct="false">Запускает бесконечный цикл</div>
+                        <div class="quiz-option" data-correct="false">Закрывает игру</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 2: FPS + рисование примитивов -->
+            <div class="lesson-section" id="section2">
+                <h2><span class="emoji-icon">🎨</span> FPS и рисование примитивов</h2>
+                
+                <p>Чтобы игра работала плавно и с одинаковой скоростью на разных компьютерах, нужно ограничить количество кадров в секунду (<strong>FPS</strong>).</p>
+
+                <h3>Clock и ограничение FPS</h3>
+                <div class="code-block"><span class="kw">import</span> <span class="var">pygame</span> <span class="kw">as</span> <span class="var">pg</span>
+
+<span class="var">pg</span>.<span class="func">init</span>()
+<span class="var">screen</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">display</span>.<span class="func">set_mode</span>((<span class="num">600</span>, <span class="num">400</span>))
+
+<span class="com"># Создаём объект Clock для контроля времени</span>
+<span class="var">clock</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">time</span>.<span class="func">Clock</span>()
+<span class="var">FPS</span> <span class="op">=</span> <span class="num">60</span>  <span class="com"># Цель: 60 кадров в секунду</span>
+
+<span class="var">running</span> <span class="op">=</span> <span class="kw">True</span>
+<span class="kw">while</span> <span class="var">running</span>:
+    <span class="kw">for</span> <span class="var">event</span> <span class="kw">in</span> <span class="var">pg</span>.<span class="var">event</span>.<span class="func">get</span>():
+        <span class="kw">if</span> <span class="var">event</span>.<span class="var">type</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">QUIT</span>:
+            <span class="var">running</span> <span class="op">=</span> <span class="kw">False</span>
+    
+    <span class="var">screen</span>.<span class="func">fill</span>((<span class="num">30</span>, <span class="num">30</span>, <span class="num">30</span>))
+    <span class="var">pg</span>.<span class="var">display</span>.<span class="func">flip</span>()
+    
+    <span class="com"># Заставляем цикл ждать, </span>
+    <span class="var">clock</span>.<span class="func">tick</span>(<span class="var">FPS</span>)  <span class="com"># чтобы не превышать 60 кадров в секунду</span>
+
+<span class="var">pg</span>.<span class="func">quit</span>()</div>
+
+                <h3>Рисование фигур</h3>
+                <p>Все функции рисования находятся в модуле <code>pg.draw</code>. Цвета задаются кортежем RGB: <code>(Red, Green, Blue)</code> от 0 до 255.</p>
+                <div class="code-block"><span class="com"># Прямоугольник: (экран, цвет, (x, y, ширина, высота))</span>
+<span class="var">pg</span>.<span class="var">draw</span>.<span class="func">rect</span>(<span class="var">screen</span>, (<span class="num">255</span>, <span class="num">0</span>, <span class="num">0</span>), (<span class="num">50</span>, <span class="num">50</span>, <span class="num">100</span>, <span class="num">60</span>))
+
+<span class="com"># Круг: (экран, цвет, (x центра, y центра), радиус)</span>
+<span class="var">pg</span>.<span class="var">draw</span>.<span class="func">circle</span>(<span class="var">screen</span>, (<span class="num">0</span>, <span class="num">255</span>, <span class="num">0</span>), (<span class="num">300</span>, <span class="num">200</span>), <span class="num">40</span>)
+
+<span class="com"># Линия: (экран, цвет, (x1, y1), (x2, y2), толщина)</span>
+<span class="var">pg</span>.<span class="var">draw</span>.<span class="func">line</span>(<span class="var">screen</span>, (<span class="num">0</span>, <span class="num">0</span>, <span class="num">255</span>), (<span class="num">0</span>, <span class="num">0</span>), (<span class="num">600</span>, <span class="num">400</span>), <span class="num">3</span>)</div>
+
+<h3>Стили задания цветов</h3>
+<p>В pygame цвет можно задавать тремя способами:</p>
+<div class="code-block"><span class="com"># 1. Кортеж RGB (Red, Green, Blue) — каждый от 0 до 255</span>
+<span class="var">pg</span>.<span class="var">draw</span>.<span class="func">rect</span>(<span class="var">screen</span>, (<span class="num">255</span>, <span class="num">0</span>, <span class="num">0</span>), (<span class="num">50</span>, <span class="num">50</span>, <span class="num">100</span>, <span class="num">60</span>))  <span class="com"># красный</span>
+
+<span class="com"># 2. Имя цвета строкой (pygame знает ~140 стандартных имён)</span>
+<span class="var">pg</span>.<span class="var">draw</span>.<span class="func">circle</span>(<span class="var">screen</span>, <span class="str">"red"</span>, (<span class="num">300</span>, <span class="num">200</span>), <span class="num">40</span>)
+<span class="var">pg</span>.<span class="var">draw</span>.<span class="func">circle</span>(<span class="var">screen</span>, <span class="str">"blue"</span>, (<span class="num">400</span>, <span class="num">200</span>), <span class="num">40</span>)
+<span class="var">pg</span>.<span class="var">draw</span>.<span class="func">circle</span>(<span class="var">screen</span>, <span class="str">"green"</span>, (<span class="num">500</span>, <span class="num">200</span>), <span class="num">40</span>)
+
+<span class="com"># 3. HEX-код (как в веб-разработке)</span>
+<span class="var">pg</span>.<span class="var">draw</span>.<span class="func">circle</span>(<span class="var">screen</span>, <span class="str">"#FF0000"</span>, (<span class="num">300</span>, <span class="num">300</span>), <span class="num">40</span>)  <span class="com"># красный</span>
+<span class="var">pg</span>.<span class="var">draw</span>.<span class="func">circle</span>(<span class="var">screen</span>, <span class="str">"#00FF00"</span>, (<span class="num">400</span>, <span class="num">300</span>), <span class="num">40</span>)  <span class="com"># зелёный</span>
+<span class="var">pg</span>.<span class="var">draw</span>.<span class="func">circle</span>(<span class="var">screen</span>, <span class="str">"#0000FF"</span>, (<span class="num">500</span>, <span class="num">300</span>), <span class="num">40</span>)  <span class="com"># синий</span></div>
+
+<div class="example-box">
+    <strong>💡 Популярные именованные цвета:</strong>
+    <p><code>"red"</code>, <code>"green"</code>, <code>"blue"</code> — основные цвета</p>
+    <p><code>"white"</code>, <code>"black"</code>, <code>"yellow"</code>, <code>"orange"</code>, <code>"purple"</code></p>
+    <p><code>"pink"</code>, <code>"brown"</code>, <code>"gray"</code>, <code>"cyan"</code>, <code>"magenta"</code></p>
+    <p>HEX-коды начинаются с <code>#</code> и содержат 6 символов: <code>#RRGGBB</code></p>
+</div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Что делает метод <code>clock.tick(60)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Ждёт ровно 60 секунд</div>
+                        <div class="quiz-option" data-correct="true">Ограничивает цикл до 60 кадров в секунду</div>
+                        <div class="quiz-option" data-correct="false">Ускоряет игру в 60 раз</div>
+                        <div class="quiz-option" data-correct="false">Создаёт таймер обратного отсчёта</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">4. Какой цвет задаёт кортеж <code>(0, 255, 0)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Красный</div>
+                        <div class="quiz-option" data-correct="true">Зелёный</div>
+                        <div class="quiz-option" data-correct="false">Синий</div>
+                        <div class="quiz-option" data-correct="false">Белый</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 3: Атрибуты Rect -->
+            <div class="lesson-section" id="section3">
+                <h2><span class="emoji-icon">📐</span> Атрибуты объекта Rect</h2>
+                
+                <p><code>pg.Rect</code> — это прямоугольник, который хранит позицию и размер объекта. У него есть множество "виртуальных" атрибутов, которые позволяют легко перемещать и выравнивать объекты без сложной математики.</p>
+
+                <div class="code-block"><span class="com"># Создаём прямоугольник: (x, y, ширина, высота)</span>
+<span class="var">small_rect</span> <span class="op">=</span> <span class="var">pg</span>.<span class="func">Rect</span>(<span class="num">0</span>, <span class="num">0</span>, <span class="num">50</span>, <span class="num">50</span>)
+
+<span class="com"># --- Основные координаты ---</span>
+<span class="var">small_rect</span>.<span class="var">x</span>, <span class="var">small_rect</span>.<span class="var">y</span>           <span class="com"># Верхний левый угол</span>
+<span class="var">small_rect</span>.<span class="var">top</span>, <span class="var">small_rect</span>.<span class="var">left</span>      <span class="com"># Верхняя и левая границы</span>
+<span class="var">small_rect</span>.<span class="var">bottom</span>, <span class="var">small_rect</span>.<span class="var">right</span>  <span class="com"># Нижняя и правая границы</span>
+
+<span class="com"># --- Угловые точки (возвращают кортеж (x, y)) ---</span>
+<span class="var">small_rect</span>.<span class="var">topleft</span>              <span class="com"># Верхний левый угол</span>
+<span class="var">small_rect</span>.<span class="var">bottomright</span>          <span class="com"># Нижний правый угол</span>
+
+<span class="com"># --- Середины сторон и центр ---</span>
+<span class="var">small_rect</span>.<span class="var">midtop</span>               <span class="com"># Середина верхней стороны</span>
+<span class="var">small_rect</span>.<span class="var">center</span>               <span class="com"># (x, y) центра прямоугольника</span>
+<span class="var">small_rect</span>.<span class="var">centerx</span>              <span class="com"># Только X центра</span>
+
+<span class="com"># --- Размеры ---</span>
+<span class="var">small_rect</span>.<span class="var">size</span>                 <span class="com"># Кортеж (width, height)</span>
+<span class="var">small_rect</span>.<span class="var">width</span>                <span class="com"># или small_rect.w</span>
+<span class="var">small_rect</span>.<span class="var">height</span>               <span class="com"># или small_rect.h</span></div>
+
+                <h3>Пример: центрирование объекта</h3>
+                <div class="code-block"><span class="var">size</span> <span class="op">=</span> (<span class="num">600</span>, <span class="num">400</span>)  <span class="com"># Размер нашего игрового окна</span>
+<span class="var">small_rect</span> <span class="op">=</span> <span class="var">pg</span>.<span class="func">Rect</span>(<span class="num">0</span>, <span class="num">0</span>, <span class="num">50</span>, <span class="num">50</span>)
+
+<span class="com"># Ставим прямоугольник ровно в центр экрана одной строкой!</span>
+<span class="var">small_rect</span>.<span class="var">center</span> <span class="op">=</span> (<span class="var">size</span>[<span class="num">0</span>] <span class="op">//</span> <span class="num">2</span>, <span class="var">size</span>[<span class="num">1</span>] <span class="op">//</span> <span class="num">2</span>)
+
+<span class="com"># Прижимаем правый край прямоугольника к правому краю окна</span>
+<span class="var">small_rect</span>.<span class="var">right</span> <span class="op">=</span> <span class="var">size</span>[<span class="num">0</span>]</div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">5. Что хранит атрибут <code>rect.center</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Размер прямоугольника</div>
+                        <div class="quiz-option" data-correct="true">Кортеж с координатами (x, y) центра прямоугольника</div>
+                        <div class="quiz-option" data-correct="false">Цвет прямоугольника</div>
+                        <div class="quiz-option" data-correct="false">Скорость движения</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">6. Как прижать прямоугольник к правому краю окна шириной 600?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>rect.x = 600</code></div>
+                        <div class="quiz-option" data-correct="true"><code>rect.right = 600</code></div>
+                        <div class="quiz-option" data-correct="false"><code>rect.left = 600</code></div>
+                        <div class="quiz-option" data-correct="false"><code>rect.center = 600</code></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 4: События KEYDOWN + MOUSEBUTTONDOWN -->
+            <div class="lesson-section" id="section4">
+                <h2><span class="emoji-icon">⌨️🖱️</span> События клавиатуры и мыши</h2>
+                
+                <h3>Обработка клавиш: <code>KEYDOWN</code></h3>
+                <p>Событие <code>KEYDOWN</code> срабатывает <strong>один раз</strong> в момент нажатия клавиши (как щелчок).</p>
+                <div class="code-block"><span class="kw">for</span> <span class="var">event</span> <span class="kw">in</span> <span class="var">pg</span>.<span class="var">event</span>.<span class="func">get</span>():
+    <span class="kw">if</span> <span class="var">event</span>.<span class="var">type</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">KEYDOWN</span>:  
+    <span class="com"># Проверяем, была ли нажата какая-то клавиша</span>
+        <span class="kw">if</span> <span class="var">event</span>.<span class="var">key</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">K_ESCAPE</span>:
+            <span class="var">running</span> <span class="op">=</span> <span class="kw">False</span>       <span class="com"># Выход по клавише Esc</span>
+        <span class="kw">elif</span> <span class="var">event</span>.<span class="var">key</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">K_SPACE</span>:
+            <span class="func">print</span>(<span class="str">"Пробел нажат!"</span>) <span class="com"># Выстрел или прыжок</span></div>
+
+                <h3>Обработка мыши: <code>MOUSEBUTTONDOWN</code></h3>
+                <div class="code-block"><span class="kw">for</span> <span class="var">event</span> <span class="kw">in</span> <span class="var">pg</span>.<span class="var">event</span>.<span class="func">get</span>():
+    <span class="kw">if</span> <span class="var">event</span>.<span class="var">type</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">MOUSEBUTTONDOWN</span>:  
+        <span class="com"># Проверяем нажатие кнопки мыши</span>  
+        <span class="com"># event.button содержит номер нажатой кнопки:</span>
+        <span class="com"># 1 — левая кнопка, 2 — средняя (колёсико), 3 — правая</span>
+        <span class="com"># 4 — прокрутка вверх, 5 — прокрутка вниз</span>
+        
+        <span class="kw">if</span> <span class="var">event</span>.<span class="var">button</span> <span class="op">==</span> <span class="num">1</span>: <span class="com"># Если нажата левая кнопка</span>
+            <span class="func">print</span>(<span class="var">event</span>.<span class="var">pos</span>)  <span class="com"># координаты курсора (x, y)</span>
+            
+            <span class="com"># перемещаем центр прямоугольника в точку клика</span>
+            <span class="var">small_rect</span>.<span class="var">center</span> <span class="op">=</span> <span class="var">event</span>.<span class="var">pos</span>
+            
+        <span class="kw">elif</span> <span class="var">event</span>.<span class="var">button</span> <span class="op">==</span> <span class="num">3</span>:
+            <span class="func">print</span>(<span class="str">"Правая кнопка мыши"</span>)</div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">7. Какой номер имеет левая кнопка мыши в событии?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">0</div>
+                        <div class="quiz-option" data-correct="true">1</div>
+                        <div class="quiz-option" data-correct="false">2</div>
+                        <div class="quiz-option" data-correct="false">3</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">8. Что хранит атрибут <code>event.pos</code> при клике мыши?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Название нажатой кнопки</div>
+                        <div class="quiz-option" data-correct="true">Координаты (x, y) места клика</div>
+                        <div class="quiz-option" data-correct="false">Время, прошедшее с начала игры</div>
+                        <div class="quiz-option" data-correct="false">Скорость движения мыши</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 5: get_pressed() + перетаскивание мышью -->
+            <div class="lesson-section" id="section5">
+                <h2><span class="emoji-icon">🕹️</span> Плавное движение и перетаскивание</h2>
+                
+                <h3>Непрерывное движение: <code>keys = pg.key.get_pressed()</code></h3>
+                <p>В отличие от <code>KEYDOWN</code>, этот метод возвращает состояние <strong>всех клавиш прямо сейчас</strong>. Это идеально для плавного движения, пока клавиша зажата.</p>
+                <div class="code-block"><span class="kw">while</span> <span class="var">running</span>:
+    <span class="kw">for</span> <span class="var">event</span> <span class="kw">in</span> <span class="var">pg</span>.<span class="var">event</span>.<span class="func">get</span>():
+        <span class="kw">if</span> <span class="var">event</span>.<span class="var">type</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">QUIT</span>:
+            <span class="var">running</span> <span class="op">=</span> <span class="kw">False</span>
+    
+<span class="com"># Получаем словарь состояния всех клавиш (True, если зажата)</span>
+    <span class="var">keys</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">key</span>.<span class="func">get_pressed</span>()
+    
+<span class="com"># Двигаем объект, пока клавиша удерживается</span>
+    <span class="kw">if</span> <span class="var">keys</span>[<span class="var">pg</span>.<span class="var">K_LEFT</span>]:
+        <span class="var">x</span> <span class="op">-=</span> <span class="var">speed</span>
+    <span class="kw">if</span> <span class="var">keys</span>[<span class="var">pg</span>.<span class="var">K_RIGHT</span>]:
+        <span class="var">x</span> <span class="op">+=</span> <span class="var">speed</span></div>
+
+                <h3>Перетаскивание объекта мышью</h3>
+                <div class="code-block"><span class="kw">while</span> <span class="var">running</span>:
+    <span class="kw">for</span> <span class="var">event</span> <span class="kw">in</span> <span class="var">pg</span>.<span class="var">event</span>.<span class="func">get</span>():
+        <span class="kw">if</span> <span class="var">event</span>.<span class="var">type</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">QUIT</span>:
+            <span class="var">running</span> <span class="op">=</span> <span class="kw">False</span>
+    
+<span class="com"># 1. Получаем текущую позицию курсора мыши (x, y)</span>
+    <span class="var">mouse_pos</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">mouse</span>.<span class="func">get_pos</span>()
+    
+<span class="com"># 2. Получаем состояние кнопок мыши (левая, средняя, правая)</span>
+    <span class="var">mouse_keys</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">mouse</span>.<span class="func">get_pressed</span>()
+    
+<span class="com"># 3. Проверяем, нажата ли левая кнопка (индекс 0)</span>
+    <span class="kw">if</span> <span class="var">mouse_keys</span>[<span class="num">0</span>]:  
+<span class="com"># Если да, устанавливаем центр персонажа в позицию курсора</span>
+        <span class="var">character_rect</span>.<span class="var">center</span> <span class="op">=</span> <span class="var">mouse_pos</span>
+    
+    <span class="var">screen</span>.<span class="func">fill</span>((<span class="num">30</span>, <span class="num">30</span>, <span class="num">30</span>))
+    <span class="var">pg</span>.<span class="var">draw</span>.<span class="func">rect</span>(<span class="var">screen</span>, (<span class="num">0</span>, <span class="num">255</span>, <span class="num">0</span>), <span class="var">character_rect</span>)
+    <span class="var">pg</span>.<span class="var">display</span>.<span class="func">flip</span>()</div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">9. В чём главное отличие <code>key.get_pressed()</code> от <code>KEYDOWN</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Ничем, это одно и то же</div>
+                        <div class="quiz-option" data-correct="true"><code>get_pressed()</code> возвращает True, пока клавиша зажата</div>
+                        <div class="quiz-option" data-correct="false"><code>KEYDOWN</code> работает быстрее</div>
+                        <div class="quiz-option" data-correct="false"><code>get_pressed()</code> работает только для мыши</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">10. Что возвращает <code>pg.mouse.get_pressed()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Координаты мыши (x, y)</div>
+                        <div class="quiz-option" data-correct="true">Кортеж (left, middle, right) из значений True/False</div>
+                        <div class="quiz-option" data-correct="false">Скорость движения мыши</div>
+                        <div class="quiz-option" data-correct="false">Название нажатой кнопки</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 6: Изображения и текст -->
+            <div class="lesson-section" id="section6">
+                <h2><span class="emoji-icon">🖼️</span> Изображения и текст</h2>
+                
+                <h3>Загрузка и трансформации</h3>
+                <div class="code-block"><span class="com"># Загружаем картинку (файл должен лежать в папке с программой)</span>
+<span class="var">player_img</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">image</span>.<span class="func">load</span>(<span class="str">"player.png"</span>)
+
+<span class="com"># Масштабирование: изменяем размер до 50x50 пикселей</span>
+<span class="var">small_img</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">transform</span>.<span class="func">scale</span>(<span class="var">player_img</span>, (<span class="num">50</span>, <span class="num">50</span>))
+
+<span class="com"># Поворот: поворачиваем изображение на 45 градусов</span>
+<span class="var">rotated_img</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">transform</span>.<span class="func">rotate</span>(<span class="var">player_img</span>, <span class="num">45</span>)
+
+<span class="com"># Отражение: flip(по горизонтали, по вертикали)</span>
+<span class="com"># True, False означает отразить влево-вправо, но не вверх-вниз</span>
+<span class="var">flipped_h</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">transform</span>.<span class="func">flip</span>(<span class="var">player_img</span>, <span class="kw">True</span>, <span class="kw">False</span>)
+
+<span class="com"># Выводим изображение на экран в координаты (x, y)</span>
+<span class="var">screen</span>.<span class="func">blit</span>(<span class="var">player_img</span>, (<span class="var">x</span>, <span class="var">y</span>))</div>
+
+                <h3>Текст и шрифты</h3>
+                <div class="code-block"><span class="com"># Создаём шрифт. None означает встроенный шрифт pygame.</span>
+<span class="com"># Вместо None можно указать путь к файлу: "fonts/arial.ttf"</span>
+<span class="var">font</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">font</span>.<span class="func">Font</span>(<span class="kw">None</span>, <span class="num">36</span>)
+
+<span class="com"># Рендерим текст в картинку (Surface).</span>
+<span class="com"># Второй аргумент True включает сглаживание (antialiasing).</span>
+<span class="com"># Третий аргумент — цвет.</span>
+<span class="var">text</span> <span class="op">=</span> <span class="var">font</span>.<span class="func">render</span>(<span class="str">f"Счёт: 0"</span>, <span class="kw">True</span>, (<span class="num">255</span>, <span class="num">255</span>, <span class="num">255</span>))
+
+<span class="com"># Выводим получившуюся картинку с текстом на экран</span>
+<span class="var">screen</span>.<span class="func">blit</span>(<span class="var">text</span>, (<span class="num">10</span>, <span class="num">10</span>))</div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">11. Что делает функция <code>pg.transform.flip(img, True, False)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Поворачивает изображение на 90 градусов</div>
+                        <div class="quiz-option" data-correct="true">Отражает изображение по горизонтали</div>
+                        <div class="quiz-option" data-correct="false">Отражает изображение по вертикали</div>
+                        <div class="quiz-option" data-correct="false">Масштабирует изображение</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">12. За что отвечает параметр <code>True</code> в методе <code>font.render()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Делает шрифт жирным</div>
+                        <div class="quiz-option" data-correct="true">Включает сглаживание текста</div>
+                        <div class="quiz-option" data-correct="false">Делает фон текста прозрачным</div>
+                        <div class="quiz-option" data-correct="false">Делает шрифт курсивным</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 7: Звуки -->
+            <div class="lesson-section" id="section7">
+                <h2><span class="emoji-icon">🔊</span> Звуки и музыка</h2>
+                
+                <p>В pygame есть модуль <code>mixer</code>. Он делит аудио на два типа: короткие звуковые эффекты (<code>Sound</code>) и длинная фоновая музыка (<code>music</code>).</p>
+                <p>1. Короткие звуки (<code>Sound</code>) - подходят для выстрелов, прыжков, подбора монет (можно накладывать друг на друга). Форматы: WAV, OGG</p>
+                <p>2. Фоновая музыка (<code>music</code>) - подходит для саундтреков. Проигрывается только один трек за раз. Форматы: MP3, OGG</p>
+                <div class="code-block"><span class="kw">import</span> <span class="var">pygame</span> <span class="kw">as</span> <span class="var">pg</span>
+
+<span class="var">pg</span>.<span class="func">init</span>()
+<span class="var">pg</span>.<span class="var">mixer</span>.<span class="func">init</span>()  <span class="com"># Явно инициализируем звуковой модуль</span>
+
+<span class="var">shoot_sound</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">mixer</span>.<span class="func">Sound</span>(<span class="str">"shoot.wav"</span>)
+
+<span class="var">shoot_sound</span>.<span class="func">play</span>()           <span class="com"># Воспроизвести звук</span>
+<span class="var">shoot_sound</span>.<span class="func">set_volume</span>(<span class="num">0.5</span>)  <span class="com"># Громкость от 0.0 до 1.0</span>
+
+<span class="var">pg</span>.<span class="var">mixer</span>.<span class="var">music</span>.<span class="func">load</span>(<span class="str">"background.mp3"</span>)
+
+<span class="var">pg</span>.<span class="var">mixer</span>.<span class="var">music</span>.<span class="func">play</span>(<span class="num">-1</span>)      
+<span class="com"># -1 означает бесконечное повторение по кругу</span>
+<span class="var">pg</span>.<span class="var">mixer</span>.<span class="var">music</span>.<span class="func">set_volume</span>(<span class="num">0.3</span>) 
+<span class="com"># Громкость музыки (тише, чем звуки)</span>
+
+<span class="com"># Управление музыкой</span>
+<span class="var">pg</span>.<span class="var">mixer</span>.<span class="var">music</span>.<span class="func">pause</span>()   <span class="com"># Поставить на паузу</span>
+<span class="var">pg</span>.<span class="var">mixer</span>.<span class="var">music</span>.<span class="func">unpause</span>() <span class="com"># Продолжить воспроизведение</span>
+<span class="var">pg</span>.<span class="var">mixer</span>.<span class="var">music</span>.<span class="func">stop</span>()    <span class="com"># Полностью остановить</span></div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">15. В чём ключевое отличие <code>Sound</code> от <code>music</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Ничем, это просто разные названия</div>
+                        <div class="quiz-option" data-correct="true"><code>Sound</code> для коротких эффектов, <code>music</code> для длинных треков</div>
+                        <div class="quiz-option" data-correct="false"><code>Sound</code> всегда играет громче</div>
+                        <div class="quiz-option" data-correct="false"><code>music</code> работает только с файлами WAV</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">16. Как запустить фоновую музыку в бесконечном цикле?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>music.play(0)</code></div>
+                        <div class="quiz-option" data-correct="true"><code>music.play(-1)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>music.loop()</code></div>
+                        <div class="quiz-option" data-correct="false"><code>music.repeat()</code></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 8: Группы спрайтов -->
+            <div class="lesson-section" id="section8">
+                <h2><span class="emoji-icon">👥</span> Группы спрайтов</h2>
+                
+                <p>Когда объектов много, управлять ими по отдельности неудобно. Класс <code>pg.sprite.Sprite</code> и <code>pg.sprite.Group</code> решают эту проблему.</p>
+
+                <h3>Создание своего спрайта</h3>
+                <div class="code-block"><span class="kw">class</span> <span class="func">Player</span>(<span class="var">pg</span>.<span class="var">sprite</span>.<span class="var">Sprite</span>):
+    <span class="kw">def</span> <span class="func">__init__</span>(<span class="var">self</span>, <span class="var">x</span>, <span class="var">y</span>):
+        <span class="func">super</span>().<span class="func">__init__</span>()  <span class="com"># ❗ вызываем конструктор родителя</span>
+        
+        <span class="var">self</span>.<span class="var">image</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">image</span>.<span class="var">load</span>(<span class="str">"player.png"</span>)
+        <span class="com"># 1. Загружаем картинку </span>
+        <span class="var">self</span>.<span class="var">image</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">transform</span>.<span class="var">scale</span>(<span class="var">self</span>.<span class="var">image</span>, (<span class="num">50</span>, <span class="num">50</span>))
+                                        <span class="com"># Задаём размер</span>
+        <span class="var">self</span>.<span class="var">rect</span> <span class="op">=</span> <span class="var">self</span>.<span class="var">image</span>.<span class="func">get_rect</span>(<span class="var">topleft</span><span class="op">=</span>(<span class="var">x</span>, <span class="var">y</span>))
+        <span class="com"># 2. Получаем прямоугольник и задаём координаты</span>
+
+        <span class="com"># ❗ self.image и self.rect</span>
+        <span class="com"># - два ОБЯЗАТЕЛЬНЫХ атрибута для любого спрайта</span>
+
+    <span class="kw">def</span> <span class="func">update</span>(<span class="var">self</span>):
+    <span class="com"># Сюда пишем логику движения. Вызывается в игровом цикле</span>
+        <span class="var">keys</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">key</span>.<span class="func">get_pressed</span>()
+        <span class="kw">if</span> <span class="var">keys</span>[<span class="var">pg</span>.<span class="var">K_LEFT</span>]:
+            <span class="var">self</span>.<span class="var">rect</span>.<span class="var">x</span> <span class="op">-=</span> <span class="num">5</span></div>
+
+                <h3>Использование групп</h3>
+                <div class="code-block"><span class="com"># Создаём пустые группы</span>
+<span class="var">all_sprites</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">sprite</span>.<span class="func">Group</span>()  
+<span class="com"># Для отрисовки всех спрайтов одной строкой </span>
+
+<span class="var">enemies</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">sprite</span>.<span class="func">Group</span>()      
+<span class="com"># Для удобной проверки столкновений</span>
+
+<span class="com"># Создаём игрока и добавляем его в группу</span>
+<span class="var">player</span> <span class="op">=</span> <span class="func">Player</span>(<span class="num">100</span>, <span class="num">100</span>)
+<span class="var">all_sprites</span>.<span class="func">add</span>(<span class="var">player</span>)
+
+<span class="kw">while</span> <span class="var">running</span>:
+    <span class="com"># 1. Обновляем логику ВСЕХ спрайтов в группе</span>
+    <span class="var">all_sprites</span>.<span class="func">update</span>() <span class="com"># вызываем их метод update</span>
+    
+    <span class="com"># 2. Очищаем экран</span>
+    <span class="var">screen</span>.<span class="func">fill</span>((<span class="num">30</span>, <span class="num">30</span>, <span class="num">30</span>)) <span class="com"># заливка фона</span>
+    
+    <span class="com"># 3. Отрисовываем ВСЕ спрайты группы</span>
+    <span class="var">all_sprites</span>.<span class="func">draw</span>(<span class="var">screen</span>) <span class="com"># используя self.image и self.rect</span>
+    
+    <span class="var">pg</span>.<span class="var">display</span>.<span class="func">flip</span>()</div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">17. Какие два атрибута являются обязательными для класса, наследующего <code>pg.sprite.Sprite</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>name</code> и <code>position</code></div>
+                        <div class="quiz-option" data-correct="true"><code>image</code> и <code>rect</code></div>
+                        <div class="quiz-option" data-correct="false"><code>x</code> и <code>y</code></div>
+                        <div class="quiz-option" data-correct="false"><code>width</code> и <code>height</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">18. Что делает метод <code>all_sprites.draw(screen)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Вызывает метод update() у всех спрайтов</div>
+                        <div class="quiz-option" data-correct="true">Отрисовывает картинку (image) каждого спрайта в его позиции (rect)</div>
+                        <div class="quiz-option" data-correct="false">Проверяет столкновения между спрайтами</div>
+                        <div class="quiz-option" data-correct="false">Удаляет спрайты, вышедшие за границы экрана</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 9: Коллизии (от простого к сложному) -->
+            <div class="lesson-section" id="section9">
+                <h2><span class="emoji-icon">💥</span> Столкновения: от Rect до Масок</h2>
+                
+                <p>В играх постоянно нужно проверять, коснулись ли объекты друг друга. <br>Начнём с самого простого и дойдём до пиксельной точности.</p>
+
+                <h3>1. Простое столкновение: <code>colliderect</code></h3>
+                <p>Самый быстрый способ. Проверяет пересечение двух прямоугольников. <br>Минус: не учитывает прозрачные области картинки.</p>
+                <div class="code-block"><span class="com"># Создаём прямоугольники для игрока и врага</span>
+<span class="var">player_rect</span> <span class="op">=</span> <span class="var">pg</span>.<span class="func">Rect</span>(<span class="var">x</span>, <span class="var">y</span>, <span class="num">30</span>, <span class="num">30</span>)
+<span class="var">enemy_rect</span> <span class="op">=</span> <span class="var">pg</span>.<span class="func">Rect</span>(<span class="var">ex</span>, <span class="var">ey</span>, <span class="num">40</span>, <span class="num">40</span>)
+
+<span class="com"># Проверяем, пересекаются ли они</span>
+<span class="kw">if</span> <span class="var">player_rect</span>.<span class="func">colliderect</span>(<span class="var">enemy_rect</span>):
+    <span class="func">print</span>(<span class="str">"Столкновение!"</span>)</div>
+
+                <h3>2. Спрайты и <code>spritecollide</code></h3>
+                <p>Когда врагов много, удобнее использовать группы. Метод проверяет столкновение <strong>одного спрайта</strong> с <strong>группой</strong> спрайтов.</p>
+                <div class="code-block"><span class="com"># starship — это один объект (наш корабль)</span>
+<span class="com"># meteorites — это группа pg.sprite.Group()</span>
+<span class="com"># содержащая много метеоритов</span>
+
+<span class="var">hits</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">sprite</span>.<span class="func">spritecollide</span>(<span class="var">starship</span>, <span class="var">meteorites</span>, <span class="kw">True</span>)
+<span class="com"># Третий аргумент True означает:</span>
+<span class="com"># удалить метеорит из группы при столкновении</span>
+
+<span class="kw">if</span> <span class="var">hits</span>:
+    <span class="com"># hits — это список всех метеоритов, в которые мы врезались</span>
+    <span class="var">lives</span> <span class="op">-=</span> <span class="func">len</span>(<span class="var">hits</span>)  <span class="com"># Отнимаем жизни за каждое попадание</span></div>
+
+                <h3>3. Пиксельно-точное столкновение: <code>collide_mask</code></h3>
+                <p>Если у корабля круглая форма, а прямоугольник квадратный, <code>colliderect</code> даст ложное срабатывание в углах. <br>Решение — маски! Используем тот же spritecollide, но добавляем 4-й аргумент. <code>pg.sprite.collide_mask</code> заставит проверять только непрозрачные пиксели!</p>
+                <div class="code-block"><span class="var">hits</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">sprite</span>.<span class="func">spritecollide</span>(<span class="var">starship</span>, <span class="var">mice</span>, 
+                               <span class="kw">True</span>, <span class="var">pg</span>.<span class="var">sprite</span>.<span class="var">collide_mask</span>)
+<span class="kw">if</span> <span class="var">hits</span>:
+    <span class="func">print</span>(<span class="str">"Поймали мышь точно по контуру!"</span>)</div>
+
+                <h3>4. Столкновение группы с группой: <code>groupcollide</code></h3>
+                <p>Идеально для шутеров: проверяем, попали ли <strong>любые пули</strong> в <strong>любых врагов</strong>.</p>
+                <div class="code-block"><span class="com"># lasers — группа пуль, mice — группа врагов</span>
+<span class="com"># Первый True: удалить пулю при попадании.</span>
+<span class="com"># Второй True: удалить врага при попадании.</span>
+
+<span class="var">hits</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">sprite</span>.<span class="func">groupcollide</span>(<span class="var">lasers</span>, <span class="var">mice</span>, <span class="kw">True</span>, <span class="kw">True</span>)
+
+<span class="com"># hits — это словарь вида: </span>
+<span class="com"># {пуля: [список поражённых этой пулей мышей]}</span>
+<span class="kw">for</span> <span class="var">laser</span>, <span class="var">hit_mice</span> <span class="kw">in</span> <span class="var">hits</span>.<span class="func">items</span>():
+    <span class="com"># Начисляем очки за каждую уничтоженную мышь</span>
+    <span class="var">score</span> <span class="op">+=</span> <span class="func">len</span>(<span class="var">hit_mice</span>) <span class="op">*</span> <span class="num">10</span></div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">13. В чём главный недостаток метода <code>colliderect</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Он работает слишком медленно</div>
+                        <div class="quiz-option" data-correct="true">Он не учитывает прозрачные области изображения</div>
+                        <div class="quiz-option" data-correct="false">Он работает только со спрайтами</div>
+                        <div class="quiz-option" data-correct="false">Он не может проверить столкновение с мышью</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">14. Что означают два параметра <code>True, True</code> в <code>groupcollide(lasers, mice, True, True)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Проверять только первые два объекта</div>
+                        <div class="quiz-option" data-correct="true">Удалить и пулю, и врага при столкновении</div>
+                        <div class="quiz-option" data-correct="false">Включить звуковой эффект и анимацию</div>
+                        <div class="quiz-option" data-correct="false">Использовать маски для обеих групп</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 10: Мини-игра "Змейка" + Итоговый тест -->
+            <div class="lesson-section" id="section10">
+                <h2><span class="emoji-icon">🐍</span> Мини-игра: Змейка</h2>
+                
+                <p>Соберём все знания вместе! Управление стрелками, еда появляется случайно, змейка растёт при поедании.</p>
+<div class="code-wrapper">
+    <button class="copy-btn" onclick="copyCode(this)" title="Скопировать код">
+         Копировать
+    </button>
+                <div class="code-block"><span class="kw">import</span> <span class="var">pygame</span> <span class="kw">as</span> <span class="var">pg</span>
+<span class="kw">import</span> <span class="var">random</span>
+
+<span class="var">pg</span>.<span class="func">init</span>()
+
+<span class="com"># --- Настройки игры ---</span>
+<span class="var">CELL</span> <span class="op">=</span> <span class="num">20</span>                    <span class="com"># Размер одной клетки в пикселях</span>
+<span class="var">COLS</span>, <span class="var">ROWS</span> <span class="op">=</span> <span class="num">30</span>, <span class="num">20</span>          <span class="com"># Поле 30x20 клеток</span>
+<span class="var">screen</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">display</span>.<span class="func">set_mode</span>((<span class="var">COLS</span> <span class="op">*</span> <span class="var">CELL</span>, <span class="var">ROWS</span> <span class="op">*</span> <span class="var">CELL</span>))
+<span class="var">clock</span> <span class="op">=</span> <span class="var">pg</span>.<span class="var">time</span>.<span class="func">Clock</span>()
+
+<span class="com"># --- Начальное состояние ---</span>
+<span class="var">snake</span> <span class="op">=</span> [(<span class="num">15</span>, <span class="num">10</span>)]           <span class="com"># Змейка — это список координат её сегментов</span>
+<span class="var">dx</span>, <span class="var">dy</span> <span class="op">=</span> <span class="num">1</span>, <span class="num">0</span>                <span class="com"># Начальное направление: вправо (x+1, y+0)</span>
+<span class="var">food</span> <span class="op">=</span> (<span class="var">random</span>.<span class="func">randint</span>(<span class="num">0</span>, <span class="var">COLS</span><span class="op">-</span><span class="num">1</span>), <span class="var">random</span>.<span class="func">randint</span>(<span class="num">0</span>, <span class="var">ROWS</span><span class="op">-</span><span class="num">1</span>))
+
+<span class="var">running</span> <span class="op">=</span> <span class="kw">True</span>
+<span class="kw">while</span> <span class="var">running</span>:
+    <span class="com"># 1. Обработка событий</span>
+    <span class="kw">for</span> <span class="var">event</span> <span class="kw">in</span> <span class="var">pg</span>.<span class="var">event</span>.<span class="func">get</span>():
+        <span class="kw">if</span> <span class="var">event</span>.<span class="var">type</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">QUIT</span>:
+            <span class="var">running</span> <span class="op">=</span> <span class="kw">False</span>
+        <span class="kw">elif</span> <span class="var">event</span>.<span class="var">type</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">KEYDOWN</span>:
+            <span class="com"># Запрещаем разворот на 180 градусов (dy != 1 означает, что мы не движемся вниз)</span>
+            <span class="kw">if</span> <span class="var">event</span>.<span class="var">key</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">K_UP</span> <span class="kw">and</span> <span class="var">dy</span> <span class="op">!=</span> <span class="num">1</span>:
+                <span class="var">dx</span>, <span class="var">dy</span> <span class="op">=</span> <span class="num">0</span>, <span class="num">-1</span>
+            <span class="kw">elif</span> <span class="var">event</span>.<span class="var">key</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">K_DOWN</span> <span class="kw">and</span> <span class="var">dy</span> <span class="op">!=</span> <span class="num">-1</span>:
+                <span class="var">dx</span>, <span class="var">dy</span> <span class="op">=</span> <span class="num">0</span>, <span class="num">1</span>
+            <span class="kw">elif</span> <span class="var">event</span>.<span class="var">key</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">K_LEFT</span> <span class="kw">and</span> <span class="var">dx</span> <span class="op">!=</span> <span class="num">1</span>:
+                <span class="var">dx</span>, <span class="var">dy</span> <span class="op">=</span> <span class="num">-1</span>, <span class="num">0</span>
+            <span class="kw">elif</span> <span class="var">event</span>.<span class="var">key</span> <span class="op">==</span> <span class="var">pg</span>.<span class="var">K_RIGHT</span> <span class="kw">and</span> <span class="var">dx</span> <span class="op">!=</span> <span class="num">-1</span>:
+                <span class="var">dx</span>, <span class="var">dy</span> <span class="op">=</span> <span class="num">1</span>, <span class="num">0</span>
+    
+    <span class="com"># 2. Двигаем змейку: создаём новую голову на основе текущей головы + направление</span>
+    <span class="var">head</span> <span class="op">=</span> (<span class="var">snake</span>[<span class="num">0</span>][<span class="num">0</span>] <span class="op">+</span> <span class="var">dx</span>, <span class="var">snake</span>[<span class="num">0</span>][<span class="num">1</span>] <span class="op">+</span> <span class="var">dy</span>)
+    
+    <span class="com"># 3. Проверка проигрыша: удар о стену или о собственный хвост</span>
+    <span class="kw">if</span> <span class="var">head</span>[<span class="num">0</span>] <span class="op">&lt;</span> <span class="num">0</span> <span class="kw">or</span> <span class="var">head</span>[<span class="num">0</span>] <span class="op">&gt;=</span> <span class="var">COLS</span> <span class="kw">or</span> <span class="var">head</span>[<span class="num">1</span>] <span class="op">&lt;</span> <span class="num">0</span> <span class="kw">or</span> <span class="var">head</span>[<span class="num">1</span>] <span class="op">&gt;=</span> <span class="var">ROWS</span> <span class="kw">or</span> <span class="var">head</span> <span class="kw">in</span> <span class="var">snake</span>:
+        <span class="var">running</span> <span class="op">=</span> <span class="kw">False</span>
+    
+    <span class="com"># 4. Добавляем новую голову в начало списка</span>
+    <span class="var">snake</span>.<span class="func">insert</span>(<span class="num">0</span>, <span class="var">head</span>)
+    
+    <span class="com"># 5. Логика еды</span>
+    <span class="kw">if</span> <span class="var">head</span> <span class="op">==</span> <span class="var">food</span>:
+        <span class="com"># Если съели: генерируем новую еду, хвост НЕ удаляем (змейка выросла)</span>
+        <span class="var">food</span> <span class="op">=</span> (<span class="var">random</span>.<span class="func">randint</span>(<span class="num">0</span>, <span class="var">COLS</span><span class="op">-</span><span class="num">1</span>), <span class="var">random</span>.<span class="func">randint</span>(<span class="num">0</span>, <span class="var">ROWS</span><span class="op">-</span><span class="num">1</span>))
+    <span class="kw">else</span>:
+        <span class="com"># Если не съели: удаляем последний элемент списка (хвост), чтобы длина не менялась</span>
+        <span class="var">snake</span>.<span class="func">pop</span>()
+    
+    <span class="com"># 6. Отрисовка</span>
+    <span class="var">screen</span>.<span class="func">fill</span>((<span class="num">30</span>, <span class="num">30</span>, <span class="num">30</span>))
+    
+    <span class="com"># Рисуем каждый сегмент змейки</span>
+    <span class="kw">for</span> <span class="var">segment</span> <span class="kw">in</span> <span class="var">snake</span>:
+        <span class="var">pg</span>.<span class="var">draw</span>.<span class="func">rect</span>(<span class="var">screen</span>, (<span class="num">0</span>, <span class="num">255</span>, <span class="num">0</span>), 
+                    (<span class="var">segment</span>[<span class="num">0</span>] <span class="op">*</span> <span class="var">CELL</span>, <span class="var">segment</span>[<span class="num">1</span>] <span class="op">*</span> <span class="var">CELL</span>, <span class="var">CELL</span>, <span class="var">CELL</span>))
+                    
+    <span class="com"># Рисуем еду</span>
+    <span class="var">pg</span>.<span class="var">draw</span>.<span class="func">rect</span>(<span class="var">screen</span>, (<span class="num">255</span>, <span class="num">0</span>, <span class="num">0</span>), 
+                (<span class="var">food</span>[<span class="num">0</span>] <span class="op">*</span> <span class="var">CELL</span>, <span class="var">food</span>[<span class="num">1</span>] <span class="op">*</span> <span class="var">CELL</span>, <span class="var">CELL</span>, <span class="var">CELL</span>))
+                
+    <span class="var">pg</span>.<span class="var">display</span>.<span class="func">flip</span>()
+    <span class="var">clock</span>.<span class="func">tick</span>(<span class="num">10</span>)  <span class="com"># Скорость игры: 10 кадров (шагов) в секунду</span>
+
+<span class="var">pg</span>.<span class="func">quit</span>()</div>
+</div>
+
+ <div class="example-box">
+        <strong> Как работает змейка:</strong>
+        <p><strong>1.</strong> Змейка — список кортежей <code>[(x,y), (x,y), ...]</code></p>
+        <p><strong>2.</strong> Каждый кадр добавляем новую голову в направлении <code>(dx, dy)</code></p>
+        <p><strong>3.</strong> Если съели еду — хвост не удаляем (змейка растёт)</p>
+        <p><strong>4.</strong> Если не съели — удаляем последний элемент (хвост)</p>
+        <p><strong>5.</strong> <code>clock.tick(10)</code> — змейка двигается 10 раз в секунду</p>
+    </div>
+</div>
+
+<!-- Раздел 11: Итоговый тест -->
+<div class="lesson-section" id="section11">
+    <h2><span class="emoji-icon">🏆</span> Итоговый тест</h2>
+                    <div class="final-test-header">
+                    <h3 style="margin:0; color:#856404;">10 вопросов, 7 минут. Удачи!</h3>
+                </div>
+
+                <div class="global-timer" id="globalTimer">⏱️ 7:00</div>
+                <div class="final-test-stats" id="finalTestStats" style="display: none;"></div>
+
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">1. Как правильно нарисовать прямоугольник в pygame?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>pg.draw.rectangle(screen, color, rect)</code></div>
+                        <div class="quiz-option" data-correct="true"><code>pg.draw.rect(screen, color, rect)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>pg.rect.draw(screen, color, rect)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>draw.rect(screen, color, rect)</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">2. Что возвращает метод <code>pg.mouse.get_pressed()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Координаты мыши (x, y)</div>
+                        <div class="quiz-option" data-correct="true">Кортеж (left, middle, right) из значений True/False</div>
+                        <div class="quiz-option" data-correct="false">Скорость движения мыши</div>
+                        <div class="quiz-option" data-correct="false">Название нажатой кнопки</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">3. Какой индекс в кортеже <code>mouse_keys</code> отвечает за левую кнопку мыши?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="true">0</div>
+                        <div class="quiz-option" data-correct="false">1</div>
+                        <div class="quiz-option" data-correct="false">2</div>
+                        <div class="quiz-option" data-correct="false">3</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">4. За что отвечает параметр <code>True</code> в методе <code>font.render("Текст", True, color)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Делает шрифт жирным</div>
+                        <div class="quiz-option" data-correct="true">Включает сглаживание текста</div>
+                        <div class="quiz-option" data-correct="false">Делает фон текста прозрачным</div>
+                        <div class="quiz-option" data-correct="false">Делает шрифт курсивным</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">5. В чём главный недостаток проверки столкновений через <code>colliderect</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Он работает слишком медленно</div>
+                        <div class="quiz-option" data-correct="true">Он не учитывает прозрачные области изображения</div>
+                        <div class="quiz-option" data-correct="false">Он работает только со спрайтами</div>
+                        <div class="quiz-option" data-correct="false">Он не может проверить столкновение с мышью</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">6. Что делают два параметра <code>True, True</code> в <code>groupcollide(lasers, mice, True, True)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Проверяют только первые два объекта в группах</div>
+                        <div class="quiz-option" data-correct="true">Удаляют и пулю, и врага при факте столкновения</div>
+                        <div class="quiz-option" data-correct="false">Включают звуковой эффект и анимацию взрыва</div>
+                        <div class="quiz-option" data-correct="false">Заставляют использовать маски для обеих групп</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">7. Как запустить фоновую музыку в бесконечном цикле?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>music.play(0)</code></div>
+                        <div class="quiz-option" data-correct="true"><code>music.play(-1)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>music.loop()</code></div>
+                        <div class="quiz-option" data-correct="false"><code>music.repeat()</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">8. Какие два атрибута являются строго обязательными для класса, наследующего <code>pg.sprite.Sprite</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>name</code> и <code>position</code></div>
+                        <div class="quiz-option" data-correct="true"><code>image</code> и <code>rect</code></div>
+                        <div class="quiz-option" data-correct="false"><code>x</code> и <code>y</code></div>
+                        <div class="quiz-option" data-correct="false"><code>width</code> и <code>height</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">9. Что делает метод <code>all_sprites.draw(screen)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Вызывает метод update() у всех спрайтов</div>
+                        <div class="quiz-option" data-correct="true">Отрисовывает картинку (image) каждого спрайта в его позиции (rect)</div>
+                        <div class="quiz-option" data-correct="false">Проверяет столкновения между всеми спрайтами</div>
+                        <div class="quiz-option" data-correct="false">Удаляет спрайты, вышедшие за границы экрана</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">10. Что произойдёт, если не вызвать <code>clock.tick(FPS)</code> в игровом цикле?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Игра будет работать медленнее</div>
+                        <div class="quiz-option" data-correct="true">Игра будет работать с максимальной скоростью компьютера</div>
+                        <div class="quiz-option" data-correct="false">Игра не запустится</div>
+                        <div class="quiz-option" data-correct="false">Окно сразу закроется</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="btn" id="prevBtn" onclick="previousSection()" disabled>← Назад</button>
+            <button class="btn" id="nextBtn" onclick="nextSection()">Далее →</button>
+        </div>
+    </div>
+
+    <script src="script-pygame.js"></script>
+    
+</body>
+</html>

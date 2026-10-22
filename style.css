@@ -1277,6 +1277,183 @@ pre.quiz-code {
     border-style: solid;
 }
 
+/* ===== Кнопка копирования кода ===== */
+.code-wrapper {
+    position: relative;
+    margin: 20px 0;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #252542;
+    color: #a78bfa;
+    border: 1px solid #333360;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: all 0.2s;
+    z-index: 10;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.copy-btn:hover {
+    background: #333360;
+    color: #c084fc;
+    border-color: #667eea;
+    transform: translateY(-1px);
+}
+
+.copy-btn.copied {
+    background: #14532d;
+    color: #bbf7d0;
+    border-color: #22c55e;
+}
+
+.code-block {
+    position: relative;
+    padding-top: 35px;
+}
+
+/* ===== Модальное окно отправки результата ===== */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-overlay.active {
+    display: flex;
+}
+
+.modal {
+    background: #1e1e2f;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    border: 2px solid #4a3fbf;
+}
+
+.modal h3 {
+    color: #a78bfa;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.modal input {
+    width: 100%;
+    padding: 12px;
+    background: #12121f;
+    border: 2px solid #2a2a4a;
+    border-radius: 8px;
+    color: #e0e0e0;
+    font-size: 1em;
+    margin-bottom: 20px;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.modal input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+}
+
+.modal-buttons .btn {
+    padding: 10px 25px;
+    font-size: 1em;
+    margin: 0;
+}
+
+.modal-buttons .btn-secondary {
+    background: #252542;
+}
+
+.send-status {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+    display: none;
+}
+
+.send-status.success {
+    background: #14532d;
+    color: #bbf7d0;
+    border-left: 4px solid #22c55e;
+    display: block;
+}
+
+.send-status.error {
+    background: #450a0a;
+    color: #fecaca;
+    border-left: 4px solid #ef4444;
+    display: block;
+}
+
+/* Стили для кнопки во время отправки */
+.modal-buttons .btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    background: #252542;
+}
+
+.modal-buttons .btn:disabled:hover {
+    transform: none;
+    box-shadow: 0 5px 15px rgba(74, 63, 191, 0.4);
+}
+
+/* Анимация для статусного сообщения */
+.send-status {
+    transition: all 0.3s ease;
+}
+
+.send-status.success {
+    animation: slideInRight 0.5s ease-out;
+}
+
+.send-status.error {
+    animation: shake 0.5s ease-out;
+}
+
+.modal input {
+    width: 100%;
+    padding: 12px;
+    background: #12121f;
+    border: 2px solid #2a2a4a;
+    border-radius: 8px;
+    color: #e0e0e0;
+    font-size: 1em;
+    margin-bottom: 10px;
+    font-family: 'Segoe UI', sans-serif;
+    box-sizing: border-box;
+}
+
+.modal input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.modal input::placeholder {
+    color: #666;
+}
+
 /* Адаптивность */
 @media (max-width: 768px) {
     body { padding: 10px; }
