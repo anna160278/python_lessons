@@ -1521,3 +1521,67 @@ pre.quiz-code {
     .interactive-task { padding: 15px; }
     .fill-blank { min-width: 60px; font-size: 0.85em; }
 }
+
+/* ===== АДАПТИВНЫЕ ТАБЛИЦЫ СПРАВОЧНИКА ===== */
+@media screen and (max-width: 768px) {
+    /* Скрываем заголовок таблицы на мобильных */
+    .reference-table thead {
+        display: none;
+    }
+    
+    /* Превращаем таблицу в блочную структуру */
+    .reference-table,
+    .reference-table tbody,
+    .reference-table tr,
+    .reference-table td {
+        display: block;
+        width: 100%;
+    }
+    
+    /* Каждая строка таблицы становится "карточкой" */
+    .reference-table tr {
+        margin-bottom: 15px;
+        background: #1e1e2f;
+        border-radius: 10px;
+        border: 1px solid #2a2a4a;
+        padding: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Каждая ячейка — отдельный блок с подписью */
+    .reference-table td {
+        padding: 8px 10px;
+        border: none;
+        border-bottom: 1px solid #2a2a4a;
+        text-align: left;
+        position: relative;
+    }
+    
+    .reference-table td:last-child {
+        border-bottom: none;
+    }
+    
+    /* Подписи перед каждой ячейкой через data-label */
+    .reference-table td::before {
+        content: attr(data-label);
+        display: block;
+        font-weight: bold;
+        color: #a78bfa;
+        font-size: 0.85em;
+        margin-bottom: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    /* Код внутри ячеек — переносить, а не обрезать */
+    .reference-table td code {
+        white-space: pre-wrap;
+        word-break: break-word;
+        font-size: 0.9em;
+    }
+    
+    /* Уменьшаем размер шрифта на мобильных */
+    .reference-table {
+        font-size: 0.95em;
+    }
+}

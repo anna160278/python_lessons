@@ -1678,6 +1678,32 @@
             </div>
         </div>
     </div>
+
+    <script>
+// Автоматически добавляем data-label ко всем таблицам справочника
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.reference-table table').forEach(table => {
+        // Получаем заголовки из thead
+        const headers = Array.from(table.querySelectorAll('thead th')).map(th => th.textContent.trim());
+        
+        // Если заголовков нет — пропускаем таблицу
+        if (headers.length === 0) return;
+        
+        // Добавляем data-label к каждой ячейке в tbody
+        table.querySelectorAll('tbody tr').forEach(row => {
+            const cells = row.querySelectorAll('td');
+            cells.forEach((cell, index) => {
+                if (headers[index]) {
+                    cell.setAttribute('data-label', headers[index]);
+                }
+            });
+        });
+    });
+    
+    console.log('✅ data-label добавлены ко всем таблицам справочника');
+});
+</script>
+
 </body>
 
 </html>
