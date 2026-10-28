@@ -31,6 +31,7 @@
                     <a href="#oop">🏛️ ООП</a>
                     <a href="#tkinter">📟 Tkinter</a>
                     <a href="#pygame">🎮 Pygame</a>
+                    <a href="#files"> Файлы и JSON</a>
                 </div>
 
                 <div class="reference-section" id="arithmetic">
@@ -1674,6 +1675,344 @@
 
     <a href="#" class="back-to-top">↑ Наверх</a>
 </section>
+
+<!-- Раздел Файлы и JSON -->
+<section class="reference-section" id="files">
+    <h2><span class="emoji-icon"></span> Файлы и JSON</h2>
+
+    <h3>Открытие файлов</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>open(name, mode)</code></td>
+                    <td>Открыть файл (возвращает объект файла)</td>
+                    <td><code>f = open("note.txt", "r")</code></td>
+                </tr>
+                <tr>
+                    <td><code>mode="r"</code></td>
+                    <td>Режим чтения (файл должен существовать)</td>
+                    <td><code>open("f.txt", "r")</code></td>
+                </tr>
+                <tr>
+                    <td><code>mode="w"</code></td>
+                    <td>Режим записи (стирает старый файл)</td>
+                    <td><code>open("f.txt", "w")</code></td>
+                </tr>
+                <tr>
+                    <td><code>mode="a"</code></td>
+                    <td>Режим дописки в конец</td>
+                    <td><code>open("f.txt", "a")</code></td>
+                </tr>
+                <tr>
+                    <td><code>encoding="utf-8"</code></td>
+                    <td>Кодировка (всегда указывай для русских букв!)</td>
+                    <td><code>open("f.txt", "r", encoding="utf-8")</code></td>
+                </tr>
+                <tr>
+                    <td><code>f.close()</code></td>
+                    <td>Закрыть файл (освободить ресурсы)</td>
+                    <td><code>f.close()</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Методы чтения файла</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Метод</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>f.read()</code></td>
+                    <td>Прочитать всё содержимое в одну строку</td>
+                    <td><code>text = f.read()</code></td>
+                </tr>
+                <tr>
+                    <td><code>f.readlines()</code></td>
+                    <td>Прочитать все строки в список</td>
+                    <td><code>lines = f.readlines()</code></td>
+                </tr>
+                <tr>
+                    <td><code>for line in f:</code></td>
+                    <td>Читать файл построчно (эффективно для больших файлов)</td>
+                    <td><code>for line in f: print(line)</code></td>
+                </tr>
+                <tr>
+                    <td><code>f.seek(0)</code></td>
+                    <td>Вернуть указатель в начало файла</td>
+                    <td><code>f.seek(0)</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Методы записи в файл</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Метод</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>f.write(text)</code></td>
+                    <td>Записать строку в файл (принимает только строки!)</td>
+                    <td><code>f.write("Привет\n")</code></td>
+                </tr>
+                <tr>
+                    <td><code>f.writelines(list)</code></td>
+                    <td>Записать список строк</td>
+                    <td><code>f.writelines(["a\n", "b\n"])</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Конструкция with</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Синтаксис</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>with open(...) as f:</code></td>
+                    <td>Автоматически закрывает файл после блока (даже при ошибке)</td>
+                    <td><code>with open("f.txt", "r", encoding="utf-8") as f: text = f.read()</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Обработка строк файла</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Метод</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>line.strip()</code></td>
+                    <td>Убрать пробелы и <code>\n</code> по краям строки</td>
+                    <td><code>"  hi\n  ".strip() → "hi"</code></td>
+                </tr>
+                <tr>
+                    <td><code>line.split(sep)</code></td>
+                    <td>Разбить строку по разделителю на список</td>
+                    <td><code>"Анна,85".split(",") → ["Анна", "85"]</code></td>
+                </tr>
+                <tr>
+                    <td><code>int(s) / float(s)</code></td>
+                    <td>Превратить строку в число</td>
+                    <td><code>int("85") → 85</code></td>
+                </tr>
+                <tr>
+                    <td><code>str(n)</code></td>
+                    <td>Превратить число в строку (для записи в файл)</td>
+                    <td><code>str(100) → "100"</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Модуль json</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Функция</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>import json</code></td>
+                    <td>Импорт модуля JSON</td>
+                    <td><code>import json</code></td>
+                </tr>
+                <tr>
+                    <td><code>json.load(f)</code></td>
+                    <td>Прочитать JSON из файла → словарь/список Python</td>
+                    <td><code>data = json.load(f)</code></td>
+                </tr>
+                <tr>
+                    <td><code>json.loads(s)</code></td>
+                    <td>Прочитать JSON из строки (s = string)</td>
+                    <td><code>data = json.loads('{"a": 1}')</code></td>
+                </tr>
+                <tr>
+                    <td><code>json.dump(data, f)</code></td>
+                    <td>Записать словарь/список в файл как JSON</td>
+                    <td><code>json.dump(data, f)</code></td>
+                </tr>
+                <tr>
+                    <td><code>json.dumps(data)</code></td>
+                    <td>Превратить в JSON-строку</td>
+                    <td><code>s = json.dumps(data)</code></td>
+                </tr>
+                <tr>
+                    <td><code>indent=2</code></td>
+                    <td>Красивое форматирование с отступами</td>
+                    <td><code>json.dump(data, f, indent=2)</code></td>
+                </tr>
+                <tr>
+                    <td><code>ensure_ascii=False</code></td>
+                    <td>Сохранять русские буквы как есть (не <code>\u0410</code>)</td>
+                    <td><code>json.dump(data, f, ensure_ascii=False)</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Отличия JSON от Python</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Python</th>
+                    <th>JSON</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>True / False</code></td>
+                    <td><code>true / false</code> (с маленькой буквы)</td>
+                </tr>
+                <tr>
+                    <td><code>None</code></td>
+                    <td><code>null</code></td>
+                </tr>
+                <tr>
+                    <td><code>'одинарные кавычки'</code></td>
+                    <td>Только <code>"двойные кавычки"</code></td>
+                </tr>
+                <tr>
+                    <td><code>(1, 2)</code> кортеж</td>
+                    <td>Не поддерживается (только списки <code>[]</code>)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Модуль os (работа с файлами)</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Функция</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>import os</code></td>
+                    <td>Импорт модуля os</td>
+                    <td><code>import os</code></td>
+                </tr>
+                <tr>
+                    <td><code>os.path.exists(path)</code></td>
+                    <td>Проверить, существует ли файл/папка</td>
+                    <td><code>os.path.exists("data.json")</code></td>
+                </tr>
+                <tr>
+                    <td><code>os.remove(path)</code></td>
+                    <td>Удалить файл</td>
+                    <td><code>os.remove("old.txt")</code></td>
+                </tr>
+                <tr>
+                    <td><code>os.path.isfile(path)</code></td>
+                    <td>Проверить, является ли путь файлом</td>
+                    <td><code>os.path.isfile("data.txt")</code></td>
+                </tr>
+                <tr>
+                    <td><code>os.path.isdir(path)</code></td>
+                    <td>Проверить, является ли путь папкой</td>
+                    <td><code>os.path.isdir("folder")</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h3>Модуль csv (таблицы)</h3>
+    <div class="reference-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Команда</th>
+                    <th>Описание</th>
+                    <th>Пример</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>import csv</code></td>
+                    <td>Импорт модуля CSV</td>
+                    <td><code>import csv</code></td>
+                </tr>
+                <tr>
+                    <td><code>csv.DictReader(f)</code></td>
+                    <td>Читать CSV как список словарей (по заголовку)</td>
+                    <td><code>reader = csv.DictReader(f)</code></td>
+                </tr>
+                <tr>
+                    <td><code>csv.DictWriter(f, fieldnames)</code></td>
+                    <td>Писать CSV из словарей</td>
+                    <td><code>w = csv.DictWriter(f, fieldnames=["name", "age"])</code></td>
+                </tr>
+                <tr>
+                    <td><code>writer.writeheader()</code></td>
+                    <td>Записать строку заголовков</td>
+                    <td><code>w.writeheader()</code></td>
+                </tr>
+                <tr>
+                    <td><code>writer.writerow(row)</code></td>
+                    <td>Записать одну строку</td>
+                    <td><code>w.writerow({"name": "Анна", "age": 12})</code></td>
+                </tr>
+                <tr>
+                    <td><code>writer.writerows(rows)</code></td>
+                    <td>Записать несколько строк</td>
+                    <td><code>w.writerows(students)</code></td>
+                </tr>
+                <tr>
+                    <td><code>newline=""</code></td>
+                    <td>Параметр open() для корректной записи CSV</td>
+                    <td><code>open("f.csv", "w", newline="", encoding="utf-8")</code></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <a href="#" class="back-to-top">↑ Наверх</a>
+</section>
+
 
             </div>
         </div>
