@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Файлы и JSON — Python</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="emoji-icon">📂</span> Файлы и JSON</h1>
+            <p>Учимся сохранять данные и работать с файлами</p>
+        </div>
+
+        <nav class="page-nav">
+            <a href="index.html" class="page-link">🏠 Главная</a>
+        </nav>
+
+        <div class="stats">
+            <div class="stat-item">
+                <span class="stat-value" id="score">0</span>
+                <span class="stat-label">Очки</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="progress">1/12</span>
+                <span class="stat-label">Прогресс</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-value" id="correct">0</span>
+                <span class="stat-label">Правильных</span>
+            </div>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <div class="content">
+            <!-- Раздел 1: Зачем нужны файлы? -->
+            <div class="lesson-section active" id="section1">
+                <h2><span class="emoji-icon"></span> Зачем нужны файлы?</h2>
+                
+                <p>До сих пор все наши программы <strong>забывали данные</strong> после закрытия. Переменные живут только пока работает программа. Но что если нужно сохранить результат насовсем?</p>
+
+                <div class="example-box">
+                    <strong>🎯 Примеры из жизни:</strong>
+                    <p>🎮 <strong>Pygame</strong>: сохранить рекорд, чтобы он остался после перезапуска игры</p>
+                    <p> <strong>Tkinter</strong>: создать текстовый редактор, который сохраняет заметки в файл</p>
+                    <p>👥 <strong>База данных</strong>: хранить список друзей, игр или учеников с оценками</p>
+                </div>
+
+                <h3>Переменные vs Файлы</h3>
+                <div class="code-block"><span class="com"># Переменная — живёт только в памяти</span>
+<span class="var">score</span> <span class="op">=</span> <span class="num">100</span>
+<span class="func">print</span>(<span class="var">score</span>)  <span class="com"># 100</span>
+
+<span class="com"># Закрыли программу — score исчез навсегда!</span>
+
+<span class="com"># Файл — живёт на диске компьютера</span>
+<span class="com"># Даже после перезапуска программы данные останутся</span></div>
+
+                <div class="example-box">
+                    <strong>📝 Что мы изучим:</strong>
+                    <p>📄 <strong>Текстовые файлы</strong> (.txt) — простой текст, построчно</p>
+                    <p>🔷 <strong>JSON</strong> (.json) — структурированные данные (словари, списки)</p>
+                    <p>📊 <strong>CSV</strong> (.csv) — таблицы (кратко)</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">1. Чем файл отличается от переменной?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Ничем, это одно и то же</div>
+                        <div class="quiz-option" data-correct="true">Файл сохраняется на диске, переменная — только в памяти</div>
+                        <div class="quiz-option" data-correct="false">Переменная больше по размеру</div>
+                        <div class="quiz-option" data-correct="false">Файл работает быстрее</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">2. Какой формат лучше для хранения списка друзей с именами и возрастом?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Только переменная</div>
+                        <div class="quiz-option" data-correct="true">JSON или текстовый файл</div>
+                        <div class="quiz-option" data-correct="false">Только картинка</div>
+                        <div class="quiz-option" data-correct="false">Только число</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 2: Чтение файлов (простой способ) -->
+            <div class="lesson-section" id="section2">
+                <h2><span class="emoji-icon">📖</span> Чтение текстовых файлов</h2>
+                
+                <p>Чтобы прочитать файл, нужно его <strong>открыть</strong>, <strong>прочитать содержимое</strong> и <strong>закрыть</strong>.</p>
+
+                <h3>Функция open() и метод read()</h3>
+                <div class="code-block"><span class="com"># 1. Открываем файл для чтения (режим 'r' — read)</span>
+<span class="var">f</span> <span class="op">=</span> <span class="func">open</span>(<span class="str">"note.txt"</span>, <span class="str">"r"</span>)
+
+<span class="com"># 2. Читаем всё содержимое файла в одну строку</span>
+<span class="var">content</span> <span class="op">=</span> <span class="var">f</span>.<span class="func">read</span>()
+<span class="func">print</span>(<span class="var">content</span>)
+
+<span class="com"># 3. Обязательно закрываем файл, чтобы освободить память!</span>
+<span class="var">f</span>.<span class="func">close</span>()</div>
+
+                <div class="example-box">
+                    <strong>🔑 Что здесь происходит:</strong>
+                    <p><code>open("note.txt", "r")</code> — открываем файл <em>note.txt</em> в режиме чтения</p>
+                    <p><code>f</code> — это переменная, через которую мы "общаемся" с файлом</p>
+                    <p><code>f.read()</code> — читает <strong>всё содержимое</strong> файла в одну большую строку</p>
+                    <p><code>f.close()</code> — закрывает файл (освобождает ресурсы компьютера)</p>
+                </div>
+
+                <h3>Режимы открытия файла</h3>
+                <div class="code-block"><span class="com"># "r" — read (чтение). Файл должен существовать.</span>
+<span class="var">f</span> <span class="op">=</span> <span class="func">open</span>(<span class="str">"note.txt"</span>, <span class="str">"r"</span>)
+
+<span class="com"># "w" — write (запись). Создаёт новый файл или стирает старый.</span>
+<span class="var">f</span> <span class="op">=</span> <span class="func">open</span>(<span class="str">"note.txt"</span>, <span class="str">"w"</span>)
+
+<span class="com"># "a" — append (дописка). Добавляет текст в конец файла.</span>
+<span class="var">f</span> <span class="op">=</span> <span class="func">open</span>(<span class="str">"note.txt"</span>, <span class="str">"a"</span>)</div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">3. Какой режим нужен для чтения файла?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>"w"</code></div>
+                        <div class="quiz-option" data-correct="true"><code>"r"</code></div>
+                        <div class="quiz-option" data-correct="false"><code>"a"</code></div>
+                        <div class="quiz-option" data-correct="false"><code>"x"</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">4. Что делает <code>f.close()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Открывает файл</div>
+                        <div class="quiz-option" data-correct="false">Читает файл</div>
+                        <div class="quiz-option" data-correct="true">Закрывает файл и освобождает память</div>
+                        <div class="quiz-option" data-correct="false">Удаляет файл</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 3: Запись в файлы (простой способ) -->
+            <div class="lesson-section" id="section3">
+                <h2><span class="emoji-icon">✏️</span> Запись в текстовые файлы</h2>
+                
+                <h3>Режим "w" — запись (перезапись)</h3>
+                <div class="code-block"><span class="com"># Открываем файл для записи</span>
+<span class="var">f</span> <span class="op">=</span> <span class="func">open</span>(<span class="str">"note.txt"</span>, <span class="str">"w"</span>)
+
+<span class="com"># Записываем текст</span>
+<span class="var">f</span>.<span class="func">write</span>(<span class="str">"Привет, мир!\n"</span>)
+<span class="var">f</span>.<span class="func">write</span>(<span class="str">"Это моя заметка.\n"</span>)
+
+<span class="var">f</span>.<span class="func">close</span>()
+
+<span class="com"># ️ Если файл уже существовал — его содержимое СТЁРТО!</span></div>
+
+                <h3>Режим "a" — дописка в конец</h3>
+                <div class="code-block"><span class="com"># Открываем для дописки (append)</span>
+<span class="var">f</span> <span class="op">=</span> <span class="func">open</span>(<span class="str">"diary.txt"</span>, <span class="str">"a"</span>)
+
+<span class="com"># Добавляем новую строку в конец файла</span>
+<span class="var">f</span>.<span class="func">write</span>(<span class="str">"Сегодня был хороший день!\n"</span>)
+
+<span class="var">f</span>.<span class="func">close</span>()
+
+<span class="com"># Старое содержимое файла СОХРАНИЛОСЬ!</span></div>
+
+                <div class="example-box">
+                    <strong>🔑 Разница между "w" и "a":</strong>
+                    <p><code>"w"</code> — <strong>стирает</strong> всё старое и записывает новое (как чистый лист)</p>
+                    <p><code>"a"</code> — <strong>дописывает</strong> в конец, не трогая старое (как дневник)</p>
+                    <p>Оба режима <strong>создают файл</strong>, если его не существует</p>
+                </div>
+
+                <h3>Практика: сохраняем рекорд из Pygame</h3>
+                <div class="code-block"><span class="com"># Сохраняем лучший счёт в файл</span>
+<span class="var">best_score</span> <span class="op">=</span> <span class="num">1500</span>
+
+<span class="var">f</span> <span class="op">=</span> <span class="func">open</span>(<span class="str">"record.txt"</span>, <span class="str">"w"</span>)
+<span class="var">f</span>.<span class="func">write</span>(<span class="func">str</span>(<span class="var">best_score</span>))  <span class="com"># write принимает только строки!</span>
+<span class="var">f</span>.<span class="func">close</span>()
+
+<span class="com"># Читаем рекорд при запуске игры</span>
+<span class="var">f</span> <span class="op">=</span> <span class="func">open</span>(<span class="str">"record.txt"</span>, <span class="str">"r"</span>)
+<span class="var">saved_score</span> <span class="op">=</span> <span class="func">int</span>(<span class="var">f</span>.<span class="func">read</span>().<span class="func">strip</span>())
+<span class="com"># strip() убирает \n, int() превращает в число</span>
+<span class="var">f</span>.<span class="func">close</span>()
+
+<span class="func">print</span>(<span class="str">f"Лучший счёт: </span><span class="var">{saved_score}</span><span class="str">"</span>)</div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">5. Что делает режим "w" при открытии существующего файла?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Дописывает в конец</div>
+                        <div class="quiz-option" data-correct="true">Стирает всё содержимое и записывает новое</div>
+                        <div class="quiz-option" data-correct="false">Выдаёт ошибку</div>
+                        <div class="quiz-option" data-correct="false">Ничего не делает</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">6. Почему <code>f.write(100)</code> вызовет ошибку?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Потому что файл не открыт</div>
+                        <div class="quiz-option" data-correct="true">Потому что write принимает только строки</div>
+                        <div class="quiz-option" data-correct="false">Потому что число слишком большое</div>
+                        <div class="quiz-option" data-correct="false">Ошибки не будет</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 4: Кодировки, readlines и указатель -->
+            <div class="lesson-section" id="section4">
+                <h2><span class="emoji-icon">🔤</span> Кодировки, readlines() и указатель файла</h2>
+                
+                <h3>Кодировка и русские буквы</h3>
+                <p>Попробуй открыть файл с русским текстом — и на Windows могут появиться <strong>"кракозябры"</strong> вместо букв! Почему?</p>
+
+                <div class="code-block"><span class="com"># ❌ Без указания кодировки на Windows - непонятные символы</span>
+<span class="var">f</span> <span class="op">=</span> <span class="func">open</span>(<span class="str">"note.txt"</span>, <span class="str">"r"</span>)
+<span class="func">print</span>(<span class="var">f</span>.<span class="func">read</span>())  <span class="com">#  ! (кракозябры)</span>
+<span class="var">f</span>.<span class="func">close</span>()
+
+<span class="com"># ✅ Правильно — указываем кодировку явно</span>
+<span class="var">f</span> <span class="op">=</span> <span class="func">open</span>(<span class="str">"note.txt"</span>, <span class="str">"r"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>)
+<span class="func">print</span>(<span class="var">f</span>.<span class="func">read</span>())  <span class="com"># Привет, мир!</span>
+<span class="var">f</span>.<span class="func">close</span>()</div>
+
+                <div class="example-box">
+                    <strong>🔑 Почему так происходит:</strong>
+                    <p>На Windows по умолчанию используется кодировка <code>cp1251</code>, а на Mac/Linux — <code>utf-8</code></p>
+                    <p><code>utf-8</code> — универсальная кодировка, понимает все языки мира</p>
+                    <p>Чтобы программа работала одинаково на всех компьютерах, <strong>всегда указывай <code>encoding="utf-8"</code></strong></p>
+                </div>
+
+                <h3>read() vs readlines()</h3>
+                <p>Есть два способа прочитать файл — они возвращают разные результаты:</p>
+
+                <div class="code-block"><span class="com"># Файл scores.txt содержит три строки:</span>
+<span class="com"># 100</span>
+<span class="com"># 250</span>
+<span class="com"># 180</span>
+
+<span class="com"># read() — возвращает ОДНУ большую строку</span>
+<span class="var">f</span> <span class="op">=</span> <span class="func">open</span>(<span class="str">"scores.txt"</span>, <span class="str">"r"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>)
+<span class="var">all_text</span> <span class="op">=</span> <span class="var">f</span>.<span class="func">read</span>()
+<span class="func">print</span>(<span class="var">all_text</span>)
+<span class="com"># 100</span>
+<span class="com"># 250</span>
+<span class="com"># 180</span>
+<span class="var">f</span>.<span class="func">close</span>()
+
+<span class="com"># readlines() — возвращает СПИСОК строк</span>
+<span class="var">f</span> <span class="op">=</span> <span class="func">open</span>(<span class="str">"scores.txt"</span>, <span class="str">"r"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>)
+<span class="var">lines</span> <span class="op">=</span> <span class="var">f</span>.<span class="func">readlines</span>()
+<span class="func">print</span>(<span class="var">lines</span>)  <span class="com"># ['100\n', '250\n', '180\n']</span>
+<span class="var">f</span>.<span class="func">close</span>()</div>
+
+                <div class="example-box">
+                    <strong>⚠️ Важно про readlines():</strong>
+                    <p>В конце каждой строки стоит символ <code>\n</code> — это перенос строки</p>
+                    <p>Чтобы его убрать, используем метод <code>strip()</code>: <code>line.strip()</code></p>
+                    <p><code>read()</code> удобен, когда нужно всё содержимое сразу</p>
+                    <p><code>readlines()</code> удобен, когда нужно обработать файл построчно</p>
+                </div>
+
+                <h3>Указатель файла — важная ловушка!</h3>
+                <p>Когда ты читаешь файл, Python запоминает, <strong>где остановился</strong>. Это называется "указатель". После первого <code>read()</code> указатель стоит в <strong>конце файла</strong>, и повторное чтение ничего не даст!</p>
+
+                <div class="code-block"><span class="var">f</span> <span class="op">=</span> <span class="func">open</span>(<span class="str">"note.txt"</span>, <span class="str">"r"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>)
+
+<span class="com"># Первое чтение — всё ок</span>
+<span class="var">first</span> <span class="op">=</span> <span class="var">f</span>.<span class="func">read</span>()
+<span class="func">print</span>(<span class="var">first</span>)  <span class="com"># "Привет, мир!"</span>
+
+<span class="com"># Второе чтение — ПУСТО! Указатель уже в конце файла</span>
+<span class="var">second</span> <span class="op">=</span> <span class="var">f</span>.<span class="func">read</span>()
+<span class="func">print</span>(<span class="var">second</span>)  <span class="com"># "" (пустая строка!)</span>
+
+<span class="var">f</span>.<span class="func">close</span>()</div>
+
+                <div class="example-box">
+                    <strong>🔑 Как решить проблему указателя:</strong>
+                    <p><strong>Способ 1:</strong> Сохранить результат в переменную и использовать её</p>
+                    <div class="code-block"><span class="var">content</span> <span class="op">=</span> <span class="var">f</span>.<span class="func">read</span>()  <span class="com"># читаем один раз</span>
+<span class="func">print</span>(<span class="var">content</span>)       <span class="com"># используем переменную</span>
+<span class="func">print</span>(<span class="func">len</span>(<span class="var">content</span>))  <span class="com"># снова используем переменную</span></div>
+                    <p><strong>Способ 2:</strong> Закрыть и открыть файл заново</p>
+                    <p><strong>Способ 3:</strong> Вернуть указатель в начало через <code>f.seek(0)</code></p>
+                    <div class="code-block"><span class="var">f</span>.<span class="func">read</span>()     <span class="com"># читаем файл</span>
+<span class="var">f</span>.<span class="func">seek</span>(<span class="num">0</span>)    <span class="com"># возвращаем указатель в начало</span>
+<span class="var">f</span>.<span class="func">read</span>()     <span class="com"># читаем снова — теперь работает!</span></div>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">7. Что возвращает <code>readlines()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Одну большую строку</div>
+                        <div class="quiz-option" data-correct="true">Список всех строк файла</div>
+                        <div class="quiz-option" data-correct="false">Число строк</div>
+                        <div class="quiz-option" data-correct="false">Словарь</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">8. Почему второй <code>f.read()</code> возвращает пустую строку?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Файл пустой</div>
+                        <div class="quiz-option" data-correct="false">Метод read() сломался</div>
+                        <div class="quiz-option" data-correct="true">Указатель файла стоит в конце после первого чтения</div>
+                        <div class="quiz-option" data-correct="false">Нужно использовать readlines()</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">9. Как вернуть указатель файла в начало?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>f.start()</code></div>
+                        <div class="quiz-option" data-correct="false"><code>f.reset()</code></div>
+                        <div class="quiz-option" data-correct="true"><code>f.seek(0)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>f.begin()</code></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 5: Конструкция with -->
+            <div class="lesson-section" id="section5">
+                <h2><span class="emoji-icon">🛡️</span> Конструкция with</h2>
+                
+                <p>Забывать <code>f.close()</code> — частая ошибка. Если забыть закрыть файл, данные могут не сохраниться, а память компьютера — засориться. Конструкция <code>with</code> <strong>автоматически закрывает файл</strong>, даже если произошла ошибка.</p>
+
+                <h3>Синтаксис with</h3>
+                <div class="code-block"><span class="com"># Чтение файла через with (не нужно писать f.close())</span>
+<span class="kw">with</span> <span class="func">open</span>(<span class="str">"note.txt"</span>, <span class="str">"r"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+    <span class="var">content</span> <span class="op">=</span> <span class="var">f</span>.<span class="func">read</span>()
+    <span class="func">print</span>(<span class="var">content</span>)
+<span class="com"># Файл автоматически закрылся здесь!</span>
+
+<span class="com"># Запись через with</span>
+<span class="kw">with</span> <span class="func">open</span>(<span class="str">"note.txt"</span>, <span class="str">"w"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+    <span class="var">f</span>.<span class="func">write</span>(<span class="str">"Новый текст\n"</span>)
+<span class="com"># Файл автоматически закрылся!</span></div>
+
+                <div class="example-box">
+                    <strong>💡 Как это работает:</strong>
+                    <p><code>with open(...) as f:</code> — открываем файл и даём ему имя <code>f</code></p>
+                    <p>Всё, что с отступом внутри <code>with</code> — файл открыт</p>
+                    <p>Как только отступ закончился — файл <strong>сам закрылся</strong></p>
+                    <p>Не нужно писать <code>f.close()</code>!</p>
+                </div>
+
+                <h3>Практика: текстовый редактор (Tkinter + файлы)</h3>
+                <div class="code-block"><span class="kw">import</span> <span class="var">tkinter</span> <span class="kw">as</span> <span class="var">tk</span>
+<span class="kw">from</span> <span class="var">tkinter</span> <span class="kw">import</span> <span class="var">filedialog</span>
+
+<span class="var">window</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Tk</span>()
+<span class="var">text_area</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Text</span>(<span class="var">window</span>, <span class="var">width</span><span class="op">=</span><span class="num">50</span>, <span class="var">height</span><span class="op">=</span><span class="num">20</span>)
+<span class="var">text_area</span>.<span class="func">pack</span>()
+
+<span class="kw">def</span> <span class="func">save_file</span>():
+    <span class="var">filepath</span> <span class="op">=</span> <span class="var">filedialog</span>.<span class="func">asksaveasfilename</span>(
+                                <span class="var">defaultextension</span><span class="op">=</span><span class="str">".txt"</span>)
+    <span class="kw">if</span> <span class="var">filepath</span>:
+        <span class="com"># with сам закроет файл после записи</span>
+        <span class="kw">with</span> <span class="func">open</span>(<span class="var">filepath</span>, <span class="str">"w"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+            <span class="var">f</span>.<span class="func">write</span>(<span class="var">text_area</span>.<span class="func">get</span>(<span class="str">"1.0"</span>, <span class="str">"end"</span>))
+
+<span class="var">btn</span> <span class="op">=</span> <span class="var">tk</span>.<span class="func">Button</span>(<span class="var">window</span>, <span class="var">text</span><span class="op">=</span><span class="str">"Сохранить"</span>, <span class="var">command</span><span class="op">=</span><span class="var">save_file</span>)
+<span class="var">btn</span>.<span class="func">pack</span>()
+
+<span class="var">window</span>.<span class="func">mainloop</span>()</div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">10. Зачем нужна конструкция <code>with</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Чтобы файл открывался быстрее</div>
+                        <div class="quiz-option" data-correct="true">Чтобы файл автоматически закрывался</div>
+                        <div class="quiz-option" data-correct="false">Чтобы читать файл построчно</div>
+                        <div class="quiz-option" data-correct="false">Чтобы создавать новые файлы</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">11. Что произойдёт с файлом, если внутри блока <code>with</code> произойдёт ошибка?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Он останется открытым</div>
+                        <div class="quiz-option" data-correct="true">Он автоматически закроется, даже при ошибке</div>
+                        <div class="quiz-option" data-correct="false">Программа зависнет</div>
+                        <div class="quiz-option" data-correct="false">Файл удалится</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 6: Работа со строками файла -->
+            <div class="lesson-section" id="section6">
+                <h2><span class="emoji-icon">📋</span> Работа со строками файла</h2>
+                
+                <p>Часто нужно обработать файл <strong>построчно</strong>: прочитать каждую строку, что-то с ней сделать и сохранить результат.</p>
+
+                <h3>Цикл по файлу</h3>
+                <div class="code-block"><span class="com"># Файл scores.txt содержит:</span>
+<span class="com"># 100</span>
+<span class="com"># 250</span>
+<span class="com"># 180</span>
+
+<span class="kw">with</span> <span class="func">open</span>(<span class="str">"scores.txt"</span>, <span class="str">"r"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+    <span class="kw">for</span> <span class="var">line</span> <span class="kw">in</span> <span class="var">f</span>:
+        <span class="var">score</span> <span class="op">=</span> <span class="func">int</span>(<span class="var">line</span>.<span class="func">strip</span>())
+            <span class="com"># убираем \n и превращаем в число</span>
+        <span class="func">print</span>(<span class="str">f"Счёт: </span><span class="var">{score}</span><span class="str">"</span>)</div>
+
+                <div class="example-box">
+                    <strong>💡 Почему <code>for line in f</code> лучше <code>readlines()</code>?</strong>
+                    <p><code>for line in f</code> — читает файл <strong>по одной строке</strong>, не загружая всё в память</p>
+                    <p><code>readlines()</code> — загружает <strong>весь файл сразу</strong> в список (плохо для больших файлов)</p>
+                    <p>Для больших файлов всегда используй <code>for line in f</code>!</p>
+                </div>
+
+                <h3>Практика: база данных учеников</h3>
+                <p>Допустим, у нас есть файл <code>students.txt</code> с данными учеников:</p>
+                <div class="code-block"><span class="com"># students.txt:</span>
+<span class="com"># Анна,85</span>
+<span class="com"># Борис,92</span>
+<span class="com"># Вика,78</span>
+
+<span class="var">students</span> <span class="op">=</span> []
+
+<span class="kw">with</span> <span class="func">open</span>(<span class="str">"students.txt"</span>, <span class="str">"r"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+    <span class="kw">for</span> <span class="var">line</span> <span class="kw">in</span> <span class="var">f</span>:
+        <span class="com"># Разделяем строку по запятой</span>
+        <span class="var">parts</span> <span class="op">=</span> <span class="var">line</span>.<span class="func">strip</span>().<span class="func">split</span>(<span class="str">","</span>)
+        <span class="var">name</span> <span class="op">=</span> <span class="var">parts</span>[<span class="num">0</span>]
+        <span class="var">grade</span> <span class="op">=</span> <span class="func">int</span>(<span class="var">parts</span>[<span class="num">1</span>])
+        <span class="var">students</span>.<span class="func">append</span>({<span class="str">"name"</span>: <span class="var">name</span>, <span class="str">"grade"</span>: <span class="var">grade</span>})
+
+<span class="func">print</span>(<span class="var">students</span>)
+<span class="com"># [{'name': 'Анна', 'grade': 85}, 
+    {'name': 'Борис', 'grade': 92}, ...]</span></div>
+
+                <div class="example-box">
+                    <strong> Ключевые методы:</strong>
+                    <p><code>line.strip()</code> — убирает пробелы и <code>\n</code> по краям строки</p>
+                    <p><code>line.split(",")</code> — разбивает строку по запятой на список</p>
+                    <p><code>int()</code> / <code>float()</code> — превращает строку в число</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">12. Что делает <code>line.strip()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Разбивает строку на слова</div>
+                        <div class="quiz-option" data-correct="true">Убирает пробелы и переносы строк по краям</div>
+                        <div class="quiz-option" data-correct="false">Превращает строку в число</div>
+                        <div class="quiz-option" data-correct="false">Делает строку заглавной</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">13. Что вернёт <code>"Анна,85".split(",")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>"Анна85"</code></div>
+                        <div class="quiz-option" data-correct="true"><code>["Анна", "85"]</code></div>
+                        <div class="quiz-option" data-correct="false"><code>("Анна", 85)</code></div>
+                        <div class="quiz-option" data-correct="false"><code>{"Анна": 85}</code></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 7: Что такое JSON? -->
+            <div class="lesson-section" id="section7">
+                <h2><span class="emoji-icon"></span> Что такое JSON?</h2>
+                
+                <p><strong>JSON</strong> (JavaScript Object Notation) — это формат для хранения <strong>структурированных данных</strong>. Он выглядит как словарь Python, но используется во всех языках программирования.</p>
+
+                <h3>JSON vs Словарь Python</h3>
+                <div class="code-block"><span class="com"># Словарь Python:</span>
+<span class="var">friend</span> <span class="op">=</span> {
+    <span class="str">"name"</span>: <span class="str">"Алиса"</span>,
+    <span class="str">"age"</span>: <span class="num">12</span>,
+    <span class="str">"hobbies"</span>: [<span class="str">"рисование"</span>, <span class="str">"игры"</span>]
+}
+
+<span class="com"># Те же данные в JSON (файл friend.json):</span>
+<span class="com"># {</span>
+<span class="com">#   "name": "Алиса",</span>
+<span class="com">#   "age": 12,</span>
+<span class="com">#   "hobbies": ["рисование", "игры"]</span>
+<span class="com"># }</span></div>
+
+                <div class="example-box">
+                    <strong>⚠️ Важные отличия JSON от Python:</strong>
+                    <p>✅ В JSON ключи <strong>всегда в двойных кавычках</strong> <code>"name"</code>, не одинарных <code>'name'</code></p>
+                    <p>✅ <code>true</code>/<code>false</code> в JSON пишутся с <strong>маленькой буквы</strong> (в Python <code>True</code>/<code>False</code>)</p>
+                    <p>✅ <code>null</code> в JSON = <code>None</code> в Python</p>
+                    <p>✅ JSON не поддерживает кортежи <code>()</code> и множества <code>{}</code></p>
+                </div>
+
+                <h3>Зачем нужен JSON?</h3>
+                <div class="example-box">
+                    <strong>💡 Примеры использования:</strong>
+                    <p>🎮 <strong>Pygame</strong>: сохранить рекорды, настройки игры, уровень игрока</p>
+                    <p>🌐 <strong>Веб-сайты</strong>: обмен данными между сервером и браузером</p>
+                    <p>👥 <strong>Базы данных</strong>: хранить списки друзей, каталоги игр, оценки учеников</p>
+                    <p>⚙️ <strong>Настройки</strong>: сохранять конфигурацию программы</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">14. Чем JSON отличается от словаря Python?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Ничем, это одно и то же</div>
+                        <div class="quiz-option" data-correct="true">В JSON ключи только в двойных кавычках, true/false с маленькой буквы</div>
+                        <div class="quiz-option" data-correct="false">JSON только для чисел</div>
+                        <div class="quiz-option" data-correct="false">JSON только для строк</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">15. Как в JSON записывается "ничего" (отсутствие значения)?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>None</code></div>
+                        <div class="quiz-option" data-correct="true"><code>null</code></div>
+                        <div class="quiz-option" data-correct="false"><code>empty</code></div>
+                        <div class="quiz-option" data-correct="false"><code>0</code></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 8: Чтение JSON -->
+            <div class="lesson-section" id="section8">
+                <h2><span class="emoji-icon">📥</span> Чтение JSON</h2>
+                
+                <p>Для работы с JSON в Python есть встроенный модуль <code>json</code>. Он умеет превращать JSON в словарь Python и обратно.</p>
+
+                <h3>json.load() — читаем файл</h3>
+                <div class="code-block"><span class="kw">import</span> <span class="var">json</span>
+
+<span class="com"># Файл friend.json:</span>
+<span class="com"># {"name": "Алиса", "age": 12, 
+  "hobbies": ["рисование", "игры"]}</span>
+
+<span class="kw">with</span> <span class="func">open</span>(<span class="str">"friend.json"</span>, <span class="str">"r"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+    <span class="var">friend</span> <span class="op">=</span> <span class="var">json</span>.<span class="func">load</span>(<span class="var">f</span>)  <span class="com"># JSON → словарь Python</span>
+
+<span class="func">print</span>(<span class="var">friend</span>[<span class="str">"name"</span>])    <span class="com"># Алиса</span>
+<span class="func">print</span>(<span class="var">friend</span>[<span class="str">"age"</span>])     <span class="com"># 12</span>
+<span class="func">print</span>(<span class="var">friend</span>[<span class="str">"hobbies"</span>]) <span class="com"># ['рисование', 'игры']</span></div>
+
+                <h3>json.loads() — читаем строку</h3>
+                <div class="code-block"><span class="var">json_string</span> <span class="op">=</span> <span class="str">'{"name": "Борис", "age": 13}'</span>
+
+<span class="com"># loads = load string (загружаем из строки)</span>
+<span class="var">data</span> <span class="op">=</span> <span class="var">json</span>.<span class="func">loads</span>(<span class="var">json_string</span>)
+<span class="func">print</span>(<span class="var">data</span>[<span class="str">"name"</span>])  <span class="com"># Борис</span></div>
+
+                <h3>Вложенные данные</h3>
+                <div class="code-block"><span class="com"># friends.json — список друзей</span>
+<span class="com"># [</span>
+<span class="com">#   {"name": "Алиса", "age": 12},</span>
+<span class="com">#   {"name": "Борис", "age": 13},</span>
+<span class="com">#   {"name": "Вика", "age": 11}</span>
+<span class="com"># ]</span>
+
+<span class="kw">with</span> <span class="func">open</span>(<span class="str">"friends.json"</span>, <span class="str">"r"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+    <span class="var">friends</span> <span class="op">=</span> <span class="var">json</span>.<span class="func">load</span>(<span class="var">f</span>)  <span class="com"># JSON → список словарей</span>
+
+<span class="kw">for</span> <span class="var">friend</span> <span class="kw">in</span> <span class="var">friends</span>:
+    <span class="func">print</span>(<span class="str">f"</span><span class="var">{friend['name']}</span><span class="str">, </span><span class="var">{friend['age']}</span><span class="str"> лет"</span>)
+<span class="com"># Алиса, 12 лет</span>
+<span class="com"># Борис, 13 лет</span>
+<span class="com"># Вика, 11 лет</span></div>
+
+                <div class="example-box">
+                    <strong>🔑 Запомни:</strong>
+                    <p><code>json.load(f)</code> — читает из <strong>файла</strong> (file)</p>
+                    <p><code>json.loads(s)</code> — читает из <strong>строки</strong> (string)</p>
+                    <p>Буква <code>s</code> в конце = <strong>string</strong></p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">16. Что делает <code>json.load(f)</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Записывает словарь в файл</div>
+                        <div class="quiz-option" data-correct="true">Читает JSON из файла и превращает в словарь Python</div>
+                        <div class="quiz-option" data-correct="false">Удаляет файл</div>
+                        <div class="quiz-option" data-correct="false">Создаёт новый файл</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">17. В чём разница между <code>load</code> и <code>loads</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Никакой</div>
+                        <div class="quiz-option" data-correct="true"><code>load</code> читает из файла, <code>loads</code> — из строки</div>
+                        <div class="quiz-option" data-correct="false"><code>load</code> быстрее</div>
+                        <div class="quiz-option" data-correct="false"><code>loads</code> только для списков</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 9: Запись в JSON -->
+            <div class="lesson-section" id="section9">
+                <h2><span class="emoji-icon">📤</span> Запись в JSON</h2>
+                
+                <h3>json.dump() — записываем в файл</h3>
+                <div class="code-block"><span class="kw">import</span> <span class="var">json</span>
+
+<span class="var">friend</span> <span class="op">=</span> {
+    <span class="str">"name"</span>: <span class="str">"Алиса"</span>,
+    <span class="str">"age"</span>: <span class="num">12</span>,
+    <span class="str">"hobbies"</span>: [<span class="str">"рисование"</span>, <span class="str">"игры"</span>]
+}
+
+<span class="kw">with</span> <span class="func">open</span>(<span class="str">"friend.json"</span>, <span class="str">"w"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+    <span class="var">json</span>.<span class="func">dump</span>(<span class="var">friend</span>, <span class="var">f</span>, <span class="var">ensure_ascii</span><span class="op">=</span><span class="kw">False</span>)
+      <span class="com"># словарь Python → JSON в файл</span></div>
+
+                <h3>Параметр <code>ensure_ascii=False</code> — сохраняем русские буквы</h3>
+                <p>По умолчанию <code>json.dump()</code> превращает <strong>все не-английские символы</strong> в <code>\u</code>-коды. Это безопасно, но нечитаемо для человека:</p>
+
+                <div class="code-block"><span class="com"># ❌ Без ensure_ascii=False (по умолчанию):</span>
+<span class="com"># {"name": "\u0410\u043b\u0438\u0441\u0430", "age": 12}</span>
+<span class="com"># Это валидный JSON, но человек не может его прочитать!</span>
+
+<span class="com"># ✅ С ensure_ascii=False:</span>
+<span class="com"># {"name": "Алиса", "age": 12}</span>
+<span class="com"># Читаемо и понятно!</span></div>
+
+                <div class="example-box">
+                    <strong>🔑 Когда использовать <code>ensure_ascii=False</code>:</strong>
+                    <p>✅ <strong>Всегда</strong>, когда в данных есть русские (или другие не-английские) буквы</p>
+                    <p>✅ Когда файл будут читать люди (открывать в блокноте)</p>
+                    <p>️ Без этого параметра JSON всё равно будет <strong>валидным</strong> — просто некрасивым</p>
+                    <p>️ При чтении такого файла через <code>json.load()</code> русские буквы <strong>восстановятся автоматически</strong></p>
+                </div>
+
+                <h3>Параметр <code>indent</code> — красивое форматирование</h3>
+                <div class="code-block"><span class="com"># Без indent — всё в одну строку:</span>
+<span class="com"># {"name": "Алиса", "age": 12, "hobbies": ["музыка", "игры"]}</span>
+
+<span class="com"># С indent=2 — красиво и читаемо:</span>
+<span class="kw">with</span> <span class="func">open</span>(<span class="str">"friend.json"</span>, <span class="str">"w"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+    <span class="var">json</span>.<span class="func">dump</span>(<span class="var">friend</span>, <span class="var">f</span>, <span class="var">indent</span><span class="op">=</span><span class="num">2</span>, <span class="var">ensure_ascii</span><span class="op">=</span><span class="kw">False</span>)
+
+<span class="com"># Результат в файле:</span>
+<span class="com"># {</span>
+<span class="com">#   "name": "Алиса",</span>
+<span class="com">#   "age": 12,</span>
+<span class="com">#   "hobbies": [</span>
+<span class="com">#     "музыка",</span>
+<span class="com">#     "игры"</span>
+<span class="com">#   ]</span>
+<span class="com"># }</span></div>
+
+                <h3>json.dumps() — превращаем в строку</h3>
+                <div class="code-block"><span class="var">json_string</span> <span class="op">=</span> <span class="var">json</span>.<span class="func">dumps</span>(<span class="var">friend</span>, <span class="var">indent</span><span class="op">=</span><span class="num">2</span>, <span class="var">ensure_ascii</span><span class="op">=</span><span class="kw">False</span>)
+<span class="func">print</span>(<span class="var">json_string</span>)  <span class="com"># Выводим JSON как строку</span></div>
+
+                <h3>Практика: каталог игр с рейтингами</h3>
+                <div class="code-block"><span class="var">games</span> <span class="op">=</span> [
+    {<span class="str">"name"</span>: <span class="str">"Minecraft"</span>, <span class="str">"rating"</span>: <span class="num">9.5</span>, <span class="str">"genre"</span>: <span class="str">"песочница"</span>},
+    {<span class="str">"name"</span>: <span class="str">"Among Us"</span>, <span class="str">"rating"</span>: <span class="num">8.0</span>, <span class="str">"genre"</span>: <span class="str">"детектив"</span>},
+    {<span class="str">"name"</span>: <span class="str">"Roblox"</span>, <span class="str">"rating"</span>: <span class="num">7.5</span>, <span class="str">"genre"</span>: <span class="str">"платформер"</span>}
+]
+
+<span class="com"># Сохраняем каталог в JSON</span>
+<span class="kw">with</span> <span class="func">open</span>(<span class="str">"games.json"</span>, <span class="str">"w"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+    <span class="var">json</span>.<span class="func">dump</span>(<span class="var">games</span>, <span class="var">f</span>, <span class="var">indent</span><span class="op">=</span><span class="num">2</span>, <span class="var">ensure_ascii</span><span class="op">=</span><span class="kw">False</span>)
+
+<span class="com"># Читаем каталог обратно</span>
+<span class="kw">with</span> <span class="func">open</span>(<span class="str">"games.json"</span>, <span class="str">"r"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+    <span class="var">loaded_games</span> <span class="op">=</span> <span class="var">json</span>.<span class="func">load</span>(<span class="var">f</span>)
+
+<span class="kw">for</span> <span class="var">game</span> <span class="kw">in</span> <span class="var">loaded_games</span>:
+    <span class="func">print</span>(<span class="str">f"</span><span class="var">{game['name']}</span><span class="str"> — </span>
+            <span class="var">{game['rating']}</span><span class="str">/10 (</span><span class="var">{game['genre']}</span><span class="str">)"</span>)</div>
+
+                <div class="example-box">
+                    <strong>📝 Запомни:</strong>
+                    <p><code>json.dump(data, f)</code> — записывает в <strong>файл</strong></p>
+                    <p><code>json.dumps(data)</code> — превращает в <strong>строку</strong></p>
+                    <p><code>indent=2</code> — красивое форматирование с отступами</p>
+                    <p><code>ensure_ascii=False</code> — сохраняет русские буквы как есть, а не превращает в <code>\u0410</code></p>
+                    <p><code>encoding="utf-8"</code> — гарантирует корректную работу с русским текстом на всех ОС</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">18. Что делает параметр <code>indent=2</code> в <code>json.dump()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Сжимает файл</div>
+                        <div class="quiz-option" data-correct="true">Делает красивое форматирование с отступами</div>
+                        <div class="quiz-option" data-correct="false">Шифрует данные</div>
+                        <div class="quiz-option" data-correct="false">Добавляет 2 файла</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">19. Зачем нужен <code>ensure_ascii=False</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Для скорости</div>
+                        <div class="quiz-option" data-correct="true">Чтобы русские буквы не превращались в \u-коды</div>
+                        <div class="quiz-option" data-correct="false">Для шифрования</div>
+                        <div class="quiz-option" data-correct="false">Для сжатия</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 10: Практика — создаём базу данных -->
+            <div class="lesson-section" id="section10">
+                <h2><span class="emoji-icon">🎮</span> Практика: создаём базу данных</h2>
+                
+                <p>Соберём всё вместе! Создадим программу для управления базой данных друзей с сохранением в JSON.</p>
+
+                <h3>База данных друзей</h3>
+                <div class="code-block"><span class="kw">import</span> <span class="var">json</span>
+<span class="kw">import</span> <span class="var">os</span>
+
+<span class="var">DB_FILE</span> <span class="op">=</span> <span class="str">"friends.json"</span>
+
+<span class="com"># Загружаем базу (или создаём новую)</span>
+<span class="kw">def</span> <span class="func">load_friends</span>():
+    <span class="kw">if</span> <span class="var">os</span>.<span class="var">path</span>.<span class="func">exists</span>(<span class="var">DB_FILE</span>):
+        <span class="kw">with</span> <span class="func">open</span>(<span class="var">DB_FILE</span>, <span class="str">"r"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+            <span class="kw">return</span> <span class="var">json</span>.<span class="func">load</span>(<span class="var">f</span>)
+    <span class="kw">return</span> []
+
+<span class="com"># Сохраняем базу</span>
+<span class="kw">def</span> <span class="func">save_friends</span>(<span class="var">friends</span>):
+    <span class="kw">with</span> <span class="func">open</span>(<span class="var">DB_FILE</span>, <span class="str">"w"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+        <span class="var">json</span>.<span class="func">dump</span>(<span class="var">friends</span>, <span class="var">f</span>, <span class="var">indent</span><span class="op">=</span><span class="num">2</span>, <span class="var">ensure_ascii</span><span class="op">=</span><span class="kw">False</span>)
+
+<span class="com"># Добавляем друга</span>
+<span class="kw">def</span> <span class="func">add_friend</span>(<span class="var">name</span>, <span class="var">age</span>, <span class="var">hobby</span>):
+    <span class="var">friends</span> <span class="op">=</span> <span class="func">load_friends</span>()
+    <span class="var">friends</span>.<span class="func">append</span>({<span class="str">"name"</span>: <span class="var">name</span>, <span class="str">"age"</span>: <span class="var">age</span>, <span class="str">"hobby"</span>: <span class="var">hobby</span>})
+    <span class="func">save_friends</span>(<span class="var">friends</span>)
+    <span class="func">print</span>(<span class="str">f"✅ </span><span class="var">{name}</span><span class="str"> добавлен!"</span>)
+
+<span class="com"># Показываем всех друзей</span>
+<span class="kw">def</span> <span class="func">show_friends</span>():
+    <span class="var">friends</span> <span class="op">=</span> <span class="func">load_friends</span>()
+    <span class="kw">if not</span> <span class="var">friends</span>:
+        <span class="func">print</span>(<span class="str">"База пустая"</span>)
+        <span class="kw">return</span>
+    <span class="kw">for</span> <span class="var">i</span>, <span class="var">friend</span> <span class="kw">in</span> <span class="func">enumerate</span>(<span class="var">friends</span>, <span class="num">1</span>):
+        <span class="func">print</span>(<span class="str">f"</span><span class="var">{i}</span><span class="str">. </span><span class="var">{friend['name']}</span><span class="str">, </span>
+                     <span class="var">{friend['age']}</span><span class="str"> лет, </span>
+                     <span>хобби: </span><span class="var">{friend['hobby']}</span><span class="str">"</span>)
+
+<span class="com"># Главное меню</span>
+<span class="kw">while</span> <span class="kw">True</span>:
+    <span class="func">print</span>(<span class="str">"\n1. Показать друзей  2. Добавить  3. Выход"</span>)
+    <span class="var">choice</span> <span class="op">=</span> <span class="func">input</span>(<span class="str">"Выбор: "</span>)
+    
+    <span class="kw">if</span> <span class="var">choice</span> <span class="op">==</span> <span class="str">"1"</span>:
+        <span class="func">show_friends</span>()
+    <span class="kw">elif</span> <span class="var">choice</span> <span class="op">==</span> <span class="str">"2"</span>:
+        <span class="var">name</span> <span class="op">=</span> <span class="func">input</span>(<span class="str">"Имя: "</span>)
+        <span class="var">age</span> <span class="op">=</span> <span class="func">int</span>(<span class="func">input</span>(<span class="str">"Возраст: "</span>))
+        <span class="var">hobby</span> <span class="op">=</span> <span class="func">input</span>(<span class="str">"Хобби: "</span>)
+        <span class="func">add_friend</span>(<span class="var">name</span>, <span class="var">age</span>, <span class="var">hobby</span>)
+    <span class="kw">elif</span> <span class="var">choice</span> <span class="op">==</span> <span class="str">"3"</span>:
+        <span class="kw">break</span></div>
+
+                <div class="example-box">
+                    <strong>🔑 Что здесь происходит:</strong>
+                    <p><strong>1.</strong> <code>os.path.exists()</code> — проверяем, существует ли файл базы</p>
+                    <p><strong>2.</strong> <code>load_friends()</code> — загружаем базу из JSON (или создаём пустую)</p>
+                    <p><strong>3.</strong> <code>save_friends()</code> — сохраняем изменения обратно в JSON</p>
+                    <p><strong>4.</strong> Данные <strong>не теряются</strong> между запусками программы!</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">20. Что делает <code>os.path.exists("file.json")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Создаёт файл</div>
+                        <div class="quiz-option" data-correct="true">Проверяет, существует ли файл</div>
+                        <div class="quiz-option" data-correct="false">Удаляет файл</div>
+                        <div class="quiz-option" data-correct="false">Открывает файл</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">21. Почему данные друзей не теряются после закрытия программы?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Потому что они в переменных</div>
+                        <div class="quiz-option" data-correct="true">Потому что они сохраняются в JSON-файл на диске</div>
+                        <div class="quiz-option" data-correct="false">Потому что Python запоминает всё</div>
+                        <div class="quiz-option" data-correct="false">Потому что используется <code>with</code></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 11: Кратко про CSV -->
+            <div class="lesson-section" id="section11">
+                <h2><span class="emoji-icon">📊</span> Кратко про CSV</h2>
+                
+                <p><strong>CSV</strong> (Comma-Separated Values) — это формат <strong>таблиц</strong>, где значения разделены запятыми. Открывается в Excel или Google Sheets.</p>
+
+                <h3>Как выглядит CSV</h3>
+                <div class="code-block"><span class="com"># students.csv:</span>
+<span class="com"># name,age,grade</span>
+<span class="com"># Анна,12,85</span>
+<span class="com"># Борис,13,92</span>
+<span class="com"># Вика,11,78</span></div>
+
+                <h3>Чтение CSV</h3>
+                <div class="code-block"><span class="kw">import</span> <span class="var">csv</span>
+
+<span class="kw">with</span> <span class="func">open</span>(<span class="str">"students.csv"</span>, <span class="str">"r"</span>, <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>) <span class="kw">as</span> <span class="var">f</span>:
+    <span class="var">reader</span> <span class="op">=</span> <span class="var">csv</span>.<span class="var">DictReader</span>(<span class="var">f</span>)  <span class="com"># читаем как словарь</span>
+    <span class="kw">for</span> <span class="var">row</span> <span class="kw">in</span> <span class="var">reader</span>:
+        <span class="func">print</span>(<span class="str">f"</span><span class="var">{row['name']}</span><span class="str">: </span><span class="var">{row['grade']}</span><span class="str"> баллов"</span>)</div>
+
+                <h3>Запись в CSV</h3>
+                <div class="code-block"><span class="var">students</span> <span class="op">=</span> [
+    {<span class="str">"name"</span>: <span class="str">"Анна"</span>, <span class="str">"age"</span>: <span class="num">12</span>, <span class="str">"grade"</span>: <span class="num">85</span>},
+    {<span class="str">"name"</span>: <span class="str">"Борис"</span>, <span class="str">"age"</span>: <span class="num">13</span>, <span class="str">"grade"</span>: <span class="num">92</span>}
+]
+
+<span class="kw">with</span> <span class="func">open</span>(<span class="str">"students.csv"</span>, <span class="str">"w"</span>, 
+            <span class="var">encoding</span><span class="op">=</span><span class="str">"utf-8"</span>, <span class="var">newline</span><span class="op">=</span><span class="str">""</span>) <span class="kw">as</span> <span class="var">f</span>:
+    <span class="var">writer</span> <span class="op">=</span> <span class="var">csv</span>.<span class="var">DictWriter</span>(<span class="var">f, </span>
+            <span class="var">fieldnames</span><span class="op">=</span>[<span class="str">"name"</span>, <span class="str">"age"</span>, <span class="str">"grade"</span>])
+    <span class="var">writer</span>.<span class="func">writeheader</span>()  <span class="com"># записываем заголовок</span>
+    <span class="var">writer</span>.<span class="func">writerows</span>(<span class="var">students</span>)  <span class="com"># записываем все строки</span></div>
+
+                <div class="example-box">
+                    <strong> CSV vs JSON:</strong>
+                    <p><strong>CSV</strong> — простой, как таблица Excel. Подходит для плоских данных (без вложенности).</p>
+                    <p><strong>JSON</strong> — более гибкий. Поддерживает вложенные структуры (списки внутри словарей).</p>
+                    <p>Для большинства задач в Python <strong>JSON удобнее</strong>.</p>
+                </div>
+
+                <div class="quiz-container">
+                    <div class="quiz-question">22. Что такое CSV?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Язык программирования</div>
+                        <div class="quiz-option" data-correct="true">Формат таблиц, где значения разделены запятыми</div>
+                        <div class="quiz-option" data-correct="false">База данных</div>
+                        <div class="quiz-option" data-correct="false">Тип переменной</div>
+                    </div>
+                </div>
+                <div class="quiz-container">
+                    <div class="quiz-question">23. Какой модуль Python работает с CSV?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>json</code></div>
+                        <div class="quiz-option" data-correct="true"><code>csv</code></div>
+                        <div class="quiz-option" data-correct="false"><code>table</code></div>
+                        <div class="quiz-option" data-correct="false"><code>excel</code></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Раздел 12: Итоговый тест -->
+            <div class="lesson-section" id="section12">
+                <h2><span class="emoji-icon">🏆</span> Итоговый тест</h2>
+                <div class="final-test-header">
+                    <h3 style="margin:0; color:#856404;">10 вопросов, 7 минут. Удачи!</h3>
+                </div>
+
+                <div class="global-timer" id="globalTimer">⏱️ 7:00</div>
+                <div class="final-test-stats" id="finalTestStats" style="display: none;"></div>
+
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">1. Какой режим открытия файла нужен для чтения?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>"w"</code></div>
+                        <div class="quiz-option" data-correct="true"><code>"r"</code></div>
+                        <div class="quiz-option" data-correct="false"><code>"a"</code></div>
+                        <div class="quiz-option" data-correct="false"><code>"x"</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">2. Что делает режим <code>"a"</code> при открытии существующего файла?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Стирает всё содержимое</div>
+                        <div class="quiz-option" data-correct="true">Дописывает текст в конец файла</div>
+                        <div class="quiz-option" data-correct="false">Выдаёт ошибку</div>
+                        <div class="quiz-option" data-correct="false">Читает файл</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">3. Зачем нужна конструкция <code>with open(...) as f:</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Чтобы файл открывался быстрее</div>
+                        <div class="quiz-option" data-correct="true">Чтобы файл автоматически закрывался после блока</div>
+                        <div class="quiz-option" data-correct="false">Чтобы читать файл построчно</div>
+                        <div class="quiz-option" data-correct="false">Чтобы создавать новые файлы</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">4. Что делает метод <code>line.strip()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Разбивает строку на слова</div>
+                        <div class="quiz-option" data-correct="true">Убирает пробелы и переносы строк по краям</div>
+                        <div class="quiz-option" data-correct="false">Превращает строку в число</div>
+                        <div class="quiz-option" data-correct="false">Делает строку заглавной</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">5. Как в JSON записывается логическое "истина"?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false"><code>True</code></div>
+                        <div class="quiz-option" data-correct="true"><code>true</code></div>
+                        <div class="quiz-option" data-correct="false"><code>TRUE</code></div>
+                        <div class="quiz-option" data-correct="false"><code>1</code></div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">6. В чём разница между <code>json.load()</code> и <code>json.loads()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Никакой</div>
+                        <div class="quiz-option" data-correct="true"><code>load</code> читает из файла, <code>loads</code> — из строки</div>
+                        <div class="quiz-option" data-correct="false"><code>load</code> быстрее</div>
+                        <div class="quiz-option" data-correct="false"><code>loads</code> только для списков</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">7. Что делает параметр <code>indent=2</code> в <code>json.dump()</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Сжимает файл</div>
+                        <div class="quiz-option" data-correct="true">Делает красивое форматирование с отступами</div>
+                        <div class="quiz-option" data-correct="false">Шифрует данные</div>
+                        <div class="quiz-option" data-correct="false">Добавляет 2 файла</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">8. Зачем нужен <code>ensure_ascii=False</code> при записи JSON?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Для скорости</div>
+                        <div class="quiz-option" data-correct="true">Чтобы русские буквы не превращались в \u-коды</div>
+                        <div class="quiz-option" data-correct="false">Для шифрования</div>
+                        <div class="quiz-option" data-correct="false">Для сжатия</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">9. Что делает <code>os.path.exists("file.json")</code>?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">Создаёт файл</div>
+                        <div class="quiz-option" data-correct="true">Проверяет, существует ли файл</div>
+                        <div class="quiz-option" data-correct="false">Удаляет файл</div>
+                        <div class="quiz-option" data-correct="false">Открывает файл</div>
+                    </div>
+                </div>
+                <div class="quiz-container final-q">
+                    <div class="quiz-question">10. Чем CSV отличается от JSON?</div>
+                    <div class="quiz-options">
+                        <div class="quiz-option" data-correct="false">CSV только для чисел</div>
+                        <div class="quiz-option" data-correct="true">CSV — это таблицы, JSON поддерживает вложенные структуры</div>
+                        <div class="quiz-option" data-correct="false">JSON только для строк</div>
+                        <div class="quiz-option" data-correct="false">Ничем</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="btn" id="prevBtn" onclick="previousSection()" disabled>← Назад</button>
+            <button class="btn" id="nextBtn" onclick="nextSection()">Далее →</button>
+        </div>
+    </div>
+
+    <script src="script-files.js"></script>
+</body>
+</html>

@@ -133,6 +133,9 @@ function showFinalTestStats(timeIsUp) {
                 <span class="label">Время прохождения</span>
             </div>
         </div>
+        <div style="text-align:center;margin-top:20px;">
+            <button class="btn" onclick="openSendModal()" style="margin-right:10px;">📧 Отправить результат</button>
+        </div>
     `;
     statsEl.style.display = 'block';
     statsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -275,7 +278,6 @@ function showFinalResults() {
                 </ul>
             </div>
             <div style="text-align:center;margin-top:30px;">
-            <button class="btn" onclick="openSendModal()" style="margin-right:10px;">📧 Отправить результат</button>
             <a href="index.html" class="btn" style="text-decoration:none;display:inline-block;">🏠Главная</a>
                 <button class="btn" onclick="restartLesson()">🔄 Пройти урок заново</button>
             </div>

@@ -101,7 +101,11 @@ function showFinalTestStats(timeIsUp) {
             <div class="stats-cell"><span class="value">${finalCorrectCount}/${FINAL_TOTAL}</span><span class="label">Правильных</span></div>
             <div class="stats-cell"><span class="value">${percent}%</span><span class="label">Точность</span></div>
             <div class="stats-cell"><span class="value">${timeStr}</span><span class="label">Время</span></div>
-        </div>`;
+        </div>
+        <div style="text-align:center;margin-top:20px;">
+            <button class="btn" onclick="openSendModal()" style="margin-right:10px;">📧 Отправить результат</button>
+        </div>
+        `;
     statsEl.style.display = 'block';
     statsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
@@ -197,7 +201,6 @@ function showFinalResults() {
             <li>Методы добавления и удаления: add, remove, discard, pop</li><li>Операции над множествами: union, intersection, difference</li>
             <li>Проверка вхождения и подмножеств</li><li>Практическое применение множеств</li></ul></div>
             <div style="text-align:center;margin-top:30px;">
-            <button class="btn" onclick="openSendModal()" style="margin-right:10px;">📧 Отправить результат</button>
             <a href="index.html" class="btn" style="text-decoration:none;display:inline-block;">🏠 На главную</a>
             <button class="btn" onclick="restartLesson()">🔄 Пройти заново</button></div>`;
         document.getElementById(`section${totalSections}`).appendChild(r);

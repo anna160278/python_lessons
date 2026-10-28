@@ -179,6 +179,9 @@ function showFinalTestStats(timeIsUp) {
             <div class="stats-cell"><span class="value">${finalCorrectCount}/${FINAL_TOTAL}</span><span class="label">Правильных</span></div>
             <div class="stats-cell"><span class="value">${percent}%</span><span class="label">Точность</span></div>
             <div class="stats-cell"><span class="value">${timeStr}</span><span class="label">Время</span></div>
+        </div>
+        <div style="text-align:center;margin-top:20px;">
+            <button class="btn" onclick="openSendModal()" style="margin-right:10px;">📧 Отправить результат</button>
         </div>`;
     statsEl.style.display = 'block';
     statsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -203,7 +206,6 @@ function showFinalResults() {
     <li>Параметры pack (side, fill, padx/pady)</li><li>Размещение через place() и grid()</li>
     <li>messagebox и виджет Text с индексами</li><li>Radiobutton, Checkbutton, Listbox и переменные</li></ul></div>
     <div style="text-align:center;margin-top:30px;">
-    <button class="btn" onclick="openSendModal()" style="margin-right:10px;">📧 Отправить результат</button>
     <a href="index.html" class="btn" style="text-decoration:none;display:inline-block;">🏠 На главную</a>
     <button class="btn" onclick="restartLesson()">🔄 Пройти заново</button></div>`;
         document.getElementById(`section${totalSections}`).appendChild(r);
